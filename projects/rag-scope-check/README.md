@@ -1,12 +1,20 @@
 # RAG Scope Check
 
-**Find retrieval paths that are permission-safe but still fail the user.**
+**Help employees find the information they are entitled to use.**
 
 Status: experimental. Local SQLite reproduction and exported-case checks work; a real source-system integration and production validation remain open.
 
-## The problem
+## Business problem
 
 A finance user asks for an expense policy. Retrieval returns the public handbook but misses the private policy they are allowed to read. No document leaks, so a safety-only gate can pass while the answer quality suffers.
+
+A missed policy means another support ticket, an interrupted task, or a decision made with incomplete guidance. The same workflow can arise in finance operations, manufacturing support, or employee self-service. These are intended use cases, not verified customer deployments.
+
+## How the workflow changes
+
+**Before:** the team checks that restricted information is hidden, then discovers employees cannot find useful information they should see.
+
+**With this project:** run reviewed questions against the assistant's retrieval output, check whether permitted answers were found, and identify the affected user group before releasing a retrieval change.
 
 RAG Scope Check measures returned-document leaks, authorized recall per tenant/cohort, and top-k underfill. Its executable demo separates source permissions from the index's permission copy. Synchronizing that copy changes the retrieval result while preserving the query, source grants, relevance labels and thresholds.
 
@@ -37,13 +45,13 @@ The collection's daily workflow repeats both paths with unchanged thresholds and
 python3 scripts/verify_rag_demo.py /path/to/rag-scope-check
 ```
 
-## Why this exists
+## Use it with your workflow
 
-- A [practitioner report](https://www.reddit.com/r/Rag/comments/1w3q78p/our_rag_permissions_filter_is_safe_and_still/) describes safe filtering suppressing useful private results. This is one unverified account, not independent proof of widespread demand.
-- [pgvector documents filtered-search underfill](https://github.com/pgvector/pgvector#filtering) and existing tuning options. Underfill has several causes; this project does not claim to diagnose them from a count alone.
-- [raggate](https://raggate.net/product.html) describes permission regression testing. Its inaccessible source was not audited, so we do not claim global novelty or that it lacks particular features.
+Export document IDs returned by your assistant before it constructs a model response. For each case, supply the user's independently verified document permissions, reviewed relevant documents, and how many documents are eligible. No document text is required.
 
-The contribution demonstrated here is a small, inspectable check combining permission safety with useful authorized recall. The current implementation accepts exported evidence; it does not enforce authorization.
+The checker produces a report of permission violations, missed relevant answers, and short result sets by user group. It does not change permissions, retrieve documents, or call a model. [Input contract](https://github.com/suboss87/rag-scope-check#feed-it-from-your-pipeline).
+
+**Success in a trial:** known unauthorized results fail; known permitted answers are found at your agreed threshold; invalid or missing required evidence cannot produce a passing result. Use your own representative cases before connecting a release gate.
 
 ## Limits and next step
 
@@ -51,6 +59,6 @@ The SQLite fixture deliberately plants a missed grant. Its source table is a sim
 
 The first maintenance fix rejects duplicate JSON permission fields and empty evaluation batches that previously produced misleading PASS results. [Reproduce the rejected input](https://github.com/suboss87/rag-scope-check/tree/cfeb20db068ed25b1ad4a5e544dbfd19114e58a1/docs/evidence/input-integrity).
 
-Next: establish a reproducible integration with a genuine source permission authority before broadening claims. Jev's source-oracle assessment recommended narrowing scope; that recommendation is retained.
+Next: establish a reproducible integration with a genuine source permission authority before broadening claims. The current release deliberately keeps that integration boundary explicit.
 
 [Source and schema](https://github.com/suboss87/rag-scope-check) · [Recorded demo evidence](https://github.com/suboss87/rag-scope-check/tree/cfeb20db068ed25b1ad4a5e544dbfd19114e58a1/docs/evidence/permission-sync) · [Report a vulnerability privately](https://github.com/suboss87/rag-scope-check/security/advisories/new)
