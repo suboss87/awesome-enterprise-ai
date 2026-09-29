@@ -35,6 +35,21 @@ An assistant can avoid exposing restricted documents and still miss the answer i
 
 [Run the example](projects/rag-scope-check/#run-it) · [Project code](https://github.com/suboss87/rag-scope-check)
 
+### 02 / Finance operations
+
+**[Invoice Exception Brief →](projects/invoice-exception-brief/)**
+
+*Give the right person the evidence needed to resolve a blocked supplier invoice.*
+
+An invoice says 20 items arrived. Receiving accepted 17. Or an earlier invoice has already used most of the accepted quantity. The finance team needs to see the difference and know what to ask for next.
+
+- **Who it helps:** accounts-payable staff, buyers, and receiving teams.
+- **Where it fits:** procurement workflows in manufacturing, distribution, retail, and shared services.
+- **Try it:** turn invoice, order, receipt, and prior-billing records into a review brief with the blocker, evidence, and responsible owner.
+- **Available today:** a local workflow that produces JSON and a readable HTML brief. It does not approve invoices or make payments; source-system mapping requires a trial.
+
+[Run the example](projects/invoice-exception-brief/#try-it) · [Project code](projects/invoice-exception-brief/invoice_exception_brief/)
+
 ---
 
 ## What you get in every project

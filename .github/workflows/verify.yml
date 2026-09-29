@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: suboss87/rag-scope-check
-          ref: cfeb20db068ed25b1ad4a5e544dbfd19114e58a1
+          ref: c07538117764b4a39de377091cdb50b2117b4831
           path: .verified/rag-scope-check
           persist-credentials: false
       - name: Run project tests
@@ -31,3 +31,25 @@ jobs:
         run: python3 -m unittest discover -s tests -v
       - name: Reproduce failure and correction
         run: python3 scripts/verify_rag_demo.py .verified/rag-scope-check
+  invoice-exception-brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: projects/invoice-exception-brief
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Test invoice evidence and report safety
+        run: python3 -m unittest discover -s tests -v
+      - name: Reproduce clean evidence
+        run: python3 -m invoice_exception_brief examples/clean.json
+      - name: Reproduce a delivery exception
+        run: |
+          set +e
+          python3 -m invoice_exception_brief examples/partial_receipt.json > /tmp/partial-receipt.json
+          result=$?
+          set -e
+          test "$result" -eq 1
