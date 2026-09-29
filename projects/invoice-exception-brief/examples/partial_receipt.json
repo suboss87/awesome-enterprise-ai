@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-09-29T09:00:00Z",
+  "max_age_days": 7,
+  "owners": {
+    "accounts_payable": "AP review desk",
+    "receiving": "Receiving supervisor",
+    "procurement": "Buyer"
+  },
+  "purchase_order": {
+    "id": "PO-100",
+    "source_ref": "erp:po/100",
+    "observed_at": "2026-09-29T09:00:00Z",
+    "entity": "Northstar Components",
+    "vendor": "Harbour Supplies",
+    "currency": "GBP",
+    "lines": [
+      {
+        "id": "PO-100-1",
+        "source_ref": "erp:po/100/1",
+        "uom": "EA",
+        "quantity": "20",
+        "unit_price": "12.50"
+      }
+    ]
+  },
+  "receipt_snapshot": {
+    "complete": true,
+    "source_ref": "export:receipts/2026-09-29",
+    "observed_at": "2026-09-29T09:00:00Z",
+    "records": [
+      {
+        "id": "R-1",
+        "source_ref": "wms:receipt/1",
+        "observed_at": "2026-09-29T09:00:00Z",
+        "po_line_id": "PO-100-1",
+        "entity": "Northstar Components",
+        "vendor": "Harbour Supplies",
+        "currency": "GBP",
+        "uom": "EA",
+        "received_quantity": "20",
+        "accepted_quantity": "17",
+        "rejected_quantity": "3"
+      }
+    ]
+  },
+  "prior_invoice_snapshot": {
+    "complete": true,
+    "source_ref": "export:posted-invoices/2026-09-29",
+    "observed_at": "2026-09-29T09:00:00Z",
+    "records": []
+  },
+  "invoice": {
+    "id": "INV-100",
+    "source_ref": "ap:invoice/100",
+    "observed_at": "2026-09-29T09:00:00Z",
+    "entity": "Northstar Components",
+    "vendor": "Harbour Supplies",
+    "currency": "GBP",
+    "lines": [
+      {
+        "id": "I-1",
+        "source_ref": "ap:invoice/100/1",
+        "po_line_id": "PO-100-1",
+        "uom": "EA",
+        "quantity": "20",
+        "unit_price": "12.50"
+      }
+    ]
+  }
+}

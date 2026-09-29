@@ -8,7 +8,7 @@ Status: experimental. Local SQLite reproduction and exported-case checks work; a
 
 A finance user asks for an expense policy. Retrieval returns the public handbook but misses the private policy they are allowed to read. No document leaks, so a safety-only gate can pass while the answer quality suffers.
 
-A missed policy means another support ticket, an interrupted task, or a decision made with incomplete guidance. The same workflow can arise in finance operations, manufacturing support, or employee self-service. These are intended use cases, not verified customer deployments.
+A missed policy can mean another support ticket, an interrupted task, or a decision made with incomplete guidance. The same workflow can arise in finance operations, manufacturing support, or employee self-service. These are intended use cases, not verified customer deployments.
 
 ## How the workflow changes
 
@@ -25,7 +25,7 @@ Requirements: Git, Python 3.10+ with SQLite FTS5. No model, API key, package ins
 ```sh
 git clone https://github.com/suboss87/rag-scope-check.git
 cd rag-scope-check
-git checkout cfeb20db068ed25b1ad4a5e544dbfd19114e58a1
+git checkout c07538117764b4a39de377091cdb50b2117b4831
 python3 -m unittest discover -s tests -v
 
 python3 examples/sqlite_acl_demo.py > stale.jsonl
@@ -57,8 +57,8 @@ The checker produces a report of permission violations, missed relevant answers,
 
 The SQLite fixture deliberately plants a missed grant. Its source table is a simulated authority. Real use requires permissions from an independent source system, reviewed relevance labels and stable document IDs. A passing result only covers supplied cases; it is not a security certification.
 
-The first maintenance fix rejects duplicate JSON permission fields and empty evaluation batches that previously produced misleading PASS results. [Reproduce the rejected input](https://github.com/suboss87/rag-scope-check/tree/cfeb20db068ed25b1ad4a5e544dbfd19114e58a1/docs/evidence/input-integrity).
+The first maintenance fix rejects duplicate JSON permission fields and empty evaluation batches that previously produced misleading PASS results. [Reproduce the rejected input](https://github.com/suboss87/rag-scope-check/tree/c07538117764b4a39de377091cdb50b2117b4831/docs/evidence/input-integrity).
 
 Next: establish a reproducible integration with a genuine source permission authority before broadening claims. The current release deliberately keeps that integration boundary explicit.
 
-[Source and schema](https://github.com/suboss87/rag-scope-check) · [Recorded demo evidence](https://github.com/suboss87/rag-scope-check/tree/cfeb20db068ed25b1ad4a5e544dbfd19114e58a1/docs/evidence/permission-sync) · [Report a vulnerability privately](https://github.com/suboss87/rag-scope-check/security/advisories/new)
+[Source and schema](https://github.com/suboss87/rag-scope-check) · [Recorded demo evidence](https://github.com/suboss87/rag-scope-check/tree/c07538117764b4a39de377091cdb50b2117b4831/docs/evidence/permission-sync) · [Report a vulnerability privately](https://github.com/suboss87/rag-scope-check/security/advisories/new)
