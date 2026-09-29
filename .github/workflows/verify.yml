@@ -1,0 +1,33 @@
+name: Verify projects
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  rag-scope-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Check out the reviewed project revision
+        uses: actions/checkout@v6
+        with:
+          repository: suboss87/rag-scope-check
+          ref: cfeb20db068ed25b1ad4a5e544dbfd19114e58a1
+          path: .verified/rag-scope-check
+          persist-credentials: false
+      - name: Run project tests
+        working-directory: .verified/rag-scope-check
+        run: python3 -m unittest discover -s tests -v
+      - name: Reproduce failure and correction
+        run: python3 scripts/verify_rag_demo.py .verified/rag-scope-check
