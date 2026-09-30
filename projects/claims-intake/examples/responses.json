@@ -1,0 +1,80 @@
+[
+  {
+    "documents": [
+      {
+        "document_id": "D1",
+        "document_type": "incident_report",
+        "evidence": [
+          {
+            "source_id": "P1",
+            "quote": "Incident report."
+          }
+        ],
+        "fields": [
+          {
+            "field": "claimant_id",
+            "value": "ORG-8",
+            "evidence": [
+              {
+                "source_id": "P1",
+                "quote": "Claimant ORG-8."
+              }
+            ]
+          },
+          {
+            "field": "incident_date",
+            "value": "2026-09-12",
+            "evidence": [
+              {
+                "source_id": "P1",
+                "quote": "Incident date 2026-09-12."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "document_id": "D2",
+        "document_type": "repair_estimate",
+        "evidence": [
+          {
+            "source_id": "P2",
+            "quote": "Repair estimate."
+          }
+        ],
+        "fields": [
+          {
+            "field": "claimant_id",
+            "value": "ORG-8",
+            "evidence": [
+              {
+                "source_id": "P2",
+                "quote": "Claimant ORG-8."
+              }
+            ]
+          },
+          {
+            "field": "amount",
+            "value": "1500.00",
+            "evidence": [
+              {
+                "source_id": "P2",
+                "quote": "Proposed total USD 1500.00"
+              }
+            ]
+          },
+          {
+            "field": "currency",
+            "value": "USD",
+            "evidence": [
+              {
+                "source_id": "P2",
+                "quote": "Proposed total USD 1500.00"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

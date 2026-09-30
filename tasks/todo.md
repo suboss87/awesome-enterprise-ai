@@ -13,7 +13,11 @@ The user explicitly selected these ten categories on 2026-09-30. Build original,
 
 ## Progress
 
-- [ ] Shared runtime, transport, CLI and workspace verified.
-- [ ] Ten distinct workflows implemented and independently tested.
-- [ ] Live model evaluation and failure analysis per project.
+- [x] Shared runtime, transport, CLI and workspace verified (153 tests, ten example journeys).
+- [x] Ten distinct workflows implemented and independently tested.
+- [x] Live model evaluation and failure analysis per project (58 initial cases, 15 corrective live cases, saved-response claims replay; no production validation).
 - [ ] Jev artifact assessment, independent code review, CI and truthful publication.
+
+## Current release boundary
+
+Automatic approval review blocked uploading implementations and private synthetic evaluation reports to api.typesafe.ai for Jev assessment. Specific user permission requested; ten review payloads prepared privately but not uploaded. Jev assessment and exact-head GitHub CI remain pending. Do not claim enterprise deployment approval or published availability before those steps.

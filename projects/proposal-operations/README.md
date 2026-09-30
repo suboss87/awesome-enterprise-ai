@@ -50,3 +50,7 @@ Before relying on generated drafts, evaluate independently labeled requirement/e
 ## Adoption
 
 Keep approval and validity metadata under document-owner control. Restrict source access before exporting the packet; this module does not implement a multi-user document permission system. Product capabilities and proposal content may be confidential. Live mode sends supplied text to the configured model provider; apply organizational data policies.
+
+## Collection workspace and current evidence
+
+Run `python3 -m enterprise_ai serve` from the collection root to try this workflow in the browser, upload a compatible JSON export, inspect results and export JSON. [Deployment and data handling](../../docs/DEPLOYMENT.md) explains the single-user boundary and live provider. [Verification](../../docs/VERIFICATION.md) records the actual inference trials, initial failures, corrective regressions and independent semantic review; authored fixtures above remain distinct from live evaluation.

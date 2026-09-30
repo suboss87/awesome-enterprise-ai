@@ -17,8 +17,13 @@ def loads(raw):
                 raise InputError('Duplicate JSON key')
             result[key] = value
         return result
+    def finite_float(raw_number):
+        value=float(raw_number)
+        if not math.isfinite(value):
+            raise InputError('Non-finite number')
+        return value
     try:
-        return json.loads(raw, object_pairs_hook=pairs,
+        return json.loads(raw, object_pairs_hook=pairs, parse_float=finite_float,
                           parse_constant=lambda _: (_ for _ in ()).throw(InputError('Non-finite number')))
     except (ValueError, UnicodeError, RecursionError) as exc:
         raise InputError('Invalid JSON: duplicate keys and non-finite numbers are forbidden') from exc
@@ -49,7 +54,7 @@ def integer(value, name='integer', minimum=0, maximum=1000000000):
 
 
 def number(value, name='number', minimum=-1e12, maximum=1e12):
-    if type(value) not in (int,float) or not math.isfinite(value) or not minimum<=value<=maximum:
+    if type(value) not in (int,float) or not minimum<=value<=maximum or not math.isfinite(value):
         raise InputError(f'Invalid {name}')
     return value
 

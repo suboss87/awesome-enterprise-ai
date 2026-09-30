@@ -42,7 +42,7 @@ def run(data, ai):
     if intent in ('return', 'refund'):
         if not delivered: reasons.append('return_requires_delivery')
         elif (today - delivered).days > window: reasons.append('return_window_expired')
-    if intent != 'other' and outstanding == 0: reasons.append('nothing_to_refund')
+    if intent in ('return','refund') and outstanding == 0: reasons.append('nothing_to_refund')
     if requested > limit: reasons.append('amount_exceeds_policy')
     if data['tool_state'] != 'ready': reasons.append('tool_' + data['tool_state'])
     for code in reasons:

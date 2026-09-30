@@ -47,3 +47,7 @@ The tests also reject fabricated quotations, foreign sources, duplicate IDs, mis
 No seasonality forecast, supplier integration, purchases or optimization guarantee. Capacity is conservative: all pending units are counted, without modeled consumption before arrival. Existing orders count in position without delivery dates, so late receipts require rerunning with corrected assumptions. No service-level or stockout probability is estimated. Budget findings require a planner to prioritize items.
 
 Exact quotation checks cannot guarantee semantic entailment or defeat every prompt injection. Human reviewers must verify substantive interpretations. This is an original bounded reference workflow, not a copy of an upstream enterprise application. See the collection license and security guidance.
+
+## Collection workspace and current evidence
+
+Run `python3 -m enterprise_ai serve` from the collection root to try this workflow in the browser, upload a compatible JSON export, inspect results and export JSON. [Deployment and data handling](../../docs/DEPLOYMENT.md) explains the single-user boundary and live provider. [Verification](../../docs/VERIFICATION.md) records the actual inference trials, initial failures, corrective regressions and independent semantic review; authored fixtures above remain distinct from live evaluation.

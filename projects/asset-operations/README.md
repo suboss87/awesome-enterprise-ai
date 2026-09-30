@@ -47,3 +47,7 @@ The tests also reject fabricated quotations, foreign sources, duplicate IDs, mis
 No live monitoring connector, predictive maintenance model, physical diagnosis, equipment commands, repair instructions or safety certification. Thresholds and units are supplied by an authorized engineer. Being within threshold does not establish safe operation. Missing history is not proof that maintenance did not occur. This reference is unsuitable as a safety control.
 
 Exact quotation checks cannot guarantee semantic entailment or defeat every prompt injection. Human reviewers must verify substantive interpretations. This is an original bounded reference workflow, not a copy of an upstream enterprise application. See the collection license and security guidance.
+
+## Collection workspace and current evidence
+
+Run `python3 -m enterprise_ai serve` from the collection root to try this workflow in the browser, upload a compatible JSON export, inspect results and export JSON. [Deployment and data handling](../../docs/DEPLOYMENT.md) explains the single-user boundary and live provider. [Verification](../../docs/VERIFICATION.md) records the actual inference trials, initial failures, corrective regressions and independent semantic review; authored fixtures above remain distinct from live evaluation.

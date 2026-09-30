@@ -2,84 +2,102 @@
 
 # Awesome Enterprise AI
 
-### Business problems. Working solutions. Clear paths to adoption.
+### Useful AI. Familiar workflows. Work you can inspect.
 
-Practical projects for teams bringing AI into everyday operations.
+Ten focused workflows for customer service, operations, security and business teams.
 
-[Explore projects](#explore-projects) · [Start using one](ADOPTION.md) · [Contribute a problem](CONTRIBUTING.md)
+[Explore the collection](#choose-your-workflow) · [Run the workspace](#try-it-in-two-minutes) · [Adoption guide](ADOPTION.md) · [What we tested](docs/VERIFICATION.md)
 
 </div>
 
----
+![Local Enterprise AI workspace showing a customer resolution proposal, its input records and source evidence](docs/images/workspace.png)
 
 ## Built around the work
 
-Finding the right policy. Checking a document before it enters a business system. Handling the exceptions an automated workflow cannot resolve.
+I like the point where a messy business problem becomes something you can actually use: an incident timeline, a clearer answer to a customer, a claim packet with the missing pieces identified.
 
-I’m building this collection around those everyday problems: who gets stuck, what it costs them, and where a small piece of software can help. Each project includes a clear use case, runnable examples, tests, and the boundaries you need to understand before adopting it.
+This is where I build those ideas into small, inspectable workflows. Each one starts with a business task, does a bounded piece of work, and gives a person the evidence and next step. You can run the examples, read the rules, and adapt the inputs to your own systems.
 
-## Explore projects
+**Current stage: reference workflows for internal trials.** All ten have a browser journey, CLI, examples and tests. They are not complete replacements for enterprise systems or pre-certified deployments. [Read the tested scope and remaining limits.](docs/VERIFICATION.md)
 
-### 01 / Trusted knowledge
+## Choose your workflow
 
-**[RAG Scope Check →](projects/rag-scope-check/)**
+| Team / problem | Project | What you get |
+|---|---|---|
+| Support — an order request needs the right policy and action | [Customer Resolution Desk](projects/customer-resolution/) | A checked return, cancellation or escalation proposal; no automatic refund |
+| IT — incident evidence is scattered and causes are uncertain | [Incident Investigation Workbench](projects/incident-operations/) | An ordered timeline, competing hypotheses, contradictions and missing checks |
+| Security — scanner findings need inventory and advisory context | [Vulnerability Remediation Planner](projects/exposure-review/) | Exact version matches, unknowns, advisory context and owner review |
+| Business — a question needs an agreed metric and traceable answer | [Business Insights Workbench](projects/business-insights/) | A reviewable analysis plan, exact totals and contributing record IDs |
+| Supply chain — replenishment decisions compete for a limited budget | [Inventory Planning Workbench](projects/inventory-decisions/) | Transparent reorder proposals, budget constraints and planning-note interpretation |
+| Operations — equipment alerts need recent readings and history | [Equipment Monitoring Workbench](projects/asset-operations/) | Persistent threshold observations, stale-data findings and maintenance context |
+| Insurance — incomplete evidence delays an adjuster’s review | [Claims Intake Workbench](projects/claims-intake/) | A document checklist, conflicting facts and missing-information requests |
+| Proposals — answers must match current, approved evidence | [Proposal Evidence Workbench](projects/proposal-operations/) | A sourced response matrix with conflicts and unsupported answers exposed |
+| Sales — meeting commitments and CRM records drift apart | [Account Review Workbench](projects/account-intelligence/) | Quoted observations, date conflicts and missing next steps; no invented forecast |
+| People operations — onboarding tasks depend on each other | [Onboarding Readiness Desk](projects/workforce-onboarding/) | Applicable tasks, prerequisite gaps and a readiness checklist |
 
-*Help employees find the information they are entitled to use.*
+### Also in the collection
 
-An assistant can avoid exposing restricted documents and still miss the answer its user needs. This project checks both sides: information stays within permission boundaries, and useful answers remain discoverable.
+- **[RAG Scope Check](projects/rag-scope-check/)** — verify permission boundaries and whether entitled users can still find useful answers.
+- **[Invoice Exception Brief](projects/invoice-exception-brief/)** — assemble the evidence behind a blocked supplier invoice.
 
-- **Who it helps:** teams maintaining internal assistants, policy search, or support knowledge.
-- **Where it fits:** employee self-service, banking operations, manufacturing support, and shared services.
-- **Try it:** reproduce a missing-policy failure, correct the permission copy, and compare the results.
-- **Available today:** a local checker and tested SQLite example. Real source-system integration remains open.
+## Try it in two minutes
 
-[Run the example](projects/rag-scope-check/#run-it) · [Project code](https://github.com/suboss87/rag-scope-check)
+Python **3.11+**. No third-party Python packages are required for the ten-workflow workspace.
 
-### 02 / Finance operations
+```sh
+git clone https://github.com/suboss87/awesome-enterprise-ai.git
+cd awesome-enterprise-ai
+python3 -m enterprise_ai serve
+```
 
-**[Invoice Exception Brief →](projects/invoice-exception-brief/)**
+Open **http://127.0.0.1:8765**. Pick a workflow, run its example, inspect the findings, and export the result.
 
-*Give the right person the evidence needed to resolve a blocked supplier invoice.*
+**Example replay** uses a recorded response and makes no model call. **Live AI** analyzes your supplied records through the configured provider. The interface always labels which mode produced the result.
 
-An invoice says 20 items arrived. Receiving accepted 17. Or an earlier invoice has already used most of the accepted quantity. The finance team needs to see the difference and know what to ask for next.
+To use live AI, configure `OPENAI_API_KEY` in the server environment and restart the workspace. Provider access and usage charges apply. Read [data handling and deployment](docs/DEPLOYMENT.md) before sending business data.
 
-- **Who it helps:** accounts-payable staff, buyers, and receiving teams.
-- **Where it fits:** procurement workflows in manufacturing, distribution, retail, and shared services.
-- **Try it:** turn invoice, order, receipt, and prior-billing records into a review brief with the blocker, evidence, and responsible owner.
-- **Available today:** a local workflow that produces JSON and a readable HTML brief. It does not approve invoices or make payments; source-system mapping requires a trial.
+### Prefer the command line?
 
-[Run the example](projects/invoice-exception-brief/#try-it) · [Project code](projects/invoice-exception-brief/invoice_exception_brief/)
+```sh
+python3 -m enterprise_ai list
+python3 -m enterprise_ai run customer-resolution \
+  --input projects/customer-resolution/examples/input.json \
+  --mode replay --responses projects/customer-resolution/examples/responses.json
+python3 scripts/verify_workflows.py
+```
 
----
+Use `--mode live` without `--responses` for actual inference. Live failures produce errors; they never quietly become example replays.
 
-## What you get in every project
+## A consistent starting point
 
-| Your question | Where to look |
-|---|---|
-| What problem does this solve? | Business problem and intended users |
-| How does the work change? | Before-and-after workflow |
-| Can I try it? | Quickstart, sample inputs, and expected outputs |
-| Can my team adopt it? | Integration contract, data handling, and deployment limits |
-| Does it work? | Tests, reproducible evidence, and independent review |
+```text
+projects/<workflow>/
+├── README.md                 # Business problem, quickstart, contract and limits
+├── workflow.py               # Model interpretation and explicit business rules
+├── examples/                 # Fictional inputs and recorded model responses
+├── evaluation/cases.json     # Declared outcomes and failure cases
+└── tests/                    # Business-rule and evidence-boundary checks
+enterprise_ai/                # Shared CLI, provider and local browser workspace
+```
 
-Projects are designed for workflows that recur across industries. Industry examples describe potential uses; they are not customer endorsements or claims of regulatory approval.
+The workflow interprets text where interpretation helps. Ordinary code handles arithmetic, date windows, prerequisites and exact matching. Results preserve uncertainty and require human review. None of the ten writes to a CRM, ERP, claim system or infrastructure control plane.
 
-## Start with a small trial
+## Adopt one small piece
 
-1. Choose the business problem that matches your workflow.
-2. Run the included example with synthetic data.
-3. Test representative cases inside your own environment.
-4. Connect your systems only after reviewing permissions, data handling, and failure behavior.
+1. Choose a task your team already performs and record its current result.
+2. Run the example; read the project’s input contract and limits.
+3. Map an authorized export from your system and test representative cases.
+4. Review correctness, access control and operational requirements before connecting production systems.
 
-[Read the adoption guide →](ADOPTION.md)
+[Adoption guide](ADOPTION.md) · [Deployment boundary](docs/DEPLOYMENT.md) · [Verification and evaluation](docs/VERIFICATION.md)
 
-## How the collection grows
+## Keep improving the collection
 
-Research starts with recurring user problems. Ideas are compared with existing solutions and challenged with Jev before a focused build. Each release gets tests, documentation, and a separate review. Daily work can add a project or improve one already here.
+Useful additions solve a distinct, recurring problem. Improvements to an existing workflow count too: better evidence, an adapter that really works, clearer failure behavior, or a smaller setup burden.
 
-**Available** means the documented example runs and its checks pass. It does not mean a project has been validated in your environment. Project pages state what has been tested and what remains open.
+Daily CI reruns the documented checks. New work should arrive through reviewed changes with runnable evidence; a publishing quota does not establish quality.
 
-[Verification runs](https://github.com/suboss87/awesome-enterprise-ai/actions/workflows/verify.yml) · [Suggest a problem](CONTRIBUTING.md) · [Report a vulnerability](SECURITY.md)
+[Suggest a problem](CONTRIBUTING.md) · [Verification runs](https://github.com/suboss87/awesome-enterprise-ai/actions/workflows/verify.yml) · [Report a vulnerability](SECURITY.md)
 
 ---
 

@@ -1,0 +1,39 @@
+{
+  "question": "What is net revenue by region in September 2026 in USD?",
+  "as_of": "2026-09-30",
+  "records": [
+    {
+      "id": "S1",
+      "date": "2026-09-05",
+      "region": "North",
+      "product": "Sensors",
+      "currency": "USD",
+      "revenue": "1200.00",
+      "refund": "100.00",
+      "cost": "650.00",
+      "units": 12
+    },
+    {
+      "id": "S2",
+      "date": "2026-09-15",
+      "region": "South",
+      "product": "Sensors",
+      "currency": "USD",
+      "revenue": "800.00",
+      "refund": "0.00",
+      "cost": "500.00",
+      "units": 8
+    },
+    {
+      "id": "S3",
+      "date": "2026-08-31",
+      "region": "North",
+      "product": "Controls",
+      "currency": "USD",
+      "revenue": "400.00",
+      "refund": "0.00",
+      "cost": "200.00",
+      "units": 4
+    }
+  ]
+}

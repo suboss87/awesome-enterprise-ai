@@ -32,9 +32,9 @@ def run(data,ai):
             elif asset['version'] in a['affected_versions']: state='affected_version_match'
             elif asset['version'] in a['fixed_versions']: state='fixed_version_match'
             else: state='version_unlisted'
-        matches.append({'finding_id':scan['id'],'inventory_id':scan['inventory_id'],'advisory_id':a['id'],'status':state,'owner':asset['owner'] if asset else None,'service':asset['service'] if asset else None,'fixed_version_options':a['fixed_versions']})
+        matches.append({'finding_id':scan['id'],'inventory_id':scan['inventory_id'],'advisory_id':a['id'],'status':state,'owner':asset['owner'] if asset else None,'service':asset['service'] if asset else None,'advisory_fixed_versions':a['fixed_versions']})
     schema=object_schema({'advisories':array_schema(object_schema({'advisory_id':string_schema(),'impact_summary':string_schema(),'preconditions':array_schema(string_schema()),'review_questions':array_schema(string_schema()),'evidence':EVIDENCE_SCHEMA}))})
-    interpreted=ai.ask('Interpret each advisory supplied, exactly once. Quote advisory text for impact and contextual preconditions; use review_questions for unknowns. Do not infer installed software, version applicability, exploitability, fixes, or vendor backports beyond the provided deterministic matches. No exploitation or remediation execution instructions.',{'advisories':advisories,'matches':matches},schema)
+    interpreted=ai.ask('Interpret each advisory supplied, exactly once. Evidence source_id must be exactly the advisory id, with quote copied verbatim ONLY from that advisory text field. Matches, package/version arrays and other JSON metadata are context, not quotable sources. Do not add id prefixes. Quote advisory text for impact and contextual preconditions; use review_questions for unknowns. Do not infer installed software, version applicability, exploitability, fixes, or vendor backports beyond the provided deterministic matches. No exploitation or remediation execution instructions.',{'advisories':advisories,'matches':matches},schema)
     records=interpreted['advisories']; unique(records,'advisory_id')
     if {r['advisory_id'] for r in records}!=set(adv): raise InputError('Advisory interpretations must cover input exactly')
     for r in records:

@@ -49,3 +49,7 @@ For a live study, label held-out customer messages independently, compare agains
 ## Deployment boundary
 
 Use behind existing authentication and case-level authorization. Minimize personal information before sending inputs to a model. Output is sensitive support data; apply your normal retention policy. There are no outbound messages, refunds, dynamic tools, URL fetches, or credentials in inputs.
+
+## Collection workspace and current evidence
+
+Run `python3 -m enterprise_ai serve` from the collection root to try this workflow in the browser, upload a compatible JSON export, inspect results and export JSON. [Deployment and data handling](../../docs/DEPLOYMENT.md) explains the single-user boundary and live provider. [Verification](../../docs/VERIFICATION.md) records the actual inference trials, initial failures, corrective regressions and independent semantic review; authored fixtures above remain distinct from live evaluation.

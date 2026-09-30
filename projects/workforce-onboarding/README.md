@@ -46,3 +46,7 @@ Compare live policy mapping to a maintained role checklist and dependency graph 
 ## Adoption
 
 An authorized HR/IT operator must select applicable policy and current task exports. Authenticate the user, isolate each starter's records and minimize personal data before invoking this workflow. Live mode transmits supplied text to the model provider. Completion updates, identity checks and provisioning remain in your existing approved systems.
+
+## Collection workspace and current evidence
+
+Run `python3 -m enterprise_ai serve` from the collection root to try this workflow in the browser, upload a compatible JSON export, inspect results and export JSON. [Deployment and data handling](../../docs/DEPLOYMENT.md) explains the single-user boundary and live provider. [Verification](../../docs/VERIFICATION.md) records the actual inference trials, initial failures, corrective regressions and independent semantic review; authored fixtures above remain distinct from live evaluation.

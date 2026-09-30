@@ -47,3 +47,7 @@ The tests also reject fabricated quotations, foreign sources, duplicate IDs, mis
 No scanning, exploitation, runtime reachability analysis, version-range resolution, vendor feed or package upgrades. Callers must normalize package identities and supply authoritative version lists; the model cannot amend them. The tool is not a vulnerability suppression or deployment gate. Advisory prose remains untrusted.
 
 Exact quotation checks cannot guarantee semantic entailment or defeat every prompt injection. Human reviewers must verify substantive interpretations. This is an original bounded reference workflow, not a copy of an upstream enterprise application. See the collection license and security guidance.
+
+## Collection workspace and current evidence
+
+Run `python3 -m enterprise_ai serve` from the collection root to try this workflow in the browser, upload a compatible JSON export, inspect results and export JSON. [Deployment and data handling](../../docs/DEPLOYMENT.md) explains the single-user boundary and live provider. [Verification](../../docs/VERIFICATION.md) records the actual inference trials, initial failures, corrective regressions and independent semantic review; authored fixtures above remain distinct from live evaluation.

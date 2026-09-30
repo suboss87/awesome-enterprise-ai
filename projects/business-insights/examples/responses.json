@@ -1,0 +1,14 @@
+[
+  {
+    "status": "ready",
+    "measure": "net_revenue",
+    "group_by": "region",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "currency": "USD",
+    "regions": [],
+    "products": [],
+    "clarification": "",
+    "question_quote": "net revenue by region in September 2026 in USD"
+  }
+]

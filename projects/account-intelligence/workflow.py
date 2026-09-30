@@ -1,4 +1,5 @@
 """CRM review with sourced meeting changes; no fabricated forecast values."""
+import re
 from enterprise_ai.common import (InputError, obj, text, integer, day, rows, unique,
     object_schema, array_schema, string_schema, EVIDENCE_SCHEMA, evidence, finding, result)
 
@@ -30,13 +31,19 @@ def run(data, ai):
         if meeting['account_id'] != account['id']: raise InputError('Cross-account meeting rejected')
         if day(meeting['date']) > today: raise InputError('Future meeting is not an observed event')
     sources = unique(meetings)
-    answer = ai.ask('Extract meeting statements relevant to supplied opportunity IDs. Return blockers, next steps, and proposed close-date changes. Each needs an exact meeting quote. For a date change, proposed_date must be an ISO date appearing literally in a supporting quote; otherwise omit the date-change observation. All other proposed_date values must be empty. Do not infer deal values, probability, buyer names, or completion from plans. Do not duplicate observations.', data, SCHEMA)
+    answer = ai.ask('Extract meeting statements relevant to supplied opportunity IDs. Return blockers, next steps, and proposed close-date changes. A blocker requires explicit evidence of obstruction, delay, rejection or an unmet prerequisite preventing progress. Routine procurement review in progress is not itself a blocker. Omit neutral status observations; do not force them into one of these categories. Each needs an exact meeting quote. For a date change, proposed_date must be an ISO date appearing literally in a supporting quote; otherwise omit the date-change observation. All other proposed_date values must be empty. Do not infer deal values, probability, buyer names, or completion from plans. Do not duplicate observations.', data, SCHEMA)
     findings = []; observations = []; seen = set()
     for item in rows(answer['observations'], 'observations', 200):
         oid = item['opportunity_id']
         if oid not in ops: raise InputError('Unknown opportunity in observation')
         ev = evidence(item['evidence'], {sid: s['text'] for sid, s in sources.items()})
         if not ev: raise InputError('Meeting observation requires evidence')
+        for citation in ev:
+            full_text=sources[citation['source_id']]['text']
+            explicit={candidate for candidate in ops if re.search(r'(?<![\w-])'+re.escape(candidate)+r'(?![\w-])',full_text)}
+            quoted={candidate for candidate in ops if re.search(r'(?<![\w-])'+re.escape(candidate)+r'(?![\w-])',citation['quote'])}
+            if (quoted and oid not in quoted) or (not quoted and explicit and explicit!={oid}):
+                raise InputError('Meeting evidence is bound to a different or ambiguous opportunity')
         key = (oid, item['kind'], tuple(sorted((e['source_id'], e['quote']) for e in ev)))
         if key in seen: raise InputError('Duplicate observation')
         seen.add(key)

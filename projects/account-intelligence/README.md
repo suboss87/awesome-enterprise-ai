@@ -47,3 +47,7 @@ Compare held-out meeting-to-opportunity labels against keyword matching plus det
 ## Adoption
 
 Export only records visible to the reviewer; enforce authentication and row permissions before this module. Avoid unnecessary personal information in notes. Apply retention controls to outputs and model requests. There is no outreach, scraping, automatic opportunity update, personal profiling or bulk forecast generation.
+
+## Collection workspace and current evidence
+
+Run `python3 -m enterprise_ai serve` from the collection root to try this workflow in the browser, upload a compatible JSON export, inspect results and export JSON. [Deployment and data handling](../../docs/DEPLOYMENT.md) explains the single-user boundary and live provider. [Verification](../../docs/VERIFICATION.md) records the actual inference trials, initial failures, corrective regressions and independent semantic review; authored fixtures above remain distinct from live evaluation.

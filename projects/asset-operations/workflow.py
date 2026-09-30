@@ -59,4 +59,7 @@ def run(data,ai):
         if sources and not r['evidence']: raise InputError('Available maintenance context requires evidence')
         for question in rows(r['missing_information'],'missing_information',20): text(question)
         if not sources and not r['missing_information']: raise InputError('Missing asset documents must be disclosed')
+        if not sources:
+            # No prose about history can be supported when there are no records.
+            r['history_summary']='No maintenance documents supplied for this asset.'
     return result(SPEC['id'],'Configured thresholds evaluated; no failure prediction or operational instructions.',{'assets':len(assets),'persistent_breaches':sum(s['status']=='persistent_breach' for s in statuses),'unavailable_assets':sum(s['status'] in ('no_data','stale') for s in statuses)},findings,[{'type':'maintenance_review','asset_id':s['asset_id'],'status':s['status']} for s in statuses if s['status']!='within_threshold'],statuses=statuses,analysis=model)
