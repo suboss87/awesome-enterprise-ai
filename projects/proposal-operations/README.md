@@ -1,5 +1,7 @@
 # Proposal Evidence Workbench
 
+**Experimental.** Local examples and tests pass, but Jev retained an operational-deployment hold after the fresh evaluation. Evaluate with synthetic data; source-system integration, identity controls and operational validation remain open. This project is included for inspection and development, not as an approved reference release. See the [verification record](../../docs/VERIFICATION.md).
+
 Sales engineers review an RFP question set against a dated, approved evidence library. The workbench produces a requirement-by-requirement response matrix, highlights contradictions and evidence gaps, and removes affirmative drafts backed by expired, future, or unapproved sources.
 
 ## Try it

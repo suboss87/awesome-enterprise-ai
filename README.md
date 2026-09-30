@@ -18,7 +18,7 @@ I like the point where a messy business problem becomes something you can actual
 
 This is where I build those ideas into small, inspectable workflows. Each one starts with a business task, does a bounded piece of work, and gives a person the evidence and next step. You can run the examples, read the rules, and adapt the inputs to your own systems.
 
-**Current stage: development preview under review. Jev release review is on hold.** All ten have a browser journey, CLI, examples and tests. They are not complete replacements for enterprise systems or pre-certified deployments. [Read the tested scope and remaining limits.](docs/VERIFICATION.md)
+**Current stage: nine reviewed reference workflows and one experimental project.** All ten have a browser journey, CLI, examples and tests. Proposal Evidence remains experimental while its operational review hold is open. They are not complete replacements for enterprise systems or pre-certified deployments. [Read the tested scope and remaining limits.](docs/VERIFICATION.md)
 
 ## Choose your workflow
 
@@ -31,7 +31,7 @@ This is where I build those ideas into small, inspectable workflows. Each one st
 | Supply chain — replenishment decisions compete for a limited budget | [Inventory Planning Workbench](projects/inventory-decisions/) | Transparent reorder proposals, budget constraints and planning-note interpretation |
 | Operations — equipment alerts need recent readings and history | [Equipment Monitoring Workbench](projects/asset-operations/) | Persistent threshold observations, stale-data findings and maintenance context |
 | Insurance — incomplete evidence delays an adjuster’s review | [Claims Intake Workbench](projects/claims-intake/) | A document checklist, conflicting facts and missing-information requests |
-| Proposals — answers must match current, approved evidence | [Proposal Evidence Workbench](projects/proposal-operations/) | A sourced response matrix with conflicts and unsupported answers exposed |
+| Proposals — answers must match current, approved evidence | [Proposal Evidence Workbench](projects/proposal-operations/) · experimental | A sourced response matrix with conflicts and unsupported answers exposed |
 | Sales — meeting commitments and CRM records drift apart | [Account Review Workbench](projects/account-intelligence/) | Quoted observations, date conflicts and missing next steps; no invented forecast |
 | People operations — onboarding tasks depend on each other | [Onboarding Readiness Desk](projects/workforce-onboarding/) | Applicable tasks, prerequisite gaps and a readiness checklist |
 

@@ -16,11 +16,13 @@ The user explicitly selected these ten categories on 2026-09-30. Build original,
 - [x] Shared runtime, transport, CLI and workspace verified (153 tests, ten example journeys).
 - [x] Ten distinct workflows implemented and independently tested.
 - [x] Live model evaluation and failure analysis per project (58 initial cases, 15 corrective live cases, saved-response claims replay; no production validation).
-- [ ] Jev artifact assessment, independent code review, CI and truthful publication.
+- [x] Jev artifact assessment, independent code review and exact-head CI.
+- [ ] Publish nine reference-approved projects and one explicitly experimental implementation; candidate has independent documentation review and passing links.
+- [ ] Resolve Proposal Evidence operational hold before promoting it to a reviewed reference.
 
 ## Current release boundary
 
-User reaffirmed publication authority and requested meaningful improvements over established enterprise projects. Ten implementations and their evidence have now been assessed by Jev. All ten received fix_before_reference; preserve this result. Exact-head CI and resolution of the review hold remain before a validated-reference release. A draft PR may expose the candidate for review without claiming release approval.
+The user repeatedly authorized publication. Nine projects now received ready_reference after materially new evidence; Proposal Evidence retains fix_before_reference for operational deployment. Publish it only with experimental labeling and the unresolved hold visible. Do not call all ten reference-approved or production-ready. Original judgments remain in the verification record.
 
 ## Agreed outcome
 

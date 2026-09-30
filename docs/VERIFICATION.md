@@ -62,8 +62,18 @@ Each project includes declared cases under `evaluation/`. Some recorded cases de
 
 Do not change an expected result to make an observed failure pass. Preserve prior runs, document the cause and distinguish a corrective regression from fresh validation.
 
-## Jev artifact assessment — release held
+## Initial Jev artifact assessment — historical holds
 
 Jev (`jev-1.13.0`) reviewed all ten implementations, tests, deployment limits and the retained initial/corrective evaluation evidence. All ten received `fix_before_reference`, with `adopter_validation_required` for enterprise readiness. Usefulness scores ranged from 1.99 to 2.04 on the declared 0–4 rubric. These are typed artifact judgments, not runtime benchmark scores or written technical diagnoses.
 
-The hold is preserved. Local passing tests and independent code review do not override it. The projects are under review; no Jev approval, comparative superiority or bank production readiness is claimed. All three GitHub CI jobs passed on candidate `20195350caa66f61aa6596e3c9807fbb276b24d7` ([run](https://github.com/suboss87/awesome-enterprise-ai/actions/runs/36684488756)). A follow-up assessment will use the fresh cases and operational trial plan; the original judgments are retained.
+These original judgments remain in the record. They were not overwritten or resampled with unchanged evidence. The follow-up below reports the materially new evidence and current dispositions. No comparative superiority or bank production readiness is claimed. All three GitHub CI jobs passed on candidate `20195350caa66f61aa6596e3c9807fbb276b24d7` ([run](https://github.com/suboss87/awesome-enterprise-ai/actions/runs/36684488756)). The follow-up assessment below used the fresh cases and operational trial plan; the original judgments are retained.
+
+## Follow-up artifact assessment and publication scope
+
+The same original questions and rubric were applied to materially new evidence: twenty independent fresh live cases, cross-author semantic reviews, public reproducible snapshots, an operational trial plan, and passing exact-head CI on `e4396b0006027f5e8ea13c40b7db2fd0f33399fa` ([run](https://github.com/suboss87/awesome-enterprise-ai/actions/runs/36690768229)). Runtime code and model prompts were unchanged during the fresh evaluation.
+
+**Nine projects received `ready_reference`. Proposal Evidence received `fix_before_reference`.** A separate diagnostic classified its remaining hold as `operational_deployment`; no written technical diagnosis was returned. Operational capabilities were not implemented by writing the adoption plan, and that hold remains unresolved.
+
+All ten received `adopter_validation_required` for enterprise readiness. Usefulness scores ranged from 1.89 to 1.99 on the original 0–4 rubric. These scores describe bounded utility, not enterprise excellence or evidence of superiority. [Per-project results](../evaluation/2026-09-30/artifact-review.json) retain the actual dispositions.
+
+This publication makes nine reviewed references and one clearly labeled experimental implementation available. It does **not** claim all ten passed release approval. The experimental project remains available for code inspection, synthetic testing and further development. Its promotion requires operational evidence and a resolved review hold; a green CI run alone is insufficient.
