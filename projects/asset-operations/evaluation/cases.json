@@ -1,0 +1,498 @@
+{
+  "provenance": "Independently specified synthetic workflow fixtures. Replay validates contracts and deterministic behavior, not model accuracy or enterprise suitability.",
+  "cases": [
+    {
+      "id": "persistent_breach",
+      "input": {
+        "as_of": "2026-09-01T10:05:00Z",
+        "assets": [
+          {
+            "id": "PUMP-1",
+            "metric": "temperature",
+            "unit": "C",
+            "upper_threshold": 80,
+            "persistence": 2,
+            "max_age_seconds": 300,
+            "max_gap_seconds": 120
+          }
+        ],
+        "readings": [
+          {
+            "id": "reading1",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T10:03:00Z",
+            "value": 83
+          },
+          {
+            "id": "reading2",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T10:04:00Z",
+            "value": 84
+          }
+        ],
+        "documents": [
+          {
+            "id": "wo1",
+            "asset_id": "PUMP-1",
+            "kind": "work_order",
+            "text": "Last inspection recorded bearing wear; replacement completion was not documented."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "asset_reviews": [
+            {
+              "asset_id": "PUMP-1",
+              "history_summary": "Bearing wear was recorded; completion is undocumented.",
+              "evidence": [
+                {
+                  "source_id": "wo1",
+                  "quote": "Last inspection recorded bearing wear; replacement completion was not documented."
+                }
+              ],
+              "missing_information": [
+                "Was the replacement completed and inspected?"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "persistent_breaches": 1,
+        "unavailable_assets": 0
+      },
+      "expected_finding_codes": [
+        "persistent_breach"
+      ]
+    },
+    {
+      "id": "transient_breach",
+      "input": {
+        "as_of": "2026-09-01T10:05:00Z",
+        "assets": [
+          {
+            "id": "PUMP-1",
+            "metric": "temperature",
+            "unit": "C",
+            "upper_threshold": 80,
+            "persistence": 2,
+            "max_age_seconds": 300,
+            "max_gap_seconds": 120
+          }
+        ],
+        "readings": [
+          {
+            "id": "reading1",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T10:03:00Z",
+            "value": 80
+          },
+          {
+            "id": "reading2",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T10:04:00Z",
+            "value": 84
+          }
+        ],
+        "documents": [
+          {
+            "id": "wo1",
+            "asset_id": "PUMP-1",
+            "kind": "work_order",
+            "text": "Last inspection recorded bearing wear; replacement completion was not documented."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "asset_reviews": [
+            {
+              "asset_id": "PUMP-1",
+              "history_summary": "Bearing wear was recorded; completion is undocumented.",
+              "evidence": [
+                {
+                  "source_id": "wo1",
+                  "quote": "Last inspection recorded bearing wear; replacement completion was not documented."
+                }
+              ],
+              "missing_information": [
+                "Was the replacement completed and inspected?"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "persistent_breaches": 0,
+        "unavailable_assets": 0
+      },
+      "expected_finding_codes": [
+        "transient_breach"
+      ]
+    },
+    {
+      "id": "threshold_equality",
+      "input": {
+        "as_of": "2026-09-01T10:05:00Z",
+        "assets": [
+          {
+            "id": "PUMP-1",
+            "metric": "temperature",
+            "unit": "C",
+            "upper_threshold": 80,
+            "persistence": 2,
+            "max_age_seconds": 300,
+            "max_gap_seconds": 120
+          }
+        ],
+        "readings": [
+          {
+            "id": "reading1",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T10:03:00Z",
+            "value": 83
+          },
+          {
+            "id": "reading2",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T10:04:00Z",
+            "value": 80
+          }
+        ],
+        "documents": [
+          {
+            "id": "wo1",
+            "asset_id": "PUMP-1",
+            "kind": "work_order",
+            "text": "Last inspection recorded bearing wear; replacement completion was not documented."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "asset_reviews": [
+            {
+              "asset_id": "PUMP-1",
+              "history_summary": "Bearing wear was recorded; completion is undocumented.",
+              "evidence": [
+                {
+                  "source_id": "wo1",
+                  "quote": "Last inspection recorded bearing wear; replacement completion was not documented."
+                }
+              ],
+              "missing_information": [
+                "Was the replacement completed and inspected?"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "persistent_breaches": 0,
+        "unavailable_assets": 0
+      },
+      "expected_finding_codes": []
+    },
+    {
+      "id": "stale_data",
+      "input": {
+        "as_of": "2026-09-01T11:00:00Z",
+        "assets": [
+          {
+            "id": "PUMP-1",
+            "metric": "temperature",
+            "unit": "C",
+            "upper_threshold": 80,
+            "persistence": 2,
+            "max_age_seconds": 300,
+            "max_gap_seconds": 120
+          }
+        ],
+        "readings": [
+          {
+            "id": "reading1",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T10:03:00Z",
+            "value": 83
+          },
+          {
+            "id": "reading2",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T10:04:00Z",
+            "value": 84
+          }
+        ],
+        "documents": [
+          {
+            "id": "wo1",
+            "asset_id": "PUMP-1",
+            "kind": "work_order",
+            "text": "Last inspection recorded bearing wear; replacement completion was not documented."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "asset_reviews": [
+            {
+              "asset_id": "PUMP-1",
+              "history_summary": "Bearing wear was recorded; completion is undocumented.",
+              "evidence": [
+                {
+                  "source_id": "wo1",
+                  "quote": "Last inspection recorded bearing wear; replacement completion was not documented."
+                }
+              ],
+              "missing_information": [
+                "Was the replacement completed and inspected?"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "persistent_breaches": 0,
+        "unavailable_assets": 1
+      },
+      "expected_finding_codes": [
+        "stale"
+      ]
+    },
+    {
+      "id": "missing_sensor_data",
+      "input": {
+        "as_of": "2026-09-01T10:05:00Z",
+        "assets": [
+          {
+            "id": "PUMP-1",
+            "metric": "temperature",
+            "unit": "C",
+            "upper_threshold": 80,
+            "persistence": 2,
+            "max_age_seconds": 300,
+            "max_gap_seconds": 120
+          }
+        ],
+        "readings": [],
+        "documents": [
+          {
+            "id": "wo1",
+            "asset_id": "PUMP-1",
+            "kind": "work_order",
+            "text": "Last inspection recorded bearing wear; replacement completion was not documented."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "asset_reviews": [
+            {
+              "asset_id": "PUMP-1",
+              "history_summary": "Bearing wear was recorded; completion is undocumented.",
+              "evidence": [
+                {
+                  "source_id": "wo1",
+                  "quote": "Last inspection recorded bearing wear; replacement completion was not documented."
+                }
+              ],
+              "missing_information": [
+                "Was the replacement completed and inspected?"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "persistent_breaches": 0,
+        "unavailable_assets": 1
+      },
+      "expected_finding_codes": [
+        "no_data"
+      ]
+    },
+    {
+      "id": "sampling_gap",
+      "input": {
+        "as_of": "2026-09-01T10:05:00Z",
+        "assets": [
+          {
+            "id": "PUMP-1",
+            "metric": "temperature",
+            "unit": "C",
+            "upper_threshold": 80,
+            "persistence": 2,
+            "max_age_seconds": 300,
+            "max_gap_seconds": 120
+          }
+        ],
+        "readings": [
+          {
+            "id": "reading1",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T09:50:00Z",
+            "value": 83
+          },
+          {
+            "id": "reading2",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T10:04:00Z",
+            "value": 84
+          }
+        ],
+        "documents": [
+          {
+            "id": "wo1",
+            "asset_id": "PUMP-1",
+            "kind": "work_order",
+            "text": "Last inspection recorded bearing wear; replacement completion was not documented."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "asset_reviews": [
+            {
+              "asset_id": "PUMP-1",
+              "history_summary": "Bearing wear was recorded; completion is undocumented.",
+              "evidence": [
+                {
+                  "source_id": "wo1",
+                  "quote": "Last inspection recorded bearing wear; replacement completion was not documented."
+                }
+              ],
+              "missing_information": [
+                "Was the replacement completed and inspected?"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "persistent_breaches": 0,
+        "unavailable_assets": 0
+      },
+      "expected_finding_codes": [
+        "transient_breach"
+      ]
+    },
+    {
+      "id": "missing_history",
+      "input": {
+        "as_of": "2026-09-01T10:05:00Z",
+        "assets": [
+          {
+            "id": "PUMP-1",
+            "metric": "temperature",
+            "unit": "C",
+            "upper_threshold": 80,
+            "persistence": 2,
+            "max_age_seconds": 300,
+            "max_gap_seconds": 120
+          }
+        ],
+        "readings": [
+          {
+            "id": "reading1",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T10:03:00Z",
+            "value": 83
+          },
+          {
+            "id": "reading2",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T10:04:00Z",
+            "value": 84
+          }
+        ],
+        "documents": []
+      },
+      "replay_responses": [
+        {
+          "asset_reviews": [
+            {
+              "asset_id": "PUMP-1",
+              "history_summary": "No maintenance documents provided.",
+              "evidence": [],
+              "missing_information": [
+                "Maintenance history is missing."
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "persistent_breaches": 1,
+        "unavailable_assets": 0
+      },
+      "expected_finding_codes": [
+        "persistent_breach"
+      ]
+    },
+    {
+      "id": "out_of_order_samples",
+      "input": {
+        "as_of": "2026-09-01T10:05:00Z",
+        "assets": [
+          {
+            "id": "PUMP-1",
+            "metric": "temperature",
+            "unit": "C",
+            "upper_threshold": 80,
+            "persistence": 2,
+            "max_age_seconds": 300,
+            "max_gap_seconds": 120
+          }
+        ],
+        "readings": [
+          {
+            "id": "reading2",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T10:04:00Z",
+            "value": 84
+          },
+          {
+            "id": "reading1",
+            "asset_id": "PUMP-1",
+            "at": "2026-09-01T10:03:00Z",
+            "value": 83
+          }
+        ],
+        "documents": [
+          {
+            "id": "wo1",
+            "asset_id": "PUMP-1",
+            "kind": "work_order",
+            "text": "Last inspection recorded bearing wear; replacement completion was not documented."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "asset_reviews": [
+            {
+              "asset_id": "PUMP-1",
+              "history_summary": "Bearing wear was recorded; completion is undocumented.",
+              "evidence": [
+                {
+                  "source_id": "wo1",
+                  "quote": "Last inspection recorded bearing wear; replacement completion was not documented."
+                }
+              ],
+              "missing_information": [
+                "Was the replacement completed and inspected?"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "persistent_breaches": 1,
+        "unavailable_assets": 0
+      },
+      "expected_finding_codes": [
+        "persistent_breach"
+      ]
+    }
+  ]
+}

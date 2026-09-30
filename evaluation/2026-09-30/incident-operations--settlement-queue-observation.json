@@ -1,0 +1,141 @@
+{
+  "project": "incident-operations",
+  "summary": "Incident evidence assembled; all causal explanations remain hypotheses.",
+  "metrics": {
+    "events": 3,
+    "services": 2,
+    "hypotheses": 3
+  },
+  "findings": [],
+  "actions": [
+    {
+      "type": "review_hypotheses",
+      "detail": "Compare supporting and contradictory observations with the incident owner."
+    }
+  ],
+  "human_review_required": true,
+  "timeline": [
+    {
+      "id": "lease-trace",
+      "at": "2026-10-02T07:20:00Z",
+      "kind": "trace",
+      "service": "lease-store",
+      "text": "Lease-store request duration increased to 900 milliseconds; historical baseline was 20 milliseconds."
+    },
+    {
+      "id": "consumer-log",
+      "at": "2026-10-02T07:21:00Z",
+      "kind": "log",
+      "service": "settlement",
+      "text": "Consumers reported repeated lease acquisition timeouts."
+    },
+    {
+      "id": "q-growth",
+      "at": "2026-10-02T07:24:00Z",
+      "kind": "alert",
+      "service": "settlement",
+      "text": "Settlement queue depth reached 4200 messages."
+    }
+  ],
+  "analysis": {
+    "hypotheses": [
+      {
+        "explanation": "A lease-store latency regression may have caused settlement consumers to time out while acquiring leases, reducing consumption and allowing the settlement queue to accumulate.",
+        "support": [
+          {
+            "source_id": "lease-trace",
+            "quote": "Lease-store request duration increased to 900 milliseconds; historical baseline was 20 milliseconds."
+          },
+          {
+            "source_id": "consumer-log",
+            "quote": "Consumers reported repeated lease acquisition timeouts."
+          },
+          {
+            "source_id": "q-growth",
+            "quote": "Settlement queue depth reached 4200 messages."
+          }
+        ],
+        "contradictions": [],
+        "missing_checks": [
+          "Whether lease-store latency increases align per-request with the lease acquisition timeout periods seen by settlement consumers.",
+          "Whether the lease acquisition timeout threshold is below or near the observed 900 millisecond lease-store request duration.",
+          "Whether settlement consumer throughput dropped during the same interval that queue depth increased."
+        ]
+      },
+      {
+        "explanation": "Settlement consumers may have been unable to acquire leases because of lease coordination contention or failures, leading to queue growth; the lease-store latency increase could be related but is not sufficient alone to establish causation.",
+        "support": [
+          {
+            "source_id": "consumer-log",
+            "quote": "Consumers reported repeated lease acquisition timeouts."
+          },
+          {
+            "source_id": "q-growth",
+            "quote": "Settlement queue depth reached 4200 messages."
+          },
+          {
+            "source_id": "lease-trace",
+            "quote": "Lease-store request duration increased to 900 milliseconds; historical baseline was 20 milliseconds."
+          }
+        ],
+        "contradictions": [],
+        "missing_checks": [
+          "Whether multiple consumers were competing for the same leases or partitions during the incident window.",
+          "Whether lease acquisition failures occurred even for requests without elevated lease-store duration.",
+          "Whether lease-store error rates, lock contention, or retry counts increased alongside the reported timeouts."
+        ]
+      },
+      {
+        "explanation": "The settlement backlog may reflect reduced settlement consumer progress, with repeated lease acquisition timeouts as the observable failure mode and elevated lease-store duration as a possible contributing symptom.",
+        "support": [
+          {
+            "source_id": "q-growth",
+            "quote": "Settlement queue depth reached 4200 messages."
+          },
+          {
+            "source_id": "consumer-log",
+            "quote": "Consumers reported repeated lease acquisition timeouts."
+          },
+          {
+            "source_id": "lease-trace",
+            "quote": "Lease-store request duration increased to 900 milliseconds; historical baseline was 20 milliseconds."
+          }
+        ],
+        "contradictions": [],
+        "missing_checks": [
+          "Whether settlement consumers were otherwise healthy, running, and processing messages during the queue growth.",
+          "Whether message ingress rate increased enough to explain a queue depth of 4200 messages without a consumer-side regression.",
+          "Whether other settlement dependencies besides lease-store showed latency or error changes in the same window."
+        ]
+      }
+    ],
+    "unresolved_questions": [
+      "No direct event text states the root cause of the lease-store latency increase.",
+      "No event text provides settlement consumer throughput, ingress rate, lease timeout configuration, or error-rate details."
+    ]
+  },
+  "incident_id": "FRESH-SETTLEMENT",
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_0b590517397587c0016abcc987705887d1acc8d5a34baddf10",
+        "usage": {
+          "input_tokens": 488,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 807,
+          "output_tokens_details": {
+            "reasoning_tokens": 253
+          },
+          "total_tokens": 1295
+        },
+        "prompt_sha256": "5ff3d668c6b4164fb69ce81bb7ed1a131f38351052414e2c02f2a055a8b4a956"
+      }
+    ]
+  }
+}

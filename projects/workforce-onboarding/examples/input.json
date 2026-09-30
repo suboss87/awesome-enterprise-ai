@@ -1,0 +1,35 @@
+{
+  "as_of": "2026-09-30",
+  "starter": {
+    "id": "employee-1",
+    "role": "Data Engineer",
+    "location": "London",
+    "start_date": "2026-10-01"
+  },
+  "policies": [
+    {
+      "id": "policy-1",
+      "text": "Data Engineers must finish identity verification before repository access."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "identity",
+      "title": "Identity verification",
+      "owner": "HR",
+      "status": "complete",
+      "required": true,
+      "depends_on": []
+    },
+    {
+      "id": "repo-access",
+      "title": "Repository access approval",
+      "owner": "IT",
+      "status": "pending",
+      "required": true,
+      "depends_on": [
+        "identity"
+      ]
+    }
+  ]
+}

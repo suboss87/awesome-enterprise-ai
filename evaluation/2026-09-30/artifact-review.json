@@ -1,0 +1,97 @@
+{
+  "scope": "Reference publication, not production deployment approval. Original holds and initial failures are retained in VERIFICATION.md. One project remains experimental with its Jev hold unresolved.",
+  "reviewed_commit": "e4396b0006027f5e8ea13c40b7db2fd0f33399fa",
+  "model": "jev-1.13.0",
+  "projects": [
+    {
+      "project": "account-intelligence",
+      "model": "jev-1.13.0",
+      "answers": {
+        "usefulness": 1.95,
+        "reference_disposition": "ready_reference",
+        "enterprise_readiness": "adopter_validation_required"
+      }
+    },
+    {
+      "project": "asset-operations",
+      "model": "jev-1.13.0",
+      "answers": {
+        "usefulness": 1.91,
+        "reference_disposition": "ready_reference",
+        "enterprise_readiness": "adopter_validation_required"
+      }
+    },
+    {
+      "project": "business-insights",
+      "model": "jev-1.13.0",
+      "answers": {
+        "usefulness": 1.95,
+        "reference_disposition": "ready_reference",
+        "enterprise_readiness": "adopter_validation_required"
+      }
+    },
+    {
+      "project": "claims-intake",
+      "model": "jev-1.13.0",
+      "answers": {
+        "usefulness": 1.96,
+        "reference_disposition": "ready_reference",
+        "enterprise_readiness": "adopter_validation_required"
+      }
+    },
+    {
+      "project": "customer-resolution",
+      "model": "jev-1.13.0",
+      "answers": {
+        "usefulness": 1.99,
+        "reference_disposition": "ready_reference",
+        "enterprise_readiness": "adopter_validation_required"
+      }
+    },
+    {
+      "project": "exposure-review",
+      "model": "jev-1.13.0",
+      "answers": {
+        "usefulness": 1.92,
+        "reference_disposition": "ready_reference",
+        "enterprise_readiness": "adopter_validation_required"
+      }
+    },
+    {
+      "project": "incident-operations",
+      "model": "jev-1.13.0",
+      "answers": {
+        "usefulness": 1.95,
+        "reference_disposition": "ready_reference",
+        "enterprise_readiness": "adopter_validation_required"
+      }
+    },
+    {
+      "project": "inventory-decisions",
+      "model": "jev-1.13.0",
+      "answers": {
+        "usefulness": 1.89,
+        "reference_disposition": "ready_reference",
+        "enterprise_readiness": "adopter_validation_required"
+      }
+    },
+    {
+      "project": "proposal-operations",
+      "model": "jev-1.13.0",
+      "answers": {
+        "usefulness": 1.93,
+        "reference_disposition": "fix_before_reference",
+        "enterprise_readiness": "adopter_validation_required"
+      }
+    },
+    {
+      "project": "workforce-onboarding",
+      "model": "jev-1.13.0",
+      "answers": {
+        "usefulness": 1.95,
+        "reference_disposition": "ready_reference",
+        "enterprise_readiness": "adopter_validation_required"
+      }
+    }
+  ]
+}

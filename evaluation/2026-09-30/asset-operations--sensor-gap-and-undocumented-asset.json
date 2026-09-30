@@ -1,0 +1,119 @@
+{
+  "project": "asset-operations",
+  "summary": "Configured thresholds evaluated; no failure prediction or operational instructions.",
+  "metrics": {
+    "assets": 2,
+    "persistent_breaches": 0,
+    "unavailable_assets": 1
+  },
+  "findings": [
+    {
+      "code": "transient_breach",
+      "severity": "review",
+      "title": "Sensor observation requires review",
+      "detail": "COMP-G",
+      "evidence_ids": [
+        "gap-a",
+        "gap-b",
+        "gap-c"
+      ]
+    },
+    {
+      "code": "no_data",
+      "severity": "review",
+      "title": "Sensor observation requires review",
+      "detail": "COMP-N",
+      "evidence_ids": []
+    }
+  ],
+  "actions": [
+    {
+      "type": "maintenance_review",
+      "asset_id": "COMP-G",
+      "status": "transient_breach"
+    },
+    {
+      "type": "maintenance_review",
+      "asset_id": "COMP-N",
+      "status": "no_data"
+    }
+  ],
+  "human_review_required": true,
+  "statuses": [
+    {
+      "asset_id": "COMP-G",
+      "status": "transient_breach",
+      "consecutive_high_readings": 1,
+      "latest_reading": {
+        "id": "gap-c",
+        "asset_id": "COMP-G",
+        "at": "2026-10-02T09:09:30Z",
+        "value": 7
+      }
+    },
+    {
+      "asset_id": "COMP-N",
+      "status": "no_data",
+      "consecutive_high_readings": 0,
+      "latest_reading": null
+    }
+  ],
+  "analysis": {
+    "asset_reviews": [
+      {
+        "asset_id": "COMP-G",
+        "history_summary": "Documented context: an operator note reports a prior inspection with no visible leak, but vibration measurements were not recorded. Current sensor status supplied for context only: transient_breach with 1 consecutive high reading and latest vibration reading 7 mm/s at 2026-10-02T09:09:30Z; this is an observation, not a diagnosis.",
+        "evidence": [
+          {
+            "source_id": "old-check-g",
+            "quote": "The last inspection found no visible leak; vibration measurements were not recorded."
+          }
+        ],
+        "missing_information": [
+          "Date/time of the inspection referenced in the operator note.",
+          "Inspector/operator identity and qualifications for the referenced inspection.",
+          "Any recorded vibration history or baseline measurements for COMP-G.",
+          "Maintenance work orders, corrective actions, or follow-up findings related to COMP-G.",
+          "Calibration/status details for the vibration sensor or measurement method.",
+          "Additional recent readings needed to evaluate persistence under the supplied rule parameters."
+        ]
+      },
+      {
+        "asset_id": "COMP-N",
+        "history_summary": "No maintenance documents supplied for this asset.",
+        "evidence": [],
+        "missing_information": [
+          "Maintenance history documents for COMP-N.",
+          "Inspection records and dates for COMP-N.",
+          "Any vibration readings, trends, or baseline measurements for COMP-N.",
+          "Sensor availability/status details explaining the no_data status.",
+          "Maintenance work orders, corrective actions, or known service context for COMP-N.",
+          "Asset identification details such as location, component type, and service duty for qualified review."
+        ]
+      }
+    ]
+  },
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_0f4d056453659a93016abcc99219a887d19f0e065c102aa57d",
+        "usage": {
+          "input_tokens": 475,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 328,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 803
+        },
+        "prompt_sha256": "c57d08b50e32a268f05942c1b4911dbeee252bf1c7fdb04c247990c78378a4e0"
+      }
+    ]
+  }
+}

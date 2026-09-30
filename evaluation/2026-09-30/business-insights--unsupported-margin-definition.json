@@ -1,0 +1,57 @@
+{
+  "project": "business-insights",
+  "summary": "A business definition needs clarification.",
+  "metrics": {
+    "matched_records": 0
+  },
+  "findings": [
+    {
+      "code": "clarification",
+      "severity": "review",
+      "title": "Clarify the question",
+      "detail": "Profit margin percentage is not a supported measure. Do you want gross_profit by region for September 2026, or one of the supported measures: revenue, net_revenue, cost, or units?",
+      "evidence_ids": []
+    }
+  ],
+  "actions": [],
+  "human_review_required": true,
+  "plan": {
+    "status": "clarify",
+    "measure": "gross_profit",
+    "group_by": "region",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "currency": "USD",
+    "regions": [
+      "East",
+      "West"
+    ],
+    "products": [],
+    "clarification": "Profit margin percentage is not a supported measure. Do you want gross_profit by region for September 2026, or one of the supported measures: revenue, net_revenue, cost, or units?",
+    "question_quote": "gross profit margin percentage by region in September 2026"
+  },
+  "table": [],
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_0776a8ca0689b8de016abcc98b2fd887d1969cbedeed6ad28d",
+        "usage": {
+          "input_tokens": 398,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 393,
+          "output_tokens_details": {
+            "reasoning_tokens": 273
+          },
+          "total_tokens": 791
+        },
+        "prompt_sha256": "b15448117a7979042b90291e517ab2437b65db5d172558b86275c411f81012a1"
+      }
+    ]
+  }
+}

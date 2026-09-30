@@ -1,0 +1,79 @@
+# Verification record
+
+This is a record of tested behavior, not certification or a promise of fit for every enterprise. All supplied examples are fictional. No customer deployment, savings or superiority to another product is claimed.
+
+## Offline verification
+
+Run from the repository root:
+
+```sh
+python3 scripts/verify_workflows.py
+```
+
+**153 tests pass locally**: 25 shared runtime, input-boundary and server tests, plus 128 project tests. Ten CLI example replays also pass.
+
+The verifier runs the shared runtime/security tests, each workflow's business-rule tests, and all ten CLI example replays. Tests exercise invalid inputs, missing evidence, conflicting records, exact arithmetic and human-review boundaries. Recorded-response tests do not measure live model quality.
+
+The GitHub `enterprise-workflows` job runs this command on pushes, pull requests, manual runs and the existing daily schedule. The two earlier projects keep their own verification jobs.
+
+## Browser verification
+
+All ten workflows were exercised in Chromium: select a project, load its example, run a replay, inspect the result and export JSON. Malformed JSON and edited replay inputs were rejected. Desktop 1440×1000 and mobile 390×844 were inspected; no page script errors or mobile horizontal overflow were observed. The README screenshot is from the actual workspace.
+
+The final browser pass also verified nested duplicate-key rejection and one actual live customer-resolution run, including live execution metadata and a provider response ID. The other nine browser journeys used replay; their live workflow behavior was exercised separately through Python.
+
+## Actual inference — 2026-09-30
+
+A frozen 58-case synthetic set was run through the configured model. Requests and raw responses were retained privately. **50/58 automatic checks passed on the first run.** Two independent reviewers then inspected all 58 cases against their inputs, including outputs that passed automatic checks.
+
+| Initial finding | Correction |
+|---|---|
+| Four vulnerability runs quoted metadata or invented citation IDs | Prompt now explicitly restricts quotations to the advisory text and exact advisory IDs |
+| One incident run quoted a timestamp rather than source text | Prompt distinguishes contextual metadata from quotable event text |
+| Three claims runs rejected correct amounts followed by sentence punctuation | Numeric-token validation fixed; tests retain full-number boundaries |
+| Two sales answers treated ordinary procurement progress as an obstruction | Prompt requires explicit evidence of a blocker and omits neutral status |
+| Incident answers treated alternative explanations as contradictions | Prompt requires evidence incompatible with the particular hypothesis |
+| Analytics displayed zero for an empty period | An empty result now has a null total and an explicit missing-data finding |
+
+A corrective live run of all 15 incident, vulnerability and account cases passed **15/15 automatic checks**. This is regression evidence on known cases, not a new held-out benchmark. An intermediate sandbox-network failure was retained separately; it is not counted as model evaluation.
+
+Independent semantic review accepted the inspected corrections in the 15-case live regression. The original nine claims cases also meet their frozen outcomes after replaying the saved inference through the corrected validator (eight saved responses and one case requiring no call; no new claims inference). Shared regressions cover the fixes.
+
+Automatic checks and semantic review are distinct. Small synthetic sets do not establish production accuracy. No representative enterprise integration, latency/load study or controlled comparison with a non-AI baseline has been completed. Business owners must test their own workflows before adoption.
+
+## Fresh independent cases — 2026-09-30
+
+After the initial fixes were complete, two independent authors created twenty new synthetic cases using only the input contracts and examples. Neither inspected earlier evaluation cases or model outputs. Expected outcomes were frozen before inference. **20/20 automatic checks passed without changing prompts, code or expected outcomes.** Each author then reviewed the other author's actual outputs for semantic correctness. All twenty met their specific semantic criteria, with no blocking defect found. Nonblocking observations remain: one claims information request could describe the identity conflict more precisely, and two incident outputs could separate overlapping hypotheses and supporting/counterevidence labels more clearly.
+
+[The complete case set](../evaluation/live-cases.json) and [actual result snapshots](../evaluation/2026-09-30/) are public. These are two cases per project, not a representative enterprise accuracy estimate. The initial failures and consumed corrective regressions above remain part of the record.
+
+```sh
+python3 scripts/evaluate_workflows.py --cases evaluation/live-cases.json \
+  --output /tmp/enterprise-ai-fresh-run --workers 2
+```
+
+This command makes actual model calls and incurs provider usage. Use a new output directory; the evaluator refuses to overwrite an existing run. Synthetic snapshots can be inspected without a provider key.
+
+## Reproduce or extend evaluation
+
+Each project includes declared cases under `evaluation/`. Some recorded cases deliberately inject invalid model responses to test rejection; those are not live model benchmarks.
+
+`scripts/evaluate_workflows.py` accepts a separate JSON object with a `cases` list. Each case needs `project`, `id`, `input`, and an `expected` object containing any of `metrics`, `required_findings`, `forbidden_findings`, `any_findings`, or dotted `paths`. Freeze expected outcomes before inference. Save output outside the public repository and inspect the actual responses separately.
+
+Do not change an expected result to make an observed failure pass. Preserve prior runs, document the cause and distinguish a corrective regression from fresh validation.
+
+## Initial Jev artifact assessment — historical holds
+
+Jev (`jev-1.13.0`) reviewed all ten implementations, tests, deployment limits and the retained initial/corrective evaluation evidence. All ten received `fix_before_reference`, with `adopter_validation_required` for enterprise readiness. Usefulness scores ranged from 1.99 to 2.04 on the declared 0–4 rubric. These are typed artifact judgments, not runtime benchmark scores or written technical diagnoses.
+
+These original judgments remain in the record. They were not overwritten or resampled with unchanged evidence. The follow-up below reports the materially new evidence and current dispositions. No comparative superiority or bank production readiness is claimed. All three GitHub CI jobs passed on candidate `20195350caa66f61aa6596e3c9807fbb276b24d7` ([run](https://github.com/suboss87/awesome-enterprise-ai/actions/runs/36684488756)). The follow-up assessment below used the fresh cases and operational trial plan; the original judgments are retained.
+
+## Follow-up artifact assessment and publication scope
+
+The same original questions and rubric were applied to materially new evidence: twenty independent fresh live cases, cross-author semantic reviews, public reproducible snapshots, an operational trial plan, and passing exact-head CI on `e4396b0006027f5e8ea13c40b7db2fd0f33399fa` ([run](https://github.com/suboss87/awesome-enterprise-ai/actions/runs/36690768229)). Runtime code and model prompts were unchanged during the fresh evaluation.
+
+**Nine projects received `ready_reference`. Proposal Evidence received `fix_before_reference`.** A separate diagnostic classified its remaining hold as `operational_deployment`; no written technical diagnosis was returned. Operational capabilities were not implemented by writing the adoption plan, and that hold remains unresolved.
+
+All ten received `adopter_validation_required` for enterprise readiness. Usefulness scores ranged from 1.89 to 1.99 on the original 0–4 rubric. These scores describe bounded utility, not enterprise excellence or evidence of superiority. [Per-project results](../evaluation/2026-09-30/artifact-review.json) retain the actual dispositions.
+
+This publication makes nine reviewed references and one clearly labeled experimental implementation available. It does **not** claim all ten passed release approval. The experimental project remains available for code inspection, synthetic testing and further development. Its promotion requires operational evidence and a resolved review hold; a green CI run alone is insufficient.

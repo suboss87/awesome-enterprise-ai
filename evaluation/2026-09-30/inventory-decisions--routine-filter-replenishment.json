@@ -1,0 +1,71 @@
+{
+  "project": "inventory-decisions",
+  "summary": "Mean-demand replenishment scenario; inventory and supplier assumptions need planner review.",
+  "metrics": {
+    "items": 1,
+    "proposed_cost_cents": 500,
+    "budget_cents": 3000,
+    "budget_gap_cents": 0
+  },
+  "findings": [],
+  "actions": [
+    {
+      "type": "review_replenishment",
+      "sku": "FILTER-Q",
+      "units": 4
+    }
+  ],
+  "human_review_required": true,
+  "plan": [
+    {
+      "sku": "FILTER-Q",
+      "mean_daily_units": 3.0,
+      "inventory_position": 13,
+      "target_units": 17,
+      "requested_units": 4,
+      "capacity_limited_units": 4,
+      "capacity_shortfall_units": 0,
+      "proposed_cost_cents": 500,
+      "stockout_within_lead": false
+    }
+  ],
+  "analysis": {
+    "note_reviews": [
+      {
+        "note_id": "confirmed-window",
+        "classification": "information",
+        "summary": "Supplier reconfirmed the existing delivery window with no schedule changes.",
+        "evidence": [
+          {
+            "source_id": "confirmed-window",
+            "quote": "The supplier reconfirmed the existing delivery window; no changes to the agreed schedule."
+          }
+        ]
+      }
+    ]
+  },
+  "currency": "GBP",
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_099c717c8289a52d016abcc98db4c087d18e1253fa931d0de0",
+        "usage": {
+          "input_tokens": 335,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 120,
+          "output_tokens_details": {
+            "reasoning_tokens": 47
+          },
+          "total_tokens": 455
+        },
+        "prompt_sha256": "9df7db3b69f38cb3fd59ddfa7f033d46e4bff3d2534b50146ec603bee808333a"
+      }
+    ]
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "project": "account-intelligence",
+  "summary": "Account review uses recorded CRM values and quoted meeting statements.",
+  "metrics": {
+    "open_pipeline_cents": 3250000,
+    "active_opportunities": 1,
+    "meeting_observations": 0
+  },
+  "findings": [
+    {
+      "code": "overdue_close",
+      "severity": "review",
+      "title": "Open opportunity past close date",
+      "detail": "OP-OPEN-46",
+      "evidence_ids": [
+        "OP-OPEN-46"
+      ]
+    },
+    {
+      "code": "missing_next_step",
+      "severity": "review",
+      "title": "CRM next step missing",
+      "detail": "OP-OPEN-46",
+      "evidence_ids": [
+        "OP-OPEN-46"
+      ]
+    }
+  ],
+  "actions": [],
+  "human_review_required": true,
+  "account": {
+    "id": "AC-CEDAR-92",
+    "name": "Cedar Logistics"
+  },
+  "opportunities": [
+    {
+      "id": "OP-OPEN-46",
+      "account_id": "AC-CEDAR-92",
+      "title": "Fleet analytics extension",
+      "amount_cents": 3250000,
+      "stage": "qualified",
+      "close_date": "2026-09-16",
+      "next_step": ""
+    },
+    {
+      "id": "OP-CLOSED-57",
+      "account_id": "AC-CEDAR-92",
+      "title": "Completed warehouse renewal",
+      "amount_cents": 17000000,
+      "stage": "won",
+      "close_date": "2026-07-30",
+      "next_step": ""
+    }
+  ],
+  "observations": [],
+  "latest_meeting_date": "2026-09-25",
+  "forecast_probability": null,
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_03966502db4edc7f016abcc996ea2087d1b7d20c3370683442",
+        "usage": {
+          "input_tokens": 524,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 56,
+          "output_tokens_details": {
+            "reasoning_tokens": 40
+          },
+          "total_tokens": 580
+        },
+        "prompt_sha256": "a810a607401cf0de15ea9438d444b402df55e3156ee1f1dd769a2e5db5ceb5f3"
+      }
+    ]
+  }
+}

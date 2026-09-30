@@ -1,0 +1,95 @@
+{
+  "project": "exposure-review",
+  "summary": "Version evidence and advisory context prepared; no exploitability clearance.",
+  "metrics": {
+    "findings": 1,
+    "affected_matches": 1,
+    "unknown_matches": 0
+  },
+  "findings": [
+    {
+      "code": "affected_version_match",
+      "severity": "review",
+      "title": "Finding requires owner review",
+      "detail": "report-scan",
+      "evidence_ids": [
+        "report-scan",
+        "FRESH-ADV-PARSER"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "owner_review",
+      "finding_id": "report-scan",
+      "owner": "report-platform"
+    }
+  ],
+  "human_review_required": true,
+  "matches": [
+    {
+      "finding_id": "report-scan",
+      "inventory_id": "report-prod",
+      "advisory_id": "FRESH-ADV-PARSER",
+      "status": "affected_version_match",
+      "owner": "report-platform",
+      "service": "reporting",
+      "advisory_fixed_versions": [
+        "4.2.1"
+      ]
+    }
+  ],
+  "analysis": {
+    "advisories": [
+      {
+        "advisory_id": "FRESH-ADV-PARSER",
+        "impact_summary": "Report parser 4.2.0 is reported to permit unauthorized report access under a specific configuration condition.",
+        "preconditions": [
+          "Anonymous preview must be enabled."
+        ],
+        "review_questions": [
+          "Is the matched reporting inventory item report-prod running with anonymous preview enabled?",
+          "Is the deployed build the upstream Report parser 4.2.0 package, or a downstream vendor build with different behavior?",
+          "Has report-prod been updated to a version corresponding to the advisory fixed version 4.2.1?"
+        ],
+        "evidence": [
+          {
+            "source_id": "FRESH-ADV-PARSER",
+            "quote": "Report parser 4.2.0 permits unauthorized report access only when anonymous preview is enabled."
+          },
+          {
+            "source_id": "FRESH-ADV-PARSER",
+            "quote": "Version 4.2.1 removes anonymous preview access."
+          },
+          {
+            "source_id": "FRESH-ADV-PARSER",
+            "quote": "No information is provided about downstream vendor builds."
+          }
+        ]
+      }
+    ]
+  },
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_0bbcd90595f73ab4016abcc98768e487d1bd4dab5acd80bb51",
+        "usage": {
+          "input_tokens": 432,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 212,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 644
+        },
+        "prompt_sha256": "46e8b5b10da7972b5bab842aed1892eaee00f0d9052875ac1da411e7e6a0b298"
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "as_of": "2026-09-30",
+  "requirements": [
+    {
+      "id": "req-1",
+      "text": "Does the product support SAML single sign-on?"
+    }
+  ],
+  "sources": [
+    {
+      "id": "doc-1",
+      "text": "The Enterprise plan supports SAML single sign-on.",
+      "valid_from": "2026-01-01",
+      "valid_until": "2026-12-31",
+      "approval": "approved"
+    }
+  ]
+}

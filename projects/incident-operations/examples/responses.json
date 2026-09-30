@@ -1,0 +1,27 @@
+[
+  {
+    "hypotheses": [
+      {
+        "explanation": "The deployment may contribute, but cannot explain the earlier timeouts.",
+        "support": [
+          {
+            "source_id": "alert",
+            "quote": "Checkout error rate rose to 8 percent."
+          }
+        ],
+        "contradictions": [
+          {
+            "source_id": "log",
+            "quote": "Connection timeouts began before the deployment."
+          }
+        ],
+        "missing_checks": [
+          "Did database saturation precede the first timeout?"
+        ]
+      }
+    ],
+    "unresolved_questions": [
+      "Which dependency first became unhealthy?"
+    ]
+  }
+]

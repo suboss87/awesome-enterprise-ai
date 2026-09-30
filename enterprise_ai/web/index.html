@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="workspace-token" content="__SESSION_NONCE__"><title>Awesome Enterprise AI · Workspace</title>
+<link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body><a class="skip" href="#main">Skip to workspace</a>
+<aside><a class="brand" href="/">Enterprise<span>AI</span></a><p class="collection">A working collection by Subash</p>
+<label class="search-label" for="search">Find a workflow</label><input id="search" type="search" placeholder="Search projects…">
+<nav id="projects" aria-label="Enterprise workflows"></nav>
+<div class="sidebar-note"><strong>Bring your own context.</strong><p>Start with an example. Inspect the work. Connect your own data when you’re ready.</p></div></aside>
+<main id="main"><header class="topbar"><span>Awesome Enterprise AI</span><span class="local">Local workspace</span></header>
+<section class="intro"><p id="category"></p><h1 id="title">Work worth doing.</h1><p id="description">Choose a workflow to begin.</p></section>
+<div class="workspace"><section class="input-pane" aria-labelledby="input-heading"><div class="section-head"><h2 id="input-heading">Your inputs</h2><button id="reload" class="quiet">Load example</button></div>
+<p class="hint">Use the sample or upload a JSON export that follows this project’s input contract.</p>
+<label class="upload" for="upload">Upload JSON <input id="upload" type="file" accept=".json,application/json"></label>
+<label for="input">Input records</label><textarea id="input" spellcheck="false" aria-describedby="input-help"></textarea>
+<p id="input-help" class="hint">Examples contain fictional business data. Edited inputs require a live AI run.</p>
+<fieldset><legend>Run mode</legend><label><input type="radio" name="mode" value="replay" checked> Example replay <small>No model call</small></label><label><input type="radio" name="mode" value="live"> Live AI <small>Uses the server’s API key</small></label></fieldset>
+<button id="run" class="primary">Run workflow</button><p id="error" role="alert" hidden></p></section>
+<section class="output-pane" aria-labelledby="output-heading"><div class="section-head"><h2 id="output-heading">Review the work</h2><button id="download" class="quiet" disabled>Export JSON</button></div>
+<div id="status" class="status" role="status" aria-live="polite">Ready when you are.</div>
+<div id="empty"><div class="empty-mark" aria-hidden="true">↳</div><h3>From context to a useful result.</h3><p>Run the example to see findings, evidence, and next steps. Every result stays open for human review.</p></div>
+<div id="result" hidden><h3 id="summary"></h3><div id="metrics"></div><div id="findings"></div><div id="actions"></div><div id="details"></div>
+<details class="raw"><summary>Full result and execution details</summary><pre id="raw"></pre></details></div>
+</section></div><footer>Reference workflows for internal trials. Review the project’s deployment requirements before operational use.</footer></main></body></html>

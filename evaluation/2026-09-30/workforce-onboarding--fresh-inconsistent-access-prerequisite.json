@@ -1,0 +1,104 @@
+{
+  "project": "workforce-onboarding",
+  "summary": "Readiness reflects supplied task records; no access has been provisioned.",
+  "metrics": {
+    "ready": false,
+    "required_tasks": 2,
+    "unfinished_required": 1,
+    "uncertain_policy_matches": 0
+  },
+  "findings": [
+    {
+      "code": "completion_inconsistent",
+      "severity": "review",
+      "title": "Completed task has unfinished prerequisites",
+      "detail": "console-75",
+      "evidence_ids": []
+    },
+    {
+      "code": "readiness_blocker",
+      "severity": "urgent",
+      "title": "Required task unfinished",
+      "detail": "identity-64: People Operations",
+      "evidence_ids": []
+    }
+  ],
+  "actions": [
+    {
+      "action": "resolve_task",
+      "task_id": "identity-64",
+      "owner": "People Operations",
+      "waiting_on": []
+    }
+  ],
+  "human_review_required": true,
+  "starter": {
+    "id": "EMP-HARBOR-69",
+    "role": "Support Engineer",
+    "location": "Toronto",
+    "start_date": "2026-09-29"
+  },
+  "policy_matches": [
+    {
+      "task_id": "identity-64",
+      "applicability": "required",
+      "evidence": [
+        {
+          "source_id": "POL-ACCESS-83",
+          "quote": "Toronto Support Engineers must finish identity verification before support-console access."
+        },
+        {
+          "source_id": "POL-ACCESS-83",
+          "quote": "Both identity verification and support-console access approval are mandatory."
+        }
+      ],
+      "required_flag_preserved": false
+    },
+    {
+      "task_id": "console-75",
+      "applicability": "required",
+      "evidence": [
+        {
+          "source_id": "POL-ACCESS-83",
+          "quote": "Toronto Support Engineers must finish identity verification before support-console access."
+        },
+        {
+          "source_id": "POL-ACCESS-83",
+          "quote": "Both identity verification and support-console access approval are mandatory."
+        }
+      ],
+      "required_flag_preserved": true
+    }
+  ],
+  "required_task_ids": [
+    "console-75",
+    "identity-64"
+  ],
+  "completed_task_ids": [
+    "console-75"
+  ],
+  "provisioning_performed": false,
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_0c52b1d8bb19abf3016abcc99897b487d181aa01550bcf477c",
+        "usage": {
+          "input_tokens": 386,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 144,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 530
+        },
+        "prompt_sha256": "c335e0d2138718c0604dbb1c2933e77b78ba0bc2409180542ce9793559d3dbd4"
+      }
+    ]
+  }
+}

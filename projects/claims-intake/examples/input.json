@@ -1,0 +1,48 @@
+{
+  "claim": {
+    "id": "CL-401",
+    "claimant_id": "ORG-8",
+    "incident_date": "2026-09-12",
+    "currency": "USD",
+    "amount": "1500.00"
+  },
+  "requirements": [
+    {
+      "id": "R1",
+      "document_type": "incident_report",
+      "required_fields": [
+        "claimant_id",
+        "incident_date"
+      ]
+    },
+    {
+      "id": "R2",
+      "document_type": "repair_estimate",
+      "required_fields": [
+        "claimant_id",
+        "amount",
+        "currency"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "D1",
+      "pages": [
+        {
+          "id": "P1",
+          "text": "Incident report. Claimant ORG-8. Incident date 2026-09-12. Water damaged the storage room."
+        }
+      ]
+    },
+    {
+      "id": "D2",
+      "pages": [
+        {
+          "id": "P2",
+          "text": "Repair estimate. Claimant ORG-8. Proposed total USD 1500.00 for replacement shelving."
+        }
+      ]
+    }
+  ]
+}

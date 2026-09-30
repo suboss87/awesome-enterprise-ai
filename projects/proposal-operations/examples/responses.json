@@ -1,0 +1,17 @@
+[
+  {
+    "answers": [
+      {
+        "requirement_id": "req-1",
+        "status": "supported",
+        "draft": "SAML single sign-on is supported on the Enterprise plan.",
+        "evidence": [
+          {
+            "source_id": "doc-1",
+            "quote": "The Enterprise plan supports SAML single sign-on."
+          }
+        ]
+      }
+    ]
+  }
+]

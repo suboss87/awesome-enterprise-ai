@@ -1,0 +1,432 @@
+{
+  "provenance": "Original synthetic business records; expectations frozen before live calls. These are reference trials, not customer validation.",
+  "cases": [
+    {
+      "id": "net-region",
+      "input": {
+        "question": "What is net revenue by region in September 2026 in USD?",
+        "as_of": "2026-09-30",
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "metrics.total": "1900.00",
+        "metrics.matched_records": 2
+      }
+    },
+    {
+      "id": "gross-revenue",
+      "input": {
+        "question": "What is gross revenue for September 2026 in USD?",
+        "as_of": "2026-09-30",
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "metrics.total": "2000.00",
+        "metrics.matched_records": 2
+      }
+    },
+    {
+      "id": "profit",
+      "input": {
+        "question": "Show gross profit by product in September 2026 in USD.",
+        "as_of": "2026-09-30",
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "metrics.total": "750.00"
+      }
+    },
+    {
+      "id": "north-filter",
+      "input": {
+        "question": "Net revenue in North for September 2026, USD.",
+        "as_of": "2026-09-30",
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "metrics.total": "1100.00",
+        "metrics.matched_records": 1
+      }
+    },
+    {
+      "id": "month-groups",
+      "input": {
+        "question": "Show net revenue by month for all supplied USD records.",
+        "as_of": "2026-09-30",
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "metrics.total": "2300.00",
+        "metrics.groups": 2
+      }
+    },
+    {
+      "id": "units",
+      "input": {
+        "question": "Total recorded units in September 2026, USD records.",
+        "as_of": "2026-09-30",
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "metrics.total": "20",
+        "metrics.unit": "units"
+      }
+    },
+    {
+      "id": "unsupported",
+      "input": {
+        "question": "Predict our next quarter profit margin.",
+        "as_of": "2026-09-30",
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "finding_codes": [
+          "clarification"
+        ]
+      }
+    },
+    {
+      "id": "no-data",
+      "input": {
+        "question": "What was net revenue in January 2025 in USD?",
+        "as_of": "2026-09-30",
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "finding_codes": [
+          "no_data"
+        ]
+      }
+    },
+    {
+      "id": "mixed-currency",
+      "input": {
+        "question": "Total revenue across all records.",
+        "as_of": "2026-09-30",
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          },
+          {
+            "id": "E1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "EUR",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          }
+        ]
+      },
+      "expected": {
+        "finding_codes": [
+          "mixed_currency"
+        ]
+      }
+    }
+  ]
+}

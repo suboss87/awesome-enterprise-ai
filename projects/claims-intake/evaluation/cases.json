@@ -1,0 +1,478 @@
+{
+  "provenance": "Original synthetic claim packets; frozen before live model calls. No real claimant data or domain expert validation.",
+  "cases": [
+    {
+      "id": "complete",
+      "input": {
+        "claim": {
+          "id": "CL-401",
+          "claimant_id": "ORG-8",
+          "incident_date": "2026-09-12",
+          "currency": "USD",
+          "amount": "1500.00"
+        },
+        "requirements": [
+          {
+            "id": "R1",
+            "document_type": "incident_report",
+            "required_fields": [
+              "claimant_id",
+              "incident_date"
+            ]
+          },
+          {
+            "id": "R2",
+            "document_type": "repair_estimate",
+            "required_fields": [
+              "claimant_id",
+              "amount",
+              "currency"
+            ]
+          }
+        ],
+        "documents": [
+          {
+            "id": "D1",
+            "pages": [
+              {
+                "id": "P1",
+                "text": "Incident report. Claimant ORG-8. Incident date 2026-09-12. Water damaged the storage room."
+              }
+            ]
+          },
+          {
+            "id": "D2",
+            "pages": [
+              {
+                "id": "P2",
+                "text": "Repair estimate. Claimant ORG-8. Proposed total USD 1500.00 for replacement shelving."
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "metrics.incomplete_requirements": 0,
+        "metrics.review_findings": 0
+      }
+    },
+    {
+      "id": "missing-estimate",
+      "input": {
+        "claim": {
+          "id": "CL-401",
+          "claimant_id": "ORG-8",
+          "incident_date": "2026-09-12",
+          "currency": "USD",
+          "amount": "1500.00"
+        },
+        "requirements": [
+          {
+            "id": "R1",
+            "document_type": "incident_report",
+            "required_fields": [
+              "claimant_id",
+              "incident_date"
+            ]
+          },
+          {
+            "id": "R2",
+            "document_type": "repair_estimate",
+            "required_fields": [
+              "claimant_id",
+              "amount",
+              "currency"
+            ]
+          }
+        ],
+        "documents": [
+          {
+            "id": "D1",
+            "pages": [
+              {
+                "id": "P1",
+                "text": "Incident report. Claimant ORG-8. Incident date 2026-09-12. Water damaged the storage room."
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "metrics.incomplete_requirements": 1
+      }
+    },
+    {
+      "id": "wrong-claimant",
+      "input": {
+        "claim": {
+          "id": "CL-401",
+          "claimant_id": "ORG-8",
+          "incident_date": "2026-09-12",
+          "currency": "USD",
+          "amount": "1500.00"
+        },
+        "requirements": [
+          {
+            "id": "R1",
+            "document_type": "incident_report",
+            "required_fields": [
+              "claimant_id",
+              "incident_date"
+            ]
+          },
+          {
+            "id": "R2",
+            "document_type": "repair_estimate",
+            "required_fields": [
+              "claimant_id",
+              "amount",
+              "currency"
+            ]
+          }
+        ],
+        "documents": [
+          {
+            "id": "D1",
+            "pages": [
+              {
+                "id": "P1",
+                "text": "Incident report. Claimant ORG-8. Incident date 2026-09-12. Water damaged the storage room."
+              }
+            ]
+          },
+          {
+            "id": "D2",
+            "pages": [
+              {
+                "id": "P2",
+                "text": "Repair estimate. Claimant ORG-9. Proposed total USD 1500.00."
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "finding_codes": [
+          "identity_or_event_conflict",
+          "missing_requirement"
+        ]
+      }
+    },
+    {
+      "id": "wrong-date",
+      "input": {
+        "claim": {
+          "id": "CL-401",
+          "claimant_id": "ORG-8",
+          "incident_date": "2026-09-12",
+          "currency": "USD",
+          "amount": "1500.00"
+        },
+        "requirements": [
+          {
+            "id": "R1",
+            "document_type": "incident_report",
+            "required_fields": [
+              "claimant_id",
+              "incident_date"
+            ]
+          },
+          {
+            "id": "R2",
+            "document_type": "repair_estimate",
+            "required_fields": [
+              "claimant_id",
+              "amount",
+              "currency"
+            ]
+          }
+        ],
+        "documents": [
+          {
+            "id": "D1",
+            "pages": [
+              {
+                "id": "P1",
+                "text": "Incident report. Claimant ORG-8. Incident date 2026-08-12."
+              }
+            ]
+          },
+          {
+            "id": "D2",
+            "pages": [
+              {
+                "id": "P2",
+                "text": "Repair estimate. Claimant ORG-8. Proposed total USD 1500.00 for replacement shelving."
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "finding_codes": [
+          "identity_or_event_conflict",
+          "missing_requirement"
+        ]
+      }
+    },
+    {
+      "id": "amount-diff",
+      "input": {
+        "claim": {
+          "id": "CL-401",
+          "claimant_id": "ORG-8",
+          "incident_date": "2026-09-12",
+          "currency": "USD",
+          "amount": "1500.00"
+        },
+        "requirements": [
+          {
+            "id": "R1",
+            "document_type": "incident_report",
+            "required_fields": [
+              "claimant_id",
+              "incident_date"
+            ]
+          },
+          {
+            "id": "R2",
+            "document_type": "repair_estimate",
+            "required_fields": [
+              "claimant_id",
+              "amount",
+              "currency"
+            ]
+          }
+        ],
+        "documents": [
+          {
+            "id": "D1",
+            "pages": [
+              {
+                "id": "P1",
+                "text": "Incident report. Claimant ORG-8. Incident date 2026-09-12. Water damaged the storage room."
+              }
+            ]
+          },
+          {
+            "id": "D2",
+            "pages": [
+              {
+                "id": "P2",
+                "text": "Repair estimate. Claimant ORG-8. Proposed total USD 1800.00."
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "finding_codes": [
+          "amount_difference"
+        ]
+      }
+    },
+    {
+      "id": "unreadable",
+      "input": {
+        "claim": {
+          "id": "CL-401",
+          "claimant_id": "ORG-8",
+          "incident_date": "2026-09-12",
+          "currency": "USD",
+          "amount": "1500.00"
+        },
+        "requirements": [
+          {
+            "id": "R1",
+            "document_type": "incident_report",
+            "required_fields": [
+              "claimant_id",
+              "incident_date"
+            ]
+          },
+          {
+            "id": "R2",
+            "document_type": "repair_estimate",
+            "required_fields": [
+              "claimant_id",
+              "amount",
+              "currency"
+            ]
+          }
+        ],
+        "documents": [
+          {
+            "id": "D1",
+            "pages": [
+              {
+                "id": "P1",
+                "text": "Incident report. Claimant ORG-8. Incident date 2026-09-12. Water damaged the storage room."
+              }
+            ]
+          },
+          {
+            "id": "D2",
+            "pages": [
+              {
+                "id": "P2",
+                "text": "[OCR failed; no readable document content]"
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "finding_codes": [
+          "unclassified_document",
+          "missing_requirement"
+        ]
+      }
+    },
+    {
+      "id": "no-documents",
+      "input": {
+        "claim": {
+          "id": "CL-401",
+          "claimant_id": "ORG-8",
+          "incident_date": "2026-09-12",
+          "currency": "USD",
+          "amount": "1500.00"
+        },
+        "requirements": [
+          {
+            "id": "R1",
+            "document_type": "incident_report",
+            "required_fields": [
+              "claimant_id",
+              "incident_date"
+            ]
+          },
+          {
+            "id": "R2",
+            "document_type": "repair_estimate",
+            "required_fields": [
+              "claimant_id",
+              "amount",
+              "currency"
+            ]
+          }
+        ],
+        "documents": []
+      },
+      "expected": {
+        "metrics.incomplete_requirements": 2
+      }
+    },
+    {
+      "id": "missing-amount",
+      "input": {
+        "claim": {
+          "id": "CL-401",
+          "claimant_id": "ORG-8",
+          "incident_date": "2026-09-12",
+          "currency": "USD",
+          "amount": "1500.00"
+        },
+        "requirements": [
+          {
+            "id": "R1",
+            "document_type": "incident_report",
+            "required_fields": [
+              "claimant_id",
+              "incident_date"
+            ]
+          },
+          {
+            "id": "R2",
+            "document_type": "repair_estimate",
+            "required_fields": [
+              "claimant_id",
+              "amount",
+              "currency"
+            ]
+          }
+        ],
+        "documents": [
+          {
+            "id": "D1",
+            "pages": [
+              {
+                "id": "P1",
+                "text": "Incident report. Claimant ORG-8. Incident date 2026-09-12. Water damaged the storage room."
+              }
+            ]
+          },
+          {
+            "id": "D2",
+            "pages": [
+              {
+                "id": "P2",
+                "text": "Repair estimate. Claimant ORG-8. Currency USD. Amount awaiting contractor review."
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "metrics.incomplete_requirements": 1
+      }
+    },
+    {
+      "id": "wrong-currency",
+      "input": {
+        "claim": {
+          "id": "CL-401",
+          "claimant_id": "ORG-8",
+          "incident_date": "2026-09-12",
+          "currency": "USD",
+          "amount": "1500.00"
+        },
+        "requirements": [
+          {
+            "id": "R1",
+            "document_type": "incident_report",
+            "required_fields": [
+              "claimant_id",
+              "incident_date"
+            ]
+          },
+          {
+            "id": "R2",
+            "document_type": "repair_estimate",
+            "required_fields": [
+              "claimant_id",
+              "amount",
+              "currency"
+            ]
+          }
+        ],
+        "documents": [
+          {
+            "id": "D1",
+            "pages": [
+              {
+                "id": "P1",
+                "text": "Incident report. Claimant ORG-8. Incident date 2026-09-12. Water damaged the storage room."
+              }
+            ]
+          },
+          {
+            "id": "D2",
+            "pages": [
+              {
+                "id": "P2",
+                "text": "Repair estimate. Claimant ORG-8. Proposed total EUR 1500.00."
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "finding_codes": [
+          "identity_or_event_conflict",
+          "missing_requirement"
+        ]
+      }
+    }
+  ]
+}

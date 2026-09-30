@@ -1,0 +1,101 @@
+{
+  "project": "account-intelligence",
+  "summary": "Account review uses recorded CRM values and quoted meeting statements.",
+  "metrics": {
+    "open_pipeline_cents": 8600000,
+    "active_opportunities": 1,
+    "meeting_observations": 2
+  },
+  "findings": [
+    {
+      "code": "close_date_conflict",
+      "severity": "review",
+      "title": "Meeting date differs from CRM",
+      "detail": "OP-RENEW-35: CRM 2026-10-07; meeting 2026-10-28",
+      "evidence_ids": [
+        "MEET-SEP-81"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "action": "review_meeting_observation",
+      "opportunity_id": "OP-RENEW-35",
+      "kind": "date_change"
+    },
+    {
+      "action": "review_meeting_observation",
+      "opportunity_id": "OP-RENEW-35",
+      "kind": "blocker"
+    }
+  ],
+  "human_review_required": true,
+  "account": {
+    "id": "AC-NORTH-62",
+    "name": "North Quay Services"
+  },
+  "opportunities": [
+    {
+      "id": "OP-RENEW-35",
+      "account_id": "AC-NORTH-62",
+      "title": "Service desk renewal",
+      "amount_cents": 8600000,
+      "stage": "proposal",
+      "close_date": "2026-10-07",
+      "next_step": "Confirm the security assessment result."
+    }
+  ],
+  "observations": [
+    {
+      "opportunity_id": "OP-RENEW-35",
+      "kind": "date_change",
+      "proposed_date": "2026-10-28",
+      "evidence": [
+        {
+          "source_id": "MEET-SEP-81",
+          "quote": "For OP-RENEW-35, the customer proposed moving the close date to 2026-10-28."
+        }
+      ],
+      "review_status": "unreviewed",
+      "crm_changed": false
+    },
+    {
+      "opportunity_id": "OP-RENEW-35",
+      "kind": "blocker",
+      "proposed_date": "",
+      "evidence": [
+        {
+          "source_id": "MEET-SEP-81",
+          "quote": "For OP-RENEW-35, a failed security assessment is preventing procurement approval."
+        }
+      ],
+      "review_status": "unreviewed",
+      "crm_changed": false
+    }
+  ],
+  "latest_meeting_date": "2026-09-29",
+  "forecast_probability": null,
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_08071d0f37b904f5016abcc99642dc87d19c5087bd8a27a4b7",
+        "usage": {
+          "input_tokens": 475,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 221,
+          "output_tokens_details": {
+            "reasoning_tokens": 80
+          },
+          "total_tokens": 696
+        },
+        "prompt_sha256": "a810a607401cf0de15ea9438d444b402df55e3156ee1f1dd769a2e5db5ceb5f3"
+      }
+    ]
+  }
+}

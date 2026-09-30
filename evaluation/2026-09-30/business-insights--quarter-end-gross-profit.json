@@ -1,0 +1,65 @@
+{
+  "project": "business-insights",
+  "summary": "Gross profit across 2 matching records.",
+  "metrics": {
+    "matched_records": 2,
+    "groups": 2,
+    "total": "1000.00",
+    "unit": "EUR"
+  },
+  "findings": [],
+  "actions": [],
+  "human_review_required": true,
+  "plan": {
+    "status": "ready",
+    "measure": "gross_profit",
+    "group_by": "region",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "currency": "EUR",
+    "regions": [],
+    "products": [],
+    "clarification": "",
+    "question_quote": "gross profit by region for September 2026 in EUR"
+  },
+  "table": [
+    {
+      "group": "East",
+      "value": "550.00",
+      "record_ids": [
+        "eastern-sale"
+      ]
+    },
+    {
+      "group": "West",
+      "value": "450.00",
+      "record_ids": [
+        "western-sale"
+      ]
+    }
+  ],
+  "calculation": "sum(revenue - refund - cost)",
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_0e97bddb70ce05ed016abcc98a8d3487d1a6f292df03802561",
+        "usage": {
+          "input_tokens": 399,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 155,
+          "output_tokens_details": {
+            "reasoning_tokens": 81
+          },
+          "total_tokens": 554
+        },
+        "prompt_sha256": "b15448117a7979042b90291e517ab2437b65db5d172558b86275c411f81012a1"
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "as_of": "2026-09-30",
+  "policy": {
+    "return_window_days": 30,
+    "max_refund_cents": 10000
+  },
+  "order": {
+    "id": "order-1",
+    "status": "delivered",
+    "total_cents": 5000,
+    "refunded_cents": 0,
+    "delivered_on": "2026-09-20"
+  },
+  "message": {
+    "id": "msg-1",
+    "text": "I want to return this order."
+  },
+  "tool_state": "ready"
+}

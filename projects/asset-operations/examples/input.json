@@ -1,0 +1,36 @@
+{
+  "as_of": "2026-09-01T10:05:00Z",
+  "assets": [
+    {
+      "id": "PUMP-1",
+      "metric": "temperature",
+      "unit": "C",
+      "upper_threshold": 80,
+      "persistence": 2,
+      "max_age_seconds": 300,
+      "max_gap_seconds": 120
+    }
+  ],
+  "readings": [
+    {
+      "id": "reading1",
+      "asset_id": "PUMP-1",
+      "at": "2026-09-01T10:03:00Z",
+      "value": 83
+    },
+    {
+      "id": "reading2",
+      "asset_id": "PUMP-1",
+      "at": "2026-09-01T10:04:00Z",
+      "value": 84
+    }
+  ],
+  "documents": [
+    {
+      "id": "wo1",
+      "asset_id": "PUMP-1",
+      "kind": "work_order",
+      "text": "Last inspection recorded bearing wear; replacement completion was not documented."
+    }
+  ]
+}

@@ -1,0 +1,1178 @@
+{
+  "protocol": "Fresh independently authored synthetic cases; frozen before inference, no prompt/code changes or retries after observing these results. Two cases per workflow, not a production accuracy estimate.",
+  "cases": [
+    {
+      "project": "customer-resolution",
+      "id": "fresh-unshipped-cancel",
+      "input": {
+        "as_of": "2026-09-30",
+        "policy": {
+          "return_window_days": 21,
+          "max_refund_cents": 15000
+        },
+        "order": {
+          "id": "ORD-KITE-73",
+          "status": "pending",
+          "total_cents": 8900,
+          "refunded_cents": 0
+        },
+        "message": {
+          "id": "MSG-KITE-91",
+          "text": "Our branch ordered the wrong docking stations. Please cancel order ORD-KITE-73 before dispatch; we have not asked for a specific refund amount."
+        },
+        "tool_state": "ready"
+      },
+      "expected": {
+        "metrics": {
+          "outstanding_cents": 8900,
+          "maximum_refund_cents": 8900,
+          "blocked": false
+        },
+        "required_findings": [],
+        "forbidden_findings": [
+          "unsupported_request",
+          "cancellation_not_available",
+          "amount_exceeds_policy"
+        ],
+        "paths": {
+          "intent": "cancel"
+        }
+      },
+      "semantic_review": [
+        "Does the intent correctly reflect cancellation of the pending order, not a delivered return?",
+        "Is the proposed action awaiting approval, with requested amount zero because no monetary amount was requested, and execution_performed false?",
+        "Does the handoff avoid promising an issued refund or cancelled order?"
+      ]
+    },
+    {
+      "project": "customer-resolution",
+      "id": "fresh-expired-partial-return",
+      "input": {
+        "as_of": "2026-09-30",
+        "policy": {
+          "return_window_days": 14,
+          "max_refund_cents": 5000
+        },
+        "order": {
+          "id": "ORD-MESA-25",
+          "status": "delivered",
+          "total_cents": 19000,
+          "refunded_cents": 17000,
+          "delivered_on": "2026-08-28"
+        },
+        "message": {
+          "id": "MSG-MESA-62",
+          "text": "I want to return the damaged remaining item from ORD-MESA-25 and request a refund of 7500 cents. The screen froze on my earlier refund request; do not assume it completed."
+        },
+        "tool_state": "uncertain"
+      },
+      "expected": {
+        "metrics": {
+          "outstanding_cents": 2000,
+          "maximum_refund_cents": 2000,
+          "blocked": true
+        },
+        "required_findings": [
+          "return_window_expired",
+          "amount_exceeds_policy",
+          "tool_uncertain"
+        ],
+        "forbidden_findings": [
+          "nothing_to_refund"
+        ]
+      },
+      "semantic_review": [
+        "Does the model preserve the explicit 7500-cent request without authorizing it?",
+        "Does the handoff require verification before retrying an uncertain financial action, while preserving the expired-window and outstanding-balance reasons?"
+      ]
+    },
+    {
+      "project": "claims-intake",
+      "id": "fresh-complete-storm-packet",
+      "input": {
+        "claim": {
+          "id": "CL-STORM-72",
+          "claimant_id": "ORG-BIRCH-41",
+          "incident_date": "2026-09-17",
+          "currency": "GBP",
+          "amount": "2450.50"
+        },
+        "requirements": [
+          {
+            "id": "REQ-EVENT-52",
+            "document_type": "incident_report",
+            "required_fields": [
+              "claimant_id",
+              "incident_date"
+            ]
+          },
+          {
+            "id": "REQ-REPAIR-63",
+            "document_type": "repair_estimate",
+            "required_fields": [
+              "claimant_id",
+              "amount",
+              "currency"
+            ]
+          }
+        ],
+        "documents": [
+          {
+            "id": "DOC-EVENT-44",
+            "pages": [
+              {
+                "id": "PAGE-EVENT-19",
+                "text": "Incident report. Claimant ORG-BIRCH-41. Incident date 2026-09-17. Storm water entered the loading area and damaged two electrical cabinets."
+              }
+            ]
+          },
+          {
+            "id": "DOC-EST-53",
+            "pages": [
+              {
+                "id": "PAGE-EST-29",
+                "text": "Repair estimate for claimant ORG-BIRCH-41. Cabinet replacement and labour: GBP 2,450.50. Estimate only; work has not been performed."
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "documents": 2,
+          "requirements": 2,
+          "incomplete_requirements": 0,
+          "review_findings": 0
+        },
+        "required_findings": [],
+        "forbidden_findings": [
+          "missing_requirement",
+          "identity_or_event_conflict",
+          "amount_difference"
+        ],
+        "paths": {
+          "decision": "NO_COVERAGE_OR_PAYMENT_DECISION"
+        }
+      },
+      "semantic_review": [
+        "Are both document types grounded in their own pages, with no invented policy identifier?",
+        "Is GBP 2,450.50 normalized to 2450.50 using a complete cited amount, without implying coverage or completed repair?"
+      ]
+    },
+    {
+      "project": "claims-intake",
+      "id": "fresh-wrong-claimant-and-email",
+      "input": {
+        "claim": {
+          "id": "CL-FROST-86",
+          "claimant_id": "ORG-FROST-18",
+          "incident_date": "2026-09-09",
+          "currency": "EUR",
+          "amount": "6100.00"
+        },
+        "requirements": [
+          {
+            "id": "REQ-EVENT-52",
+            "document_type": "incident_report",
+            "required_fields": [
+              "claimant_id",
+              "incident_date"
+            ]
+          },
+          {
+            "id": "REQ-REPAIR-63",
+            "document_type": "repair_estimate",
+            "required_fields": [
+              "claimant_id",
+              "amount",
+              "currency"
+            ]
+          }
+        ],
+        "documents": [
+          {
+            "id": "DOC-OTHER-37",
+            "pages": [
+              {
+                "id": "PAGE-OTHER-47",
+                "text": "Incident report. Claimant ORG-FROST-81. Incident date 2026-09-09. Refrigeration outage spoiled stock."
+              }
+            ]
+          },
+          {
+            "id": "DOC-MAIL-77",
+            "pages": [
+              {
+                "id": "PAGE-MAIL-87",
+                "text": "Email from warehouse staff: the repair estimate is still with the contractor and will be uploaded next week. No estimate document or prices are attached."
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "documents": 2,
+          "requirements": 2,
+          "incomplete_requirements": 2
+        },
+        "required_findings": [
+          "identity_or_event_conflict",
+          "unclassified_document",
+          "missing_requirement"
+        ],
+        "forbidden_findings": [],
+        "paths": {
+          "decision": "NO_COVERAGE_OR_PAYMENT_DECISION"
+        }
+      },
+      "semantic_review": [
+        "Does the claimant transposition remain visible instead of being silently corrected to the submitted claimant?",
+        "Is the email treated as unknown rather than a repair estimate, and are both requirements requested for review without fraud or coverage conclusions?"
+      ]
+    },
+    {
+      "project": "proposal-operations",
+      "id": "fresh-dated-capability-answer",
+      "input": {
+        "as_of": "2026-09-30",
+        "requirements": [
+          {
+            "id": "RFP-EXPORT-22",
+            "text": "Can administrators export activity logs as CSV?"
+          },
+          {
+            "id": "RFP-DELETE-33",
+            "text": "Can administrators configure automatic log deletion after 30 days?"
+          }
+        ],
+        "sources": [
+          {
+            "id": "SRC-GUIDE-55",
+            "text": "Administrators can export activity logs as CSV from the audit console. Automatic log deletion is not described in this guide.",
+            "valid_from": "2026-06-01",
+            "valid_until": "2027-05-31",
+            "approval": "approved"
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "requirements": 2,
+          "draftable": 1,
+          "unresolved": 1
+        },
+        "required_findings": [
+          "gap"
+        ],
+        "forbidden_findings": [
+          "conflict",
+          "evidence_review"
+        ]
+      },
+      "semantic_review": [
+        "Is only the CSV capability drafted with a precise quote?",
+        "Does the deletion requirement remain a gap with empty draft and evidence, rather than treating lack of documentation as support or denial?"
+      ]
+    },
+    {
+      "project": "proposal-operations",
+      "id": "fresh-contradictory-current-residency",
+      "input": {
+        "as_of": "2026-09-30",
+        "requirements": [
+          {
+            "id": "RFP-RESIDENCY-68",
+            "text": "Is all customer content, including backups, stored exclusively in the EU on the Standard plan?"
+          }
+        ],
+        "sources": [
+          {
+            "id": "SRC-SEC-14",
+            "text": "The Standard plan stores all customer content and backups exclusively in the EU.",
+            "valid_from": "2026-09-01",
+            "valid_until": "2027-08-31",
+            "approval": "approved"
+          },
+          {
+            "id": "SRC-OPS-24",
+            "text": "The Standard plan stores primary customer content in the EU, but backups are stored in the United States.",
+            "valid_from": "2026-09-01",
+            "valid_until": "2027-08-31",
+            "approval": "approved"
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "requirements": 1,
+          "draftable": 0,
+          "unresolved": 1
+        },
+        "required_findings": [
+          "conflict"
+        ],
+        "forbidden_findings": [
+          "gap"
+        ]
+      },
+      "semantic_review": [
+        "Is the mutually contradictory backup residency explicitly treated as conflict, citing both current approved sources?",
+        "Is there no affirmative draft or invented rationale about plan versions, authority or precedence?"
+      ]
+    },
+    {
+      "project": "account-intelligence",
+      "id": "fresh-renewal-delay",
+      "input": {
+        "as_of": "2026-09-30",
+        "account": {
+          "id": "AC-NORTH-62",
+          "name": "North Quay Services"
+        },
+        "opportunities": [
+          {
+            "id": "OP-RENEW-35",
+            "account_id": "AC-NORTH-62",
+            "title": "Service desk renewal",
+            "amount_cents": 8600000,
+            "stage": "proposal",
+            "close_date": "2026-10-07",
+            "next_step": "Confirm the security assessment result."
+          }
+        ],
+        "meetings": [
+          {
+            "id": "MEET-SEP-81",
+            "account_id": "AC-NORTH-62",
+            "date": "2026-09-29",
+            "text": "For OP-RENEW-35, the customer proposed moving the close date to 2026-10-28. For OP-RENEW-35, a failed security assessment is preventing procurement approval."
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "open_pipeline_cents": 8600000,
+          "active_opportunities": 1,
+          "meeting_observations": 2
+        },
+        "required_findings": [
+          "close_date_conflict"
+        ],
+        "forbidden_findings": [
+          "overdue_close",
+          "missing_next_step",
+          "stale_engagement"
+        ],
+        "paths": {
+          "forecast_probability": null
+        }
+      },
+      "semantic_review": [
+        "Are the two observations a literal proposed date change and an explicit blocker, both attached only to OP-RENEW-35?",
+        "Do all observations preserve crm_changed false and unreviewed status, with no invented win probability?"
+      ]
+    },
+    {
+      "project": "account-intelligence",
+      "id": "fresh-neutral-procurement-closed-excluded",
+      "input": {
+        "as_of": "2026-09-30",
+        "account": {
+          "id": "AC-CEDAR-92",
+          "name": "Cedar Logistics"
+        },
+        "opportunities": [
+          {
+            "id": "OP-OPEN-46",
+            "account_id": "AC-CEDAR-92",
+            "title": "Fleet analytics extension",
+            "amount_cents": 3250000,
+            "stage": "qualified",
+            "close_date": "2026-09-16",
+            "next_step": ""
+          },
+          {
+            "id": "OP-CLOSED-57",
+            "account_id": "AC-CEDAR-92",
+            "title": "Completed warehouse renewal",
+            "amount_cents": 17000000,
+            "stage": "won",
+            "close_date": "2026-07-30",
+            "next_step": ""
+          }
+        ],
+        "meetings": [
+          {
+            "id": "MEET-CEDAR-68",
+            "account_id": "AC-CEDAR-92",
+            "date": "2026-09-25",
+            "text": "For OP-OPEN-46, procurement review is proceeding on its normal timetable. No delay, obstacle, proposed date change or new commitment was reported."
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "open_pipeline_cents": 3250000,
+          "active_opportunities": 1,
+          "meeting_observations": 0
+        },
+        "required_findings": [
+          "overdue_close",
+          "missing_next_step"
+        ],
+        "forbidden_findings": [
+          "close_date_conflict",
+          "stale_engagement"
+        ],
+        "paths": {
+          "forecast_probability": null
+        }
+      },
+      "semantic_review": [
+        "Is routine procurement progress omitted rather than reclassified as a blocker or next step?",
+        "Is the won opportunity excluded from pipeline and missing-next-step/overdue findings?"
+      ]
+    },
+    {
+      "project": "workforce-onboarding",
+      "id": "fresh-ready-analyst-with-optional-session",
+      "input": {
+        "as_of": "2026-09-30",
+        "starter": {
+          "id": "EMP-ELM-58",
+          "role": "Risk Analyst",
+          "location": "Dublin",
+          "start_date": "2026-10-05"
+        },
+        "policies": [
+          {
+            "id": "POL-DUBLIN-79",
+            "text": "For Risk Analysts in Dublin, identity verification and privacy induction are mandatory. The social welcome session is optional."
+          }
+        ],
+        "tasks": [
+          {
+            "id": "verify-id-21",
+            "title": "Identity verification",
+            "owner": "People Operations",
+            "status": "complete",
+            "required": true,
+            "depends_on": []
+          },
+          {
+            "id": "privacy-32",
+            "title": "Privacy induction",
+            "owner": "Compliance",
+            "status": "complete",
+            "required": false,
+            "depends_on": [
+              "verify-id-21"
+            ]
+          },
+          {
+            "id": "welcome-43",
+            "title": "Social welcome session",
+            "owner": "Team coordinator",
+            "status": "pending",
+            "required": false,
+            "depends_on": []
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "ready": true,
+          "required_tasks": 2,
+          "unfinished_required": 0,
+          "uncertain_policy_matches": 0
+        },
+        "required_findings": [],
+        "forbidden_findings": [
+          "policy_uncertain",
+          "readiness_blocker",
+          "completion_inconsistent"
+        ],
+        "paths": {
+          "provisioning_performed": false
+        }
+      },
+      "semantic_review": [
+        "Is privacy induction required by policy despite its false record flag?",
+        "Does a pending optional welcome session remain optional without blocking readiness, and is readiness limited to supplied records?"
+      ]
+    },
+    {
+      "project": "workforce-onboarding",
+      "id": "fresh-inconsistent-access-prerequisite",
+      "input": {
+        "as_of": "2026-09-30",
+        "starter": {
+          "id": "EMP-HARBOR-69",
+          "role": "Support Engineer",
+          "location": "Toronto",
+          "start_date": "2026-09-29"
+        },
+        "policies": [
+          {
+            "id": "POL-ACCESS-83",
+            "text": "Toronto Support Engineers must finish identity verification before support-console access. Both identity verification and support-console access approval are mandatory."
+          }
+        ],
+        "tasks": [
+          {
+            "id": "identity-64",
+            "title": "Identity verification",
+            "owner": "People Operations",
+            "status": "pending",
+            "required": false,
+            "depends_on": []
+          },
+          {
+            "id": "console-75",
+            "title": "Support-console access approval",
+            "owner": "IT Access",
+            "status": "complete",
+            "required": true,
+            "depends_on": [
+              "identity-64"
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "ready": false,
+          "required_tasks": 2,
+          "unfinished_required": 1,
+          "uncertain_policy_matches": 0
+        },
+        "required_findings": [
+          "completion_inconsistent",
+          "readiness_blocker"
+        ],
+        "forbidden_findings": [
+          "policy_uncertain"
+        ],
+        "paths": {
+          "provisioning_performed": false
+        }
+      },
+      "semantic_review": [
+        "Is the completed access record challenged because its mandatory identity prerequisite remains unfinished?",
+        "Does the urgent overdue-start blocker identify identity verification and its owner without inventing access revocation or provisioning?"
+      ]
+    },
+    {
+      "project": "incident-operations",
+      "id": "settlement-queue-observation",
+      "input": {
+        "incident_id": "FRESH-SETTLEMENT",
+        "window_start": "2026-10-02T07:00:00Z",
+        "window_end": "2026-10-02T08:00:00Z",
+        "events": [
+          {
+            "id": "q-growth",
+            "at": "2026-10-02T07:24:00Z",
+            "kind": "alert",
+            "service": "settlement",
+            "text": "Settlement queue depth reached 4200 messages."
+          },
+          {
+            "id": "consumer-log",
+            "at": "2026-10-02T07:21:00Z",
+            "kind": "log",
+            "service": "settlement",
+            "text": "Consumers reported repeated lease acquisition timeouts."
+          },
+          {
+            "id": "lease-trace",
+            "at": "2026-10-02T07:20:00Z",
+            "kind": "trace",
+            "service": "lease-store",
+            "text": "Lease-store request duration increased to 900 milliseconds; historical baseline was 20 milliseconds."
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "events": 3,
+          "services": 2
+        },
+        "required_findings": [],
+        "forbidden_findings": [
+          "single_signal_type"
+        ]
+      },
+      "semantic_review": [
+        "Does the investigation connect lease latency and consumer timeouts only as a hypothesis, without claiming proven cause?",
+        "Are supporting quotations literal and assigned to the correct event?",
+        "Are missing checks observational rather than executable remediation instructions?"
+      ]
+    },
+    {
+      "project": "incident-operations",
+      "id": "deployment-counterevidence",
+      "input": {
+        "incident_id": "FRESH-EXPORT",
+        "window_start": "2026-10-02T07:00:00Z",
+        "window_end": "2026-10-02T08:00:00Z",
+        "events": [
+          {
+            "id": "rollout",
+            "at": "2026-10-02T07:30:00Z",
+            "kind": "deployment",
+            "service": "export-api",
+            "text": "Version cobalt deployed to cohort B only. Cohort A remained on version amber."
+          },
+          {
+            "id": "before-rollout",
+            "at": "2026-10-02T07:12:00Z",
+            "kind": "log",
+            "service": "export-api",
+            "text": "Cohort A export requests began timing out eighteen minutes before the cobalt deployment."
+          },
+          {
+            "id": "cohort-b",
+            "at": "2026-10-02T07:35:00Z",
+            "kind": "trace",
+            "service": "export-api",
+            "text": "All sampled cohort B exports completed within the normal latency range."
+          },
+          {
+            "id": "dependency",
+            "at": "2026-10-02T07:10:00Z",
+            "kind": "alert",
+            "service": "object-store",
+            "text": "Object-store write latency rose across both cohorts."
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "events": 4,
+          "services": 2
+        },
+        "required_findings": [],
+        "forbidden_findings": [
+          "single_signal_type"
+        ]
+      },
+      "semantic_review": [
+        "Does the answer avoid attributing predeployment cohort A failures to the later cobalt rollout?",
+        "If a deployment hypothesis is included, are predeployment failures and healthy cohort B explicitly treated as counterevidence?",
+        "Does it avoid treating dependency latency as a confirmed cause without causal confirmation?"
+      ]
+    },
+    {
+      "project": "exposure-review",
+      "id": "matched-parser-inventory",
+      "input": {
+        "inventory_complete": true,
+        "inventory": [
+          {
+            "id": "report-prod",
+            "package": "pkg:pypi/report-parser",
+            "version": "4.2.0",
+            "service": "reporting",
+            "owner": "report-platform"
+          }
+        ],
+        "advisories": [
+          {
+            "id": "FRESH-ADV-PARSER",
+            "package": "pkg:pypi/report-parser",
+            "affected_versions": [
+              "4.2.0"
+            ],
+            "fixed_versions": [
+              "4.2.1"
+            ],
+            "text": "Report parser 4.2.0 permits unauthorized report access only when anonymous preview is enabled. Version 4.2.1 removes anonymous preview access. No information is provided about downstream vendor builds."
+          }
+        ],
+        "findings": [
+          {
+            "id": "report-scan",
+            "inventory_id": "report-prod",
+            "advisory_id": "FRESH-ADV-PARSER"
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "findings": 1,
+          "affected_matches": 1,
+          "unknown_matches": 0
+        },
+        "required_findings": [
+          "affected_version_match"
+        ],
+        "forbidden_findings": [
+          "inventory_incomplete",
+          "package_mismatch"
+        ]
+      },
+      "semantic_review": [
+        "Does the analysis preserve the anonymous-preview precondition rather than declare deployment exploitability?",
+        "Are package version matches separated from whether the configuration is enabled?",
+        "Does it avoid assuming a compatible upgrade or automatically remediating?"
+      ]
+    },
+    {
+      "project": "exposure-review",
+      "id": "vendor-build-and-missing-asset",
+      "input": {
+        "inventory_complete": false,
+        "inventory": [
+          {
+            "id": "vendor-report",
+            "package": "pkg:pypi/report-parser",
+            "version": "4.2.0-bank7",
+            "service": "statements",
+            "owner": "vendor-management"
+          }
+        ],
+        "advisories": [
+          {
+            "id": "FRESH-ADV-PARSER",
+            "package": "pkg:pypi/report-parser",
+            "affected_versions": [
+              "4.2.0"
+            ],
+            "fixed_versions": [
+              "4.2.1"
+            ],
+            "text": "Report parser 4.2.0 permits unauthorized report access only when anonymous preview is enabled. Version 4.2.1 removes anonymous preview access. No information is provided about downstream vendor builds."
+          }
+        ],
+        "findings": [
+          {
+            "id": "vendor-scan",
+            "inventory_id": "vendor-report",
+            "advisory_id": "FRESH-ADV-PARSER"
+          },
+          {
+            "id": "missing-scan",
+            "inventory_id": "unlisted-host",
+            "advisory_id": "FRESH-ADV-PARSER"
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "findings": 2,
+          "affected_matches": 0,
+          "unknown_matches": 2
+        },
+        "required_findings": [
+          "inventory_incomplete",
+          "version_unlisted",
+          "unknown_inventory"
+        ],
+        "forbidden_findings": [
+          "affected_version_match"
+        ]
+      },
+      "semantic_review": [
+        "Is the vendor build left unresolved, without inferring safe backport or vulnerability from its prefix?",
+        "Is the missing host explicitly unknown rather than cleared?",
+        "Are fixed versions described only as advisory information, not guaranteed compatible remedies?"
+      ]
+    },
+    {
+      "project": "business-insights",
+      "id": "quarter-end-gross-profit",
+      "input": {
+        "question": "Show gross profit by region for September 2026 in EUR.",
+        "as_of": "2026-10-02",
+        "records": [
+          {
+            "id": "eastern-sale",
+            "date": "2026-09-30",
+            "region": "East",
+            "product": "Enterprise licences",
+            "currency": "EUR",
+            "revenue": "900.00",
+            "refund": "50.00",
+            "cost": "300.00",
+            "units": 9
+          },
+          {
+            "id": "western-sale",
+            "date": "2026-09-01",
+            "region": "West",
+            "product": "Enterprise licences",
+            "currency": "EUR",
+            "revenue": "700.00",
+            "refund": "0.00",
+            "cost": "250.00",
+            "units": 7
+          },
+          {
+            "id": "old-sale",
+            "date": "2026-08-31",
+            "region": "East",
+            "product": "Enterprise licences",
+            "currency": "EUR",
+            "revenue": "1000.00",
+            "refund": "0.00",
+            "cost": "100.00",
+            "units": 10
+          },
+          {
+            "id": "foreign-sale",
+            "date": "2026-09-15",
+            "region": "East",
+            "product": "Enterprise licences",
+            "currency": "USD",
+            "revenue": "100.00",
+            "refund": "0.00",
+            "cost": "40.00",
+            "units": 1
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "matched_records": 2,
+          "groups": 2,
+          "total": "1000.00",
+          "unit": "EUR"
+        },
+        "required_findings": [],
+        "forbidden_findings": [
+          "clarification",
+          "mixed_currency",
+          "unknown_filter",
+          "no_data"
+        ],
+        "paths": {
+          "plan.measure": "gross_profit",
+          "plan.group_by": "region",
+          "plan.start_date": "2026-09-01",
+          "plan.end_date": "2026-09-30"
+        }
+      },
+      "semantic_review": [
+        "Does the plan use gross profit as revenue less refunds and cost?",
+        "Are August and USD records excluded, with East 550.00 and West 450.00?"
+      ]
+    },
+    {
+      "project": "business-insights",
+      "id": "unsupported-margin-definition",
+      "input": {
+        "question": "What is our gross profit margin percentage by region in September 2026?",
+        "as_of": "2026-10-02",
+        "records": [
+          {
+            "id": "margin-east",
+            "date": "2026-09-10",
+            "region": "East",
+            "product": "Enterprise licences",
+            "currency": "USD",
+            "revenue": "1250.00",
+            "refund": "100.00",
+            "cost": "700.00",
+            "units": 5
+          },
+          {
+            "id": "margin-west",
+            "date": "2026-09-18",
+            "region": "West",
+            "product": "Enterprise licences",
+            "currency": "USD",
+            "revenue": "600.00",
+            "refund": "0.00",
+            "cost": "400.00",
+            "units": 3
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "matched_records": 0
+        },
+        "required_findings": [
+          "clarification"
+        ],
+        "forbidden_findings": [
+          "no_data"
+        ],
+        "paths": {
+          "plan.status": "clarify"
+        }
+      },
+      "semantic_review": [
+        "Does it explain that percentage margin is unsupported rather than silently output a gross-profit amount?",
+        "Does the clarification avoid claiming the supplied records are absent or invalid?"
+      ]
+    },
+    {
+      "project": "inventory-decisions",
+      "id": "routine-filter-replenishment",
+      "input": {
+        "as_of": "2026-10-01",
+        "currency": "GBP",
+        "budget_cents": 3000,
+        "items": [
+          {
+            "sku": "FILTER-Q",
+            "on_hand": 12,
+            "reserved": 2,
+            "on_order": 3,
+            "lead_days": 2,
+            "review_days": 3,
+            "safety_units": 2,
+            "capacity_units": 50,
+            "unit_cost_cents": 125,
+            "history": [
+              {
+                "date": "2026-09-28",
+                "units": 3
+              },
+              {
+                "date": "2026-09-29",
+                "units": 0
+              },
+              {
+                "date": "2026-09-30",
+                "units": 6
+              }
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "id": "confirmed-window",
+            "sku": "FILTER-Q",
+            "text": "The supplier reconfirmed the existing delivery window; no changes to the agreed schedule."
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "items": 1,
+          "proposed_cost_cents": 500,
+          "budget_cents": 3000,
+          "budget_gap_cents": 0
+        },
+        "required_findings": [],
+        "forbidden_findings": [
+          "budget_exceeded",
+          "capacity_shortfall",
+          "lead_time_shortfall"
+        ]
+      },
+      "semantic_review": [
+        "Does the plan include the zero-demand day, producing mean 3, target 17, position 13 and order proposal 4?",
+        "Does the note avoid inventing revised lead times or triggering a purchase?"
+      ]
+    },
+    {
+      "project": "inventory-decisions",
+      "id": "capacity-budget-delay-conflict",
+      "input": {
+        "as_of": "2026-10-01",
+        "currency": "GBP",
+        "budget_cents": 500,
+        "items": [
+          {
+            "sku": "SEAL-R",
+            "on_hand": 3,
+            "reserved": 2,
+            "on_order": 1,
+            "lead_days": 3,
+            "review_days": 2,
+            "safety_units": 1,
+            "capacity_units": 10,
+            "unit_cost_cents": 200,
+            "history": [
+              {
+                "date": "2026-09-28",
+                "units": 4
+              },
+              {
+                "date": "2026-09-29",
+                "units": 4
+              },
+              {
+                "date": "2026-09-30",
+                "units": 4
+              }
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "id": "unconfirmed-shipment",
+            "sku": "SEAL-R",
+            "text": "Supplier cannot confirm this week shipment. A revised delivery date has not been agreed; do not assume the historical three-day lead time is still valid."
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "items": 1,
+          "proposed_cost_cents": 1200,
+          "budget_cents": 500,
+          "budget_gap_cents": 700
+        },
+        "required_findings": [
+          "budget_exceeded",
+          "capacity_shortfall",
+          "lead_time_shortfall",
+          "notes_need_review"
+        ],
+        "forbidden_findings": []
+      },
+      "semantic_review": [
+        "Does the plan retain the supplied numeric scenario: target 21, position 2, requested 19, capped quantity 6, shortfall 13?",
+        "Does the note interpretation flag uncertainty or constraint without silently changing lead time?",
+        "Does the output require planner review instead of claiming that this constrained purchase solves the shortage?"
+      ]
+    },
+    {
+      "project": "asset-operations",
+      "id": "compressor-persistent-observation",
+      "input": {
+        "as_of": "2026-10-02T09:10:00Z",
+        "assets": [
+          {
+            "id": "COMP-Z",
+            "metric": "vibration",
+            "unit": "mm/s",
+            "upper_threshold": 6,
+            "persistence": 3,
+            "max_age_seconds": 120,
+            "max_gap_seconds": 60
+          }
+        ],
+        "readings": [
+          {
+            "id": "vib-a",
+            "asset_id": "COMP-Z",
+            "at": "2026-10-02T09:08:00Z",
+            "value": 6.5
+          },
+          {
+            "id": "vib-b",
+            "asset_id": "COMP-Z",
+            "at": "2026-10-02T09:09:00Z",
+            "value": 6.8
+          },
+          {
+            "id": "vib-c",
+            "asset_id": "COMP-Z",
+            "at": "2026-10-02T09:10:00Z",
+            "value": 6.4
+          }
+        ],
+        "documents": [
+          {
+            "id": "inspection-z",
+            "asset_id": "COMP-Z",
+            "kind": "work_order",
+            "text": "Inspection recorded an alignment check request. No alignment measurement or completion record is attached."
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "assets": 1,
+          "persistent_breaches": 1,
+          "unavailable_assets": 0
+        },
+        "required_findings": [
+          "persistent_breach"
+        ],
+        "forbidden_findings": [
+          "stale",
+          "no_data",
+          "transient_breach"
+        ]
+      },
+      "semantic_review": [
+        "Does it describe three consecutive threshold observations without diagnosing misalignment?",
+        "Does it retain the distinction between a requested check and a completed maintenance action?",
+        "Does it avoid shutdown, repair or safety instructions?"
+      ]
+    },
+    {
+      "project": "asset-operations",
+      "id": "sensor-gap-and-undocumented-asset",
+      "input": {
+        "as_of": "2026-10-02T09:10:00Z",
+        "assets": [
+          {
+            "id": "COMP-G",
+            "metric": "vibration",
+            "unit": "mm/s",
+            "upper_threshold": 6,
+            "persistence": 3,
+            "max_age_seconds": 120,
+            "max_gap_seconds": 60
+          },
+          {
+            "id": "COMP-N",
+            "metric": "vibration",
+            "unit": "mm/s",
+            "upper_threshold": 6,
+            "persistence": 3,
+            "max_age_seconds": 120,
+            "max_gap_seconds": 60
+          }
+        ],
+        "readings": [
+          {
+            "id": "gap-a",
+            "asset_id": "COMP-G",
+            "at": "2026-10-02T09:04:00Z",
+            "value": 8
+          },
+          {
+            "id": "gap-b",
+            "asset_id": "COMP-G",
+            "at": "2026-10-02T09:05:00Z",
+            "value": 8
+          },
+          {
+            "id": "gap-c",
+            "asset_id": "COMP-G",
+            "at": "2026-10-02T09:09:30Z",
+            "value": 7
+          }
+        ],
+        "documents": [
+          {
+            "id": "old-check-g",
+            "asset_id": "COMP-G",
+            "kind": "operator_note",
+            "text": "The last inspection found no visible leak; vibration measurements were not recorded."
+          }
+        ]
+      },
+      "expected": {
+        "metrics": {
+          "assets": 2,
+          "persistent_breaches": 0,
+          "unavailable_assets": 1
+        },
+        "required_findings": [
+          "transient_breach",
+          "no_data"
+        ],
+        "forbidden_findings": [
+          "persistent_breach",
+          "stale"
+        ]
+      },
+      "semantic_review": [
+        "Does the long observation gap reset persistence, leaving COMP-G transient rather than persistent?",
+        "Is COMP-N explicitly undocumented without borrowing COMP-G history?",
+        "Does absence of visible leakage remain distinct from evidence of normal vibration or equipment safety?"
+      ]
+    }
+  ]
+}

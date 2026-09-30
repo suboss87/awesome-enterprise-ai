@@ -1,0 +1,86 @@
+{
+  "project": "asset-operations",
+  "summary": "Configured thresholds evaluated; no failure prediction or operational instructions.",
+  "metrics": {
+    "assets": 1,
+    "persistent_breaches": 1,
+    "unavailable_assets": 0
+  },
+  "findings": [
+    {
+      "code": "persistent_breach",
+      "severity": "review",
+      "title": "Sensor observation requires review",
+      "detail": "COMP-Z",
+      "evidence_ids": [
+        "vib-a",
+        "vib-b",
+        "vib-c"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "maintenance_review",
+      "asset_id": "COMP-Z",
+      "status": "persistent_breach"
+    }
+  ],
+  "human_review_required": true,
+  "statuses": [
+    {
+      "asset_id": "COMP-Z",
+      "status": "persistent_breach",
+      "consecutive_high_readings": 3,
+      "latest_reading": {
+        "id": "vib-c",
+        "asset_id": "COMP-Z",
+        "at": "2026-10-02T09:10:00Z",
+        "value": 6.4
+      }
+    }
+  ],
+  "analysis": {
+    "asset_reviews": [
+      {
+        "asset_id": "COMP-Z",
+        "history_summary": "COMP-Z has a documented work order noting an inspection with an alignment check request, but the record states that no alignment measurement or completion record is attached. Current sensor status reports a persistent vibration threshold breach with 3 consecutive high readings and latest value 6.4 mm/s at 2026-10-02T09:10:00Z; this is an observation only and not a diagnosis.",
+        "evidence": [
+          {
+            "source_id": "inspection-z",
+            "quote": "Inspection recorded an alignment check request. No alignment measurement or completion record is attached."
+          }
+        ],
+        "missing_information": [
+          "Alignment measurement results are not documented.",
+          "Completion record for the alignment check request is not documented.",
+          "No documented maintenance actions, findings, or closeout details are provided beyond the inspection note.",
+          "No additional historical inspection, repair, or trend context is provided for qualified maintenance review."
+        ]
+      }
+    ]
+  },
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_048f0b327b7c45b1016abcc990dd1887d19c630fe6c9e902b1",
+        "usage": {
+          "input_tokens": 396,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 192,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 588
+        },
+        "prompt_sha256": "c57d08b50e32a268f05942c1b4911dbeee252bf1c7fdb04c247990c78378a4e0"
+      }
+    ]
+  }
+}
