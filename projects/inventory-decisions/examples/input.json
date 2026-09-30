@@ -1,0 +1,35 @@
+{
+  "as_of": "2026-09-03",
+  "currency": "USD",
+  "budget_cents": 5000,
+  "items": [
+    {
+      "sku": "BEARING",
+      "on_hand": 5,
+      "reserved": 0,
+      "on_order": 0,
+      "lead_days": 3,
+      "review_days": 2,
+      "safety_units": 2,
+      "capacity_units": 100,
+      "unit_cost_cents": 100,
+      "history": [
+        {
+          "date": "2026-09-01",
+          "units": 4
+        },
+        {
+          "date": "2026-09-02",
+          "units": 4
+        }
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "id": "note1",
+      "sku": "BEARING",
+      "text": "Supplier says delivery may slip; no revised commitment yet."
+    }
+  ]
+}

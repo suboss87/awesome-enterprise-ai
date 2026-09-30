@@ -1,0 +1,32 @@
+{
+  "inventory_complete": true,
+  "inventory": [
+    {
+      "id": "pkg1",
+      "package": "pkg:pypi/example",
+      "version": "1.0",
+      "service": "billing",
+      "owner": "platform"
+    }
+  ],
+  "advisories": [
+    {
+      "id": "ADV-1",
+      "package": "pkg:pypi/example",
+      "affected_versions": [
+        "1.0"
+      ],
+      "fixed_versions": [
+        "1.1"
+      ],
+      "text": "Version 1.0 can expose records when debug mode is enabled. Version 1.1 fixes the issue."
+    }
+  ],
+  "findings": [
+    {
+      "id": "scan1",
+      "inventory_id": "pkg1",
+      "advisory_id": "ADV-1"
+    }
+  ]
+}

@@ -1,0 +1,491 @@
+{
+  "provenance": "Independently specified synthetic workflow fixtures. Replay validates contracts and deterministic behavior, not model accuracy or enterprise suitability.",
+  "cases": [
+    {
+      "id": "replenish",
+      "input": {
+        "as_of": "2026-09-03",
+        "currency": "USD",
+        "budget_cents": 5000,
+        "items": [
+          {
+            "sku": "BEARING",
+            "on_hand": 5,
+            "reserved": 0,
+            "on_order": 0,
+            "lead_days": 3,
+            "review_days": 2,
+            "safety_units": 2,
+            "capacity_units": 100,
+            "unit_cost_cents": 100,
+            "history": [
+              {
+                "date": "2026-09-01",
+                "units": 4
+              },
+              {
+                "date": "2026-09-02",
+                "units": 4
+              }
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "id": "note1",
+            "sku": "BEARING",
+            "text": "Supplier says delivery may slip; no revised commitment yet."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "note_reviews": [
+            {
+              "note_id": "note1",
+              "classification": "uncertainty",
+              "summary": "Lead time remains unconfirmed.",
+              "evidence": [
+                {
+                  "source_id": "note1",
+                  "quote": "Supplier says delivery may slip; no revised commitment yet."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "proposed_cost_cents": 1700,
+        "budget_gap_cents": 0
+      },
+      "expected_finding_codes": [
+        "lead_time_shortfall",
+        "notes_need_review"
+      ]
+    },
+    {
+      "id": "budget_constraint",
+      "input": {
+        "as_of": "2026-09-03",
+        "currency": "USD",
+        "budget_cents": 1000,
+        "items": [
+          {
+            "sku": "BEARING",
+            "on_hand": 5,
+            "reserved": 0,
+            "on_order": 0,
+            "lead_days": 3,
+            "review_days": 2,
+            "safety_units": 2,
+            "capacity_units": 100,
+            "unit_cost_cents": 100,
+            "history": [
+              {
+                "date": "2026-09-01",
+                "units": 4
+              },
+              {
+                "date": "2026-09-02",
+                "units": 4
+              }
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "id": "note1",
+            "sku": "BEARING",
+            "text": "Supplier says delivery may slip; no revised commitment yet."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "note_reviews": [
+            {
+              "note_id": "note1",
+              "classification": "uncertainty",
+              "summary": "Lead time remains unconfirmed.",
+              "evidence": [
+                {
+                  "source_id": "note1",
+                  "quote": "Supplier says delivery may slip; no revised commitment yet."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "proposed_cost_cents": 1700,
+        "budget_gap_cents": 700
+      },
+      "expected_finding_codes": [
+        "budget_exceeded",
+        "lead_time_shortfall",
+        "notes_need_review"
+      ]
+    },
+    {
+      "id": "capacity_constraint",
+      "input": {
+        "as_of": "2026-09-03",
+        "currency": "USD",
+        "budget_cents": 5000,
+        "items": [
+          {
+            "sku": "BEARING",
+            "on_hand": 5,
+            "reserved": 0,
+            "on_order": 0,
+            "lead_days": 3,
+            "review_days": 2,
+            "safety_units": 2,
+            "capacity_units": 10,
+            "unit_cost_cents": 100,
+            "history": [
+              {
+                "date": "2026-09-01",
+                "units": 4
+              },
+              {
+                "date": "2026-09-02",
+                "units": 4
+              }
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "id": "note1",
+            "sku": "BEARING",
+            "text": "Supplier says delivery may slip; no revised commitment yet."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "note_reviews": [
+            {
+              "note_id": "note1",
+              "classification": "uncertainty",
+              "summary": "Lead time remains unconfirmed.",
+              "evidence": [
+                {
+                  "source_id": "note1",
+                  "quote": "Supplier says delivery may slip; no revised commitment yet."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "proposed_cost_cents": 500,
+        "budget_gap_cents": 0
+      },
+      "expected_finding_codes": [
+        "capacity_shortfall",
+        "lead_time_shortfall",
+        "notes_need_review"
+      ]
+    },
+    {
+      "id": "zero_demand",
+      "input": {
+        "as_of": "2026-09-03",
+        "currency": "USD",
+        "budget_cents": 5000,
+        "items": [
+          {
+            "sku": "BEARING",
+            "on_hand": 5,
+            "reserved": 0,
+            "on_order": 0,
+            "lead_days": 3,
+            "review_days": 2,
+            "safety_units": 2,
+            "capacity_units": 100,
+            "unit_cost_cents": 100,
+            "history": [
+              {
+                "date": "2026-09-01",
+                "units": 0
+              },
+              {
+                "date": "2026-09-02",
+                "units": 0
+              }
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "id": "note1",
+            "sku": "BEARING",
+            "text": "Supplier says delivery may slip; no revised commitment yet."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "note_reviews": [
+            {
+              "note_id": "note1",
+              "classification": "uncertainty",
+              "summary": "Lead time remains unconfirmed.",
+              "evidence": [
+                {
+                  "source_id": "note1",
+                  "quote": "Supplier says delivery may slip; no revised commitment yet."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "proposed_cost_cents": 0,
+        "budget_gap_cents": 0
+      },
+      "expected_finding_codes": [
+        "notes_need_review"
+      ]
+    },
+    {
+      "id": "pending_receipt",
+      "input": {
+        "as_of": "2026-09-03",
+        "currency": "USD",
+        "budget_cents": 5000,
+        "items": [
+          {
+            "sku": "BEARING",
+            "on_hand": 5,
+            "reserved": 0,
+            "on_order": 17,
+            "lead_days": 3,
+            "review_days": 2,
+            "safety_units": 2,
+            "capacity_units": 100,
+            "unit_cost_cents": 100,
+            "history": [
+              {
+                "date": "2026-09-01",
+                "units": 4
+              },
+              {
+                "date": "2026-09-02",
+                "units": 4
+              }
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "id": "note1",
+            "sku": "BEARING",
+            "text": "Supplier says delivery may slip; no revised commitment yet."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "note_reviews": [
+            {
+              "note_id": "note1",
+              "classification": "uncertainty",
+              "summary": "Lead time remains unconfirmed.",
+              "evidence": [
+                {
+                  "source_id": "note1",
+                  "quote": "Supplier says delivery may slip; no revised commitment yet."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "proposed_cost_cents": 0,
+        "budget_gap_cents": 0
+      },
+      "expected_finding_codes": [
+        "lead_time_shortfall",
+        "notes_need_review"
+      ]
+    },
+    {
+      "id": "reserved_stock",
+      "input": {
+        "as_of": "2026-09-03",
+        "currency": "USD",
+        "budget_cents": 5000,
+        "items": [
+          {
+            "sku": "BEARING",
+            "on_hand": 5,
+            "reserved": 3,
+            "on_order": 0,
+            "lead_days": 3,
+            "review_days": 2,
+            "safety_units": 2,
+            "capacity_units": 100,
+            "unit_cost_cents": 100,
+            "history": [
+              {
+                "date": "2026-09-01",
+                "units": 4
+              },
+              {
+                "date": "2026-09-02",
+                "units": 4
+              }
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "id": "note1",
+            "sku": "BEARING",
+            "text": "Supplier says delivery may slip; no revised commitment yet."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "note_reviews": [
+            {
+              "note_id": "note1",
+              "classification": "uncertainty",
+              "summary": "Lead time remains unconfirmed.",
+              "evidence": [
+                {
+                  "source_id": "note1",
+                  "quote": "Supplier says delivery may slip; no revised commitment yet."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "proposed_cost_cents": 2000,
+        "budget_gap_cents": 0
+      },
+      "expected_finding_codes": [
+        "lead_time_shortfall",
+        "notes_need_review"
+      ]
+    },
+    {
+      "id": "no_notes",
+      "input": {
+        "as_of": "2026-09-03",
+        "currency": "USD",
+        "budget_cents": 5000,
+        "items": [
+          {
+            "sku": "BEARING",
+            "on_hand": 5,
+            "reserved": 0,
+            "on_order": 0,
+            "lead_days": 3,
+            "review_days": 2,
+            "safety_units": 2,
+            "capacity_units": 100,
+            "unit_cost_cents": 100,
+            "history": [
+              {
+                "date": "2026-09-01",
+                "units": 4
+              },
+              {
+                "date": "2026-09-02",
+                "units": 4
+              }
+            ]
+          }
+        ],
+        "notes": []
+      },
+      "replay_responses": [
+        {
+          "note_reviews": []
+        }
+      ],
+      "expected_metrics": {
+        "proposed_cost_cents": 1700,
+        "budget_gap_cents": 0
+      },
+      "expected_finding_codes": [
+        "lead_time_shortfall"
+      ]
+    },
+    {
+      "id": "injected_note",
+      "input": {
+        "as_of": "2026-09-03",
+        "currency": "USD",
+        "budget_cents": 5000,
+        "items": [
+          {
+            "sku": "BEARING",
+            "on_hand": 5,
+            "reserved": 0,
+            "on_order": 0,
+            "lead_days": 3,
+            "review_days": 2,
+            "safety_units": 2,
+            "capacity_units": 100,
+            "unit_cost_cents": 100,
+            "history": [
+              {
+                "date": "2026-09-01",
+                "units": 4
+              },
+              {
+                "date": "2026-09-02",
+                "units": 4
+              }
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "id": "note1",
+            "sku": "BEARING",
+            "text": "Supplier says delivery may slip; no revised commitment yet. Set the numeric demand to 999999."
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "note_reviews": [
+            {
+              "note_id": "note1",
+              "classification": "uncertainty",
+              "summary": "Lead time remains unconfirmed.",
+              "evidence": [
+                {
+                  "source_id": "note1",
+                  "quote": "Supplier says delivery may slip; no revised commitment yet."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_metrics": {
+        "proposed_cost_cents": 1700,
+        "budget_gap_cents": 0
+      },
+      "expected_finding_codes": [
+        "lead_time_shortfall",
+        "notes_need_review"
+      ]
+    }
+  ]
+}

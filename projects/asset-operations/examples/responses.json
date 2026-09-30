@@ -1,0 +1,19 @@
+[
+  {
+    "asset_reviews": [
+      {
+        "asset_id": "PUMP-1",
+        "history_summary": "Bearing wear was recorded; completion is undocumented.",
+        "evidence": [
+          {
+            "source_id": "wo1",
+            "quote": "Last inspection recorded bearing wear; replacement completion was not documented."
+          }
+        ],
+        "missing_information": [
+          "Was the replacement completed and inspected?"
+        ]
+      }
+    ]
+  }
+]

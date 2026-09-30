@@ -1,0 +1,28 @@
+{
+  "incident_id": "INC-42",
+  "window_start": "2026-09-01T10:00:00Z",
+  "window_end": "2026-09-01T11:00:00Z",
+  "events": [
+    {
+      "id": "deploy",
+      "at": "2026-09-01T10:05:00Z",
+      "kind": "deployment",
+      "service": "checkout",
+      "text": "Checkout version 7 deployed."
+    },
+    {
+      "id": "alert",
+      "at": "2026-09-01T10:08:00Z",
+      "kind": "alert",
+      "service": "checkout",
+      "text": "Checkout error rate rose to 8 percent."
+    },
+    {
+      "id": "log",
+      "at": "2026-09-01T10:03:00Z",
+      "kind": "log",
+      "service": "database",
+      "text": "Connection timeouts began before the deployment."
+    }
+  ]
+}

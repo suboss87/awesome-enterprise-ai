@@ -1,0 +1,17 @@
+[
+  {
+    "note_reviews": [
+      {
+        "note_id": "note1",
+        "classification": "uncertainty",
+        "summary": "Lead time remains unconfirmed.",
+        "evidence": [
+          {
+            "source_id": "note1",
+            "quote": "Supplier says delivery may slip; no revised commitment yet."
+          }
+        ]
+      }
+    ]
+  }
+]
