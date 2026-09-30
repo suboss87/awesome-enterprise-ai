@@ -1,0 +1,130 @@
+{
+  "project": "exposure-review",
+  "summary": "Version evidence and advisory context prepared; no exploitability clearance.",
+  "metrics": {
+    "findings": 2,
+    "affected_matches": 0,
+    "unknown_matches": 2
+  },
+  "findings": [
+    {
+      "code": "inventory_incomplete",
+      "severity": "review",
+      "title": "Inventory coverage is unknown",
+      "detail": "Missing software cannot be classified as safe.",
+      "evidence_ids": []
+    },
+    {
+      "code": "version_unlisted",
+      "severity": "review",
+      "title": "Finding requires owner review",
+      "detail": "vendor-scan",
+      "evidence_ids": [
+        "vendor-scan",
+        "FRESH-ADV-PARSER"
+      ]
+    },
+    {
+      "code": "unknown_inventory",
+      "severity": "review",
+      "title": "Finding requires owner review",
+      "detail": "missing-scan",
+      "evidence_ids": [
+        "missing-scan",
+        "FRESH-ADV-PARSER"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "owner_review",
+      "finding_id": "vendor-scan",
+      "owner": "vendor-management"
+    },
+    {
+      "type": "owner_review",
+      "finding_id": "missing-scan",
+      "owner": null
+    }
+  ],
+  "human_review_required": true,
+  "matches": [
+    {
+      "finding_id": "vendor-scan",
+      "inventory_id": "vendor-report",
+      "advisory_id": "FRESH-ADV-PARSER",
+      "status": "version_unlisted",
+      "owner": "vendor-management",
+      "service": "statements",
+      "advisory_fixed_versions": [
+        "4.2.1"
+      ]
+    },
+    {
+      "finding_id": "missing-scan",
+      "inventory_id": "unlisted-host",
+      "advisory_id": "FRESH-ADV-PARSER",
+      "status": "unknown_inventory",
+      "owner": null,
+      "service": null,
+      "advisory_fixed_versions": [
+        "4.2.1"
+      ]
+    }
+  ],
+  "analysis": {
+    "advisories": [
+      {
+        "advisory_id": "FRESH-ADV-PARSER",
+        "impact_summary": "Report parser 4.2.0 may allow unauthorized report access, but only under a specific configuration involving anonymous preview.",
+        "preconditions": [
+          "Anonymous preview is enabled.",
+          "Applicability to downstream vendor builds is not established by the advisory text."
+        ],
+        "review_questions": [
+          "For the vendor-report inventory item, what exact report-parser version or vendor build is present, given the match status is version_unlisted?",
+          "Does the relevant deployment have anonymous preview enabled?",
+          "For the unlisted-host inventory item, does the asset exist in inventory and does it run report-parser?",
+          "If a downstream vendor build is in use, does the vendor state whether it includes or is affected by report-parser 4.2.0 behavior?"
+        ],
+        "evidence": [
+          {
+            "source_id": "FRESH-ADV-PARSER",
+            "quote": "Report parser 4.2.0 permits unauthorized report access only when anonymous preview is enabled."
+          },
+          {
+            "source_id": "FRESH-ADV-PARSER",
+            "quote": "Version 4.2.1 removes anonymous preview access."
+          },
+          {
+            "source_id": "FRESH-ADV-PARSER",
+            "quote": "No information is provided about downstream vendor builds."
+          }
+        ]
+      }
+    ]
+  },
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_02dc10411d79a747016abcc9875a5487d1a5c094104b47b2f3",
+        "usage": {
+          "input_tokens": 496,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 256,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 752
+        },
+        "prompt_sha256": "46e8b5b10da7972b5bab842aed1892eaee00f0d9052875ac1da411e7e6a0b298"
+      }
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "project": "proposal-operations",
+  "summary": "Draft response matrix; no answer is approved or submitted.",
+  "metrics": {
+    "requirements": 2,
+    "draftable": 1,
+    "unresolved": 1
+  },
+  "findings": [
+    {
+      "code": "gap",
+      "severity": "review",
+      "title": "Requirement needs evidence review",
+      "detail": "RFP-DELETE-33: gap",
+      "evidence_ids": []
+    }
+  ],
+  "actions": [
+    {
+      "action": "review_requirement",
+      "requirement_id": "RFP-EXPORT-22",
+      "priority": "verify_draft"
+    },
+    {
+      "action": "review_requirement",
+      "requirement_id": "RFP-DELETE-33",
+      "priority": "evidence_first"
+    }
+  ],
+  "human_review_required": true,
+  "matrix": [
+    {
+      "requirement_id": "RFP-EXPORT-22",
+      "requirement": "Can administrators export activity logs as CSV?",
+      "status": "supported",
+      "draft": "Administrators can export activity logs as CSV from the audit console.",
+      "evidence": [
+        {
+          "source_id": "SRC-GUIDE-55",
+          "quote": "Administrators can export activity logs as CSV from the audit console."
+        }
+      ],
+      "invalid_sources": {},
+      "review_status": "unreviewed"
+    },
+    {
+      "requirement_id": "RFP-DELETE-33",
+      "requirement": "Can administrators configure automatic log deletion after 30 days?",
+      "status": "gap",
+      "draft": "",
+      "evidence": [],
+      "invalid_sources": {},
+      "review_status": "unreviewed"
+    }
+  ],
+  "source_validity": {
+    "SRC-GUIDE-55": "current"
+  },
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_0c060c24b639c64a016abcc994ec9887d18d1434291ed624fe",
+        "usage": {
+          "input_tokens": 352,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 199,
+          "output_tokens_details": {
+            "reasoning_tokens": 101
+          },
+          "total_tokens": 551
+        },
+        "prompt_sha256": "2cf59b71892cdb000a16d2e34b1596526dfcc19e846ee633d741eb0d9b761af9"
+      }
+    ]
+  }
+}

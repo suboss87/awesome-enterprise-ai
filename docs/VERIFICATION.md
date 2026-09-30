@@ -41,6 +41,19 @@ Independent semantic review accepted the inspected corrections in the 15-case li
 
 Automatic checks and semantic review are distinct. Small synthetic sets do not establish production accuracy. No representative enterprise integration, latency/load study or controlled comparison with a non-AI baseline has been completed. Business owners must test their own workflows before adoption.
 
+## Fresh independent cases — 2026-09-30
+
+After the initial fixes were complete, two independent authors created twenty new synthetic cases using only the input contracts and examples. Neither inspected earlier evaluation cases or model outputs. Expected outcomes were frozen before inference. **20/20 automatic checks passed without changing prompts, code or expected outcomes.** Each author then reviewed the other author's actual outputs for semantic correctness. All twenty met their specific semantic criteria, with no blocking defect found. Nonblocking observations remain: one claims information request could describe the identity conflict more precisely, and two incident outputs could separate overlapping hypotheses and supporting/counterevidence labels more clearly.
+
+[The complete case set](../evaluation/live-cases.json) and [actual result snapshots](../evaluation/2026-09-30/) are public. These are two cases per project, not a representative enterprise accuracy estimate. The initial failures and consumed corrective regressions above remain part of the record.
+
+```sh
+python3 scripts/evaluate_workflows.py --cases evaluation/live-cases.json \
+  --output /tmp/enterprise-ai-fresh-run --workers 2
+```
+
+This command makes actual model calls and incurs provider usage. Use a new output directory; the evaluator refuses to overwrite an existing run. Synthetic snapshots can be inspected without a provider key.
+
 ## Reproduce or extend evaluation
 
 Each project includes declared cases under `evaluation/`. Some recorded cases deliberately inject invalid model responses to test rejection; those are not live model benchmarks.
@@ -53,4 +66,4 @@ Do not change an expected result to make an observed failure pass. Preserve prio
 
 Jev (`jev-1.13.0`) reviewed all ten implementations, tests, deployment limits and the retained initial/corrective evaluation evidence. All ten received `fix_before_reference`, with `adopter_validation_required` for enterprise readiness. Usefulness scores ranged from 1.99 to 2.04 on the declared 0–4 rubric. These are typed artifact judgments, not runtime benchmark scores or written technical diagnoses.
 
-The hold is preserved. Local passing tests and independent code review do not override it. The projects are under review; no Jev approval, comparative superiority or bank production readiness is claimed. Exact-head GitHub CI is a separate pending gate.
+The hold is preserved. Local passing tests and independent code review do not override it. The projects are under review; no Jev approval, comparative superiority or bank production readiness is claimed. All three GitHub CI jobs passed on candidate `20195350caa66f61aa6596e3c9807fbb276b24d7` ([run](https://github.com/suboss87/awesome-enterprise-ai/actions/runs/36684488756)). A follow-up assessment will use the fresh cases and operational trial plan; the original judgments are retained.

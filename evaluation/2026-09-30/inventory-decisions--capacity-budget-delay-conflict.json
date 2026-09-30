@@ -1,0 +1,104 @@
+{
+  "project": "inventory-decisions",
+  "summary": "Mean-demand replenishment scenario; inventory and supplier assumptions need planner review.",
+  "metrics": {
+    "items": 1,
+    "proposed_cost_cents": 1200,
+    "budget_cents": 500,
+    "budget_gap_cents": 700
+  },
+  "findings": [
+    {
+      "code": "budget_exceeded",
+      "severity": "review",
+      "title": "Proposed replenishment exceeds budget",
+      "detail": "Reduce or prioritize the plan; no automatic allocation was performed.",
+      "evidence_ids": []
+    },
+    {
+      "code": "capacity_shortfall",
+      "severity": "review",
+      "title": "Storage capacity constrains replenishment",
+      "detail": "SEAL-R",
+      "evidence_ids": [
+        "SEAL-R"
+      ]
+    },
+    {
+      "code": "lead_time_shortfall",
+      "severity": "review",
+      "title": "Current stock may not cover mean lead-time demand",
+      "detail": "SEAL-R",
+      "evidence_ids": [
+        "SEAL-R"
+      ]
+    },
+    {
+      "code": "notes_need_review",
+      "severity": "review",
+      "title": "Supplier notes may invalidate planning assumptions",
+      "detail": "Review quoted notes and rerun with confirmed parameters.",
+      "evidence_ids": []
+    }
+  ],
+  "actions": [
+    {
+      "type": "review_replenishment",
+      "sku": "SEAL-R",
+      "units": 6
+    }
+  ],
+  "human_review_required": true,
+  "plan": [
+    {
+      "sku": "SEAL-R",
+      "mean_daily_units": 4.0,
+      "inventory_position": 2,
+      "target_units": 21,
+      "requested_units": 19,
+      "capacity_limited_units": 6,
+      "capacity_shortfall_units": 13,
+      "proposed_cost_cents": 1200,
+      "stockout_within_lead": true
+    }
+  ],
+  "analysis": {
+    "note_reviews": [
+      {
+        "note_id": "unconfirmed-shipment",
+        "classification": "uncertainty",
+        "summary": "Shipment timing is unconfirmed; no revised delivery date is agreed, and the historical three-day lead time should not be assumed valid.",
+        "evidence": [
+          {
+            "source_id": "unconfirmed-shipment",
+            "quote": "Supplier cannot confirm this week shipment. A revised delivery date has not been agreed; do not assume the historical three-day lead time is still valid."
+          }
+        ]
+      }
+    ]
+  },
+  "currency": "GBP",
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_012ba065328230d5016abcc990125c87d19477bdc1c8e08b26",
+        "usage": {
+          "input_tokens": 352,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 102,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 454
+        },
+        "prompt_sha256": "9df7db3b69f38cb3fd59ddfa7f033d46e4bff3d2534b50146ec603bee808333a"
+      }
+    ]
+  }
+}

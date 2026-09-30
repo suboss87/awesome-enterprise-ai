@@ -1,0 +1,122 @@
+{
+  "project": "claims-intake",
+  "summary": "Claim evidence prepared for adjuster review.",
+  "metrics": {
+    "documents": 2,
+    "requirements": 2,
+    "incomplete_requirements": 0,
+    "review_findings": 0
+  },
+  "findings": [],
+  "actions": [],
+  "human_review_required": true,
+  "checklist": [
+    {
+      "requirement_id": "REQ-EVENT-52",
+      "document_type": "incident_report",
+      "status": "present_for_review",
+      "document_ids": [
+        "DOC-EVENT-44"
+      ]
+    },
+    {
+      "requirement_id": "REQ-REPAIR-63",
+      "document_type": "repair_estimate",
+      "status": "present_for_review",
+      "document_ids": [
+        "DOC-EST-53"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "document_id": "DOC-EVENT-44",
+      "document_type": "incident_report",
+      "fields": [
+        {
+          "field": "claimant_id",
+          "value": "ORG-BIRCH-41",
+          "evidence": [
+            {
+              "source_id": "PAGE-EVENT-19",
+              "quote": "Claimant ORG-BIRCH-41."
+            }
+          ]
+        },
+        {
+          "field": "incident_date",
+          "value": "2026-09-17",
+          "evidence": [
+            {
+              "source_id": "PAGE-EVENT-19",
+              "quote": "Incident date 2026-09-17."
+            }
+          ]
+        }
+      ],
+      "identity_or_event_conflict": false
+    },
+    {
+      "document_id": "DOC-EST-53",
+      "document_type": "repair_estimate",
+      "fields": [
+        {
+          "field": "claimant_id",
+          "value": "ORG-BIRCH-41",
+          "evidence": [
+            {
+              "source_id": "PAGE-EST-29",
+              "quote": "Repair estimate for claimant ORG-BIRCH-41."
+            }
+          ]
+        },
+        {
+          "field": "amount",
+          "value": "2450.50",
+          "evidence": [
+            {
+              "source_id": "PAGE-EST-29",
+              "quote": "Cabinet replacement and labour: GBP 2,450.50."
+            }
+          ]
+        },
+        {
+          "field": "currency",
+          "value": "GBP",
+          "evidence": [
+            {
+              "source_id": "PAGE-EST-29",
+              "quote": "Cabinet replacement and labour: GBP 2,450.50."
+            }
+          ]
+        }
+      ],
+      "identity_or_event_conflict": false
+    }
+  ],
+  "claim_id": "CL-STORM-72",
+  "decision": "NO_COVERAGE_OR_PAYMENT_DECISION",
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_0c3621b84252f347016abcc993962c87d1bff5b1eb78894962",
+        "usage": {
+          "input_tokens": 568,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 311,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 879
+        },
+        "prompt_sha256": "cf2dce446f6aeece63a1e38faedd1bf47d8e62c101d5563def26a19615b7f97f"
+      }
+    ]
+  }
+}

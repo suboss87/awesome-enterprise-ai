@@ -1,0 +1,135 @@
+{
+  "project": "claims-intake",
+  "summary": "Claim evidence prepared for adjuster review.",
+  "metrics": {
+    "documents": 2,
+    "requirements": 2,
+    "incomplete_requirements": 2,
+    "review_findings": 4
+  },
+  "findings": [
+    {
+      "code": "identity_or_event_conflict",
+      "severity": "review",
+      "title": "Claim facts disagree",
+      "detail": "DOC-OTHER-37: claimant_id differs from the submitted claim.",
+      "evidence_ids": [
+        "PAGE-OTHER-47"
+      ]
+    },
+    {
+      "code": "unclassified_document",
+      "severity": "review",
+      "title": "Document needs identification",
+      "detail": "Document content did not establish an accepted type.",
+      "evidence_ids": [
+        "DOC-MAIL-77"
+      ]
+    },
+    {
+      "code": "missing_requirement",
+      "severity": "review",
+      "title": "Required evidence is incomplete",
+      "detail": "Provide a readable incident_report containing: claimant_id, incident_date.",
+      "evidence_ids": [
+        "REQ-EVENT-52"
+      ]
+    },
+    {
+      "code": "missing_requirement",
+      "severity": "review",
+      "title": "Required evidence is incomplete",
+      "detail": "Provide a readable repair_estimate containing: claimant_id, amount, currency.",
+      "evidence_ids": [
+        "REQ-REPAIR-63"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "owner": "Claims reviewer",
+      "label": "Provide a readable incident_report containing: claimant_id, incident_date.",
+      "requires_approval": true
+    },
+    {
+      "owner": "Claims reviewer",
+      "label": "Provide a readable repair_estimate containing: claimant_id, amount, currency.",
+      "requires_approval": true
+    }
+  ],
+  "human_review_required": true,
+  "checklist": [
+    {
+      "requirement_id": "REQ-EVENT-52",
+      "document_type": "incident_report",
+      "status": "missing_or_incomplete",
+      "document_ids": []
+    },
+    {
+      "requirement_id": "REQ-REPAIR-63",
+      "document_type": "repair_estimate",
+      "status": "missing_or_incomplete",
+      "document_ids": []
+    }
+  ],
+  "documents": [
+    {
+      "document_id": "DOC-OTHER-37",
+      "document_type": "incident_report",
+      "fields": [
+        {
+          "field": "claimant_id",
+          "value": "ORG-FROST-81",
+          "evidence": [
+            {
+              "source_id": "PAGE-OTHER-47",
+              "quote": "Claimant ORG-FROST-81."
+            }
+          ]
+        },
+        {
+          "field": "incident_date",
+          "value": "2026-09-09",
+          "evidence": [
+            {
+              "source_id": "PAGE-OTHER-47",
+              "quote": "Incident date 2026-09-09."
+            }
+          ]
+        }
+      ],
+      "identity_or_event_conflict": true
+    },
+    {
+      "document_id": "DOC-MAIL-77",
+      "document_type": "unknown",
+      "fields": [],
+      "identity_or_event_conflict": false
+    }
+  ],
+  "claim_id": "CL-FROST-86",
+  "decision": "NO_COVERAGE_OR_PAYMENT_DECISION",
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_09c6c5a0d71edda2016abcc992db2c87d1b3f9758c80dadef5",
+        "usage": {
+          "input_tokens": 556,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 158,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 714
+        },
+        "prompt_sha256": "cf2dce446f6aeece63a1e38faedd1bf47d8e62c101d5563def26a19615b7f97f"
+      }
+    ]
+  }
+}

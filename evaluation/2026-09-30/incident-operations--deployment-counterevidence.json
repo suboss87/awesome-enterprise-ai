@@ -1,0 +1,156 @@
+{
+  "project": "incident-operations",
+  "summary": "Incident evidence assembled; all causal explanations remain hypotheses.",
+  "metrics": {
+    "events": 4,
+    "services": 2,
+    "hypotheses": 3
+  },
+  "findings": [
+    {
+      "code": "contradictory_evidence",
+      "severity": "review",
+      "title": "Competing evidence requires review",
+      "detail": "Do not select a cause solely by event proximity.",
+      "evidence_ids": []
+    }
+  ],
+  "actions": [
+    {
+      "type": "review_hypotheses",
+      "detail": "Compare supporting and contradictory observations with the incident owner."
+    }
+  ],
+  "human_review_required": true,
+  "timeline": [
+    {
+      "id": "dependency",
+      "at": "2026-10-02T07:10:00Z",
+      "kind": "alert",
+      "service": "object-store",
+      "text": "Object-store write latency rose across both cohorts."
+    },
+    {
+      "id": "before-rollout",
+      "at": "2026-10-02T07:12:00Z",
+      "kind": "log",
+      "service": "export-api",
+      "text": "Cohort A export requests began timing out eighteen minutes before the cobalt deployment."
+    },
+    {
+      "id": "rollout",
+      "at": "2026-10-02T07:30:00Z",
+      "kind": "deployment",
+      "service": "export-api",
+      "text": "Version cobalt deployed to cohort B only. Cohort A remained on version amber."
+    },
+    {
+      "id": "cohort-b",
+      "at": "2026-10-02T07:35:00Z",
+      "kind": "trace",
+      "service": "export-api",
+      "text": "All sampled cohort B exports completed within the normal latency range."
+    }
+  ],
+  "analysis": {
+    "hypotheses": [
+      {
+        "explanation": "Cohort A may have had a pre-existing export-api issue independent of the cobalt rollout, because timeouts began before the deployment and cohort A stayed on amber while sampled cohort B remained normal.",
+        "support": [
+          {
+            "source_id": "before-rollout",
+            "quote": "Cohort A export requests began timing out eighteen minutes before the cobalt deployment."
+          },
+          {
+            "source_id": "rollout",
+            "quote": "Version cobalt deployed to cohort B only. Cohort A remained on version amber."
+          },
+          {
+            "source_id": "cohort-b",
+            "quote": "All sampled cohort B exports completed within the normal latency range."
+          }
+        ],
+        "contradictions": [],
+        "missing_checks": [
+          "Whether cohort A timeouts existed before 07:12 or changed in rate/severity after 07:30.",
+          "Whether cohort A requests differed from cohort B by tenant mix, export size, configuration, routing, or amber-only code path.",
+          "Whether unsampled cohort B exports also remained within normal latency."
+        ]
+      },
+      {
+        "explanation": "Object-store write latency may have contributed to export-api timeouts, with the observed impact surfacing in cohort A during this window.",
+        "support": [
+          {
+            "source_id": "dependency",
+            "quote": "Object-store write latency rose across both cohorts."
+          },
+          {
+            "source_id": "before-rollout",
+            "quote": "Cohort A export requests began timing out eighteen minutes before the cobalt deployment."
+          }
+        ],
+        "contradictions": [],
+        "missing_checks": [
+          "Whether cohort A timeout timestamps correlate with object-store write latency spikes at request level.",
+          "Whether cohort B used the same object-store write path and comparable object sizes during the latency increase.",
+          "Whether export-api timeout thresholds or retry behavior differed between cohort A and cohort B."
+        ]
+      },
+      {
+        "explanation": "A cobalt-deployment-caused explanation for the cohort A timeouts is weak and faces direct conflicting observations, because the reported A timeouts started before cobalt and A was not deployed to cobalt.",
+        "support": [
+          {
+            "source_id": "rollout",
+            "quote": "Version cobalt deployed to cohort B only. Cohort A remained on version amber."
+          }
+        ],
+        "contradictions": [
+          {
+            "source_id": "before-rollout",
+            "quote": "Cohort A export requests began timing out eighteen minutes before the cobalt deployment."
+          },
+          {
+            "source_id": "rollout",
+            "quote": "Version cobalt deployed to cohort B only. Cohort A remained on version amber."
+          },
+          {
+            "source_id": "cohort-b",
+            "quote": "All sampled cohort B exports completed within the normal latency range."
+          }
+        ],
+        "missing_checks": [
+          "Whether any export-api shared infrastructure changed at the cobalt deployment time despite cohort A remaining on amber.",
+          "Whether cohort A timeout rate changed immediately after 07:30 compared with the pre-deployment interval."
+        ]
+      }
+    ],
+    "unresolved_questions": [
+      "No event text identifies request volume, timeout counts, error codes, retry behavior, export sizes, or per-request dependency timing, so the available evidence cannot distinguish a cohort-specific export-api issue from dependency sensitivity.",
+      "The timeline does not include observations before 07:10 or after 07:35, limiting assessment of onset, duration, and recovery."
+    ]
+  },
+  "incident_id": "FRESH-EXPORT",
+  "execution": {
+    "mode": "live",
+    "calls": [
+      {
+        "mode": "live",
+        "model": "gpt-5.5-2026-04-23",
+        "response_id": "resp_03dcfea6edcbb618016abcc9874d6487d18cbbf2a731a98b4a",
+        "usage": {
+          "input_tokens": 550,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1646,
+          "output_tokens_details": {
+            "reasoning_tokens": 1034
+          },
+          "total_tokens": 2196
+        },
+        "prompt_sha256": "5ff3d668c6b4164fb69ce81bb7ed1a131f38351052414e2c02f2a055a8b4a956"
+      }
+    ]
+  }
+}

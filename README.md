@@ -89,7 +89,7 @@ The workflow interprets text where interpretation helps. Ordinary code handles a
 3. Map an authorized export from your system and test representative cases.
 4. Review correctness, access control and operational requirements before connecting production systems.
 
-[Adoption guide](ADOPTION.md) · [Deployment boundary](docs/DEPLOYMENT.md) · [Verification and evaluation](docs/VERIFICATION.md)
+[Adoption guide](ADOPTION.md) · [Integration roadmap](docs/ADOPTION-ROADMAP.md) · [Deployment boundary](docs/DEPLOYMENT.md) · [Verification and evaluation](docs/VERIFICATION.md)
 
 ## Keep improving the collection
 

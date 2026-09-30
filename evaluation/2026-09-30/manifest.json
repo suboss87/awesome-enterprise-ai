@@ -1,0 +1,29 @@
+{
+  "kind": "Fresh independently authored synthetic cases; frozen before inference, no prompt/code changes or retries after observing these results. Two cases per workflow, not a production accuracy estimate.",
+  "source_hashes": {
+    "ten-fresh-business-cases.json": "28b6dff01bd26e2aef5f2fba7f902ecb8ddd9756722f328480ea5a41e7629864",
+    "ten-fresh-operations-cases.json": "149554a0cf353942d6558ec20a5eb13ee034094ceb81e438f9354ba629ee1b73"
+  },
+  "outputs": {
+    "account-intelligence--fresh-neutral-procurement-closed-excluded.json": "29e31fc0025a6ebb282fcc5e8d39fe4ceeb5ac07dc860bb54708a2594dc321f4",
+    "account-intelligence--fresh-renewal-delay.json": "17216f32e5790d77f8ef47c675bbc02e70da9cf1cf601f47c381c37a5c6ef018",
+    "claims-intake--fresh-complete-storm-packet.json": "0091e06526a9df800acde7e8f3041241dc5cf934c740e3c2b538474da79318b2",
+    "claims-intake--fresh-wrong-claimant-and-email.json": "8b1640b7138ad8c6e2c4798503678e2d2ae731f6d0dfa5c857db8ba2e8f992a6",
+    "customer-resolution--fresh-expired-partial-return.json": "1d7a0f0243a7a44d0c8eb0384052b89cf7578591955d60d517e280cd74e99e28",
+    "customer-resolution--fresh-unshipped-cancel.json": "2afb00a9d3782a433113b8584d5265c5d6aa9f4955f52b1c849525eee26564a6",
+    "proposal-operations--fresh-contradictory-current-residency.json": "8347fa37ae012f89e05b6ec5127e5bf35250c7b9adef9d388ad7b45cfdd64326",
+    "proposal-operations--fresh-dated-capability-answer.json": "5532754e618c74f44acee486e7fb09a81c6ca928e34b159d1c96dfb23cd76efe",
+    "workforce-onboarding--fresh-inconsistent-access-prerequisite.json": "bdd4268a04dcd0814889395e996e1397323891a7682a7d00f5b1ca08765a29d5",
+    "workforce-onboarding--fresh-ready-analyst-with-optional-session.json": "35ad3e0225b0bab278f75062a0258cf15858ae71575b1b0b8c0c3ff3e9ad32c6",
+    "asset-operations--compressor-persistent-observation.json": "6d05e0642ef8ca76218e3c4877c9c29c2a8e0c98620d2d124a6ac6f3c2c0a6fb",
+    "asset-operations--sensor-gap-and-undocumented-asset.json": "dd4b9f2374a7a399619e38b05efa27221b6c61b3080c29f99412c559cbcd2015",
+    "business-insights--quarter-end-gross-profit.json": "437c49abe8ee7e2a06bc82e5dc17c9e046bd3f6b277663c7b567691779a2b454",
+    "business-insights--unsupported-margin-definition.json": "01bf7897208afe9d1dbf0cd0d56284751a0bb42f5ac2823e4edc1f7cda9a17b0",
+    "exposure-review--matched-parser-inventory.json": "1e38e1aaf02b0292e5655d4ddbfd9f6d0909a7fdd10fb81f0ea418247a9cb52d",
+    "exposure-review--vendor-build-and-missing-asset.json": "49e2e43694b359f98d80295b95f256d785de15c2c1991a083df77e66259886ac",
+    "incident-operations--deployment-counterevidence.json": "569de549e20eba169ac00f868700ce4c7e6c7eff2842c59d8f758dd8cc17032f",
+    "incident-operations--settlement-queue-observation.json": "1a76922441681fdf838c246c1ff7a7d9ab85a49dab9ee19eecc8bcacff07527a",
+    "inventory-decisions--capacity-budget-delay-conflict.json": "ce98464bea74c6b83b3d8be4daa8f0e1cfc1f17a921bb8ad37a047307f7a8e0f",
+    "inventory-decisions--routine-filter-replenishment.json": "c0afa8163e8f9af70e26c228855874d40019cdfd23924d6f82bd6f24c40721cf"
+  }
+}
