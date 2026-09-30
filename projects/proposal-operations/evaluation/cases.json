@@ -1,0 +1,455 @@
+{
+  "provenance": "Independently specified synthetic business outcomes; recorded responses are hand-authored replay fixtures, not live inference or enterprise data.",
+  "cases": [
+    {
+      "id": "current-approved-evidence",
+      "input": {
+        "as_of": "2026-09-30",
+        "requirements": [
+          {
+            "id": "req-1",
+            "text": "Does the product support SAML single sign-on?"
+          }
+        ],
+        "sources": [
+          {
+            "id": "doc-1",
+            "text": "The Enterprise plan supports SAML single sign-on.",
+            "valid_from": "2026-01-01",
+            "valid_until": "2026-12-31",
+            "approval": "approved"
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "answers": [
+            {
+              "requirement_id": "req-1",
+              "status": "supported",
+              "draft": "SAML single sign-on is supported on the Enterprise plan.",
+              "evidence": [
+                {
+                  "source_id": "doc-1",
+                  "quote": "The Enterprise plan supports SAML single sign-on."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "draftable": 1,
+          "unresolved": 0
+        },
+        "findings": []
+      }
+    },
+    {
+      "id": "expired-capability-evidence",
+      "input": {
+        "as_of": "2026-09-30",
+        "requirements": [
+          {
+            "id": "req-1",
+            "text": "Does the product support SAML single sign-on?"
+          }
+        ],
+        "sources": [
+          {
+            "id": "doc-1",
+            "text": "The Enterprise plan supports SAML single sign-on.",
+            "valid_from": "2026-01-01",
+            "valid_until": "2026-09-01",
+            "approval": "approved"
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "answers": [
+            {
+              "requirement_id": "req-1",
+              "status": "supported",
+              "draft": "SAML single sign-on is supported on the Enterprise plan.",
+              "evidence": [
+                {
+                  "source_id": "doc-1",
+                  "quote": "The Enterprise plan supports SAML single sign-on."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "draftable": 0
+        },
+        "findings": [
+          "evidence_review"
+        ]
+      }
+    },
+    {
+      "id": "unapproved-document",
+      "input": {
+        "as_of": "2026-09-30",
+        "requirements": [
+          {
+            "id": "req-1",
+            "text": "Does the product support SAML single sign-on?"
+          }
+        ],
+        "sources": [
+          {
+            "id": "doc-1",
+            "text": "The Enterprise plan supports SAML single sign-on.",
+            "valid_from": "2026-01-01",
+            "valid_until": "2026-12-31",
+            "approval": "draft"
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "answers": [
+            {
+              "requirement_id": "req-1",
+              "status": "supported",
+              "draft": "SAML single sign-on is supported on the Enterprise plan.",
+              "evidence": [
+                {
+                  "source_id": "doc-1",
+                  "quote": "The Enterprise plan supports SAML single sign-on."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "draftable": 0
+        },
+        "findings": [
+          "evidence_review"
+        ]
+      }
+    },
+    {
+      "id": "future-roadmap-not-shipped",
+      "input": {
+        "as_of": "2026-09-30",
+        "requirements": [
+          {
+            "id": "req-1",
+            "text": "Does the product support SAML single sign-on?"
+          }
+        ],
+        "sources": [
+          {
+            "id": "doc-1",
+            "text": "The Enterprise plan supports SAML single sign-on.",
+            "valid_from": "2026-10-01",
+            "valid_until": "2026-12-31",
+            "approval": "approved"
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "answers": [
+            {
+              "requirement_id": "req-1",
+              "status": "supported",
+              "draft": "SAML single sign-on is supported on the Enterprise plan.",
+              "evidence": [
+                {
+                  "source_id": "doc-1",
+                  "quote": "The Enterprise plan supports SAML single sign-on."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "draftable": 0
+        },
+        "findings": [
+          "evidence_review"
+        ]
+      }
+    },
+    {
+      "id": "no-evidence-no-answer",
+      "input": {
+        "as_of": "2026-09-30",
+        "requirements": [
+          {
+            "id": "req-1",
+            "text": "Does the product support SAML single sign-on?"
+          }
+        ],
+        "sources": []
+      },
+      "replay_responses": [
+        {
+          "answers": [
+            {
+              "requirement_id": "req-1",
+              "status": "gap",
+              "draft": "",
+              "evidence": []
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "unresolved": 1
+        },
+        "findings": [
+          "gap"
+        ]
+      }
+    },
+    {
+      "id": "conflicting-approved-claims",
+      "input": {
+        "as_of": "2026-09-30",
+        "requirements": [
+          {
+            "id": "req-1",
+            "text": "Does the product support SAML single sign-on?"
+          }
+        ],
+        "sources": [
+          {
+            "id": "doc-1",
+            "text": "The Enterprise plan supports SAML single sign-on.",
+            "valid_from": "2026-01-01",
+            "valid_until": "2026-12-31",
+            "approval": "approved"
+          },
+          {
+            "id": "doc-2",
+            "text": "SAML is not available on any plan.",
+            "valid_from": "2026-01-01",
+            "valid_until": "2026-12-31",
+            "approval": "approved"
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "answers": [
+            {
+              "requirement_id": "req-1",
+              "status": "conflict",
+              "draft": "",
+              "evidence": [
+                {
+                  "source_id": "doc-1",
+                  "quote": "The Enterprise plan supports SAML single sign-on."
+                },
+                {
+                  "source_id": "doc-2",
+                  "quote": "SAML is not available on any plan."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "unresolved": 1
+        },
+        "findings": [
+          "conflict"
+        ]
+      }
+    },
+    {
+      "id": "fabricated-source",
+      "input": {
+        "as_of": "2026-09-30",
+        "requirements": [
+          {
+            "id": "req-1",
+            "text": "Does the product support SAML single sign-on?"
+          }
+        ],
+        "sources": [
+          {
+            "id": "doc-1",
+            "text": "The Enterprise plan supports SAML single sign-on.",
+            "valid_from": "2026-01-01",
+            "valid_until": "2026-12-31",
+            "approval": "approved"
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "answers": [
+            {
+              "requirement_id": "req-1",
+              "status": "supported",
+              "draft": "SAML single sign-on is supported on the Enterprise plan.",
+              "evidence": [
+                {
+                  "source_id": "fabricated",
+                  "quote": "The Enterprise plan supports SAML single sign-on."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": true,
+        "metrics": {},
+        "findings": []
+      }
+    },
+    {
+      "id": "duplicate-requirement-output",
+      "input": {
+        "as_of": "2026-09-30",
+        "requirements": [
+          {
+            "id": "req-1",
+            "text": "Does the product support SAML single sign-on?"
+          }
+        ],
+        "sources": [
+          {
+            "id": "doc-1",
+            "text": "The Enterprise plan supports SAML single sign-on.",
+            "valid_from": "2026-01-01",
+            "valid_until": "2026-12-31",
+            "approval": "approved"
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "answers": [
+            {
+              "requirement_id": "req-1",
+              "status": "supported",
+              "draft": "SAML single sign-on is supported on the Enterprise plan.",
+              "evidence": [
+                {
+                  "source_id": "doc-1",
+                  "quote": "The Enterprise plan supports SAML single sign-on."
+                }
+              ]
+            },
+            {
+              "requirement_id": "req-1",
+              "status": "supported",
+              "draft": "SAML single sign-on is supported on the Enterprise plan.",
+              "evidence": [
+                {
+                  "source_id": "doc-1",
+                  "quote": "The Enterprise plan supports SAML single sign-on."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": true,
+        "metrics": {},
+        "findings": []
+      }
+    },
+    {
+      "id": "omitted-requirement-output",
+      "input": {
+        "as_of": "2026-09-30",
+        "requirements": [
+          {
+            "id": "req-1",
+            "text": "Does the product support SAML single sign-on?"
+          }
+        ],
+        "sources": [
+          {
+            "id": "doc-1",
+            "text": "The Enterprise plan supports SAML single sign-on.",
+            "valid_from": "2026-01-01",
+            "valid_until": "2026-12-31",
+            "approval": "approved"
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "answers": []
+        }
+      ],
+      "expected": {
+        "error": true,
+        "metrics": {},
+        "findings": []
+      }
+    },
+    {
+      "id": "gap-cannot-carry-affirmative-draft",
+      "input": {
+        "as_of": "2026-09-30",
+        "requirements": [
+          {
+            "id": "req-1",
+            "text": "Does the product support SAML single sign-on?"
+          }
+        ],
+        "sources": [
+          {
+            "id": "doc-1",
+            "text": "The Enterprise plan supports SAML single sign-on.",
+            "valid_from": "2026-01-01",
+            "valid_until": "2026-12-31",
+            "approval": "approved"
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "answers": [
+            {
+              "requirement_id": "req-1",
+              "status": "gap",
+              "draft": "SAML single sign-on is supported on the Enterprise plan.",
+              "evidence": [
+                {
+                  "source_id": "doc-1",
+                  "quote": "The Enterprise plan supports SAML single sign-on."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": true,
+        "metrics": {},
+        "findings": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,704 @@
+{
+  "provenance": "Independently specified synthetic business outcomes; recorded responses are hand-authored replay fixtures, not live inference or enterprise data.",
+  "cases": [
+    {
+      "id": "required-access-pending",
+      "input": {
+        "as_of": "2026-09-30",
+        "starter": {
+          "id": "employee-1",
+          "role": "Data Engineer",
+          "location": "London",
+          "start_date": "2026-10-01"
+        },
+        "policies": [
+          {
+            "id": "policy-1",
+            "text": "Data Engineers must finish identity verification before repository access."
+          }
+        ],
+        "tasks": [
+          {
+            "id": "identity",
+            "title": "Identity verification",
+            "owner": "HR",
+            "status": "complete",
+            "required": true,
+            "depends_on": []
+          },
+          {
+            "id": "repo-access",
+            "title": "Repository access approval",
+            "owner": "IT",
+            "status": "pending",
+            "required": true,
+            "depends_on": [
+              "identity"
+            ]
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "matches": [
+            {
+              "task_id": "identity",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            },
+            {
+              "task_id": "repo-access",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "ready": false,
+          "unfinished_required": 1
+        },
+        "findings": [
+          "readiness_blocker"
+        ]
+      }
+    },
+    {
+      "id": "completed-recorded-prerequisites",
+      "input": {
+        "as_of": "2026-09-30",
+        "starter": {
+          "id": "employee-1",
+          "role": "Data Engineer",
+          "location": "London",
+          "start_date": "2026-10-01"
+        },
+        "policies": [
+          {
+            "id": "policy-1",
+            "text": "Data Engineers must finish identity verification before repository access."
+          }
+        ],
+        "tasks": [
+          {
+            "id": "identity",
+            "title": "Identity verification",
+            "owner": "HR",
+            "status": "complete",
+            "required": true,
+            "depends_on": []
+          },
+          {
+            "id": "repo-access",
+            "title": "Repository access approval",
+            "owner": "IT",
+            "status": "complete",
+            "required": true,
+            "depends_on": [
+              "identity"
+            ]
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "matches": [
+            {
+              "task_id": "identity",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            },
+            {
+              "task_id": "repo-access",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "ready": true,
+          "unfinished_required": 0
+        },
+        "findings": []
+      }
+    },
+    {
+      "id": "false-completion-with-open-prerequisite",
+      "input": {
+        "as_of": "2026-09-30",
+        "starter": {
+          "id": "employee-1",
+          "role": "Data Engineer",
+          "location": "London",
+          "start_date": "2026-10-01"
+        },
+        "policies": [
+          {
+            "id": "policy-1",
+            "text": "Data Engineers must finish identity verification before repository access."
+          }
+        ],
+        "tasks": [
+          {
+            "id": "identity",
+            "title": "Identity verification",
+            "owner": "HR",
+            "status": "pending",
+            "required": true,
+            "depends_on": []
+          },
+          {
+            "id": "repo-access",
+            "title": "Repository access approval",
+            "owner": "IT",
+            "status": "complete",
+            "required": true,
+            "depends_on": [
+              "identity"
+            ]
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "matches": [
+            {
+              "task_id": "identity",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            },
+            {
+              "task_id": "repo-access",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "ready": false
+        },
+        "findings": [
+          "completion_inconsistent"
+        ]
+      }
+    },
+    {
+      "id": "model-cannot-downgrade-required",
+      "input": {
+        "as_of": "2026-09-30",
+        "starter": {
+          "id": "employee-1",
+          "role": "Data Engineer",
+          "location": "London",
+          "start_date": "2026-10-01"
+        },
+        "policies": [
+          {
+            "id": "policy-1",
+            "text": "Data Engineers must finish identity verification before repository access."
+          }
+        ],
+        "tasks": [
+          {
+            "id": "identity",
+            "title": "Identity verification",
+            "owner": "HR",
+            "status": "complete",
+            "required": true,
+            "depends_on": []
+          },
+          {
+            "id": "repo-access",
+            "title": "Repository access approval",
+            "owner": "IT",
+            "status": "pending",
+            "required": true,
+            "depends_on": [
+              "identity"
+            ]
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "matches": [
+            {
+              "task_id": "identity",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            },
+            {
+              "task_id": "repo-access",
+              "applicability": "optional",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "ready": false,
+          "required_tasks": 2
+        },
+        "findings": []
+      }
+    },
+    {
+      "id": "optional-prerequisite-still-blocks",
+      "input": {
+        "as_of": "2026-09-30",
+        "starter": {
+          "id": "employee-1",
+          "role": "Data Engineer",
+          "location": "London",
+          "start_date": "2026-10-01"
+        },
+        "policies": [
+          {
+            "id": "policy-1",
+            "text": "Data Engineers must finish identity verification before repository access."
+          }
+        ],
+        "tasks": [
+          {
+            "id": "identity",
+            "title": "Identity verification",
+            "owner": "HR",
+            "status": "pending",
+            "required": false,
+            "depends_on": []
+          },
+          {
+            "id": "repo-access",
+            "title": "Repository access approval",
+            "owner": "IT",
+            "status": "pending",
+            "required": true,
+            "depends_on": [
+              "identity"
+            ]
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "matches": [
+            {
+              "task_id": "identity",
+              "applicability": "optional",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            },
+            {
+              "task_id": "repo-access",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "required_tasks": 2,
+          "unfinished_required": 2
+        },
+        "findings": []
+      }
+    },
+    {
+      "id": "policy-uncertainty-blocks-ready",
+      "input": {
+        "as_of": "2026-09-30",
+        "starter": {
+          "id": "employee-1",
+          "role": "Data Engineer",
+          "location": "London",
+          "start_date": "2026-10-01"
+        },
+        "policies": [
+          {
+            "id": "policy-1",
+            "text": "Data Engineers must finish identity verification before repository access."
+          }
+        ],
+        "tasks": [
+          {
+            "id": "identity",
+            "title": "Identity verification",
+            "owner": "HR",
+            "status": "complete",
+            "required": true,
+            "depends_on": []
+          },
+          {
+            "id": "repo-access",
+            "title": "Repository access approval",
+            "owner": "IT",
+            "status": "complete",
+            "required": true,
+            "depends_on": [
+              "identity"
+            ]
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "matches": [
+            {
+              "task_id": "identity",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            },
+            {
+              "task_id": "repo-access",
+              "applicability": "uncertain",
+              "evidence": []
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "ready": false
+        },
+        "findings": [
+          "policy_uncertain"
+        ]
+      }
+    },
+    {
+      "id": "dependency-cycle",
+      "input": {
+        "as_of": "2026-09-30",
+        "starter": {
+          "id": "employee-1",
+          "role": "Data Engineer",
+          "location": "London",
+          "start_date": "2026-10-01"
+        },
+        "policies": [
+          {
+            "id": "policy-1",
+            "text": "Data Engineers must finish identity verification before repository access."
+          }
+        ],
+        "tasks": [
+          {
+            "id": "identity",
+            "title": "Identity verification",
+            "owner": "HR",
+            "status": "complete",
+            "required": true,
+            "depends_on": [
+              "repo-access"
+            ]
+          },
+          {
+            "id": "repo-access",
+            "title": "Repository access approval",
+            "owner": "IT",
+            "status": "pending",
+            "required": true,
+            "depends_on": [
+              "identity"
+            ]
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "matches": [
+            {
+              "task_id": "identity",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            },
+            {
+              "task_id": "repo-access",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": true,
+        "metrics": {},
+        "findings": []
+      }
+    },
+    {
+      "id": "unknown-prerequisite",
+      "input": {
+        "as_of": "2026-09-30",
+        "starter": {
+          "id": "employee-1",
+          "role": "Data Engineer",
+          "location": "London",
+          "start_date": "2026-10-01"
+        },
+        "policies": [
+          {
+            "id": "policy-1",
+            "text": "Data Engineers must finish identity verification before repository access."
+          }
+        ],
+        "tasks": [
+          {
+            "id": "identity",
+            "title": "Identity verification",
+            "owner": "HR",
+            "status": "complete",
+            "required": true,
+            "depends_on": []
+          },
+          {
+            "id": "repo-access",
+            "title": "Repository access approval",
+            "owner": "IT",
+            "status": "pending",
+            "required": true,
+            "depends_on": [
+              "unknown"
+            ]
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "matches": [
+            {
+              "task_id": "identity",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            },
+            {
+              "task_id": "repo-access",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": true,
+        "metrics": {},
+        "findings": []
+      }
+    },
+    {
+      "id": "invented-policy-evidence",
+      "input": {
+        "as_of": "2026-09-30",
+        "starter": {
+          "id": "employee-1",
+          "role": "Data Engineer",
+          "location": "London",
+          "start_date": "2026-10-01"
+        },
+        "policies": [
+          {
+            "id": "policy-1",
+            "text": "Data Engineers must finish identity verification before repository access."
+          }
+        ],
+        "tasks": [
+          {
+            "id": "identity",
+            "title": "Identity verification",
+            "owner": "HR",
+            "status": "complete",
+            "required": true,
+            "depends_on": []
+          },
+          {
+            "id": "repo-access",
+            "title": "Repository access approval",
+            "owner": "IT",
+            "status": "pending",
+            "required": true,
+            "depends_on": [
+              "identity"
+            ]
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "matches": [
+            {
+              "task_id": "identity",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Invented policy"
+                }
+              ]
+            },
+            {
+              "task_id": "repo-access",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": true,
+        "metrics": {},
+        "findings": []
+      }
+    },
+    {
+      "id": "omitted-task",
+      "input": {
+        "as_of": "2026-09-30",
+        "starter": {
+          "id": "employee-1",
+          "role": "Data Engineer",
+          "location": "London",
+          "start_date": "2026-10-01"
+        },
+        "policies": [
+          {
+            "id": "policy-1",
+            "text": "Data Engineers must finish identity verification before repository access."
+          }
+        ],
+        "tasks": [
+          {
+            "id": "identity",
+            "title": "Identity verification",
+            "owner": "HR",
+            "status": "complete",
+            "required": true,
+            "depends_on": []
+          },
+          {
+            "id": "repo-access",
+            "title": "Repository access approval",
+            "owner": "IT",
+            "status": "pending",
+            "required": true,
+            "depends_on": [
+              "identity"
+            ]
+          }
+        ]
+      },
+      "replay_responses": [
+        {
+          "matches": [
+            {
+              "task_id": "identity",
+              "applicability": "required",
+              "evidence": [
+                {
+                  "source_id": "policy-1",
+                  "quote": "Data Engineers must finish identity verification before repository access."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": true,
+        "metrics": {},
+        "findings": []
+      }
+    }
+  ]
+}

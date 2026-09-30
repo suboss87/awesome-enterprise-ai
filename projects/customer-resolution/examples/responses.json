@@ -1,0 +1,12 @@
+[
+  {
+    "intent": "return",
+    "requested_amount_cents": 0,
+    "evidence": [
+      {
+        "source_id": "msg-1",
+        "quote": "I want to return this order."
+      }
+    ]
+  }
+]

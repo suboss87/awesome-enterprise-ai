@@ -1,0 +1,26 @@
+[
+  {
+    "matches": [
+      {
+        "task_id": "identity",
+        "applicability": "required",
+        "evidence": [
+          {
+            "source_id": "policy-1",
+            "quote": "Data Engineers must finish identity verification before repository access."
+          }
+        ]
+      },
+      {
+        "task_id": "repo-access",
+        "applicability": "required",
+        "evidence": [
+          {
+            "source_id": "policy-1",
+            "quote": "Data Engineers must finish identity verification before repository access."
+          }
+        ]
+      }
+    ]
+  }
+]

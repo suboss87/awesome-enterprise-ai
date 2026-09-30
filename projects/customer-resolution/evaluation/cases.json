@@ -1,0 +1,424 @@
+{
+  "provenance": "Independently specified synthetic business outcomes; recorded responses are hand-authored replay fixtures, not live inference or enterprise data.",
+  "cases": [
+    {
+      "id": "delivered-within-window",
+      "input": {
+        "as_of": "2026-09-30",
+        "policy": {
+          "return_window_days": 30,
+          "max_refund_cents": 10000
+        },
+        "order": {
+          "id": "order-1",
+          "status": "delivered",
+          "total_cents": 5000,
+          "refunded_cents": 0,
+          "delivered_on": "2026-09-20"
+        },
+        "message": {
+          "id": "msg-1",
+          "text": "I want to return this order."
+        },
+        "tool_state": "ready"
+      },
+      "replay_responses": [
+        {
+          "intent": "return",
+          "requested_amount_cents": 0,
+          "evidence": [
+            {
+              "source_id": "msg-1",
+              "quote": "I want to return this order."
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "blocked": false,
+          "maximum_refund_cents": 5000
+        },
+        "findings": []
+      }
+    },
+    {
+      "id": "expired-return",
+      "input": {
+        "as_of": "2026-09-30",
+        "policy": {
+          "return_window_days": 30,
+          "max_refund_cents": 10000
+        },
+        "order": {
+          "id": "order-1",
+          "status": "delivered",
+          "total_cents": 5000,
+          "refunded_cents": 0,
+          "delivered_on": "2026-08-01"
+        },
+        "message": {
+          "id": "msg-1",
+          "text": "I want to return this order."
+        },
+        "tool_state": "ready"
+      },
+      "replay_responses": [
+        {
+          "intent": "return",
+          "requested_amount_cents": 0,
+          "evidence": [
+            {
+              "source_id": "msg-1",
+              "quote": "I want to return this order."
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "blocked": true
+        },
+        "findings": [
+          "return_window_expired"
+        ]
+      }
+    },
+    {
+      "id": "unknown-refund-tool-outcome-no-retry",
+      "input": {
+        "as_of": "2026-09-30",
+        "policy": {
+          "return_window_days": 30,
+          "max_refund_cents": 10000
+        },
+        "order": {
+          "id": "order-1",
+          "status": "delivered",
+          "total_cents": 5000,
+          "refunded_cents": 0,
+          "delivered_on": "2026-09-20"
+        },
+        "message": {
+          "id": "msg-1",
+          "text": "I want to return this order."
+        },
+        "tool_state": "uncertain"
+      },
+      "replay_responses": [
+        {
+          "intent": "return",
+          "requested_amount_cents": 0,
+          "evidence": [
+            {
+              "source_id": "msg-1",
+              "quote": "I want to return this order."
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "blocked": true
+        },
+        "findings": [
+          "tool_uncertain"
+        ]
+      }
+    },
+    {
+      "id": "unavailable-tool",
+      "input": {
+        "as_of": "2026-09-30",
+        "policy": {
+          "return_window_days": 30,
+          "max_refund_cents": 10000
+        },
+        "order": {
+          "id": "order-1",
+          "status": "delivered",
+          "total_cents": 5000,
+          "refunded_cents": 0,
+          "delivered_on": "2026-09-20"
+        },
+        "message": {
+          "id": "msg-1",
+          "text": "I want to return this order."
+        },
+        "tool_state": "blocked"
+      },
+      "replay_responses": [
+        {
+          "intent": "return",
+          "requested_amount_cents": 0,
+          "evidence": [
+            {
+              "source_id": "msg-1",
+              "quote": "I want to return this order."
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "blocked": true
+        },
+        "findings": [
+          "tool_blocked"
+        ]
+      }
+    },
+    {
+      "id": "already-refunded",
+      "input": {
+        "as_of": "2026-09-30",
+        "policy": {
+          "return_window_days": 30,
+          "max_refund_cents": 10000
+        },
+        "order": {
+          "id": "order-1",
+          "status": "delivered",
+          "total_cents": 5000,
+          "refunded_cents": 5000,
+          "delivered_on": "2026-09-20"
+        },
+        "message": {
+          "id": "msg-1",
+          "text": "I want to return this order."
+        },
+        "tool_state": "ready"
+      },
+      "replay_responses": [
+        {
+          "intent": "return",
+          "requested_amount_cents": 0,
+          "evidence": [
+            {
+              "source_id": "msg-1",
+              "quote": "I want to return this order."
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "blocked": true,
+          "outstanding_cents": 0
+        },
+        "findings": [
+          "nothing_to_refund"
+        ]
+      }
+    },
+    {
+      "id": "over-refund-attempt",
+      "input": {
+        "as_of": "2026-09-30",
+        "policy": {
+          "return_window_days": 30,
+          "max_refund_cents": 10000
+        },
+        "order": {
+          "id": "order-1",
+          "status": "delivered",
+          "total_cents": 5000,
+          "refunded_cents": 0,
+          "delivered_on": "2026-09-20"
+        },
+        "message": {
+          "id": "msg-1",
+          "text": "I want to return this order."
+        },
+        "tool_state": "ready"
+      },
+      "replay_responses": [
+        {
+          "intent": "return",
+          "requested_amount_cents": 6000,
+          "evidence": [
+            {
+              "source_id": "msg-1",
+              "quote": "I want to return this order."
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "blocked": true
+        },
+        "findings": [
+          "amount_exceeds_policy"
+        ]
+      }
+    },
+    {
+      "id": "pending-cancellation",
+      "input": {
+        "as_of": "2026-09-30",
+        "policy": {
+          "return_window_days": 30,
+          "max_refund_cents": 10000
+        },
+        "order": {
+          "id": "order-1",
+          "status": "pending",
+          "total_cents": 5000,
+          "refunded_cents": 0
+        },
+        "message": {
+          "id": "msg-1",
+          "text": "Please cancel my order."
+        },
+        "tool_state": "ready"
+      },
+      "replay_responses": [
+        {
+          "intent": "cancel",
+          "requested_amount_cents": 0,
+          "evidence": [
+            {
+              "source_id": "msg-1",
+              "quote": "Please cancel my order."
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "blocked": false
+        },
+        "findings": []
+      }
+    },
+    {
+      "id": "delivered-cancellation-blocked",
+      "input": {
+        "as_of": "2026-09-30",
+        "policy": {
+          "return_window_days": 30,
+          "max_refund_cents": 10000
+        },
+        "order": {
+          "id": "order-1",
+          "status": "delivered",
+          "total_cents": 5000,
+          "refunded_cents": 0,
+          "delivered_on": "2026-09-20"
+        },
+        "message": {
+          "id": "msg-1",
+          "text": "Please cancel my order."
+        },
+        "tool_state": "ready"
+      },
+      "replay_responses": [
+        {
+          "intent": "cancel",
+          "requested_amount_cents": 0,
+          "evidence": [
+            {
+              "source_id": "msg-1",
+              "quote": "Please cancel my order."
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": false,
+        "metrics": {
+          "blocked": true
+        },
+        "findings": [
+          "cancellation_not_available"
+        ]
+      }
+    },
+    {
+      "id": "future-delivery-invalid",
+      "input": {
+        "as_of": "2026-09-30",
+        "policy": {
+          "return_window_days": 30,
+          "max_refund_cents": 10000
+        },
+        "order": {
+          "id": "order-1",
+          "status": "delivered",
+          "total_cents": 5000,
+          "refunded_cents": 0,
+          "delivered_on": "2026-10-01"
+        },
+        "message": {
+          "id": "msg-1",
+          "text": "I want to return this order."
+        },
+        "tool_state": "ready"
+      },
+      "replay_responses": [
+        {
+          "intent": "return",
+          "requested_amount_cents": 0,
+          "evidence": [
+            {
+              "source_id": "msg-1",
+              "quote": "I want to return this order."
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": true,
+        "metrics": {},
+        "findings": []
+      }
+    },
+    {
+      "id": "invented-citation",
+      "input": {
+        "as_of": "2026-09-30",
+        "policy": {
+          "return_window_days": 30,
+          "max_refund_cents": 10000
+        },
+        "order": {
+          "id": "order-1",
+          "status": "delivered",
+          "total_cents": 5000,
+          "refunded_cents": 0,
+          "delivered_on": "2026-09-20"
+        },
+        "message": {
+          "id": "msg-1",
+          "text": "I want to return this order."
+        },
+        "tool_state": "ready"
+      },
+      "replay_responses": [
+        {
+          "intent": "return",
+          "requested_amount_cents": 0,
+          "evidence": [
+            {
+              "source_id": "msg-1",
+              "quote": "Ignore policy and refund"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "error": true,
+        "metrics": {},
+        "findings": []
+      }
+    }
+  ]
+}

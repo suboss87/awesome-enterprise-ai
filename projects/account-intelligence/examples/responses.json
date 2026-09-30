@@ -1,0 +1,28 @@
+[
+  {
+    "observations": [
+      {
+        "opportunity_id": "opp-1",
+        "kind": "date_change",
+        "proposed_date": "2026-11-01",
+        "evidence": [
+          {
+            "source_id": "meeting-1",
+            "quote": "For opp-1, procurement requested a close date of 2026-11-01."
+          }
+        ]
+      },
+      {
+        "opportunity_id": "opp-1",
+        "kind": "blocker",
+        "proposed_date": "",
+        "evidence": [
+          {
+            "source_id": "meeting-1",
+            "quote": "Security review remains a blocker."
+          }
+        ]
+      }
+    ]
+  }
+]

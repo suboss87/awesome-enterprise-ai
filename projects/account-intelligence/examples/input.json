@@ -1,0 +1,26 @@
+{
+  "as_of": "2026-09-30",
+  "account": {
+    "id": "acct-1",
+    "name": "Example Manufacturing"
+  },
+  "opportunities": [
+    {
+      "id": "opp-1",
+      "account_id": "acct-1",
+      "title": "Operations platform renewal",
+      "amount_cents": 1000000,
+      "stage": "proposal",
+      "close_date": "2026-10-15",
+      "next_step": "Confirm procurement review."
+    }
+  ],
+  "meetings": [
+    {
+      "id": "meeting-1",
+      "account_id": "acct-1",
+      "date": "2026-09-28",
+      "text": "For opp-1, procurement requested a close date of 2026-11-01. Security review remains a blocker."
+    }
+  ]
+}
