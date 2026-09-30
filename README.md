@@ -18,7 +18,7 @@ I like the point where a messy business problem becomes something you can actual
 
 This is where I build those ideas into small, inspectable workflows. Each one starts with a business task, does a bounded piece of work, and gives a person the evidence and next step. You can run the examples, read the rules, and adapt the inputs to your own systems.
 
-**Current stage: reference workflows for internal trials.** All ten have a browser journey, CLI, examples and tests. They are not complete replacements for enterprise systems or pre-certified deployments. [Read the tested scope and remaining limits.](docs/VERIFICATION.md)
+**Current stage: development preview under review. Jev release review is on hold.** All ten have a browser journey, CLI, examples and tests. They are not complete replacements for enterprise systems or pre-certified deployments. [Read the tested scope and remaining limits.](docs/VERIFICATION.md)
 
 ## Choose your workflow
 

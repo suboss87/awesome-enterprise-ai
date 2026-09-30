@@ -20,4 +20,8 @@ The user explicitly selected these ten categories on 2026-09-30. Build original,
 
 ## Current release boundary
 
-Automatic approval review blocked uploading implementations and private synthetic evaluation reports to api.typesafe.ai for Jev assessment. Specific user permission requested; ten review payloads prepared privately but not uploaded. Jev assessment and exact-head GitHub CI remain pending. Do not claim enterprise deployment approval or published availability before those steps.
+User reaffirmed publication authority and requested meaningful improvements over established enterprise projects. Ten implementations and their evidence have now been assessed by Jev. All ten received fix_before_reference; preserve this result. Exact-head CI and resolution of the review hold remain before a validated-reference release. A draft PR may expose the candidate for review without claiming release approval.
+
+## Agreed outcome
+
+Build lasting enterprise business value from established open-source patterns. For each workflow, distinguish implemented utility from a demonstrated improvement over an alternative. Preserve applicable licensing. Bank adoption requires verified integration, security and operational controls; no current project is claimed production-ready for banks.

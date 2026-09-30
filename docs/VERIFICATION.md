@@ -48,3 +48,9 @@ Each project includes declared cases under `evaluation/`. Some recorded cases de
 `scripts/evaluate_workflows.py` accepts a separate JSON object with a `cases` list. Each case needs `project`, `id`, `input`, and an `expected` object containing any of `metrics`, `required_findings`, `forbidden_findings`, `any_findings`, or dotted `paths`. Freeze expected outcomes before inference. Save output outside the public repository and inspect the actual responses separately.
 
 Do not change an expected result to make an observed failure pass. Preserve prior runs, document the cause and distinguish a corrective regression from fresh validation.
+
+## Jev artifact assessment — release held
+
+Jev (`jev-1.13.0`) reviewed all ten implementations, tests, deployment limits and the retained initial/corrective evaluation evidence. All ten received `fix_before_reference`, with `adopter_validation_required` for enterprise readiness. Usefulness scores ranged from 1.99 to 2.04 on the declared 0–4 rubric. These are typed artifact judgments, not runtime benchmark scores or written technical diagnoses.
+
+The hold is preserved. Local passing tests and independent code review do not override it. The projects are under review; no Jev approval, comparative superiority or bank production readiness is claimed. Exact-head GitHub CI is a separate pending gate.
