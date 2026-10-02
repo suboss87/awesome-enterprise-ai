@@ -19,6 +19,7 @@ from .common import InputError, loads
 
 DEFAULT_DEADLINE_SECONDS = 120
 MAX_WIRE_BYTES = 5_000_000
+MAX_RESULT_FILE_BYTES = 10_000_000
 
 
 class WorkflowFailure(InputError):
@@ -90,6 +91,8 @@ def execute_bounded(slug, data, mode='live', responses=None, *, deadline_seconds
         receipt['calls'] = [{key: call[key] for key in ('mode','model','response_id','prompt_sha256','schema_sha256') if key in call}
                             for call in output['execution'].get('calls',[])]
         output['execution']['receipt'] = receipt
+        if len(json.dumps(output,indent=2,ensure_ascii=False,allow_nan=False).encode())+1 > MAX_RESULT_FILE_BYTES:
+            raise InputError('Serialized result exceeds file size limit')
         return output
     except WorkflowFailure:
         raise

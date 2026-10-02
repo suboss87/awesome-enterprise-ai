@@ -68,6 +68,13 @@ class ExecutionTests(unittest.TestCase):
         data,responses=self.fixture()
         self.assertEqual(execute_bounded('customer-resolution',data,'replay',responses)['execution']['receipt']['status'],'succeeded')
 
+    def test_serialized_result_cap_includes_receipt(self):
+        data,responses=self.fixture()
+        with patch('enterprise_ai.execution.MAX_RESULT_FILE_BYTES',100):
+            with self.assertRaises(WorkflowFailure) as caught:
+                execute_bounded('customer-resolution',data,'replay',responses)
+        self.assertEqual(caught.exception.receipt['status'],'failed')
+
     def test_bad_deadlines_rejected(self):
         for timeout in (0,-1,301,float('inf'),float('nan'),True):
             with self.assertRaises(InputError): execute_bounded('customer-resolution',{},deadline_seconds=timeout)

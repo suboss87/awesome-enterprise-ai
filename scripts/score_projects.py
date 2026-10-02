@@ -52,9 +52,17 @@ def validate(request,response):
             raise ValueError('Inconsistent choice')
 
 
-def validate_bundle(folder,project):
+def validate_bundle(folder,project,*,allow_completed_legacy=False):
     request=read(folder/f'{project}-request.json')
     manifest=read(folder/f'{project}-manifest.json')
+    request_hash=digest((folder/f'{project}-request.json').read_bytes())
+    expected_hash=manifest.get('request_sha256')
+    if expected_hash is None and allow_completed_legacy:
+        call=read(folder/f'{project}-call.json')
+        if call.get('validated') is True and (folder/f'{project}-response.json').is_file():
+            expected_hash=call.get('request_sha256')
+    if request_hash!=expected_hash:
+        raise ValueError('Prepared request changed or lacks immutable binding')
     questions=read(ROOT/'quality/questions.json')
     rubric=read(ROOT/'quality/rubric.json')
     if request.get('questions')!=questions:
@@ -81,11 +89,18 @@ def validate_bundle(folder,project):
     return request,manifest
 
 
+def require_clean_checkout(root):
+    status=subprocess.check_output(['git','status','--porcelain','--untracked-files=normal'],cwd=root,text=True)
+    if status.strip():
+        raise ValueError('Commit or isolate working-tree changes before preparing a revision-bound assessment')
+
+
 def prepare(folder,context_path):
     # Caller writes the actual verification and unresolved gaps before scoring.
     context=read(context_path)
     if set(context.get('projects',{}))!=set(SLUGS) or not context.get('verification'):
         raise ValueError('Explicit verification and all ten project gaps are required')
+    require_clean_checkout(ROOT)
     folder.mkdir(parents=True,exist_ok=False)
     questions=read(ROOT/'quality/questions.json')
     rubric_raw=(ROOT/'quality/rubric.json').read_bytes()
@@ -105,7 +120,7 @@ def prepare(folder,context_path):
                'known_gaps':{'all':context.get('shared_gaps',[]),'project':context['projects'][slug]}}
         request={'model':'jev-latest','questions':questions,'state':state}
         save(folder/f'{slug}-request.json',request)
-        save(folder/f'{slug}-manifest.json',{'commit':commit,'rubric_sha256':digest(rubric_raw),
+        save(folder/f'{slug}-manifest.json',{'commit':commit,'request_sha256':digest((folder/f'{slug}-request.json').read_bytes()),'rubric_sha256':digest(rubric_raw),
              'context_sha256':digest(context_path.read_bytes()),'files':{p:digest(text.encode()) for p,text in files.items()}})
     with (folder/'context.json').open('xb') as stream:
         stream.write(context_path.read_bytes())
@@ -148,7 +163,7 @@ def summarize(folder):
         raise ValueError('Weights must be positive and sum to one')
     rows=[]
     for slug in SLUGS:
-        request,manifest=validate_bundle(folder,slug)
+        request,manifest=validate_bundle(folder,slug,allow_completed_legacy=True)
         request_raw=(folder/f'{slug}-request.json').read_bytes()
         response_raw=(folder/f'{slug}-response.json').read_bytes();response=json.loads(response_raw)
         call=read(folder/f'{slug}-call.json');manifest=read(folder/f'{slug}-manifest.json')

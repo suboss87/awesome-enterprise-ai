@@ -1,6 +1,8 @@
 import copy
 import json
 import tempfile
+import subprocess
+from unittest.mock import patch
 import importlib.util
 from pathlib import Path
 import unittest
@@ -35,6 +37,8 @@ class BundleTests(unittest.TestCase):
         self.request={'questions':quality.read(ROOT/'quality/questions.json'),'state':{'project':self.project,'files':{'workflow.py':'original evidence'}}}
         self.manifest={'rubric_sha256':quality.digest((ROOT/'quality/rubric.json').read_bytes()),'files':{'workflow.py':quality.digest(b'original evidence')}}
         self.save()
+        self.manifest['request_sha256']=quality.digest((self.folder/f'{self.project}-request.json').read_bytes())
+        self.save()
     def save(self):
         (self.folder/f'{self.project}-request.json').write_text(json.dumps(self.request))
         (self.folder/f'{self.project}-manifest.json').write_text(json.dumps(self.manifest))
@@ -53,13 +57,34 @@ class BundleTests(unittest.TestCase):
         self.request['state']['files']={};self.save()
         with self.assertRaises(ValueError):quality.validate_bundle(self.folder,self.project)
 
+    def test_changed_evaluation_rejected(self):
+        self.request['state']['evaluation']={'case1':{'passed':True}};self.save()
+        with self.assertRaises(ValueError):quality.validate_bundle(self.folder,self.project)
+    def test_legacy_bundle_cannot_be_newly_assessed(self):
+        del self.manifest['request_sha256'];self.save()
+        with self.assertRaises(ValueError):quality.validate_bundle(self.folder,self.project)
+
+class CheckoutTests(unittest.TestCase):
+    def test_real_uncommitted_source_cannot_be_labeled_as_head(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            subprocess.run(['git','init','-q'],cwd=root,check=True)
+            source=root/'workflow.py';source.write_text('original')
+            subprocess.run(['git','add','workflow.py'],cwd=root,check=True)
+            subprocess.run(['git','-c','user.name=Test','-c','user.email=test@example.invalid','commit','-qm','fixture'],cwd=root,check=True)
+            quality.require_clean_checkout(root)
+            source.write_text('uncommitted change')
+            with self.assertRaises(ValueError):quality.require_clean_checkout(root)
+
 class PreparationTests(unittest.TestCase):
     def test_compact_context_roundtrip_and_rejection_of_drift(self):
         with tempfile.TemporaryDirectory() as tmp:
             base=Path(tmp);source=base/'compact.json';folder=base/'assessment'
             context={'verification':{'tests':'observed'},'shared_gaps':['no target deployment'],'projects':{slug:[] for slug in quality.SLUGS}}
             source.write_text(json.dumps(context,separators=(',',':')))
-            quality.prepare(folder,source)
+            # This test exercises serialization. Checkout validation has its own real-git test.
+            with patch.object(quality,'require_clean_checkout'):
+                quality.prepare(folder,source)
             self.assertEqual(source.read_bytes(),(folder/'context.json').read_bytes())
             for slug in quality.SLUGS:quality.validate_bundle(folder,slug)
             path=folder/'customer-resolution-request.json';request=json.loads(path.read_text())
