@@ -56,3 +56,7 @@ python3 -m unittest discover -s projects/claims-intake/tests -v
 ```
 
 Tests cover incomplete packets, contradictory identity, cross-document evidence, duplicate fields, fabricated citations and partial-document mixing. Shared regressions cover amount punctuation and numeric boundaries. See [collection verification](../../docs/VERIFICATION.md) for live evaluation results and limits.
+
+## Governance and acceptance
+
+See [domain review responsibilities, evaluation metrics and deployment gates](GOVERNANCE.md).

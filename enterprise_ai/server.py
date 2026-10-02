@@ -1,4 +1,4 @@
-"""Single-user loopback workspace. Put authenticated infrastructure in front for a pilot."""
+"""Single-user loopback preview; not an enterprise authentication boundary."""
 import hmac
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 import json
@@ -7,7 +7,7 @@ import threading
 from urllib.parse import urlsplit
 from .catalog import ROOT,SLUGS,catalog
 from .common import InputError,loads,obj
-from .__main__ import execute
+from .execution import execute_bounded as execute, WorkflowFailure
 
 
 def make_server(port=8765):
@@ -94,7 +94,10 @@ def make_server(port=8765):
                 self.send(200,output)
             except (InputError,ValueError,TypeError,KeyError,OSError,RecursionError) as exc:
                 message=str(exc) if isinstance(exc,InputError) else 'Invalid input or unavailable workflow; no result produced'
-                self.send(400,{'error':message})
+                error={'error':message}
+                if isinstance(exc,WorkflowFailure):
+                    error['receipt']=exc.receipt
+                self.send(400,error)
             finally:
                 slots.release()
     server=ThreadingHTTPServer(('127.0.0.1',port),Handler)

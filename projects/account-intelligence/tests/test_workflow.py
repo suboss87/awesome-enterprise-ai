@@ -51,6 +51,81 @@ class BusinessCases(unittest.TestCase):
         with self.assertRaises(InputError): WORKFLOW.run(data, ReplayAI([]))
 
 
+    def observation_case(self, note, quote=None, kind='blocker', proposed_date=''):
+        data = json.loads((PROJECT / 'examples/input.json').read_text())
+        data['meetings'][0]['text'] = note
+        other = copy.deepcopy(data['opportunities'][0])
+        other['id'] = 'opp-2'
+        data['opportunities'].append(other)
+        response = {'observations': [{'opportunity_id': 'opp-1', 'kind': kind,
+            'proposed_date': proposed_date, 'evidence': [{'source_id': 'meeting-1',
+            'quote': quote if quote is not None else note}]}]}
+        return data, [response]
+
+    def test_unnamed_meeting_cannot_be_assigned_to_either_opportunity(self):
+        data, responses = self.observation_case('Security review remains a blocker.')
+        for target in ('opp-1', 'opp-2'):
+            with self.subTest(target=target):
+                responses[0]['observations'][0]['opportunity_id'] = target
+                with self.assertRaises(InputError):
+                    WORKFLOW.run(data, ReplayAI(responses))
+
+    def test_single_opportunity_does_not_authorize_unnamed_meeting(self):
+        data, responses = self.observation_case('Security review remains a blocker.')
+        data['opportunities'] = data['opportunities'][:1]
+        with self.assertRaises(InputError): WORKFLOW.run(data, ReplayAI(responses))
+
+    def test_multiple_ids_in_quote_are_ambiguous(self):
+        data, responses = self.observation_case('For opp-1 and opp-2, security review remains a blocker.')
+        with self.assertRaises(InputError): WORKFLOW.run(data, ReplayAI(responses))
+
+    def test_unbound_quote_in_multiple_opportunity_meeting_rejected(self):
+        data, responses = self.observation_case(
+            'Discussed opp-1 and opp-2. Security review remains a blocker.',
+            'Security review remains a blocker.')
+        with self.assertRaises(InputError): WORKFLOW.run(data, ReplayAI(responses))
+
+    def test_exact_quote_can_disambiguate_multiple_opportunity_meeting(self):
+        quote = 'For opp-1, security review remains a blocker.'
+        data, responses = self.observation_case(quote + ' For opp-2, the review is complete.', quote)
+        out = WORKFLOW.run(data, ReplayAI(responses))
+        self.assertEqual(out['observations'][0]['opportunity_id'], 'opp-1')
+
+    def test_single_explicit_meeting_id_binds_unlabelled_quote(self):
+        data, responses = self.observation_case(
+            'Discussed opp-1. Security review remains a blocker.',
+            'Security review remains a blocker.')
+        out = WORKFLOW.run(data, ReplayAI(responses))
+        self.assertEqual(out['observations'][0]['opportunity_id'], 'opp-1')
+
+    def test_opportunity_id_prefix_cannot_establish_identity(self):
+        for wrong_id in ('opp-10', 'xopp-1', 'opp-1-extra'):
+            with self.subTest(wrong_id=wrong_id):
+                data, responses = self.observation_case(f'For {wrong_id}, security review remains a blocker.')
+                with self.assertRaises(InputError): WORKFLOW.run(data, ReplayAI(responses))
+
+    def test_date_must_be_complete_token(self):
+        for invalid in ('2026-11-010', '12026-11-01', 'ref-2026-11-01',
+                        '2026-11-01-extra', '2026-11-01T12:00:00',
+                        '2026-11-01 12:00:00', '2026-11-01\t12:00:00',
+                        '2026-11-01 9:30', '2026-11-01  12:00:00+05:30'):
+            with self.subTest(token=invalid):
+                data, responses = self.observation_case(
+                    f'For opp-1, the requested date is {invalid}.',
+                    kind='date_change', proposed_date='2026-11-01')
+                with self.assertRaises(InputError): WORKFLOW.run(data, ReplayAI(responses))
+
+    def test_date_allows_sentence_and_parenthesis_punctuation(self):
+        for token in ('2026-11-01.', '(2026-11-01)', '2026-11-01,',
+                      '2026-11-01 after review', '2026-11-01\tconfirmed'):
+            with self.subTest(token=token):
+                data, responses = self.observation_case(
+                    f'For opp-1, the requested date is {token}',
+                    kind='date_change', proposed_date='2026-11-01')
+                out = WORKFLOW.run(data, ReplayAI(responses))
+                self.assertEqual(out['observations'][0]['proposed_date'], '2026-11-01')
+
+
 def make_test(case):
     def test(self):
         ai = ReplayAI(copy.deepcopy(case['replay_responses']))

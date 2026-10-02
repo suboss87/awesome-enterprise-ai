@@ -22,9 +22,9 @@ def run(data, ai):
         obj(source, ['id', 'text', 'valid_from', 'valid_until', 'approval'])
         text(source['text']); start = day(source['valid_from']); end = day(source['valid_until'])
         if start > end: raise InputError('Source validity period is reversed')
-        if source['approval'] not in ('approved', 'draft'):
+        if source['approval'] not in ('approved', 'draft', 'revoked', 'superseded'):
             raise InputError('Unknown evidence approval')
-        validity[text(source['id'], 'source id', 128)] = ('draft' if source['approval'] == 'draft' else
+        validity[text(source['id'], 'source id', 128)] = (source['approval'] if source['approval'] != 'approved' else
             'not_yet_valid' if today < start else 'expired' if today > end else 'current')
     sources = unique(source_rows)
     answer = ai.ask('Return exactly one answer for every requirement. Use supplied sources only. Identify missing evidence and contradictions, including version differences. Supported needs direct evidence; gap must have empty draft and evidence. Conflict needs evidence from at least two sources and no draft. Draft answers are for human review, never declarations of compliance. Quote exact source text.', data, SCHEMA)

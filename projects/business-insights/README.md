@@ -57,3 +57,7 @@ python3 -m unittest discover -s projects/business-insights/tests -v
 ```
 
 Tests cover exact calculations, filtering, unsupported requests, currency boundaries and invalid plans. [Evaluation cases](evaluation/cases.json) and [collection verification](../../docs/VERIFICATION.md) distinguish recorded tests from live inference and semantic review.
+
+## Governance and acceptance
+
+See [domain review responsibilities, evaluation metrics and deployment gates](GOVERNANCE.md).

@@ -28,7 +28,7 @@ The example answers a SAML question with a plan-specific source. Expire that sou
 
 - `as_of`: ISO review date.
 - `requirements`: 1–100 objects with unique `id` (128 characters maximum) and `text` (10,000 maximum).
-- `sources`: 0–100 objects with unique `id`, `text`, `valid_from`, `valid_until`, and `approval` (`approved` or `draft`). Validity dates are inclusive and cannot be reversed.
+- `sources`: 0–100 objects with unique `id`, `text`, `valid_from`, `valid_until`, and `approval` (`approved`, `draft`, `revoked`, or `superseded`). Validity dates are inclusive and cannot be reversed.
 
 Unknown fields, duplicate IDs, missing output rows, fabricated quotation text and unknown citation IDs are rejected. IDs belong to separate requirement and source namespaces. No source is fetched from a URL. Documents must be parsed and normalized before input; this tool does not parse PDFs or spreadsheets.
 
@@ -56,3 +56,54 @@ Keep approval and validity metadata under document-owner control. Restrict sourc
 ## Collection workspace and current evidence
 
 Run `python3 -m enterprise_ai serve` from the collection root to try this workflow in the browser, upload a compatible JSON export, inspect results and export JSON. [Deployment and data handling](../../docs/DEPLOYMENT.md) explains the single-user boundary and live provider. [Verification](../../docs/VERIFICATION.md) records the actual inference trials, initial failures, corrective regressions and independent semantic review; authored fixtures above remain distinct from live evaluation.
+
+## Local review ledger
+
+The optional CLI adds durable human decisions to an immutable draft snapshot. It runs on a trusted, single-user POSIX workstation. It does **not** add enterprise authentication or a document-system connector; the experimental hold remains.
+
+Prepare a private working directory outside the repository, export the latest source/requirement packet from your authorized system, and set its `as_of` to today's UTC date. Do not change historical validity dates to make evidence pass. The following commands assume that packet is saved as `$HOME/.proposal-review/current.json`:
+
+```sh
+mkdir -m 700 "$HOME/.proposal-review"
+python3 -m enterprise_ai run proposal-operations \
+  --input "$HOME/.proposal-review/current.json" --mode live \
+  > "$HOME/.proposal-review/result.json"
+python3 -m enterprise_ai.proposal_review --db "$HOME/.proposal-review/reviews.sqlite" stage \
+  --input "$HOME/.proposal-review/current.json" --result "$HOME/.proposal-review/result.json"
+```
+
+Set `DRAFT_ID` to the returned SHA-256 identifier. Inspect the actual draft, all evidence and unresolved requirements before deciding. `inspect` returns the current decision sequence, or null for a never-reviewed row; use revision `0` only for its first decision.
+
+```sh
+python3 -m enterprise_ai.proposal_review --db "$HOME/.proposal-review/reviews.sqlite" inspect --draft "$DRAFT_ID"
+python3 -m enterprise_ai.proposal_review --db "$HOME/.proposal-review/reviews.sqlite" decide \
+  --draft "$DRAFT_ID" --current-input "$HOME/.proposal-review/current.json" \
+  --requirement req-1 --decision approve --expected-revision 0 \
+  --note 'Verified the answer and plan restriction against the cited source.'
+python3 -m enterprise_ai.proposal_review --db "$HOME/.proposal-review/reviews.sqlite" export \
+  --draft "$DRAFT_ID" --current-input "$HOME/.proposal-review/current.json" \
+  > "$HOME/.proposal-review/approved.json"
+python3 -m unittest discover -s tests -p test_proposal_review.py -v
+```
+
+Refresh `current.json` from the source system before **every** decision/export. The CLI checks today's UTC date, but cannot discover an upstream revocation omitted from an operator-provided export. An old packet relabeled with today's date is not evidence of freshness.
+
+### What the ledger enforces
+
+- Approval binds to the complete staged input and result, including exact requirement, draft and source content/metadata. Every source is bound, including uncited material: adding contradictory evidence requires a new review.
+- Source or requirement changes require a fresh run and new draft identifier; changed draft text also starts unreviewed. Source validity is recomputed on the current UTC date. Any stale or changed binding fails the whole export rather than silently including an invalid answer.
+- Only `supported` answers can be approved. Gaps, conflicts and evidence-review rows are withheld. Exports may be partial; `withheld_count` identifies how many answers remain excluded.
+- Decisions persist in SQLite transactions. Concurrent reviewers using the same previous revision cannot overwrite each other silently. A rejection supersedes prior approval while retaining decision history.
+- Reviewer identity is the actual local OS UID/account, not a caller-supplied name. The database directory must be owned by that account and private (0700); its database file must be private (0600). Changing the local account or granting database access changes the trust boundary.
+
+### Remaining production work
+
+The ledger trusts the machine, OS account, clock and supplied source export. It is not a tamper-proof audit log: its owner/admin can edit SQLite, alter application code or replace files. Hashes detect changed stored draft bindings, not a malicious privileged actor. Decisions are local account attestations, not organizational authorization or segregation of duties.
+
+There is no authenticated source fetch, source-system permission check, remote revocation notification, enterprise identity/role integration, encryption-at-rest service, managed backup, retention automation or bid-system submission. Database, input and exported files contain proposal content; use organizational disk encryption, access controls and backup/retention procedures. A bank deployment requires these integrations and independently validated operating controls before production use.
+
+## Governance and acceptance
+
+See [domain review responsibilities, evaluation metrics and deployment gates](GOVERNANCE.md).
+
+Input and current-source files are limited to 500 KB. Result files may be up to 10 MB, matching the shared serialized CLI output limit. A large valid response can therefore enter the same review path as a small one.

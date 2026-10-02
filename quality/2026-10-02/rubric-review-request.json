@@ -1,0 +1,206 @@
+{
+  "model": "jev-latest",
+  "state": {
+    "rubric": {
+      "version": "1.0.0",
+      "purpose": "Prioritize improvements and assess evidence for a bounded enterprise decision-support workflow. Not production certification, competitor ranking or permission to deploy.",
+      "deployment_scope": "Human-reviewed, read-only business work products. No autonomous payments, provisioning, claims approval or remediation. Target production deployment still requires adopter controls and validation.",
+      "dimensions": {
+        "business_value": {
+          "weight": 0.15,
+          "instructions": "Evidence of value to the intended business user",
+          "criteria": [
+            "No defined user decision or business output.",
+            "A defined user and plausible task exist; evidence is limited to examples and assumptions.",
+            "A working end-to-end task has independently reviewed synthetic outcomes; no representative user trial measures value.",
+            "Representative users measured improved task outcomes against their current process, including regressions and review effort.",
+            "Repeated representative deployments show sustained measured benefits with named owners and monitored regressions."
+          ]
+        },
+        "correctness": {
+          "weight": 0.2,
+          "instructions": "Correctness of business decisions within the stated supported scope",
+          "criteria": [
+            "Known failures can silently produce incorrect authoritative decisions.",
+            "Only happy-path examples are demonstrated; important business invariants are unchecked.",
+            "Business invariants and failure states have automated tests plus reviewed model outputs; representative domain coverage remains missing.",
+            "Independent domain-labeled representative cases and adversarial cases meet predeclared error tolerances; regressions are enforced.",
+            "Production outcomes and change evaluations confirm those tolerances over time, including uncommon and high-impact cases."
+          ]
+        },
+        "adoption": {
+          "weight": 0.1,
+          "instructions": "Ability for an intended operator to complete the workflow using authorized real source data",
+          "criteria": [
+            "No runnable setup or usable input/output contract.",
+            "A developer can run a canned example but an operator cannot follow a documented real-data path.",
+            "Documented installation, validated file contracts and usable output enable a manual export/import trial; live source integration is unverified.",
+            "An authorized source adapter and operator journey are tested against a representative sandbox with identity, provenance and freshness preserved.",
+            "Operators have repeatedly completed onboarding, error recovery and routine use in target environments with maintained connectors."
+          ]
+        },
+        "reliability": {
+          "weight": 0.15,
+          "instructions": "Resilience and operational supportability of workflow execution",
+          "criteria": [
+            "Routine errors can be hidden as success or cause uncontrolled execution.",
+            "Failures are visible but resource bounds or failure recovery tests are missing.",
+            "Bounded requests, explicit failures and transport tests exist; sustained workload, restart recovery or operational observation remain unverified.",
+            "Deployment-specific load, fault, timeout, restart and recovery tests meet declared service objectives with actionable telemetry.",
+            "An operated service meets recorded objectives over time with tested rollback, recovery drills and accountable incident ownership."
+          ]
+        },
+        "security": {
+          "weight": 0.15,
+          "instructions": "Evidence that the intended deployment protects access and sensitive data",
+          "criteria": [
+            "Known exploitable critical access or data disclosure defect is unresolved.",
+            "Controls are mostly stated in documentation; implemented trust boundaries are not tested.",
+            "Implemented local/provider trust boundaries are tested and deployment exclusions explicit; target identity, authorization and data-governance validation are missing.",
+            "Target identity and authorization boundaries, retention, secrets and provider approval are independently tested in the intended environment.",
+            "Ongoing security ownership, vulnerability handling and recurring tests demonstrate those deployment controls remain effective."
+          ]
+        },
+        "reviewability": {
+          "weight": 0.1,
+          "instructions": "Ability to trace and govern a business work product through human review",
+          "criteria": [
+            "Untraceable generated assertions are presented as completed business actions.",
+            "Output requests human review but lacks usable links to the evidence or execution.",
+            "Output records evidence and execution provenance with explicit uncertainty; review decisions and freshness invalidation are not durably enforced.",
+            "Review decisions are bound to the exact work product and source versions, durably recorded, and invalidated on changed or ineligible evidence; the stated reviewer identity boundary is enforced.",
+            "The review lifecycle and authorized source freshness are verified end-to-end in the target business system, including audit retrieval and revocation."
+          ]
+        },
+        "distinct_value": {
+          "weight": 0.1,
+          "instructions": "Demonstrated useful difference specific to this repository",
+          "criteria": [
+            "Only names, styling or branding distinguish a copied generic demonstration.",
+            "A repository-specific design or constraint is described but its practical improvement is not demonstrated.",
+            "A concrete repository-specific capability solves a documented gap and has tests; equivalent upstream or manual baselines have not been executed comparatively.",
+            "A reproducible comparison against a relevant existing alternative demonstrates a useful improvement and honestly reports tradeoffs.",
+            "Independent adopters reproduce the comparative improvement on representative tasks and the capability remains maintained."
+          ]
+        },
+        "authenticity": {
+          "weight": 0.05,
+          "instructions": "Accuracy of provenance and maturity claims",
+          "criteria": [
+            "Known required attribution is removed or fabricated ownership, deployments or results are claimed.",
+            "Origin or maturity statements are ambiguous and supporting artifacts are absent.",
+            "Origin, implementation scope and limits are stated with linked code and test artifacts; some material claims remain unverified.",
+            "Material implementation and evaluation claims are traceable, limitations explicit, and applicable source notices retained; no evidence of fabricated claims.",
+            "Independent provenance and claim audit verifies all material claims and required notices against reproducible records."
+          ]
+        }
+      },
+      "hard_gates": {
+        "correctness": "No unresolved critical correctness defect; representative independent domain evaluation meets predeclared error limits.",
+        "identity_data": "Target-environment identity, source authorization, data handling and model-provider approval independently verified.",
+        "operations": "Actual deployment passes fault/load/recovery checks against declared objectives with monitoring, rollback and named owner.",
+        "business_acceptance": "Named business owner accepts representative user outcomes, escalation and human review in target environment.",
+        "provenance": "Source/derivative notices preserved and all public deployment, evaluation and originality claims supported."
+      },
+      "policy": {
+        "composite": "sum(weight * Jev score / 4) * 100; keep distributions and per-dimension values",
+        "production": "All hard gates must have verified acceptance evidence. Missing/unknown/failed blocks production designation regardless of score. Jev cannot grant deployment approval.",
+        "improvement_target": "Internal aspirational target: every dimension >=3, plus all production gates. This is not a validated universal enterprise standard.",
+        "reruns": "Freeze criteria before baseline. Reassess only after material code/evidence changes; preserve prior results and hashes.",
+        "calibration": "No domain-expert calibration of this judge is established. Scores prioritize review; deterministic evidence and independent experts decide acceptance."
+      }
+    },
+    "context": "Ten original open source Python reference workflows with tests and small synthetic live evaluations. No verified bank deployment, real source connectors or comparative superiority. User wants genuinely valuable, usable, authentic production-capable projects. Judge critically."
+  },
+  "questions": {
+    "business_value": {
+      "type": "choice",
+      "instructions": "Evaluate the proposed rubric dimension `business_value` in `rubric.dimensions` for the stated deployment_scope. Does it define a coherent, observable, ordered maturity scale without rewarding renaming, documentation alone or unverified production claims? Judge rubric design, not project quality.",
+      "criteria": {
+        "usable": "Coherent dimension, concrete evidence anchors, useful to guide project improvement.",
+        "overlap": "Materially conflates unrelated concepts or repeats another dimension enough to double-count the same quality.",
+        "anchors": "Levels are ambiguous, non-monotonic or cannot be distinguished from supplied evidence.",
+        "unsafe": "Can falsely reward unsupported production readiness, plagiarism concealment or cosmetic novelty."
+      }
+    },
+    "correctness": {
+      "type": "choice",
+      "instructions": "Evaluate the proposed rubric dimension `correctness` in `rubric.dimensions` for the stated deployment_scope. Does it define a coherent, observable, ordered maturity scale without rewarding renaming, documentation alone or unverified production claims? Judge rubric design, not project quality.",
+      "criteria": {
+        "usable": "Coherent dimension, concrete evidence anchors, useful to guide project improvement.",
+        "overlap": "Materially conflates unrelated concepts or repeats another dimension enough to double-count the same quality.",
+        "anchors": "Levels are ambiguous, non-monotonic or cannot be distinguished from supplied evidence.",
+        "unsafe": "Can falsely reward unsupported production readiness, plagiarism concealment or cosmetic novelty."
+      }
+    },
+    "adoption": {
+      "type": "choice",
+      "instructions": "Evaluate the proposed rubric dimension `adoption` in `rubric.dimensions` for the stated deployment_scope. Does it define a coherent, observable, ordered maturity scale without rewarding renaming, documentation alone or unverified production claims? Judge rubric design, not project quality.",
+      "criteria": {
+        "usable": "Coherent dimension, concrete evidence anchors, useful to guide project improvement.",
+        "overlap": "Materially conflates unrelated concepts or repeats another dimension enough to double-count the same quality.",
+        "anchors": "Levels are ambiguous, non-monotonic or cannot be distinguished from supplied evidence.",
+        "unsafe": "Can falsely reward unsupported production readiness, plagiarism concealment or cosmetic novelty."
+      }
+    },
+    "reliability": {
+      "type": "choice",
+      "instructions": "Evaluate the proposed rubric dimension `reliability` in `rubric.dimensions` for the stated deployment_scope. Does it define a coherent, observable, ordered maturity scale without rewarding renaming, documentation alone or unverified production claims? Judge rubric design, not project quality.",
+      "criteria": {
+        "usable": "Coherent dimension, concrete evidence anchors, useful to guide project improvement.",
+        "overlap": "Materially conflates unrelated concepts or repeats another dimension enough to double-count the same quality.",
+        "anchors": "Levels are ambiguous, non-monotonic or cannot be distinguished from supplied evidence.",
+        "unsafe": "Can falsely reward unsupported production readiness, plagiarism concealment or cosmetic novelty."
+      }
+    },
+    "security": {
+      "type": "choice",
+      "instructions": "Evaluate the proposed rubric dimension `security` in `rubric.dimensions` for the stated deployment_scope. Does it define a coherent, observable, ordered maturity scale without rewarding renaming, documentation alone or unverified production claims? Judge rubric design, not project quality.",
+      "criteria": {
+        "usable": "Coherent dimension, concrete evidence anchors, useful to guide project improvement.",
+        "overlap": "Materially conflates unrelated concepts or repeats another dimension enough to double-count the same quality.",
+        "anchors": "Levels are ambiguous, non-monotonic or cannot be distinguished from supplied evidence.",
+        "unsafe": "Can falsely reward unsupported production readiness, plagiarism concealment or cosmetic novelty."
+      }
+    },
+    "reviewability": {
+      "type": "choice",
+      "instructions": "Evaluate the proposed rubric dimension `reviewability` in `rubric.dimensions` for the stated deployment_scope. Does it define a coherent, observable, ordered maturity scale without rewarding renaming, documentation alone or unverified production claims? Judge rubric design, not project quality.",
+      "criteria": {
+        "usable": "Coherent dimension, concrete evidence anchors, useful to guide project improvement.",
+        "overlap": "Materially conflates unrelated concepts or repeats another dimension enough to double-count the same quality.",
+        "anchors": "Levels are ambiguous, non-monotonic or cannot be distinguished from supplied evidence.",
+        "unsafe": "Can falsely reward unsupported production readiness, plagiarism concealment or cosmetic novelty."
+      }
+    },
+    "distinct_value": {
+      "type": "choice",
+      "instructions": "Evaluate the proposed rubric dimension `distinct_value` in `rubric.dimensions` for the stated deployment_scope. Does it define a coherent, observable, ordered maturity scale without rewarding renaming, documentation alone or unverified production claims? Judge rubric design, not project quality.",
+      "criteria": {
+        "usable": "Coherent dimension, concrete evidence anchors, useful to guide project improvement.",
+        "overlap": "Materially conflates unrelated concepts or repeats another dimension enough to double-count the same quality.",
+        "anchors": "Levels are ambiguous, non-monotonic or cannot be distinguished from supplied evidence.",
+        "unsafe": "Can falsely reward unsupported production readiness, plagiarism concealment or cosmetic novelty."
+      }
+    },
+    "authenticity": {
+      "type": "choice",
+      "instructions": "Evaluate the proposed rubric dimension `authenticity` in `rubric.dimensions` for the stated deployment_scope. Does it define a coherent, observable, ordered maturity scale without rewarding renaming, documentation alone or unverified production claims? Judge rubric design, not project quality.",
+      "criteria": {
+        "usable": "Coherent dimension, concrete evidence anchors, useful to guide project improvement.",
+        "overlap": "Materially conflates unrelated concepts or repeats another dimension enough to double-count the same quality.",
+        "anchors": "Levels are ambiguous, non-monotonic or cannot be distinguished from supplied evidence.",
+        "unsafe": "Can falsely reward unsupported production readiness, plagiarism concealment or cosmetic novelty."
+      }
+    },
+    "gate_policy": {
+      "type": "choice",
+      "instructions": "Evaluate `rubric.hard_gates` and `rubric.policy` as a safeguard against falsely labeling these projects production-ready.",
+      "criteria": {
+        "usable": "Missing evidence blocks designation and deployment acceptance remains independent of model score.",
+        "incomplete": "A critical deployment acceptance area is missing.",
+        "unsafe": "High model scores could substitute for actual deployment evidence."
+      }
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "business_value": {
+    "type": "score",
+    "instructions": "Assess Evidence of value to the intended business user for the project in `project`, using actual `files`, `evaluation`, `known_gaps` and `verification`. Rate only evidence present, not planned controls. Code and evidence override README claims. Missing representative deployment evidence cannot be assumed. This question assesses business_value; do not conflate cosmetic names or test counts with achieved user value.",
+    "criteria": [
+      "No defined user decision or business output.",
+      "A defined user and plausible task exist; evidence is limited to examples and assumptions.",
+      "A working end-to-end task has independently reviewed synthetic outcomes; no representative user trial measures value.",
+      "Representative users measured improved task outcomes against their current process, including regressions and review effort.",
+      "Repeated representative deployments show sustained measured benefits with named owners and monitored regressions."
+    ]
+  },
+  "correctness": {
+    "type": "score",
+    "instructions": "Assess Correctness of business decisions within the stated supported scope for the project in `project`, using actual `files`, `evaluation`, `known_gaps` and `verification`. Rate only evidence present, not planned controls. Code and evidence override README claims. Missing representative deployment evidence cannot be assumed. This question assesses correctness; do not conflate cosmetic names or test counts with achieved user value.",
+    "criteria": [
+      "Known failures can silently produce incorrect authoritative decisions.",
+      "Only happy-path examples are demonstrated; important business invariants are unchecked.",
+      "Business invariants and failure states have automated tests plus reviewed model outputs; representative domain coverage remains missing.",
+      "Independent domain-labeled representative cases and adversarial cases meet predeclared error tolerances; regressions are enforced.",
+      "Production outcomes and change evaluations confirm those tolerances over time, including uncommon and high-impact cases."
+    ]
+  },
+  "adoption": {
+    "type": "score",
+    "instructions": "Assess Ability for an intended operator to complete the workflow using authorized real source data for the project in `project`, using actual `files`, `evaluation`, `known_gaps` and `verification`. Rate only evidence present, not planned controls. Code and evidence override README claims. Missing representative deployment evidence cannot be assumed. This question assesses adoption; do not conflate cosmetic names or test counts with achieved user value.",
+    "criteria": [
+      "No runnable setup or usable input/output contract.",
+      "A developer can run a canned example but an operator cannot follow a documented real-data path.",
+      "Documented installation, validated file contracts and usable output enable a manual export/import trial; live source integration is unverified.",
+      "An authorized source adapter and operator journey are tested against a representative sandbox with identity, provenance and freshness preserved.",
+      "Operators have repeatedly completed onboarding, error recovery and routine use in target environments with maintained connectors."
+    ]
+  },
+  "reliability": {
+    "type": "score",
+    "instructions": "Assess Resilience and operational supportability of workflow execution for the project in `project`, using actual `files`, `evaluation`, `known_gaps` and `verification`. Rate only evidence present, not planned controls. Code and evidence override README claims. Missing representative deployment evidence cannot be assumed. This question assesses reliability; do not conflate cosmetic names or test counts with achieved user value.",
+    "criteria": [
+      "Routine errors can be hidden as success or cause uncontrolled execution.",
+      "Failures are visible but resource bounds or failure recovery tests are missing.",
+      "Bounded requests, explicit failures and transport tests exist; sustained workload, restart recovery or operational observation remain unverified.",
+      "Deployment-specific load, fault, timeout, restart and recovery tests meet declared service objectives with actionable telemetry.",
+      "An operated service meets recorded objectives over time with tested rollback, recovery drills and accountable incident ownership."
+    ]
+  },
+  "security": {
+    "type": "score",
+    "instructions": "Assess Evidence that the intended deployment protects access and sensitive data for the project in `project`, using actual `files`, `evaluation`, `known_gaps` and `verification`. Rate only evidence present, not planned controls. Code and evidence override README claims. Missing representative deployment evidence cannot be assumed. This question assesses security; do not conflate cosmetic names or test counts with achieved user value.",
+    "criteria": [
+      "Known exploitable critical access or data disclosure defect is unresolved.",
+      "Controls are mostly stated in documentation; implemented trust boundaries are not tested.",
+      "Implemented local/provider trust boundaries are tested and deployment exclusions explicit; target identity, authorization and data-governance validation are missing.",
+      "Target identity and authorization boundaries, retention, secrets and provider approval are independently tested in the intended environment.",
+      "Ongoing security ownership, vulnerability handling and recurring tests demonstrate those deployment controls remain effective."
+    ]
+  },
+  "reviewability": {
+    "type": "score",
+    "instructions": "Assess Ability to trace and govern a business work product through human review for the project in `project`, using actual `files`, `evaluation`, `known_gaps` and `verification`. Rate only evidence present, not planned controls. Code and evidence override README claims. Missing representative deployment evidence cannot be assumed. This question assesses reviewability; do not conflate cosmetic names or test counts with achieved user value.",
+    "criteria": [
+      "Untraceable generated assertions are presented as completed business actions.",
+      "Output requests human review but lacks usable links to the evidence or execution.",
+      "Output records evidence and execution provenance with explicit uncertainty; review decisions and freshness invalidation are not durably enforced.",
+      "Review decisions are bound to the exact work product and source versions, durably recorded, and invalidated on changed or ineligible evidence; the stated reviewer identity boundary is enforced.",
+      "The review lifecycle and authorized source freshness are verified end-to-end in the target business system, including audit retrieval and revocation."
+    ]
+  },
+  "distinct_value": {
+    "type": "score",
+    "instructions": "Assess Demonstrated useful difference specific to this repository for the project in `project`, using actual `files`, `evaluation`, `known_gaps` and `verification`. Rate only evidence present, not planned controls. Code and evidence override README claims. Missing representative deployment evidence cannot be assumed. This question assesses distinct_value; do not conflate cosmetic names or test counts with achieved user value.",
+    "criteria": [
+      "Only names, styling or branding distinguish a copied generic demonstration.",
+      "A repository-specific design or constraint is described but its practical improvement is not demonstrated.",
+      "A concrete repository-specific capability solves a documented gap and has tests; equivalent upstream or manual baselines have not been executed comparatively.",
+      "A reproducible comparison against a relevant existing alternative demonstrates a useful improvement and honestly reports tradeoffs.",
+      "Independent adopters reproduce the comparative improvement on representative tasks and the capability remains maintained."
+    ]
+  },
+  "authenticity": {
+    "type": "score",
+    "instructions": "Assess Accuracy of provenance and maturity claims for the project in `project`, using actual `files`, `evaluation`, `known_gaps` and `verification`. Rate only evidence present, not planned controls. Code and evidence override README claims. Missing representative deployment evidence cannot be assumed. This question assesses authenticity; do not conflate cosmetic names or test counts with achieved user value.",
+    "criteria": [
+      "Known required attribution is removed or fabricated ownership, deployments or results are claimed.",
+      "Origin or maturity statements are ambiguous and supporting artifacts are absent.",
+      "Origin, implementation scope and limits are stated with linked code and test artifacts; some material claims remain unverified.",
+      "Material implementation and evaluation claims are traceable, limitations explicit, and applicable source notices retained; no evidence of fabricated claims.",
+      "Independent provenance and claim audit verifies all material claims and required notices against reproducible records."
+    ]
+  },
+  "first_priority": {
+    "type": "choice",
+    "instructions": "For the project in `project`, which single next improvement most directly removes its current barrier to useful enterprise adoption, based on files and known_gaps? This is prioritization, not production approval.",
+    "criteria": {
+      "business_correctness": "Fix an actual incorrect or unsafe business result or source association.",
+      "source_integration": "Establish authorized, identity-preserving source ingestion and freshness in a representative sandbox.",
+      "review_lifecycle": "Implement durable content-bound human review and invalidation of stale decisions.",
+      "operational_controls": "Implement and test missing runtime deadline, recovery, operational trace or deployment boundary.",
+      "representative_validation": "Measure value and error rates on independent representative user cases against an existing process.",
+      "evidence_insufficient": "Supplied evidence cannot support choosing a priority."
+    }
+  }
+}

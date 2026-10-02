@@ -22,7 +22,7 @@ All ten workflows were exercised in Chromium: select a project, load its example
 
 The final browser pass also verified nested duplicate-key rejection and one actual live customer-resolution run, including live execution metadata and a provider response ID. The other nine browser journeys used replay; their live workflow behavior was exercised separately through Python.
 
-## Actual inference — 2026-09-30
+## Actual inference: 2026-09-30
 
 A frozen 58-case synthetic set was run through the configured model. Requests and raw responses were retained privately. **50/58 automatic checks passed on the first run.** Two independent reviewers then inspected all 58 cases against their inputs, including outputs that passed automatic checks.
 
@@ -41,7 +41,7 @@ Independent semantic review accepted the inspected corrections in the 15-case li
 
 Automatic checks and semantic review are distinct. Small synthetic sets do not establish production accuracy. No representative enterprise integration, latency/load study or controlled comparison with a non-AI baseline has been completed. Business owners must test their own workflows before adoption.
 
-## Fresh independent cases — 2026-09-30
+## Fresh independent cases: 2026-09-30
 
 After the initial fixes were complete, two independent authors created twenty new synthetic cases using only the input contracts and examples. Neither inspected earlier evaluation cases or model outputs. Expected outcomes were frozen before inference. **20/20 automatic checks passed without changing prompts, code or expected outcomes.** Each author then reviewed the other author's actual outputs for semantic correctness. All twenty met their specific semantic criteria, with no blocking defect found. Nonblocking observations remain: one claims information request could describe the identity conflict more precisely, and two incident outputs could separate overlapping hypotheses and supporting/counterevidence labels more clearly.
 
@@ -62,7 +62,7 @@ Each project includes declared cases under `evaluation/`. Some recorded cases de
 
 Do not change an expected result to make an observed failure pass. Preserve prior runs, document the cause and distinguish a corrective regression from fresh validation.
 
-## Initial Jev artifact assessment — historical holds
+## Initial Jev artifact assessment: historical holds
 
 Jev (`jev-1.13.0`) reviewed all ten implementations, tests, deployment limits and the retained initial/corrective evaluation evidence. All ten received `fix_before_reference`, with `adopter_validation_required` for enterprise readiness. Usefulness scores ranged from 1.99 to 2.04 on the declared 0–4 rubric. These are typed artifact judgments, not runtime benchmark scores or written technical diagnoses.
 
@@ -77,3 +77,17 @@ The same original questions and rubric were applied to materially new evidence: 
 All ten received `adopter_validation_required` for enterprise readiness. Usefulness scores ranged from 1.89 to 1.99 on the original 0–4 rubric. These scores describe bounded utility, not enterprise excellence or evidence of superiority. [Per-project results](../evaluation/2026-09-30/artifact-review.json) retain the actual dispositions.
 
 This publication makes nine reviewed references and one clearly labeled experimental implementation available. It does **not** claim all ten passed release approval. The experimental project remains available for code inspection, synthetic testing and further development. Its promotion requires operational evidence and a resolved review hold; a green CI run alone is insufficient.
+
+## Runtime and governance refinement: 2026-10-02
+
+The local suite passes 191 tests across 11 suites and ten CLI example replays. New checks cover ambiguous account binding, complete quoted date tokens, execution mode validation, actual slow-progress child termination, post-failure server capacity, private receipt creation, malformed-input receipts, and the proposal review lifecycle. Independent review found no remaining blocker inside the documented single-OS-account scope. A sandbox initially prevented localhost binding; the same server tests were then run with binding enabled and passed.
+
+The shared worker now has a wall-clock deadline. Proposal decisions are stored against exact input and answer contents; tests cover changed sources/requirements, expiry, draft integrity, invalid approvals and competing review revisions. This does not implement source-system authentication or organizational identity. Frozen earlier actual-inference account outputs were revalidated against the stricter rules without new model calls.
+
+[Jev quality review](QUALITY.md) preserves both assessments against an unchanged rubric. All ten still require production acceptance evidence. The new `GOVERNANCE.md` files specify domain-specific metrics and ownership; they do not claim those trials or sign-offs have happened.
+
+The scorer itself received a separate integrity review after inference. It now rejects modified rubric questions, reordered score levels, substituted projects or source files, and verification context that differs from its frozen snapshot. A compact-JSON round-trip test catches serialization drift. Eleven scorer tests pass; re-validating all saved follow-up assessments produced byte-identical summary scores with no new inference. These six additional tests were added after the 191-test assessment snapshot.
+
+GitHub review then identified two additional domain boundaries and two scorer provenance gaps. Space-separated timestamps are now rejected as standalone account dates. An actual proposal with 100 requirements and a result larger than 800 KB completes the worker/CLI/staging path; review imports share the 10 MB serialized result bound while source inputs stay at 500 KB. Scoring preparation now requires a clean checkout and binds the entire request before inference, including saved evaluation data. Fourteen scorer tests pass. The published Jev follow-up remains tied to b9120fa; these later fixes are covered by regression tests, not retroactively attributed to that model assessment.
+
+Final integrated local verification passes **203 tests across 11 suites and ten CLI replays**, including the large-proposal and complete assessment-binding regressions. GitHub CI verifies the publication commit separately.

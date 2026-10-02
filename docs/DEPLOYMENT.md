@@ -35,3 +35,15 @@ The adopter owns:
 6. Explicit approval and an audited transaction layer for any future writes, plus idempotency and rollback behavior.
 
 An exact quotation confirms that text exists in the supplied source. It does not prove entailment, source truth or policy authority. Model outputs can be wrong even when every deterministic check passes. All results require review; none is a legal, coverage, medical, safety or security-clearance determination.
+
+## Execution deadlines and receipts
+
+CLI and browser runs execute in a child process with a 120-second wall-clock deadline. The CLI accepts `--deadline-seconds` up to 300 seconds. An expired deadline kills and reaps the worker and returns no business result. The provider's 90-second socket timeout is a separate inactivity bound. Current workflows spawn no child processes of their own. This is not a container sandbox or a complete service availability guarantee.
+
+Every successful bounded run includes a receipt with a run ID, timestamps, mode, input hash, source-file hashes and allowlisted model/prompt/schema metadata. The CLI can save a separate receipt using `--receipt /private/path/run.json`. It creates a new file with mode0600 and refuses to overwrite an existing file or symlink. Failed executions produce a sanitized failure category; CLI input read/parse failures also get a receipt when requested. Receipts exclude source text, business outputs and credentials. Failed provider calls do not have response IDs or model metadata that were never successfully received.
+
+Receipts are unsigned local records. Protect their directory and retention using your deployment's controls; a filesystem owner can alter them. Source hashes identify the files at execution start and assume an immutable checkout during the run. Direct Python `execute()` is the inner worker function without a wall-clock process boundary; use `execute_bounded()` or an equivalently managed worker for integrations.
+
+Proposal Evidence also offers an optional local review ledger. Its SQLite file retains proposal inputs, answers and review notes. It has a different data-retention boundary from the stateless preview server. Read the [project's review instructions](../projects/proposal-operations/README.md) before enabling it.
+
+The worker wire response is capped at 5 MB. The final serialized CLI result, including its receipt and indentation, is capped at 10 MB. Proposal review accepts result files up to that same 10 MB boundary; input and current-source packets remain capped at 500 KB. An output that exceeds the serialized boundary fails without emitting a partial business result.

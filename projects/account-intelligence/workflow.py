@@ -31,7 +31,7 @@ def run(data, ai):
         if meeting['account_id'] != account['id']: raise InputError('Cross-account meeting rejected')
         if day(meeting['date']) > today: raise InputError('Future meeting is not an observed event')
     sources = unique(meetings)
-    answer = ai.ask('Extract meeting statements relevant to supplied opportunity IDs. Return blockers, next steps, and proposed close-date changes. A blocker requires explicit evidence of obstruction, delay, rejection or an unmet prerequisite preventing progress. Routine procurement review in progress is not itself a blocker. Omit neutral status observations; do not force them into one of these categories. Each needs an exact meeting quote. For a date change, proposed_date must be an ISO date appearing literally in a supporting quote; otherwise omit the date-change observation. All other proposed_date values must be empty. Do not infer deal values, probability, buyer names, or completion from plans. Do not duplicate observations.', data, SCHEMA)
+    answer = ai.ask('Extract meeting statements relevant to supplied opportunity IDs. Return blockers, next steps, and proposed close-date changes. A blocker requires explicit evidence of obstruction, delay, rejection or an unmet prerequisite preventing progress. Routine procurement review in progress is not itself a blocker. Omit neutral status observations; do not force them into one of these categories. Each needs an exact meeting quote. Associate an observation only when its quote contains exactly the target opportunity ID, or when its quote contains no opportunity ID and the entire meeting names exactly that target ID. Do not assign ambiguous or unnamed opportunities. For a date change, proposed_date must be a complete ISO date token appearing literally in a supporting quote, not a prefix of a longer token; otherwise omit the date-change observation. All other proposed_date values must be empty. Do not infer deal values, probability, buyer names, or completion from plans. Do not duplicate observations.', data, SCHEMA)
     findings = []; observations = []; seen = set()
     for item in rows(answer['observations'], 'observations', 200):
         oid = item['opportunity_id']
@@ -42,14 +42,16 @@ def run(data, ai):
             full_text=sources[citation['source_id']]['text']
             explicit={candidate for candidate in ops if re.search(r'(?<![\w-])'+re.escape(candidate)+r'(?![\w-])',full_text)}
             quoted={candidate for candidate in ops if re.search(r'(?<![\w-])'+re.escape(candidate)+r'(?![\w-])',citation['quote'])}
-            if (quoted and oid not in quoted) or (not quoted and explicit and explicit!={oid}):
+            if (quoted and quoted != {oid}) or (not quoted and explicit != {oid}):
                 raise InputError('Meeting evidence is bound to a different or ambiguous opportunity')
         key = (oid, item['kind'], tuple(sorted((e['source_id'], e['quote']) for e in ev)))
         if key in seen: raise InputError('Duplicate observation')
         seen.add(key)
         if item['kind'] == 'date_change':
             proposed = day(item['proposed_date'])
-            if not any(proposed.isoformat() in e['quote'] for e in ev): raise InputError('Proposed date is not quoted')
+            date_token = r'(?<![\w-])' + re.escape(proposed.isoformat()) + r'(?![\w-]|[ \t]+\d{1,2}:\d{2})'
+            if not any(re.search(date_token, e['quote']) for e in ev):
+                raise InputError('Proposed date must be a complete quoted ISO date token')
             if proposed.isoformat() != ops[oid]['close_date']:
                 findings.append(finding('close_date_conflict', 'review', 'Meeting date differs from CRM',
                     oid + ': CRM ' + ops[oid]['close_date'] + '; meeting ' + proposed.isoformat(), [e['source_id'] for e in ev]))

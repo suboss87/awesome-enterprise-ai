@@ -1,0 +1,17 @@
+{
+  "commit": "51391fe7d161fefabf5a853c755a62e73ca57c3e",
+  "rubric_sha256": "d33fcd2ba2b93a1d737b8c85f9396fa9b4b87cf46193e808c3edf0f4039d6938",
+  "files": {
+    "enterprise_ai/common.py": "65f064b82cc4612b52d6560bbaac34f05c5657672a96256f3a47de690c9d3d8a",
+    "enterprise_ai/__main__.py": "af4d8207fccd9a722a632e864e6205ce9aff9a2e1dccd08216d22da9afbe8b58",
+    "enterprise_ai/provider.py": "6c646b2e94f1f42b6b214323d2dec0e7fa3cc8f403d7a2d6e6a4c877b6f1250d",
+    "enterprise_ai/server.py": "602b148fed9b8bfb92482660b69cdb1075098493c32f07a10c1e795d111b7795",
+    "tests/test_runtime.py": "408bda44c9c2edc17041e45d11a6f1eda25b4551520a39b47074375834e327d2",
+    "tests/test_server.py": "5e1039afb93bbd50f5bc95b0d7340086da34c442591d72126cbcba65ae3c0ecb",
+    "docs/DEPLOYMENT.md": "399cc4ab414c6ccecb1af35da2e78596a2a015750489a55941f7e4f7fb041661",
+    "docs/ADOPTION-ROADMAP.md": "f1602f2b00efd0b9f2b03c872e0c125069134dd4ac1609ab5d6f621f9680735e",
+    "projects/customer-resolution/workflow.py": "4afb50bc649accfc013f9cb1cddc416748f844988f998ee06bbc460acef7f4ed",
+    "projects/customer-resolution/README.md": "2d1896897260785859f9365f719a4b089d838c40617c8274b59e3de5a13f3c70",
+    "projects/customer-resolution/tests/test_workflow.py": "a87dcd052ecdee7309154e73ab9f352cce0d1fda8043d21859826c7b3b7ff14d"
+  }
+}

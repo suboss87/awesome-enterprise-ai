@@ -30,13 +30,15 @@ The example reports a meeting proposal for November 1 against an October 15 CRM 
 - Stages: prospect, qualified, proposal, won, lost. Won/lost amounts are excluded from open pipeline. All monetary values must use the same currency and minor-unit convention; no conversion is performed.
 - `meetings`: up to 100 records with unique `id`, matching `account_id`, ISO `date` no later than `as_of`, and `text` up to 10,000 characters.
 
-Unknown fields and cross-account records are rejected. Date proposals must appear literally as an ISO date in a quoted meeting passage; natural-language dates need normalization or manual review. The account identity check is a consistency control, not authentication.
+Unknown fields and cross-account records are rejected. Each observation must quote exactly one known opportunity ID matching its target. A quote without an ID is accepted only when the full meeting names exactly that target opportunity ID. Missing or multiple associations fail validation; even a single supplied opportunity is not assumed to be the subject of unnamed notes. Include explicit opportunity IDs in source exports rather than assigning them by inference.
+
+Date proposals must appear as a complete ISO date token in a quoted meeting passage. A date prefix inside a longer identifier, malformed date or timestamp (including a space/tab before the time) is rejected; ordinary punctuation is allowed. Natural-language dates need normalization or manual review. The account identity check is a consistency control, not authentication.
 
 ## Output and boundaries
 
 The result includes recorded account/opportunity facts, quoted observations, a review queue, pipeline totals and `forecast_probability: null`. A model cannot invent an opportunity ID, provide an unquoted date, change CRM values, or insert its own numeric forecast through the output schema.
 
-AI interprets meeting statements; exact citations still do not prove relevance or entailment. A statement can quote the correct meeting and refer to the wrong opportunity. Reviewers must check this association. A blocker is an observed statement, not a verified business fact.
+AI interprets meeting statements; exact citations still do not prove relevance or entailment. Explicit ID checks reduce mistaken associations but cannot determine whether a quoted statement semantically applies to the named opportunity. Reviewers must still check that association. A blocker is an observed statement, not a verified business fact.
 
 ## Evaluation
 
@@ -51,3 +53,7 @@ Export only records visible to the reviewer; enforce authentication and row perm
 ## Collection workspace and current evidence
 
 Run `python3 -m enterprise_ai serve` from the collection root to try this workflow in the browser, upload a compatible JSON export, inspect results and export JSON. [Deployment and data handling](../../docs/DEPLOYMENT.md) explains the single-user boundary and live provider. [Verification](../../docs/VERIFICATION.md) records the actual inference trials, initial failures, corrective regressions and independent semantic review; authored fixtures above remain distinct from live evaluation.
+
+## Governance and acceptance
+
+See [domain review responsibilities, evaluation metrics and deployment gates](GOVERNANCE.md).
