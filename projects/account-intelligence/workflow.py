@@ -49,7 +49,7 @@ def run(data, ai):
         seen.add(key)
         if item['kind'] == 'date_change':
             proposed = day(item['proposed_date'])
-            date_token = r'(?<![\w-])' + re.escape(proposed.isoformat()) + r'(?![\w-])'
+            date_token = r'(?<![\w-])' + re.escape(proposed.isoformat()) + r'(?![\w-]|[ \t]+\d{1,2}:\d{2})'
             if not any(re.search(date_token, e['quote']) for e in ev):
                 raise InputError('Proposed date must be a complete quoted ISO date token')
             if proposed.isoformat() != ops[oid]['close_date']:

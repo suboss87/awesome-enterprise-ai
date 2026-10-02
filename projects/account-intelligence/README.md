@@ -32,7 +32,7 @@ The example reports a meeting proposal for November 1 against an October 15 CRM 
 
 Unknown fields and cross-account records are rejected. Each observation must quote exactly one known opportunity ID matching its target. A quote without an ID is accepted only when the full meeting names exactly that target opportunity ID. Missing or multiple associations fail validation; even a single supplied opportunity is not assumed to be the subject of unnamed notes. Include explicit opportunity IDs in source exports rather than assigning them by inference.
 
-Date proposals must appear as a complete ISO date token in a quoted meeting passage. A date prefix inside a longer identifier, malformed date or timestamp is rejected; ordinary punctuation is allowed. Natural-language dates need normalization or manual review. The account identity check is a consistency control, not authentication.
+Date proposals must appear as a complete ISO date token in a quoted meeting passage. A date prefix inside a longer identifier, malformed date or timestamp (including a space/tab before the time) is rejected; ordinary punctuation is allowed. Natural-language dates need normalization or manual review. The account identity check is a consistency control, not authentication.
 
 ## Output and boundaries
 

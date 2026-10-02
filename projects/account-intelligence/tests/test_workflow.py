@@ -106,7 +106,9 @@ class BusinessCases(unittest.TestCase):
 
     def test_date_must_be_complete_token(self):
         for invalid in ('2026-11-010', '12026-11-01', 'ref-2026-11-01',
-                        '2026-11-01-extra', '2026-11-01T12:00:00'):
+                        '2026-11-01-extra', '2026-11-01T12:00:00',
+                        '2026-11-01 12:00:00', '2026-11-01\t12:00:00',
+                        '2026-11-01 9:30', '2026-11-01  12:00:00+05:30'):
             with self.subTest(token=invalid):
                 data, responses = self.observation_case(
                     f'For opp-1, the requested date is {invalid}.',
@@ -114,7 +116,8 @@ class BusinessCases(unittest.TestCase):
                 with self.assertRaises(InputError): WORKFLOW.run(data, ReplayAI(responses))
 
     def test_date_allows_sentence_and_parenthesis_punctuation(self):
-        for token in ('2026-11-01.', '(2026-11-01)', '2026-11-01,'):
+        for token in ('2026-11-01.', '(2026-11-01)', '2026-11-01,',
+                      '2026-11-01 after review', '2026-11-01\tconfirmed'):
             with self.subTest(token=token):
                 data, responses = self.observation_case(
                     f'For opp-1, the requested date is {token}',

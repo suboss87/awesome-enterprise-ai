@@ -11,6 +11,7 @@ import stat
 import sys
 
 from .catalog import load
+from .execution import MAX_RESULT_FILE_BYTES
 from .common import InputError, ReplayAI, day, loads, text, unique
 
 
@@ -169,11 +170,16 @@ class Ledger:
                  'latest_decision': self.latest(identity, row['requirement_id'])} for row in output['matrix']]
 
 
-def read_file(path):
+def read_file(path, maximum=500000):
+    """Bound inputs to 500 KB; stage imports use the shared serialized result cap.
+
+    The result cap includes pretty-print whitespace and execution receipts,
+    matching the CLI output boundary rather than its smaller input contract.
+    """
     with open(path, 'rb') as handle:
-        raw = handle.read(500001)
-    if len(raw) > 500000:
-        raise InputError('File exceeds 500 KB')
+        raw = handle.read(maximum + 1)
+    if len(raw) > maximum:
+        raise InputError(f'File exceeds {maximum} bytes')
     return loads(raw)
 
 
@@ -195,7 +201,7 @@ def main():
     try:
         ledger = Ledger(args.db)
         if args.command == 'stage':
-            result = {'draft_id': ledger.stage(read_file(args.input), read_file(args.result))}
+            result = {'draft_id': ledger.stage(read_file(args.input), read_file(args.result, MAX_RESULT_FILE_BYTES))}
         elif args.command == 'inspect':
             result = ledger.inspect(args.draft)
         elif args.command == 'decide':

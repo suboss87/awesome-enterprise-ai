@@ -4,11 +4,14 @@ from datetime import timedelta
 import json
 from pathlib import Path
 import tempfile
+import subprocess
+import sys
 import unittest
 
 from enterprise_ai.catalog import load
 from enterprise_ai.common import InputError, ReplayAI
-from enterprise_ai.proposal_review import Ledger, today
+from enterprise_ai.proposal_review import Ledger, today, read_file
+from enterprise_ai.execution import MAX_RESULT_FILE_BYTES
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -138,6 +141,49 @@ class ProposalReviewTests(unittest.TestCase):
             with self.assertRaises(InputError):
                 self.ledger.decide(identity, 'req-1', packet, 'approve', 0, 'Must remain withheld')
             self.assertEqual([], self.ledger.export(identity, packet)['approved_answers'])
+
+    def test_large_actual_cli_result_can_be_staged(self):
+        packet = copy.deepcopy(self.packet)
+        packet['sources'][0]['text'] = 'Approved capability: ' + 'x' * 8000
+        packet['requirements'] = [{'id': f'req-{index}', 'text': 'Describe the approved capability.'}
+                                  for index in range(100)]
+        answer = {'answers': [{'requirement_id': requirement['id'], 'status': 'supported',
+                  'draft': 'Capability is documented for human verification.',
+                  'evidence': [{'source_id': packet['sources'][0]['id'],
+                                'quote': packet['sources'][0]['text']}]}
+                 for requirement in packet['requirements']]}
+        input_path = Path(self.tmp.name) / 'input.json'
+        response_path = Path(self.tmp.name) / 'responses.json'
+        result_path = Path(self.tmp.name) / 'result.json'
+        input_path.write_text(json.dumps(packet))
+        response_path.write_text(json.dumps([answer]))
+        # Exercise real worker + CLI pretty output, not only an in-memory workflow result.
+        run = subprocess.run([sys.executable, '-m', 'enterprise_ai', 'run',
+            'proposal-operations', '--input', str(input_path), '--mode', 'replay',
+            '--responses', str(response_path)], cwd=ROOT, capture_output=True, timeout=30)
+        self.assertEqual(0, run.returncode, run.stderr.decode())
+        self.assertGreater(len(run.stdout), 500000)
+        self.assertLessEqual(len(run.stdout), MAX_RESULT_FILE_BYTES)
+        result_path.write_bytes(run.stdout)
+        stage = subprocess.run([sys.executable, '-m', 'enterprise_ai.proposal_review',
+            '--db', str(self.path), 'stage', '--input', str(input_path),
+            '--result', str(result_path)], cwd=ROOT, capture_output=True, timeout=30)
+        self.assertEqual(0, stage.returncode, stage.stderr.decode())
+        identity = json.loads(stage.stdout)['draft_id']
+        stored_packet, stored_result = self.ledger.read(identity)
+        self.assertEqual(packet, stored_packet)
+        self.assertEqual(100, len(stored_result['matrix']))
+
+    def test_result_and_input_read_bounds_are_separate(self):
+        path = Path(self.tmp.name) / 'oversized.json'
+        with path.open('wb') as handle:
+            handle.truncate(MAX_RESULT_FILE_BYTES + 1)
+        with self.assertRaisesRegex(InputError, 'File exceeds'):
+            read_file(path, MAX_RESULT_FILE_BYTES)
+        with path.open('wb') as handle:
+            handle.truncate(500001)
+        with self.assertRaisesRegex(InputError, 'File exceeds'):
+            read_file(path)
 
     def test_public_database_permissions_rejected(self):
         self.path.chmod(0o644)
