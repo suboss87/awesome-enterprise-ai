@@ -100,10 +100,65 @@ Refresh `current.json` from the source system before **every** decision/export. 
 
 The ledger trusts the machine, OS account, clock and supplied source export. It is not a tamper-proof audit log: its owner/admin can edit SQLite, alter application code or replace files. Hashes detect changed stored draft bindings, not a malicious privileged actor. Decisions are local account attestations, not organizational authorization or segregation of duties.
 
-There is no authenticated source fetch, source-system permission check, remote revocation notification, enterprise identity/role integration, encryption-at-rest service, managed backup, retention automation or bid-system submission. Database, input and exported files contain proposal content; use organizational disk encryption, access controls and backup/retention procedures. A bank deployment requires these integrations and independently validated operating controls before production use.
+Manual input has no authenticated source fetch or source-system permission check. The GitHub adapter below adds one authenticated read-only source path; enterprise identity/role integration, encryption-at-rest service, managed backup, retention automation and bid-system submission remain absent. Database, input and exported files contain proposal content; use organizational disk encryption, access controls and backup/retention procedures. A bank deployment requires these integrations and independently validated operating controls before production use.
 
 ## Governance and acceptance
 
 See [domain review responsibilities, evaluation metrics and deployment gates](GOVERNANCE.md).
 
 Input and current-source files are limited to 500 KB. Result files may be up to 10 MB, matching the shared serialized CLI output limit. A large valid response can therefore enter the same review path as a small one.
+
+## Authenticated GitHub document sources
+
+The optional GitHub adapter reads approved text documents from exact repositories and paths using your existing `gh` login. It refreshes the source internally before staging, approving or exporting a GitHub-bound draft. This is a single-user source integration, **not enterprise SSO or production certification**. Private organization access must already be authorized in GitHub. No repository changes are made.
+
+Keep an operator-owned `sources.json` in the private ledger directory. The directory must be owned by your account and 0700; the manifest must be a regular non-symlink file owned by you without group/other write permission. Example structure (replace repository identity and blob hash with values independently reviewed by the document owner):
+
+```json
+{
+  "version": 1,
+  "repositories": [{"owner": "approved-org", "repo": "product-docs", "repository_id": 12345, "branch": "main"}],
+  "sources": [{
+    "id": "enterprise-sso", "repository_id": 12345,
+    "path": "capabilities/enterprise-sso.md",
+    "approved_blob_sha": "REPLACE_WITH_REVIEWED_40_CHARACTER_GIT_BLOB_SHA",
+    "approval": "approved", "valid_from": "2026-10-01", "valid_until": "2026-12-31"
+  }]
+}
+```
+
+The placeholder is deliberately invalid. A document owner must approve the actual blob, scope and dates; do not automatically approve whichever content happens to be current. `requirements.json` contains only `{"requirements": [{"id": "req-1", "text": "Does the Enterprise plan support SAML?"}]}`.
+
+```sh
+python3 -m enterprise_ai.proposal_sources \
+  --manifest "$HOME/.proposal-review/sources.json" \
+  --requirements "$HOME/.proposal-review/requirements.json" \
+  > "$HOME/.proposal-review/github-input.json"
+python3 -m enterprise_ai run proposal-operations \
+  --input "$HOME/.proposal-review/github-input.json" --mode live \
+  > "$HOME/.proposal-review/github-result.json"
+python3 -m enterprise_ai.proposal_review --db "$HOME/.proposal-review/reviews.sqlite" stage \
+  --input "$HOME/.proposal-review/github-input.json" \
+  --result "$HOME/.proposal-review/github-result.json" \
+  --source-manifest "$HOME/.proposal-review/sources.json"
+# Set DRAFT_ID to the returned identifier, then inspect the actual answer and evidence.
+python3 -m enterprise_ai.proposal_review --db "$HOME/.proposal-review/reviews.sqlite" decide \
+  --draft "$DRAFT_ID" --requirement req-1 --decision approve --expected-revision 0 \
+  --note 'Reviewed answer wording, source version and product-plan restriction.'
+python3 -m enterprise_ai.proposal_review --db "$HOME/.proposal-review/reviews.sqlite" export \
+  --draft "$DRAFT_ID" > "$HOME/.proposal-review/approved.json"
+```
+
+For GitHub-bound drafts, `--current-input` is forbidden. The ledger pins the canonical operator manifest path at staging. Both CLI and programmatic `Ledger.decide`/`Ledger.export` reload that same file and authenticate to GitHub internally. A changed manifest invalidates the draft **before additional source access**, so a caller cannot broaden its scope or substitute an older manifest on export. Revocation is represented by changing the operator policy file, not by deleting an archived source snapshot. Generate a fresh packet, answer and review after a policy or branch change.
+
+The adapter verifies repository ID, current branch commit, complete Git tree, regular-file mode, exact path, approved blob SHA, base64 decoding, UTF-8, file size and decoded Git object hash. It never uses `download_url` and refuses HTTP redirects. Optional source `provenance` is strictly validated and becomes part of the ledger binding: provider, owner, repository, numeric repository ID, branch, path, commit/blob SHA, text SHA-256 and manifest SHA-256. Approved exports include that provenance without embedding source document text.
+
+Limits: five repositories, twenty source files, ten path components, 40 KB per file, 10,000 text characters per source, 500 KB packet and 200 KB per API response. Paths/branches use explicit ASCII letters, numbers, underscore, period and hyphen components; unsupported names require a future reviewed extension. A child process enforces a 100-second total refresh deadline and is killed/reaped with its process group on expiry; individual requests also have a 15-second socket timeout and a 90-second request budget. Authentication failure, rate limiting, timeout, incomplete tree, missing file or mismatch withholds the operation without a stale fallback. GitHub 404 means unavailable **or unauthorized**; only an accessible complete tree establishes path absence at a commit.
+
+Any branch-head change invalidates review, even when unrelated files changed. A final branch check detects movement during refresh, but another push can occur afterward: output means current **at the recorded check time**, not an atomic lock on GitHub. The OS account, machine clock and operator policy owner remain trusted. Someone authorized to rewrite those files or the SQLite database can restore an old policy; this is not a tamper-proof or centrally governed approval system. Read-only access does not prove document-owner authority. No new credentials are printed or stored by the adapter; the existing GitHub CLI manages its login.
+
+### Verified integration scope
+
+A read-only authenticated trial on October 2, 2026 retrieved the public synthetic fixture `projects/proposal-operations/examples/input.json` from `suboss87/awesome-enterprise-ai` (repository ID `1394550893`) through the actual bounded adapter. Commit: `e9d75186dcedb2b490d231627ddc8a6be393363b`; blob: `084fba6a79ca67f4334a78faee11997cf40db927`; decoded size: 366 bytes; SHA-256: `9530d8e1613c24f57b5ecdb023ff1e9e4bf48161df1b729ec3b7249f2fd5d2ad`. API version `2026-03-10` was accepted. This proves public-fixture connectivity and binding, not private enterprise permissions, real product evidence or bank deployment.
+
+Run `python3 -m unittest discover -s tests -p test_proposal_sources.py -v` for the failure/bypass suite. The experimental hold remains pending independent review and deployment-specific evidence.
