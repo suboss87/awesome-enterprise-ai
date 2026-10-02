@@ -1,4 +1,4 @@
-"""Local, OS-account-bound proposal review ledger. No network or enterprise identity."""
+"""Local, OS-account-bound review ledger with authenticated GitHub source refresh."""
 import argparse
 from datetime import datetime, timezone
 import hashlib
@@ -125,6 +125,8 @@ class Ledger:
             policy_path, manifest = policy_file(source_manifest)
             check_policy_binding(packet, manifest)
             fresh = proposal_sources.collect(manifest, packet['requirements'])
+            _, refreshed_policy = policy_file(policy_path)
+            check_policy_binding(packet, refreshed_policy)
             if packet_binding(packet) != packet_binding(fresh):
                 raise InputError('GitHub source packet changed before staging')
         elif source_manifest is not None:
@@ -166,6 +168,8 @@ class Ledger:
             _, manifest = policy_file(policy[0])
             check_policy_binding(packet, manifest)
             current = proposal_sources.collect(manifest, packet['requirements'])
+            _, refreshed_policy = policy_file(policy[0])
+            check_policy_binding(packet, refreshed_policy)
         if not isinstance(current, dict):
             raise InputError('Manual drafts require current input')
         if day(current.get('as_of')) != today():

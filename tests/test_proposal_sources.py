@@ -183,6 +183,30 @@ class BoundLedgerTests(unittest.TestCase):
         self.mock.side_effect = None; self.mock.return_value = changed
         with self.assertRaises(InputError): self.ledger.export(self.identity)
 
+    def test_policy_revoked_during_refresh_blocks_stage_decide_and_export(self):
+        self.ledger.decide(self.identity, 'req-1', None, 'approve', 0, 'Initially verified')
+        original_revision = self.ledger.latest(self.identity, 'req-1')[0]
+        def revoke_during_refresh(policy, reqs):
+            result = ps._collect(policy, reqs, FixtureGitHub())
+            revoked = copy.deepcopy(policy)
+            revoked['sources'][0]['approval'] = 'revoked'
+            self.policy_path.write_text(json.dumps(revoked))
+            return result
+        self.mock.side_effect = revoke_during_refresh
+        for operation in ('stage', 'decide', 'export'):
+            self.policy_path.write_text(json.dumps(self.policy))
+            with self.subTest(operation=operation), self.assertRaises(InputError):
+                if operation == 'stage':
+                    output = copy.deepcopy(self.output)
+                    output['summary'] = 'Distinct candidate to ensure no new row is inserted'
+                    self.ledger.stage(self.packet, output, self.policy_path)
+                elif operation == 'decide':
+                    self.ledger.decide(self.identity, 'req-1', None, 'approve', original_revision, 'Stale approval attempt')
+                else:
+                    self.ledger.export(self.identity)
+            self.assertEqual(original_revision, self.ledger.latest(self.identity, 'req-1')[0])
+            self.assertEqual(1, self.ledger.db.execute('SELECT count(*) FROM drafts').fetchone()[0])
+
     def test_source_provenance_cannot_be_removed_from_current_packet(self):
         packet = copy.deepcopy(self.packet); del packet['sources'][0]['provenance']
         with self.assertRaises(InputError): self.ledger.export(self.identity, packet)
