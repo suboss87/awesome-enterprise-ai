@@ -4,7 +4,7 @@ I use this review to find the next thing worth fixing. The scores measure Jev’
 
 ## What changed
 
-The baseline assessed main51391fe. Follow-up assessed b9120fa after three reproduced defects were fixed, the proposal review ledger was added, and execution gained a wall-clock deadline with private failure receipts. The same questions, weights and level descriptions were used. Each project now also has domain-specific governance and acceptance criteria.
+The baseline assessed main `51391fe`. Follow-up assessed `b9120fa` after three reproduced defects were fixed, the proposal review ledger was added, and execution gained a wall-clock deadline with private failure receipts. The same questions, weights and level descriptions were used. Each project now also has domain-specific governance and acceptance criteria.
 
 | Project | Before /100 | After /100 | Next priority from Jev |
 |---|---:|---:|---|
@@ -23,9 +23,9 @@ These are evidence scores from an uncalibrated model judge. Small numerical diff
 
 ## Changes supported by code and tests
 
-- Account evidence now rejects unnamed or ambiguous opportunity assignments and partial date tokens. Its correctness score moved from0.47 to2.00 out of4.
-- Proposal review now stores decisions against exact source, requirement and draft content. Changed, expired or unapproved evidence blocks current export. Its reviewability score moved from2.00 to2.94 out of4.
-- CLI and browser execution now terminate workers at a wall-clock deadline, preserve honest modes, and expose content-free execution receipts. The suite passes191tests and10CLIreplays.
+- Account evidence now rejects unnamed or ambiguous opportunity assignments and partial date tokens. Its correctness score moved from 0.47 to 2.00 out of 4.
+- Proposal review now stores decisions against exact source, requirement and draft content. Changed, expired or unapproved evidence blocks current export. Its reviewability score moved from 2.00 to 2.94 out of 4.
+- CLI and browser execution now terminate workers at a wall-clock deadline, preserve honest modes, and expose content-free execution receipts. The suite passed 191 tests and ten CLI replays at assessment time.
 - Each project names its business owner, permitted decisions, sensitive-data boundaries and domain-specific metrics. These documents describe acceptance work still required; they are not completed sign-offs.
 
 ## What still blocks production
@@ -41,4 +41,4 @@ Proposal Evidence remains experimental. A local OS-account ledger does not estab
 - [Follow-up summary](../quality/2026-10-02/refinement.json), [raw distributions / code hashes](../quality/2026-10-02/refinement/) and [verification context and unresolved gaps](../quality/2026-10-02/refinement-context.json).
 - [Rubric design request](../quality/2026-10-02/rubric-review-request.json) and [Jev’s typed design review](../quality/2026-10-02/rubric-review-response.json).
 
-Resolved model: `jev-1.13.0`. Full requests and responses were retained privately with hashes; public artifacts contain the judgments and source manifests. Requests used only repository code and synthetic/public evidence. No unchanged request was resampled. No new live workflow inference was performed in this hardening pass; the historical September30livecases remain explicitly historical.
+Resolved model: `jev-1.13.0`. Full requests and responses were retained privately with hashes; public artifacts contain the judgments and source manifests. Requests used only repository code and synthetic/public evidence. No unchanged request was resampled. No new live workflow inference was performed in this hardening pass; the historical September 30 live cases remain explicitly historical.
