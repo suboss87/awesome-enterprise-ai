@@ -209,7 +209,7 @@ def _collect(manifest, requirements, client=None):
         if current.get('object', {}).get('sha') != heads[rid] or current.get('object', {}).get('type') != 'commit':
             raise InputError('Branch changed during source refresh; retry with a fresh review')
     packet = {'as_of': datetime.now(timezone.utc).date().isoformat(), 'requirements': requirements, 'sources': sources}
-    if len(json.dumps(packet, ensure_ascii=False).encode()) > 500000:
+    if len((json.dumps(packet, ensure_ascii=False, indent=2) + '\n').encode()) > 500000:
         raise InputError('Source packet exceeds 500 KB')
     return packet
 
@@ -283,7 +283,7 @@ def main():
     try:
         requirement_file = read_file(args.requirements)
         obj(requirement_file, ['requirements'])
-        print(json.dumps(collect(read_file(args.manifest), requirement_file['requirements']), indent=2))
+        print(json.dumps(collect(read_file(args.manifest), requirement_file['requirements']), indent=2, ensure_ascii=False))
     except (InputError, OSError, KeyError, TypeError, ValueError) as exc:
         print('Source collection failed: ' + str(exc), file=sys.stderr)
         return 2
