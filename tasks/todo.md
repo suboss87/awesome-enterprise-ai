@@ -39,7 +39,8 @@ Goal: use Jev to assess the actual ten implementations against a frozen, evidenc
 - [x] Add bounded execution, code/schema provenance and explicit failure receipts.
 - [x] Add durable content-bound Proposal Evidence review and stale-answer invalidation.
 - [x] Independently review changes; run regressions and actual CLI journeys.
-- [ ] Reassess material changes with unchanged rubric, publish scores and remaining blockers, pass CI and publish improvements.
+- [x] Reassess material changes with unchanged rubric and publish inspectable scores and remaining blockers in the review PR.
+- [ ] Merge hardening PR4 after final exact-head CI; record published revision in the session handoff.
 
 Acceptance: all ten have inspectable scores and concrete next priorities; regression tests prove fixes; reviewed answers cannot survive changed/ineligible evidence; execution cannot silently replay or run indefinitely; production claims remain blocked without actual adoption controls and evidence. Authenticity means original useful implementation and accurate attribution, never disguising a derivative.
 

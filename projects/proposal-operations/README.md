@@ -105,3 +105,5 @@ There is no authenticated source fetch, source-system permission check, remote r
 ## Governance and acceptance
 
 See [domain review responsibilities, evaluation metrics and deployment gates](GOVERNANCE.md).
+
+Input and current-source files are limited to 500 KB. Result files may be up to 10 MB, matching the shared serialized CLI output limit. A large valid response can therefore enter the same review path as a small one.

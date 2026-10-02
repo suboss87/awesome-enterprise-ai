@@ -45,3 +45,5 @@ Every successful bounded run includes a receipt with a run ID, timestamps, mode,
 Receipts are unsigned local records. Protect their directory and retention using your deployment's controls; a filesystem owner can alter them. Source hashes identify the files at execution start and assume an immutable checkout during the run. Direct Python `execute()` is the inner worker function without a wall-clock process boundary; use `execute_bounded()` or an equivalently managed worker for integrations.
 
 Proposal Evidence also offers an optional local review ledger. Its SQLite file retains proposal inputs, answers and review notes. It has a different data-retention boundary from the stateless preview server. Read the [project's review instructions](../projects/proposal-operations/README.md) before enabling it.
+
+The worker wire response is capped at 5 MB. The final serialized CLI result, including its receipt and indentation, is capped at 10 MB. Proposal review accepts result files up to that same 10 MB boundary; input and current-source packets remain capped at 500 KB. An output that exceeds the serialized boundary fails without emitting a partial business result.
