@@ -1,4 +1,6 @@
 import copy
+import json
+import tempfile
 import importlib.util
 from pathlib import Path
 import unittest
@@ -25,5 +27,44 @@ class QualityTests(unittest.TestCase):
     def test_changed_question_scale_rejected(self):
         self.request['questions']['correctness']['criteria'].append('field verified')
         with self.assertRaises(ValueError):quality.validate(self.request,self.response)
+
+class BundleTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
+        self.folder=Path(self.tmp.name);self.project='customer-resolution'
+        self.request={'questions':quality.read(ROOT/'quality/questions.json'),'state':{'project':self.project,'files':{'workflow.py':'original evidence'}}}
+        self.manifest={'rubric_sha256':quality.digest((ROOT/'quality/rubric.json').read_bytes()),'files':{'workflow.py':quality.digest(b'original evidence')}}
+        self.save()
+    def save(self):
+        (self.folder/f'{self.project}-request.json').write_text(json.dumps(self.request))
+        (self.folder/f'{self.project}-manifest.json').write_text(json.dumps(self.manifest))
+    def test_bound_evidence_accepted(self):
+        quality.validate_bundle(self.folder,self.project)
+    def test_reordered_levels_cannot_reuse_rubric_identity(self):
+        self.request['questions']['correctness']['criteria'].reverse();self.save()
+        with self.assertRaises(ValueError):quality.validate_bundle(self.folder,self.project)
+    def test_project_substitution_rejected(self):
+        self.request['state']['project']='claims-intake';self.save()
+        with self.assertRaises(ValueError):quality.validate_bundle(self.folder,self.project)
+    def test_source_substitution_rejected(self):
+        self.request['state']['files']['workflow.py']='different evidence';self.save()
+        with self.assertRaises(ValueError):quality.validate_bundle(self.folder,self.project)
+    def test_missing_source_rejected(self):
+        self.request['state']['files']={};self.save()
+        with self.assertRaises(ValueError):quality.validate_bundle(self.folder,self.project)
+
+class PreparationTests(unittest.TestCase):
+    def test_compact_context_roundtrip_and_rejection_of_drift(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base=Path(tmp);source=base/'compact.json';folder=base/'assessment'
+            context={'verification':{'tests':'observed'},'shared_gaps':['no target deployment'],'projects':{slug:[] for slug in quality.SLUGS}}
+            source.write_text(json.dumps(context,separators=(',',':')))
+            quality.prepare(folder,source)
+            self.assertEqual(source.read_bytes(),(folder/'context.json').read_bytes())
+            for slug in quality.SLUGS:quality.validate_bundle(folder,slug)
+            path=folder/'customer-resolution-request.json';request=json.loads(path.read_text())
+            request['state']['verification']={'tests':'invented different result'}
+            path.write_text(json.dumps(request))
+            with self.assertRaises(ValueError):quality.validate_bundle(folder,'customer-resolution')
 
 if __name__=='__main__':unittest.main()

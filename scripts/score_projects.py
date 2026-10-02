@@ -52,6 +52,35 @@ def validate(request,response):
             raise ValueError('Inconsistent choice')
 
 
+def validate_bundle(folder,project):
+    request=read(folder/f'{project}-request.json')
+    manifest=read(folder/f'{project}-manifest.json')
+    questions=read(ROOT/'quality/questions.json')
+    rubric=read(ROOT/'quality/rubric.json')
+    if request.get('questions')!=questions:
+        raise ValueError('Questions differ from frozen assessment protocol')
+    for key,dimension in rubric['dimensions'].items():
+        if questions.get(key,{}).get('type')!='score' or questions[key].get('criteria')!=dimension['criteria']:
+            raise ValueError('Question levels differ from rubric')
+    if manifest.get('rubric_sha256')!=digest((ROOT/'quality/rubric.json').read_bytes()):
+        raise ValueError('Changed rubric requires separate baseline')
+    state=request.get('state',{})
+    if state.get('project')!=project:
+        raise ValueError('Evidence project identity mismatch')
+    files=state.get('files',{})
+    if not files or any(not isinstance(value,str) for value in files.values()):
+        raise ValueError('Missing source evidence')
+    if {name:digest(value.encode()) for name,value in files.items()}!=manifest.get('files'):
+        raise ValueError('Evidence file hashes differ from frozen manifest')
+    if 'context_sha256' in manifest:
+        if digest((folder/'context.json').read_bytes())!=manifest['context_sha256']:
+            raise ValueError('Verification context hash mismatch')
+        context=read(folder/'context.json')
+        if state.get('verification')!=context.get('verification') or state.get('known_gaps')!={'all':context.get('shared_gaps',[]),'project':context['projects'][project]}:
+            raise ValueError('Request context differs from frozen verification')
+    return request,manifest
+
+
 def prepare(folder,context_path):
     # Caller writes the actual verification and unresolved gaps before scoring.
     context=read(context_path)
@@ -78,7 +107,8 @@ def prepare(folder,context_path):
         save(folder/f'{slug}-request.json',request)
         save(folder/f'{slug}-manifest.json',{'commit':commit,'rubric_sha256':digest(rubric_raw),
              'context_sha256':digest(context_path.read_bytes()),'files':{p:digest(text.encode()) for p,text in files.items()}})
-    save(folder/'context.json',context)
+    with (folder/'context.json').open('xb') as stream:
+        stream.write(context_path.read_bytes())
 
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -86,7 +116,8 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 
 
 def assess(folder,project):
-    path=folder/f'{project}-request.json';raw=path.read_bytes();request=json.loads(raw)
+    request,_=validate_bundle(folder,project)
+    path=folder/f'{project}-request.json';raw=path.read_bytes()
     response_path=folder/f'{project}-response.json';call_path=folder/f'{project}-call.json'
     # A started call is not automatically retried, including ambiguous network failures.
     if response_path.exists() or call_path.exists(): raise ValueError('Assessment already started; preserve it and investigate')
@@ -117,7 +148,8 @@ def summarize(folder):
         raise ValueError('Weights must be positive and sum to one')
     rows=[]
     for slug in SLUGS:
-        request_raw=(folder/f'{slug}-request.json').read_bytes();request=json.loads(request_raw)
+        request,manifest=validate_bundle(folder,slug)
+        request_raw=(folder/f'{slug}-request.json').read_bytes()
         response_raw=(folder/f'{slug}-response.json').read_bytes();response=json.loads(response_raw)
         call=read(folder/f'{slug}-call.json');manifest=read(folder/f'{slug}-manifest.json')
         if call['request_sha256']!=digest(request_raw) or call.get('response_sha256')!=digest(response_raw):

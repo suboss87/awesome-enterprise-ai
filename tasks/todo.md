@@ -34,11 +34,11 @@ Goal: use Jev to assess the actual ten implementations against a frozen, evidenc
 
 - [x] Verify all ten published on main51391fe and isolate new work from unrelated local duplicates.
 - [x] Draft eight independently scored dimensions and non-compensating production gates; Jev accepted the rubric design.
-- [ ] Preserve baseline scores, request/evidence hashes and model distributions for all ten.
-- [ ] Fix independently reproduced execution-mode and account evidence defects.
-- [ ] Add bounded execution, code/schema provenance and explicit failure receipts.
-- [ ] Add durable content-bound Proposal Evidence review and stale-answer invalidation.
-- [ ] Independently review changes; run regressions and actual CLI journeys.
+- [x] Preserve baseline scores, request/evidence hashes and model distributions for all ten.
+- [x] Fix independently reproduced execution-mode and account evidence defects.
+- [x] Add bounded execution, code/schema provenance and explicit failure receipts.
+- [x] Add durable content-bound Proposal Evidence review and stale-answer invalidation.
+- [x] Independently review changes; run regressions and actual CLI journeys.
 - [ ] Reassess material changes with unchanged rubric, publish scores and remaining blockers, pass CI and publish improvements.
 
 Acceptance: all ten have inspectable scores and concrete next priorities; regression tests prove fixes; reviewed answers cannot survive changed/ineligible evidence; execution cannot silently replay or run indefinitely; production claims remain blocked without actual adoption controls and evidence. Authenticity means original useful implementation and accurate attribution, never disguising a derivative.

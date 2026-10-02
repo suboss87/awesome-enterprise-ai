@@ -48,6 +48,6 @@ python3 scripts/score_projects.py assess /private/path/assessment \
 python3 scripts/score_projects.py summarize /private/path/assessment
 ```
 
-Call `assess` once for each project. Started calls are not retried automatically, including ambiguous failures. The report validates question/answer structure and request/response hashes. Keep resolved model versions and raw distributions: later evidence, model versions or wording can change the result. No model score is a measured error rate.
+Call `assess` once for each project. Started calls are not retried automatically, including ambiguous failures. The report validates frozen questions, project identity, source/context bindings, answer distributions and request/response hashes. Keep resolved model versions and raw distributions: later evidence, model versions or wording can change the result. No model score is a measured error rate.
 
 The method follows TypeSafe's [Score](https://docs.typesafe.ai/primitives/score) and [composite scoring](https://docs.typesafe.ai/patterns/composite-scoring) APIs. The weights and production gates are this repository's explicit policy.
