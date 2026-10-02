@@ -59,5 +59,5 @@ class LiveAI:
         except (KeyError,TypeError,AttributeError) as exc:
             raise InputError('Malformed model response') from exc
         self.calls.append({'mode':'live','model':MODEL,'response_id':response['id'],
-                           'usage':response.get('usage'),'prompt_sha256':hashlib.sha256(prompt.encode()).hexdigest()})
+                           'usage':response.get('usage'),'schema_sha256':hashlib.sha256(json.dumps(schema,sort_keys=True,separators=(',',':')).encode()).hexdigest(),'prompt_sha256':hashlib.sha256(prompt.encode()).hexdigest()})
         return parsed

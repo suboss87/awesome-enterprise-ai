@@ -30,7 +30,7 @@ class RuntimeTests(unittest.TestCase):
             self.assertFalse(body['store']);self.assertIn('untrusted',body['input'][0]['content'])
             return {'id':'response1','model':MODEL,'status':'completed','output':[{'content':[{'type':'output_text','text':'{"answer":"ok"}'}]}],'usage':{'input_tokens':10}}
         ai=LiveAI(provider);self.assertEqual(ai.ask('analyze',{},object_schema({'answer':string_schema()})),{'answer':'ok'})
-        self.assertEqual(ai.calls[0]['mode'],'live');self.assertEqual(ai.calls[0]['response_id'],'response1')
+        self.assertEqual(len(ai.calls[0]['schema_sha256']),64);self.assertEqual(ai.calls[0]['mode'],'live');self.assertEqual(ai.calls[0]['response_id'],'response1')
     def test_unknown_citation(self):
         with self.assertRaises(InputError):evidence([{'source_id':'invented','quote':'text'}],{'s1':'text'})
     def test_quote_substitution(self):

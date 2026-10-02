@@ -1,0 +1,197 @@
+{
+  "rubric_version": "1.0.0",
+  "rubric_sha256": "d33fcd2ba2b93a1d737b8c85f9396fa9b4b87cf46193e808c3edf0f4039d6938",
+  "limits": "Uncalibrated model judgments of supplied evidence. Not measured production accuracy or deployment approval.",
+  "projects": [
+    {
+      "project": "customer-resolution",
+      "model": "jev-1.13.0",
+      "scores": {
+        "business_value": 1.99,
+        "correctness": 1.75,
+        "adoption": 1.87,
+        "reliability": 1.97,
+        "security": 1.96,
+        "reviewability": 1.99,
+        "distinct_value": 1.93,
+        "authenticity": 2.59
+      },
+      "weighted_100": 48.66,
+      "first_priority": "source_integration",
+      "request_sha256": "0afc3b267083a7eccdb6539dd8c0c61e235330b200cc00c9d1c01e7fbe9e8e0a",
+      "response_sha256": "8d4a2b44d41165d4ebf3f1b203fd46d0e29e96eb1020a1080c67a754b1bdb336",
+      "production_designation": "blocked: target-environment acceptance unverified"
+    },
+    {
+      "project": "incident-operations",
+      "model": "jev-1.13.0",
+      "scores": {
+        "business_value": 1.99,
+        "correctness": 1.88,
+        "adoption": 1.83,
+        "reliability": 1.98,
+        "security": 1.95,
+        "reviewability": 1.99,
+        "distinct_value": 1.95,
+        "authenticity": 2.57
+      },
+      "weighted_100": 49.24,
+      "first_priority": "source_integration",
+      "request_sha256": "44e635d7e285951a890938f05797705f6f9b7fa0d7f70c4d550f6952a1e4f146",
+      "response_sha256": "0a715d0f53ef785b4f9911411f15201cecd9a142445d5eec65effcc2cb649b6d",
+      "production_designation": "blocked: target-environment acceptance unverified"
+    },
+    {
+      "project": "exposure-review",
+      "model": "jev-1.13.0",
+      "scores": {
+        "business_value": 1.99,
+        "correctness": 1.75,
+        "adoption": 1.87,
+        "reliability": 1.96,
+        "security": 1.96,
+        "reviewability": 1.99,
+        "distinct_value": 1.95,
+        "authenticity": 2.49
+      },
+      "weighted_100": 48.55,
+      "first_priority": "source_integration",
+      "request_sha256": "2c4893648d2437d88d08745ed296288fbaeccd21c46a5bcc008088bc7a189f98",
+      "response_sha256": "d1bdcf9eb1ca12a6a23428b74e4ba6e789bb0d6762c8b45937c1728881e952d2",
+      "production_designation": "blocked: target-environment acceptance unverified"
+    },
+    {
+      "project": "business-insights",
+      "model": "jev-1.13.0",
+      "scores": {
+        "business_value": 1.99,
+        "correctness": 1.78,
+        "adoption": 1.95,
+        "reliability": 1.98,
+        "security": 1.96,
+        "reviewability": 1.87,
+        "distinct_value": 1.97,
+        "authenticity": 2.53
+      },
+      "weighted_100": 48.77,
+      "first_priority": "source_integration",
+      "request_sha256": "6977ada2843310d072d2778d867f874d36be70f9f225991e4ff785b5c7463ff2",
+      "response_sha256": "9d61e00b6235ac56c3bde750a0eada8fbd5235a4cd63abafed0c641893edbbe1",
+      "production_designation": "blocked: target-environment acceptance unverified"
+    },
+    {
+      "project": "inventory-decisions",
+      "model": "jev-1.13.0",
+      "scores": {
+        "business_value": 1.98,
+        "correctness": 1.84,
+        "adoption": 1.85,
+        "reliability": 1.95,
+        "security": 1.95,
+        "reviewability": 1.99,
+        "distinct_value": 1.93,
+        "authenticity": 2.54
+      },
+      "weighted_100": 48.85,
+      "first_priority": "source_integration",
+      "request_sha256": "b56c2da0b9a1accfc10df4897e35f63bc5620900adec6766df7ba7eea30306a7",
+      "response_sha256": "1bdcdd54ea695c59908f40ef82861bcf8e57efa4ee21cff918937a3ba22adea9",
+      "production_designation": "blocked: target-environment acceptance unverified"
+    },
+    {
+      "project": "asset-operations",
+      "model": "jev-1.13.0",
+      "scores": {
+        "business_value": 1.99,
+        "correctness": 1.87,
+        "adoption": 1.84,
+        "reliability": 1.97,
+        "security": 1.97,
+        "reviewability": 1.99,
+        "distinct_value": 1.96,
+        "authenticity": 2.57
+      },
+      "weighted_100": 49.27,
+      "first_priority": "source_integration",
+      "request_sha256": "cce9431a641dc7949cc6e8c3ec55b88d813a56ea5266a11703917a78a0110a6d",
+      "response_sha256": "f4d666425cb88a5b344311201b02bdc584220c486946c392780012321a3ff9f2",
+      "production_designation": "blocked: target-environment acceptance unverified"
+    },
+    {
+      "project": "claims-intake",
+      "model": "jev-1.13.0",
+      "scores": {
+        "business_value": 1.99,
+        "correctness": 1.9,
+        "adoption": 1.92,
+        "reliability": 1.96,
+        "security": 1.96,
+        "reviewability": 1.99,
+        "distinct_value": 1.98,
+        "authenticity": 2.56
+      },
+      "weighted_100": 49.59,
+      "first_priority": "source_integration",
+      "request_sha256": "4ed4d5f00fe23c0fd4aad62bf292856d03a92cd221c15589f72974c836550e0b",
+      "response_sha256": "65c4dc07d61289c34dc72cb993b0b69ac515758dfd988391f74110163b9040f2",
+      "production_designation": "blocked: target-environment acceptance unverified"
+    },
+    {
+      "project": "proposal-operations",
+      "model": "jev-1.13.0",
+      "scores": {
+        "business_value": 1.97,
+        "correctness": 1.83,
+        "adoption": 1.85,
+        "reliability": 1.97,
+        "security": 1.95,
+        "reviewability": 2.0,
+        "distinct_value": 1.97,
+        "authenticity": 2.6
+      },
+      "weighted_100": 49.04,
+      "first_priority": "review_lifecycle",
+      "request_sha256": "fe644729b1c2f14a0e7e78a1f2499e0fc27ea0a33c4fe4f898620325edaad7a6",
+      "response_sha256": "cc92d4009c0bc85a0769f0fb3f90a856e2a89417feb15369dba2d13cb2e542ea",
+      "production_designation": "blocked: target-environment acceptance unverified"
+    },
+    {
+      "project": "account-intelligence",
+      "model": "jev-1.13.0",
+      "scores": {
+        "business_value": 1.99,
+        "correctness": 0.47,
+        "adoption": 1.88,
+        "reliability": 1.71,
+        "security": 1.92,
+        "reviewability": 1.99,
+        "distinct_value": 1.89,
+        "authenticity": 2.42
+      },
+      "weighted_100": 40.85,
+      "first_priority": "business_correctness",
+      "request_sha256": "93c9cd1130af9d7a1bd2a6fdccd094f4bd7a9985848f2b931da741ad53fd55f6",
+      "response_sha256": "5b04843a0eba6d7d7611104ed1c5a199c34a1524b393f46b01e8c87cc4f6098b",
+      "production_designation": "blocked: target-environment acceptance unverified"
+    },
+    {
+      "project": "workforce-onboarding",
+      "model": "jev-1.13.0",
+      "scores": {
+        "business_value": 1.99,
+        "correctness": 1.69,
+        "adoption": 1.91,
+        "reliability": 1.94,
+        "security": 1.96,
+        "reviewability": 1.97,
+        "distinct_value": 1.98,
+        "authenticity": 2.53
+      },
+      "weighted_100": 48.35,
+      "first_priority": "source_integration",
+      "request_sha256": "7338686902ae679a8e8eb94e5e20be884b826be2b934329a97c166a3236a7725",
+      "response_sha256": "67fae2094889b973eb2bba4896ccfcbe366da4a9471cd508114cda4523ca46b6",
+      "production_designation": "blocked: target-environment acceptance unverified"
+    }
+  ]
+}

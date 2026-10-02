@@ -4,6 +4,8 @@ import json
 import re
 import threading
 import unittest
+from unittest.mock import patch
+from enterprise_ai.execution import WorkflowFailure
 from enterprise_ai.server import make_server
 
 class WorkspaceTests(unittest.TestCase):
@@ -44,6 +46,18 @@ class WorkspaceTests(unittest.TestCase):
         data['question']='Changed question'
         status,raw,_=self.request('POST','/api/run',json.dumps(body),headers)
         self.assertEqual(status,400);self.assertIn(b'unchanged example',raw)
+    def test_failed_workers_release_capacity_and_allow_next_run(self):
+        _,raw,_=self.request('GET','/api/example/business-insights')
+        body=json.dumps({'project':'business-insights','mode':'replay','input':json.loads(raw)})
+        headers=self.session()
+        failure=WorkflowFailure('Worker deadline exceeded',{'status':'failed','failure_category':'deadline_exceeded'})
+        with patch('enterprise_ai.server.execute',side_effect=failure):
+            for _ in range(3):
+                status,raw,_=self.request('POST','/api/run',body,headers)
+                self.assertEqual(status,400)
+                self.assertEqual(json.loads(raw)['receipt']['failure_category'],'deadline_exceeded')
+        self.assertEqual(self.request('POST','/api/run',body,headers)[0],200)
+
     def test_page_does_not_cache_data_or_allow_embedding(self):
         _,_,headers=self.request('GET','/')
         self.assertEqual(headers['Cache-Control'],'no-store')
