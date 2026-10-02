@@ -101,3 +101,7 @@ Refresh `current.json` from the source system before **every** decision/export. 
 The ledger trusts the machine, OS account, clock and supplied source export. It is not a tamper-proof audit log: its owner/admin can edit SQLite, alter application code or replace files. Hashes detect changed stored draft bindings, not a malicious privileged actor. Decisions are local account attestations, not organizational authorization or segregation of duties.
 
 There is no authenticated source fetch, source-system permission check, remote revocation notification, enterprise identity/role integration, encryption-at-rest service, managed backup, retention automation or bid-system submission. Database, input and exported files contain proposal content; use organizational disk encryption, access controls and backup/retention procedures. A bank deployment requires these integrations and independently validated operating controls before production use.
+
+## Governance and acceptance
+
+See [domain review responsibilities, evaluation metrics and deployment gates](GOVERNANCE.md).
