@@ -40,7 +40,7 @@ Goal: use Jev to assess the actual ten implementations against a frozen, evidenc
 - [x] Add durable content-bound Proposal Evidence review and stale-answer invalidation.
 - [x] Independently review changes; run regressions and actual CLI journeys.
 - [x] Reassess material changes with unchanged rubric and publish inspectable scores and remaining blockers in the review PR.
-- [ ] Merge hardening PR4 after final exact-head CI; record published revision in the session handoff.
+- [x] Merge hardening PR4 after final exact-head CI; record published revision in the session handoff.
 
 Acceptance: all ten have inspectable scores and concrete next priorities; regression tests prove fixes; reviewed answers cannot survive changed/ineligible evidence; execution cannot silently replay or run indefinitely; production claims remain blocked without actual adoption controls and evidence. Authenticity means original useful implementation and accurate attribution, never disguising a derivative.
 
@@ -49,3 +49,15 @@ Acceptance: all ten have inspectable scores and concrete next priorities; regres
 User expanded the outcome on 2026-10-02: 20–30 distinct useful enterprise AI projects, with evaluations, proportionate governance and production deployment evidence for every project. Research recurring community pain and system-integrator use cases; reuse permitted open source with notices and meaningful improvements. Preserve personal prose without em dashes. Existing ten must be hardened first. New work is not complete merely because it is published or receives a model score.
 
 The goal-state tool refused a replacement because an earlier unfinished goal is paused; no new automatic continuation goal was armed. This checklist records authorized project work, not a claim that the tool state changed. Existing GitHub schedules remain the durable verification/research mechanism until checked and extended.
+
+## Authenticated proposal sources: next adoption step
+
+- Scope: read approved product-document text from an explicit GitHub manifest, preserve immutable repository/commit/blob evidence, and refresh it inside approval/export. Existing manual-file review stays explicitly local.
+- Jev judged the bounded implementation plan `approve_bounded_build`; its selected primary risk was `refresh_bypass`. This is not production approval.
+- The manifest owner defines approval for exact blob versions and validity dates. GitHub read access establishes source access, not business approval.
+- Acceptance: actual authenticated public-fixture read; strict source/path/identity/bounds checks; no credential leaks or redirects; permission failures withhold output; branch and policy changes invalidate approval; programmatic and CLI exports cannot bypass refresh; independent adversarial review and exact-head CI.
+- Keep Proposal Evidence experimental until real target integration, identity, data handling and business acceptance are verified.
+
+Progress: the previous hardening PR4 merged as e9d75186dcedb2b490d231627ddc8a6be393363b; main CI passed and v0.3.0 pre-release is published. The earlier merge checkbox above is now satisfied.
+
+Source adapter verification: 220 tests and ten CLI replays passed. Independent frozen attack review reproduced a mid-refresh policy revocation race, fixed in 4c971d3 and retested unchanged. One live public-source case passed two frozen semantic criteria, six exact quotes, authenticated local review/export and policy revocation. Jev artifact review and exact-head CI remain pending; no production designation.

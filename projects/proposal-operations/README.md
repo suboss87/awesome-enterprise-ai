@@ -1,6 +1,6 @@
 # Proposal Evidence Workbench
 
-**Experimental.** Local examples and tests pass, but Jev retained an operational-deployment hold after the fresh evaluation. Evaluate with synthetic data; source-system integration, identity controls and operational validation remain open. This project is included for inspection and development, not as an approved reference release. See the [verification record](../../docs/VERIFICATION.md).
+**Experimental.** Local examples and tests pass, but Jev retained an operational-deployment hold after the fresh evaluation. Evaluate with public or synthetic data; a bounded GitHub source adapter is available, while target-environment authorization, identity controls and operational validation remain open. This project is included for inspection and development, not as an approved reference release. See the [verification record](../../docs/VERIFICATION.md).
 
 Sales engineers review an RFP question set against a dated, approved evidence library. The workbench produces a requirement-by-requirement response matrix, highlights contradictions and evidence gaps, and removes affirmative drafts backed by expired, future, or unapproved sources.
 
@@ -30,7 +30,7 @@ The example answers a SAML question with a plan-specific source. Expire that sou
 - `requirements`: 1–100 objects with unique `id` (128 characters maximum) and `text` (10,000 maximum).
 - `sources`: 0–100 objects with unique `id`, `text`, `valid_from`, `valid_until`, and `approval` (`approved`, `draft`, `revoked`, or `superseded`). Validity dates are inclusive and cannot be reversed.
 
-Unknown fields, duplicate IDs, missing output rows, fabricated quotation text and unknown citation IDs are rejected. IDs belong to separate requirement and source namespaces. No source is fetched from a URL. Documents must be parsed and normalized before input; this tool does not parse PDFs or spreadsheets.
+Unknown fields, duplicate IDs, missing output rows, fabricated quotation text and unknown citation IDs are rejected. IDs belong to separate requirement and source namespaces. The core workflow accepts normalized source records; the optional GitHub adapter below fetches allowlisted files separately. Documents must be parsed and normalized before input; this tool does not parse PDFs or spreadsheets.
 
 ## Output and interpretation
 
@@ -59,7 +59,7 @@ Run `python3 -m enterprise_ai serve` from the collection root to try this workfl
 
 ## Local review ledger
 
-The optional CLI adds durable human decisions to an immutable draft snapshot. It runs on a trusted, single-user POSIX workstation. It does **not** add enterprise authentication or a document-system connector; the experimental hold remains.
+The optional CLI adds durable human decisions to an immutable draft snapshot. It runs on a trusted, single-user POSIX workstation. It identifies the local OS account. The optional GitHub adapter below adds source refresh, but enterprise reviewer authentication remains unimplemented and the experimental hold remains.
 
 Prepare a private working directory outside the repository, export the latest source/requirement packet from your authorized system, and set its `as_of` to today's UTC date. Do not change historical validity dates to make evidence pass. The following commands assume that packet is saved as `$HOME/.proposal-review/current.json`:
 
@@ -86,7 +86,7 @@ python3 -m enterprise_ai.proposal_review --db "$HOME/.proposal-review/reviews.sq
 python3 -m unittest discover -s tests -p test_proposal_review.py -v
 ```
 
-Refresh `current.json` from the source system before **every** decision/export. The CLI checks today's UTC date, but cannot discover an upstream revocation omitted from an operator-provided export. An old packet relabeled with today's date is not evidence of freshness.
+For manual-file drafts, refresh `current.json` from the source system before **every** decision/export. The CLI checks today's UTC date, but cannot discover an upstream revocation omitted from an operator-provided export. An old packet relabeled with today's date is not evidence of freshness.
 
 ### What the ledger enforces
 
@@ -161,4 +161,4 @@ Any branch-head change invalidates review, even when unrelated files changed. A 
 
 A read-only authenticated trial on October 2, 2026 retrieved the public synthetic fixture `projects/proposal-operations/examples/input.json` from `suboss87/awesome-enterprise-ai` (repository ID `1394550893`) through the actual bounded adapter. Commit: `e9d75186dcedb2b490d231627ddc8a6be393363b`; blob: `084fba6a79ca67f4334a78faee11997cf40db927`; decoded size: 366 bytes; SHA-256: `9530d8e1613c24f57b5ecdb023ff1e9e4bf48161df1b729ec3b7249f2fd5d2ad`. API version `2026-03-10` was accepted. This proves public-fixture connectivity and binding, not private enterprise permissions, real product evidence or bank deployment.
 
-Run `python3 -m unittest discover -s tests -p test_proposal_sources.py -v` for the failure/bypass suite. The experimental hold remains pending independent review and deployment-specific evidence.
+Run `python3 -m unittest discover -s tests -p test_proposal_sources.py -v` for the failure/bypass suite. Independent adversarial review found a mid-refresh policy revocation race; the fix rereads the pinned policy after network collection, and the unchanged attack now fails closed. A separate live test used the public collection README for two predefined questions: both answers met the frozen criteria, all six quotations matched, and both began unreviewed. Authenticated staging, two explicitly labeled coding-agent demonstration decisions and export succeeded; revoking the operator policy then blocked export. This is one public-source integration test, not business-owner acceptance or a production-accuracy estimate. The experimental hold remains pending deployment-specific evidence.
