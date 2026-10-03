@@ -16,11 +16,19 @@ from workflow import run, import_gx, digest, instant
 class EvidenceTests(unittest.TestCase):
  def setUp(self):
   self.data=json.loads((ROOT/'examples/input.json').read_text())
+  self.data['narrative_mode']='template'  # Frozen deterministic cases make no model calls.
   self.raw=json.loads((ROOT/'examples/native/repaired-gx.json').read_text())
   self.suite=json.loads((ROOT/'examples/native/suite.json').read_text())
   self.binding=json.loads((ROOT/'examples/mapping.json').read_text())['bindings'][1]
  def evaluate(self):return run(self.data,ReplayAI([]))
  def native(self):return import_gx(self.raw,self.suite,self.binding,self.binding['artifact_sha256'])
+ def test_json_integral_number_roundtrip_preserves_semantic_binding(self):
+  from workflow import canonical_numbers
+  browser_packet=canonical_numbers(self.data)
+  self.assertEqual(run(browser_packet,ReplayAI([]))['status'],'retest_evidence_ready')
+  self.assertEqual(digest({'threshold':0.0}),digest({'threshold':0}))
+  self.assertNotEqual(digest({'threshold':True}),digest({'threshold':1}))
+  self.assertNotEqual(digest({'threshold':9007199254740993}),digest({'threshold':9007199254740992}))
  def test_valid_repair(self):
   output=self.evaluate();self.assertEqual(output['status'],'retest_evidence_ready');self.assertTrue(output['human_review_required'])
   self.assertNotEqual(*[r['batch_fingerprint'] for r in self.data['runs']])

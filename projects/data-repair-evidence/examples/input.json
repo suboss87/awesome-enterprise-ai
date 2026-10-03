@@ -8,7 +8,7 @@
       "run_id": "{\"run_name\":\"failed\",\"run_time\":\"2026-10-03T07:09:37.545014+05:30\"}",
       "completed_at": "2026-10-03T01:39:37.545014+00:00",
       "batch_fingerprint": "8a7451005eab23a6ad6d34568ce23dc7",
-      "suite_sha256": "91ca21d7ea1eb498a18b08feb97a50045683c3bbdf63f5cda95a790d609885c2",
+      "suite_sha256": "1f886ff43a3f4b2fb88865c63f4b58aa3cfe64c61ddd6ab69636d9798821442c",
       "artifact_sha256": "ace965ffb2041480b4a48dddc9a3a67c8302aef1f3374aab4a0e63060da3e7f4",
       "exporter_version": "1.8.0",
       "scope": {
@@ -44,7 +44,7 @@
             "min_value": 0.0,
             "max_value": 10000.0
           },
-          "configuration_sha256": "6c77eb03525861d956ce65bae1a261d2028e218daa7bb76789727f7f5538c324",
+          "configuration_sha256": "cf579624ab8521e788e71b62321e4c86d72fb28c1f5a7147eae89c451e8b9b30",
           "state": "pass",
           "aggregate": {
             "element_count": 3,
@@ -58,7 +58,7 @@
       "run_id": "{\"run_name\":\"repaired\",\"run_time\":\"2026-10-03T07:09:37.578508+05:30\"}",
       "completed_at": "2026-10-03T01:39:37.578508+00:00",
       "batch_fingerprint": "a9f89c49917610e7c7e1b7af545c3c22",
-      "suite_sha256": "91ca21d7ea1eb498a18b08feb97a50045683c3bbdf63f5cda95a790d609885c2",
+      "suite_sha256": "1f886ff43a3f4b2fb88865c63f4b58aa3cfe64c61ddd6ab69636d9798821442c",
       "artifact_sha256": "e016250300e1d938297cac2cdfda04cf2f8e8c58a353fc25816c1aea777ca5c8",
       "exporter_version": "1.8.0",
       "scope": {
@@ -94,7 +94,7 @@
             "min_value": 0.0,
             "max_value": 10000.0
           },
-          "configuration_sha256": "6c77eb03525861d956ce65bae1a261d2028e218daa7bb76789727f7f5538c324",
+          "configuration_sha256": "cf579624ab8521e788e71b62321e4c86d72fb28c1f5a7147eae89c451e8b9b30",
           "state": "pass",
           "aggregate": {
             "element_count": 3,
@@ -143,5 +143,5 @@
     ]
   },
   "runbook_sources": [],
-  "narrative_mode": "template"
+  "narrative_mode": "ai"
 }

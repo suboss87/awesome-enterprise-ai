@@ -54,7 +54,7 @@ python3 projects/data-repair-evidence/tools/run.py --input projects/data-repair-
 python3 projects/data-repair-evidence/tools/run.py --input projects/data-repair-evidence/examples/input.json --mode live
 ```
 
-Template mode makes **zero model calls**. Replay exercises **one simulated structured call**, not inference. Live mode uses the repository's existing provider for one structured call. No live call or measured benefit is claimed here. AI selects/reorders at most six existing evidence sentences; it cannot author a new fact, owner, action or decision. The full baseline stays in the output even if the selected view omits something. Approved runbook excerpts are untrusted context, not commands. Operators must review even approved excerpts and identifiers for disclosure before live use.
+Template mode makes **zero model calls**. Replay exercises **one simulated structured call**, not inference. Live mode uses the repository's existing provider for one structured call inside the shared 120-second worker boundary. No live call or measured benefit is claimed here. AI selects/reorders at most six existing evidence sentences; it cannot author a new fact, owner, action or decision. The full baseline stays in the output even if the selected view omits something. Approved runbook excerpts are untrusted context, not commands. Operators must review even approved excerpts and identifiers for disclosure before live use.
 
 This is deliberately a modest optional experiment, not an agent or multi-agent system. It may add no value. Keep the template if prioritization does not help a real reviewer. See [evaluation plan](evaluation/README.md) for the comparison required before claiming enhancement.
 
@@ -69,3 +69,21 @@ This is deliberately a modest optional experiment, not an agent or multi-agent s
 - `evaluation/`: release gates and unmeasured adoption/AI questions.
 
 See [governance and deployment gaps](GOVERNANCE.md). This is an export-based reference experiment, not production approval. It does not replace GX, dbt, a catalog or an incident platform. Whether this portable comparison is preferable to existing tools remains an adopter decision.
+
+
+## Collection workspace
+
+This experiment is also available in `python3 -m enterprise_ai serve`. The supplied browser example replays one authored sentence-selection response. For a zero-call template, use the standalone command above. Shared CLI replay:
+
+```sh
+python3 -m enterprise_ai run data-repair-evidence --input projects/data-repair-evidence/examples/input.json --mode replay --responses projects/data-repair-evidence/examples/responses.json
+```
+
+Live and replay CLI/browser paths use the collection's bounded worker and execution receipts. The local template path makes no network call. Native fixture generation uses a separate development environment; those packages are not runtime dependencies of this project.
+
+
+## Verified trial, October 3, 2026
+
+The native import round trip and frozen adversarial tests pass. A real browser replay initially exposed different hashes for JSON numbers such as `0.0` and `0`; the corrected canonicalization treats equivalent integral numbers alike while preserving booleans and genuinely different integers. The same browser journey then completed with a successful result, HTTP 200 and no console errors.
+
+One live model call selected the same four evidence sentences as the template. Its output retained the expected owner, both declared consumers, the deterministic status and human-review requirement. This checks provider integration; it demonstrates no AI improvement. That run predates the numeric-hash correction and is retained as historical evidence. The model-facing statements did not change, so no repeat inference was performed merely to obtain a different ordering.

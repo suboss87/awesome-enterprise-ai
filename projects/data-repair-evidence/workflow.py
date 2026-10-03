@@ -6,13 +6,22 @@ from enterprise_ai.common import (InputError, obj, text, rows, unique, integer, 
     object_schema, array_schema, string_schema)
 
 SPEC={'id':'data-repair-evidence','title':'Data Repair Evidence','category':'Data operations',
-      'summary':'Verify that a later validation retested unchanged checks on the same logical data scope.'}
+      'summary':'Experimental: verify that a later validation retested unchanged checks on the same logical data scope.'}
 SCHEMA_URL='https://schemas.getdbt.com/dbt/manifest/v12.json'
 GX_VERSION='1.8.0'
 
 
+def canonical_numbers(value):
+    # JSON/JavaScript represents 0.0 and 0 identically. Preserve booleans and all
+    # other exact values; a genuinely changed integer still changes the hash.
+    if isinstance(value,float) and value.is_integer(): return int(value)
+    if isinstance(value,dict): return {key:canonical_numbers(item) for key,item in value.items()}
+    if isinstance(value,list): return [canonical_numbers(item) for item in value]
+    return value
+
+
 def digest(value):
-    return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
+    return hashlib.sha256(json.dumps(canonical_numbers(value),sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
 
 
 def instant(value):

@@ -15,6 +15,7 @@ The collection provides small pieces of a business process. Adoption means conne
 | Claims intake | Evidence checklist and information requests | Approved OCR and claim/policy exports; measure missing evidence, identity conflicts and extraction failures on representative packets |
 | Proposal evidence | Approved-source response matrix | Product-document version feeds; invalidate answers when evidence expires or changes, and measure reviewer corrections |
 | Account review | CRM and meeting reconciliation | Authorized CRM/meeting exports with opportunity identity; measure false blockers and incorrect proposed changes |
+| Data repair evidence | Same-scope retest packet and declared lineage | Authenticate scope mappings and artifact freshness; compare reviewer outcomes with the fixed template before claiming AI benefit |
 | Onboarding | Dependency-aware readiness checklist | Authorized HR/task exports; verify task completion against its system of record and measure false-ready decisions |
 
 These are explicit acceptance gaps, not promised or already implemented connectors. Integration should preserve the source system's identity and permissions. Do not infer that an upstream project lacks these capabilities; comparative improvement requires inspecting and testing an appropriate baseline.

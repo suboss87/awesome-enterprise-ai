@@ -6,7 +6,7 @@ from .common import InputError
 ROOT=Path(__file__).resolve().parents[1]
 SLUGS=('customer-resolution','incident-operations','exposure-review','business-insights',
        'inventory-decisions','asset-operations','claims-intake','proposal-operations',
-       'account-intelligence','workforce-onboarding')
+       'account-intelligence','workforce-onboarding','data-repair-evidence')
 
 
 def load(slug):
