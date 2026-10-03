@@ -1,5 +1,16 @@
 """Exact inventory matching with advisory interpretation, never a scanner."""
 from enterprise_ai.common import *
+import re
+
+
+def package_identity(item):
+    ecosystem = text(item['ecosystem'], 'ecosystem', 32)
+    if not re.fullmatch(r'[a-z][a-z0-9-]*', ecosystem):
+        raise InputError('Ecosystem must be an explicit lowercase namespace, such as pypi or npm')
+    package = text(item['package'], 'package', 200)
+    if package != package.strip() or package.startswith('pkg:'):
+        raise InputError('Package must be a normalized name, not a package URL')
+    return ecosystem, package
 
 SPEC={'id':'exposure-review','title':'Vulnerability Remediation Planner','category':'Security','summary':'Separate known version matches from missing inventory and prepare advisory review.'}
 
@@ -8,12 +19,13 @@ def run(data,ai):
     if type(data['inventory_complete']) is not bool: raise InputError('inventory_complete must be boolean')
     inventory=rows(data['inventory'],'inventory',300); inv=unique(inventory)
     for item in inventory:
-        obj(item,['id','package','version','service','owner'])
+        obj(item,['id','ecosystem','package','version','service','owner'])
+        package_identity(item)
         for key in ('package','version','service','owner'): text(item[key],key,200)
     advisories=rows(data['advisories'],'advisories',100,1); adv=unique(advisories)
     for item in advisories:
-        obj(item,['id','package','affected_versions','fixed_versions','text'])
-        text(item['package'],'package',200);text(item['text'])
+        obj(item,['id','ecosystem','package','affected_versions','fixed_versions','text'])
+        package_identity(item);text(item['text'])
         for field in ('affected_versions','fixed_versions'):
             values=rows(item[field],field,100)
             for version in values: text(version,'version',128)
@@ -28,11 +40,12 @@ def run(data,ai):
         a=adv[scan['advisory_id']];asset=inv.get(scan['inventory_id'])
         state='unknown_inventory'
         if asset:
-            if asset['package']!=a['package']: state='package_mismatch'
+            if asset['ecosystem']!=a['ecosystem']: state='ecosystem_mismatch'
+            elif asset['package']!=a['package']: state='package_mismatch'
             elif asset['version'] in a['affected_versions']: state='affected_version_match'
             elif asset['version'] in a['fixed_versions']: state='fixed_version_match'
             else: state='version_unlisted'
-        matches.append({'finding_id':scan['id'],'inventory_id':scan['inventory_id'],'advisory_id':a['id'],'status':state,'owner':asset['owner'] if asset else None,'service':asset['service'] if asset else None,'advisory_fixed_versions':a['fixed_versions']})
+        matches.append({'finding_id':scan['id'],'inventory_id':scan['inventory_id'],'advisory_id':a['id'],'status':state,'owner':asset['owner'] if asset else None,'service':asset['service'] if asset else None,'advisory_fixed_versions':a['fixed_versions'],'inventory_identity':{'ecosystem':asset['ecosystem'],'package':asset['package'],'version':asset['version']} if asset else None,'advisory_identity':{'ecosystem':a['ecosystem'],'package':a['package']}})
     schema=object_schema({'advisories':array_schema(object_schema({'advisory_id':string_schema(),'impact_summary':string_schema(),'preconditions':array_schema(string_schema()),'review_questions':array_schema(string_schema()),'evidence':EVIDENCE_SCHEMA}))})
     interpreted=ai.ask('Interpret each advisory supplied, exactly once. Evidence source_id must be exactly the advisory id, with quote copied verbatim ONLY from that advisory text field. Matches, package/version arrays and other JSON metadata are context, not quotable sources. Do not add id prefixes. Quote advisory text for impact and contextual preconditions; use review_questions for unknowns. Do not infer installed software, version applicability, exploitability, fixes, or vendor backports beyond the provided deterministic matches. No exploitation or remediation execution instructions.',{'advisories':advisories,'matches':matches},schema)
     records=interpreted['advisories']; unique(records,'advisory_id')
@@ -46,4 +59,4 @@ def run(data,ai):
     if not data['inventory_complete'] or not inventory: findings.append(finding('inventory_incomplete','review','Inventory coverage is unknown','Missing software cannot be classified as safe.'))
     for match in matches:
         if match['status']!='fixed_version_match': findings.append(finding(match['status'],'review','Finding requires owner review',match['finding_id'],[match['finding_id'],match['advisory_id']]))
-    return result(SPEC['id'],'Version evidence and advisory context prepared; no exploitability clearance.',{'findings':len(matches),'affected_matches':sum(m['status']=='affected_version_match' for m in matches),'unknown_matches':sum(m['status'] in ('unknown_inventory','version_unlisted','package_mismatch') for m in matches)},findings,[{'type':'owner_review','finding_id':m['finding_id'],'owner':m['owner']} for m in matches],matches=matches,analysis=interpreted)
+    return result(SPEC['id'],'Version evidence and advisory context prepared; no exploitability clearance.',{'findings':len(matches),'affected_matches':sum(m['status']=='affected_version_match' for m in matches),'unknown_matches':sum(m['status'] in ('unknown_inventory','version_unlisted','package_mismatch','ecosystem_mismatch') for m in matches)},findings,[{'type':'owner_review','finding_id':m['finding_id'],'owner':m['owner']} for m in matches],matches=matches,analysis=interpreted)

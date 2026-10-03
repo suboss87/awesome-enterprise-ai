@@ -3,23 +3,25 @@
   "inventory": [
     {
       "id": "pkg1",
-      "package": "pkg:pypi/example",
+      "package": "example",
       "version": "1.0",
       "service": "billing",
-      "owner": "platform"
+      "owner": "platform",
+      "ecosystem": "pypi"
     }
   ],
   "advisories": [
     {
       "id": "ADV-1",
-      "package": "pkg:pypi/example",
+      "package": "example",
       "affected_versions": [
         "1.0"
       ],
       "fixed_versions": [
         "1.1"
       ],
-      "text": "Version 1.0 can expose records when debug mode is enabled. Version 1.1 fixes the issue."
+      "text": "Version 1.0 can expose records when debug mode is enabled. Version 1.1 fixes the issue.",
+      "ecosystem": "pypi"
     }
   ],
   "findings": [

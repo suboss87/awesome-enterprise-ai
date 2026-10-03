@@ -20,21 +20,21 @@ Live mode sends the supplied records to the configured fixed model provider thro
 
 ## Input contract
 
-`inventory_complete` boolean; `inventory` entries with unique `id`, `package`, `version`, `service`, `owner`; `advisories` with unique `id`, `package`, explicit `affected_versions`, `fixed_versions`, and `text`; `findings` with unique `id`, `inventory_id`, `advisory_id`. Package identity and version matching are exact. Advisory version arrays cannot overlap.
+`inventory_complete` boolean; `inventory` entries with unique `id`, `ecosystem`, `package`, `version`, `service`, `owner`; `advisories` with unique `id`, `ecosystem`, `package`, explicit `affected_versions`, `fixed_versions`, and `text`; `findings` with unique `id`, `inventory_id`, `advisory_id`. Identity is the exact `(ecosystem, package)` pair, followed by an exact version-string comparison. Ecosystem is a required lowercase namespace (for example `pypi`, `npm`, `maven`); package is a normalized name within that namespace, including any required scope/group. Ecosystem aliases are not inferred or merged, and `pkg:` URLs are rejected rather than parsed. Advisory version arrays cannot overlap.
 
 Unknown fields, duplicate identifiers, invalid types and unsupported source quotations fail without producing a successful analysis. Refer to the runnable JSON example for the full shape. Inputs and model output have bounded lengths/counts. No model-generated URLs or commands are executed.
 
 ## Output and decisions
 
-Per-finding match state and owner; quoted advisory impact, preconditions and review questions. Empty inventory is flagged even when the caller claims completeness. A listed fixed version is an input assertion, not exploitability clearance.
+Per-finding match state, inventory/advisory identity and owner; quoted advisory impact, preconditions and review questions. Empty inventory is flagged even when the caller claims completeness. `ecosystem_mismatch` is an unknown match requiring review, even when package name and an affected/fixed version string are identical. A listed fixed version is an input assertion, not exploitability clearance.
 
 All results require human review. `findings` expose actionable conditions; `actions` are review recommendations only. The workflow does not write to enterprise systems.
 
 ## Evaluation
 
-Exact package/version matching plus severity sorting is the baseline. Eight cases exercise affected/fixed/unlisted versions, absent/partial inventory, package mismatch, unresolved inventory references and adversarial text. Future evaluation needs pinned authentic advisory snapshots, vendor backports and reviewer-labelled applicability. Measure false-safe classifications and owner/fix correctness.
+Exact ecosystem/name/version matching plus severity sorting is the baseline. The original eight cases exercise affected/fixed/unlisted versions, absent/partial inventory, package mismatch, unresolved inventory references and adversarial text. Future evaluation needs pinned authentic advisory snapshots, vendor backports and reviewer-labelled applicability. Measure false-safe classifications and owner/fix correctness.
 
-`evaluation/cases.json` freezes eight synthetic cases and expected metrics/finding labels before live evaluation. All recorded responses are authored fixtures. These verify calculation, citation and error-handling contracts, not actual model accuracy. No enterprise deployment validation or measured time savings is claimed.
+`evaluation/cases.json` preserves the original eight synthetic cases unchanged as historical evidence. `evaluation/ecosystem-cases.json` explicitly migrates those eight inputs to the new identity contract and adds two same-name/different-ecosystem regressions, without changing the earlier expected business outcomes. Current tests run this new file. All recorded responses are authored fixtures. These verify calculation, citation and error-handling contracts, not actual model accuracy. No enterprise deployment validation or measured time savings is claimed.
 
 ```bash
 python3 -m unittest discover -s projects/exposure-review/tests
@@ -44,7 +44,7 @@ The tests also reject fabricated quotations, foreign sources, duplicate IDs, mis
 
 ## Limits
 
-No scanning, exploitation, runtime reachability analysis, version-range resolution, vendor feed or package upgrades. Callers must normalize package identities and supply authoritative version lists; the model cannot amend them. The tool is not a vulnerability suppression or deployment gate. Advisory prose remains untrusted.
+No scanning, exploitation, runtime reachability analysis, version-range resolution, vendor feed or package upgrades. No SBOM ingestion or package-URL parsing is implemented. Callers must normalize ecosystem/name identities and supply authoritative version lists; the model cannot amend them. The tool is not a vulnerability suppression or deployment gate. Advisory prose remains untrusted.
 
 Exact quotation checks cannot guarantee semantic entailment or defeat every prompt injection. Human reviewers must verify substantive interpretations. This is an original bounded reference workflow, not a copy of an upstream enterprise application. See the collection license and security guidance.
 
@@ -55,3 +55,11 @@ Run `python3 -m enterprise_ai serve` from the collection root to try this workfl
 ## Governance and acceptance
 
 See [domain review responsibilities, evaluation metrics and deployment gates](GOVERNANCE.md).
+
+## Input migration: ecosystem-qualified identities
+
+This is an intentional input-contract change. Older packets missing `ecosystem` now fail before model inference. Do not infer a namespace from a bare package name. For the former synthetic example only, change `"package": "pkg:pypi/example"` to `"ecosystem": "pypi", "package": "example"` in both inventory and advisory rows. Inventory and advisory producers must use the same agreed ecosystem vocabulary and canonical names. Alias normalization, private registry origin, distribution release, architecture and package-URL qualifiers are not resolved by this bounded matcher.
+
+Regression tests use `requests`, a name published independently on [PyPI](https://pypi.org/project/requests/) and [npm](https://www.npmjs.com/package/requests?activeTab=dependencies), verified October 3, 2026. Their fixture advisory text and version lists are **synthetic**, not claims about a real vulnerability in either package. Both affected-looking and fixed-looking version collisions must produce `ecosystem_mismatch`, never an affected/fixed match.
+
+Historical live trials under `evaluation/2026-09-30/` and `evaluation/live-cases.json` describe the earlier contract and remain unchanged. They do not establish current-contract live accuracy. Create a separately identified migrated dataset before a new inference evaluation; do not silently rewrite historical evidence. No dependency was added or installed for this fix.

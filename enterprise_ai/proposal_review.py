@@ -1,4 +1,4 @@
-"""Local, OS-account-bound proposal review ledger. No network or enterprise identity."""
+"""Local, OS-account-bound review ledger with authenticated GitHub source refresh."""
 import argparse
 from datetime import datetime, timezone
 import hashlib
@@ -9,6 +9,7 @@ import pwd
 import sqlite3
 import stat
 import sys
+from . import proposal_sources
 
 from .catalog import load
 from .execution import MAX_RESULT_FILE_BYTES
@@ -60,6 +61,29 @@ def validate(packet, output):
     return matrix
 
 
+def policy_file(path):
+    """Read the same operator policy at each decision, never an embedded old copy."""
+    path = Path(path).absolute()
+    parent = path.parent.stat()
+    if parent.st_uid != os.getuid() or parent.st_mode & 0o077:
+        raise InputError('Source manifest directory must be private and owned by this OS account')
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    with os.fdopen(fd, 'rb') as handle:
+        info = os.fstat(handle.fileno())
+        if not stat.S_ISREG(info.st_mode) or info.st_uid != os.getuid() or info.st_mode & 0o022:
+            raise InputError('Source manifest must be an owned regular file without group/other write access')
+        raw = handle.read(500001)
+        if len(raw) > 500000:
+            raise InputError('Source manifest exceeds 500 KB')
+    return path.resolve(), loads(raw)
+
+
+def check_policy_binding(packet, manifest):
+    expected = proposal_sources.digest(manifest)
+    if any(source.get('provenance', {}).get('manifest_sha256') != expected for source in packet['sources']):
+        raise InputError('Operator source policy changed; generate and review a new draft before accessing sources')
+
+
 class Ledger:
     def __init__(self, path):
         path = Path(path)
@@ -78,6 +102,8 @@ class Ledger:
         self.db.executescript('''
             CREATE TABLE IF NOT EXISTS drafts (
               id TEXT PRIMARY KEY, packet TEXT NOT NULL, output TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS source_policies (
+              draft_id TEXT PRIMARY KEY REFERENCES drafts(id), manifest_path TEXT NOT NULL);
             CREATE TABLE IF NOT EXISTS decisions (
               sequence INTEGER PRIMARY KEY AUTOINCREMENT,
               draft_id TEXT NOT NULL REFERENCES drafts(id), requirement_id TEXT NOT NULL,
@@ -89,11 +115,36 @@ class Ledger:
     def close(self):
         self.db.close()
 
-    def stage(self, packet, output):
+    def stage(self, packet, output, source_manifest=None):
         validate(packet, output)
+        bound = any('provenance' in source for source in packet['sources'])
+        policy_path = None
+        if bound:
+            if source_manifest is None:
+                raise InputError('GitHub-bound drafts require an operator source manifest file')
+            policy_path, manifest = policy_file(source_manifest)
+            check_policy_binding(packet, manifest)
+            fresh = proposal_sources.collect(manifest, packet['requirements'])
+            _, refreshed_policy = policy_file(policy_path)
+            check_policy_binding(packet, refreshed_policy)
+            if packet_binding(packet) != packet_binding(fresh):
+                raise InputError('GitHub source packet changed before staging')
+        elif source_manifest is not None:
+            raise InputError('Source manifest requires a GitHub-bound packet')
         identity = digest({'packet': packet, 'output': output})
-        self.db.execute('INSERT OR IGNORE INTO drafts VALUES (?,?,?)',
-                        (identity, canonical(packet), canonical(output)))
+        self.db.execute('BEGIN IMMEDIATE')
+        try:
+            self.db.execute('INSERT OR IGNORE INTO drafts VALUES (?,?,?)',
+                            (identity, canonical(packet), canonical(output)))
+            if policy_path:
+                previous = self.db.execute('SELECT manifest_path FROM source_policies WHERE draft_id=?', (identity,)).fetchone()
+                if previous and previous[0] != str(policy_path):
+                    raise InputError('Cannot replace the staged operator policy path')
+                self.db.execute('INSERT OR IGNORE INTO source_policies VALUES (?,?)', (identity, str(policy_path)))
+            self.db.execute('COMMIT')
+        except BaseException:
+            self.db.execute('ROLLBACK')
+            raise
         return identity
 
     def read(self, identity):
@@ -108,13 +159,26 @@ class Ledger:
 
     def current_rows(self, identity, current):
         packet, output = self.read(identity)
+        if any('provenance' in source for source in packet['sources']):
+            if current is not None:
+                raise InputError('Manual current input cannot replace authenticated GitHub refresh')
+            policy = self.db.execute('SELECT manifest_path FROM source_policies WHERE draft_id=?', (identity,)).fetchone()
+            if not policy:
+                raise InputError('GitHub draft has no bound operator policy; stage again')
+            _, manifest = policy_file(policy[0])
+            check_policy_binding(packet, manifest)
+            current = proposal_sources.collect(manifest, packet['requirements'])
+            _, refreshed_policy = policy_file(policy[0])
+            check_policy_binding(packet, refreshed_policy)
+        if not isinstance(current, dict):
+            raise InputError('Manual drafts require current input')
         if day(current.get('as_of')) != today():
             raise InputError('Current input as_of must be today in UTC')
         if packet_binding(packet) != packet_binding(current):
             raise InputError('Requirements or source snapshot changed; generate and review a new draft')
         # Re-evaluate actual validity today, never the historical generation date.
         validate(current, output)
-        return {row['requirement_id']: row for row in output['matrix']}
+        return {row['requirement_id']: row for row in output['matrix']}, current
 
     def latest(self, identity, requirement):
         return self.db.execute('''SELECT sequence,decision,reviewer_uid,reviewer_name,recorded_at,note
@@ -127,7 +191,7 @@ class Ledger:
         text(note, 'review note', 2000)
         self.db.execute('BEGIN IMMEDIATE')
         try:
-            rows = self.current_rows(identity, current)
+            rows, current = self.current_rows(identity, current)
             if requirement not in rows:
                 raise InputError('Unknown requirement')
             if decision == 'approve' and rows[requirement]['status'] != 'supported':
@@ -145,10 +209,10 @@ class Ledger:
             self.db.execute('ROLLBACK')
             raise
 
-    def export(self, identity, current):
+    def export(self, identity, current=None):
         self.db.execute('BEGIN')
         try:
-            rows = self.current_rows(identity, current)
+            rows, current = self.current_rows(identity, current)
             approved = []
             for requirement, row in rows.items():
                 decision = self.latest(identity, requirement)
@@ -159,6 +223,7 @@ class Ledger:
             self.db.execute('COMMIT')
             return {'draft_id': identity, 'checked_at': datetime.now(timezone.utc).isoformat(),
                     'current_input_sha256': digest(current), 'approved_answers': approved,
+                    'source_provenance': [{'id': source['id'], **source['provenance']} for source in current['sources'] if 'provenance' in source],
                     'withheld_count': len(rows) - len(approved)}
         except BaseException:
             self.db.execute('ROLLBACK')
@@ -187,10 +252,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--db', required=True, type=Path)
     sub = parser.add_subparsers(dest='command', required=True)
-    stage = sub.add_parser('stage'); stage.add_argument('--input', required=True); stage.add_argument('--result', required=True)
+    stage = sub.add_parser('stage'); stage.add_argument('--input', required=True); stage.add_argument('--result', required=True); stage.add_argument('--source-manifest', help='Private operator policy file required for GitHub-bound drafts')
     inspect = sub.add_parser('inspect'); inspect.add_argument('--draft', required=True)
     for command in ('decide', 'export'):
-        item = sub.add_parser(command); item.add_argument('--draft', required=True); item.add_argument('--current-input', required=True)
+        item = sub.add_parser(command); item.add_argument('--draft', required=True); item.add_argument('--current-input', help='Required for manual drafts; forbidden for GitHub-bound drafts')
         if command == 'decide':
             item.add_argument('--requirement', required=True)
             item.add_argument('--decision', required=True, choices=['approve', 'reject'])
@@ -201,13 +266,13 @@ def main():
     try:
         ledger = Ledger(args.db)
         if args.command == 'stage':
-            result = {'draft_id': ledger.stage(read_file(args.input), read_file(args.result, MAX_RESULT_FILE_BYTES))}
+            result = {'draft_id': ledger.stage(read_file(args.input), read_file(args.result, MAX_RESULT_FILE_BYTES), args.source_manifest)}
         elif args.command == 'inspect':
             result = ledger.inspect(args.draft)
         elif args.command == 'decide':
-            result = {'revision': ledger.decide(args.draft, args.requirement, read_file(args.current_input), args.decision, args.expected_revision, args.note)}
+            result = {'revision': ledger.decide(args.draft, args.requirement, read_file(args.current_input) if args.current_input else None, args.decision, args.expected_revision, args.note)}
         else:
-            result = ledger.export(args.draft, read_file(args.current_input))
+            result = ledger.export(args.draft, read_file(args.current_input) if args.current_input else None)
         print(json.dumps(result, indent=2))
     except (InputError, OSError, sqlite3.Error, KeyError, TypeError) as exc:
         print('Review failed: ' + str(exc), file=sys.stderr)

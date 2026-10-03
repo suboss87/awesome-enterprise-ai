@@ -30,6 +30,8 @@ class WorkflowFailure(InputError):
 
 def start_receipt(slug, mode):
     files = ['common.py', 'provider.py', 'catalog.py', '__main__.py', 'execution.py', 'worker.py']
+    if slug == 'proposal-operations':
+        files.append('proposal_sources.py')
     hashes = {f'enterprise_ai/{name}': hashlib.sha256((ROOT/'enterprise_ai'/name).read_bytes()).hexdigest()
               for name in files}
     if slug in SLUGS:

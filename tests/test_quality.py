@@ -77,6 +77,38 @@ class CheckoutTests(unittest.TestCase):
             with self.assertRaises(ValueError):quality.require_clean_checkout(root)
 
 class PreparationTests(unittest.TestCase):
+    def test_targeted_batch_requires_exact_context_and_excludes_unrelated_projects(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base=Path(tmp);source=base/'context.json';folder=base/'assessment'
+            context={'verification':{'tests':'observed'},'projects':{'customer-resolution':[]}}
+            source.write_text(json.dumps(context))
+            with patch.object(quality,'require_clean_checkout'):
+                quality.prepare(folder,source,['customer-resolution'])
+                with self.assertRaises(ValueError):quality.prepare(base/'wrong',source,['claims-intake'])
+            request,_=quality.validate_bundle(folder,'customer-resolution')
+            self.assertEqual(1,len(list(folder.glob('*-request.json'))))
+            self.assertNotIn('enterprise_ai/proposal_sources.py',request['state']['files'])
+            self.assertFalse((folder/'claims-intake-request.json').exists())
+
+    def test_summary_cannot_hide_a_missing_project_manifest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base=Path(tmp)
+            (base/'context.json').write_text(json.dumps({'projects':{'customer-resolution':[]}}))
+            with self.assertRaisesRegex(ValueError,'manifests differ'):quality.summarize(base)
+
+    def test_injected_context_cannot_shrink_an_unbound_legacy_batch(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base=Path(tmp)
+            (base/'customer-resolution-manifest.json').write_text('{}')
+            (base/'context.json').write_text(json.dumps({'projects':{'customer-resolution':[]}}))
+            with self.assertRaisesRegex(ValueError,'manifests differ'):quality.summarize(base)
+
+    def test_legacy_batch_cannot_shrink_when_context_is_absent(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base=Path(tmp)
+            (base/'customer-resolution-manifest.json').write_text('{}')
+            with self.assertRaisesRegex(ValueError,'manifests differ'):quality.summarize(base)
+
     def test_compact_context_roundtrip_and_rejection_of_drift(self):
         with tempfile.TemporaryDirectory() as tmp:
             base=Path(tmp);source=base/'compact.json';folder=base/'assessment'
