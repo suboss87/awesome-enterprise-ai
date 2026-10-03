@@ -149,6 +149,34 @@ class EvidenceTests(unittest.TestCase):
     self.setUp();self.data['runs'][1]['checks'][1]['aggregate']=aggregate
     out=self.evaluate();self.assertEqual(out['status'],'unverified')
     self.assertIn('assessed_coverage_unverified',out['reasons'])
+ def test_null_skipping_requires_explicit_counts(self):
+  for key in ('missing_count','unexpected_count'):
+   with self.subTest(key=key):
+    self.setUp();self.data['runs'][1]['checks'][1]['aggregate'].pop(key)
+    self.assertIn('assessed_coverage_unverified',self.evaluate()['reasons'])
+ def test_unexpected_cannot_exceed_nonmissing_population(self):
+  self.data['runs'][1]['checks'][1]['aggregate']={'element_count':3,'missing_count':2,'unexpected_count':2}
+  out=self.evaluate();self.assertEqual(out['status'],'unverified')
+  self.assertIn('aggregate_counts_inconsistent',out['reasons'])
+ def test_nullability_legitimately_omits_missing_count(self):
+  self.assertNotIn('missing_count',self.data['runs'][1]['checks'][0]['aggregate'])
+  self.assertEqual(self.evaluate()['status'],'retest_evidence_ready')
+ def test_unknown_population_semantics_unverified(self):
+  for row in self.data['runs']:
+   check=row['checks'][1];check['expectation_type']='expect_custom_populations'
+   check['configuration_sha256']=digest({'type':check['expectation_type'],'kwargs':check['semantic_arguments']})
+  out=self.evaluate();self.assertEqual(out['status'],'unverified')
+  self.assertIn('unsupported_population_semantics',out['reasons'])
+ def test_membership_requires_nonmissing_coverage(self):
+  for kind in ('expect_column_values_to_be_in_set','expect_column_values_to_not_be_in_set'):
+   with self.subTest(kind=kind):
+    self.setUp()
+    for row in self.data['runs']:
+     check=row['checks'][1];check['expectation_type']=kind
+     check['configuration_sha256']=digest({'type':kind,'kwargs':check['semantic_arguments']})
+    self.assertEqual(self.evaluate()['status'],'retest_evidence_ready')
+    self.data['runs'][1]['checks'][1]['aggregate'].pop('missing_count')
+    self.assertEqual(self.evaluate()['status'],'unverified')
  def test_genuine_empty_gx_retest_cannot_prove_repair(self):
   native=ROOT/'examples/native';provenance=json.loads((native/'empty-provenance.json').read_text())
   for name,sha in provenance['artifact_sha256'].items():self.assertEqual(hashlib.sha256((native/name).read_bytes()).hexdigest(),sha)

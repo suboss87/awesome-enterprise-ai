@@ -182,13 +182,20 @@ def run(data,ai):
             if check['state'] not in ('pass','fail','error','unknown'):raise InputError('Invalid observed check state')
             obj(check['aggregate'],[],['element_count','unexpected_count','missing_count'])
             for value in check['aggregate'].values():integer(value,'aggregate count',0,10**12)
-            population=check['aggregate'].get('element_count')
-            missing=check['aggregate'].get('missing_count',0)
-            # A vacuous pass (or an unreported population) cannot prove a repair.
-            # For checks that exclude missing rows, require a positive assessed population.
-            if population is None or population<=0 or missing>=population:
+            aggregate=check['aggregate'];population=aggregate.get('element_count')
+            unexpected=aggregate.get('unexpected_count');missing=aggregate.get('missing_count')
+            kind=check['expectation_type'];assessed=None
+            # Null checks assess all rows; range/membership checks exclude missing rows.
+            # Other expectation populations need an explicit reviewed adapter contract.
+            if kind in ('expect_column_values_to_be_null','expect_column_values_to_not_be_null'):
+                assessed=population
+            elif kind in ('expect_column_values_to_be_between','expect_column_values_to_be_in_set','expect_column_values_to_not_be_in_set'):
+                if population is not None and missing is not None:assessed=population-missing
+            else:
+                reasons.append('unsupported_population_semantics')
+            if assessed is None or assessed<=0 or unexpected is None:
                 reasons.append('assessed_coverage_unverified')
-            if population is not None and any(value>population for key,value in check['aggregate'].items() if key!='element_count'):
+            if (population is not None and any(value>population for key,value in aggregate.items() if key!='element_count')) or (assessed is not None and unexpected is not None and unexpected>assessed):
                 reasons.append('aggregate_counts_inconsistent')
         if not evidence_run['complete'] or evidence_run['issues'] or not checks:reasons.append('incomplete_or_inconsistent_run')
         if any(c['state'] in ('error','unknown') for c in checks):reasons.append('check_execution_unverified')
