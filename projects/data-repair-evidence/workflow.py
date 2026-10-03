@@ -182,6 +182,14 @@ def run(data,ai):
             if check['state'] not in ('pass','fail','error','unknown'):raise InputError('Invalid observed check state')
             obj(check['aggregate'],[],['element_count','unexpected_count','missing_count'])
             for value in check['aggregate'].values():integer(value,'aggregate count',0,10**12)
+            population=check['aggregate'].get('element_count')
+            missing=check['aggregate'].get('missing_count',0)
+            # A vacuous pass (or an unreported population) cannot prove a repair.
+            # For checks that exclude missing rows, require a positive assessed population.
+            if population is None or population<=0 or missing>=population:
+                reasons.append('assessed_coverage_unverified')
+            if population is not None and any(value>population for key,value in check['aggregate'].items() if key!='element_count'):
+                reasons.append('aggregate_counts_inconsistent')
         if not evidence_run['complete'] or evidence_run['issues'] or not checks:reasons.append('incomplete_or_inconsistent_run')
         if any(c['state'] in ('error','unknown') for c in checks):reasons.append('check_execution_unverified')
         if at>exported or (now-at).total_seconds()>age*3600:reasons.append('stale_or_future_run')
@@ -212,10 +220,13 @@ def run(data,ai):
     if any(c['owner_id'] is None for c in consumers):reasons.append('consumer_owner_missing')
     status='unverified' if reasons else 'still_failing' if any(c['state']=='fail' for c in last['checks']) else 'retest_evidence_ready'
     failed=[{'check_id':c['id'],'expectation_type':c['expectation_type'],'aggregate':c['aggregate']} for c in first['checks'] if c['state']=='fail']
+    current_failed=[{'check_id':c['id'],'expectation_type':c['expectation_type'],'aggregate':c['aggregate']} for c in last['checks'] if c['state']=='fail']
     statements=[{'id':'status','text':'Retest evidence status: '+status+'. Human acceptance is still required.'},
                 {'id':'owner','text':'Declared owner: '+(owners[0] if len(owners)==1 else 'unassigned; review mapping')+'.'},
                 {'id':'consumers','text':'Declared potentially affected consumers: '+(', '.join(c['id'] for c in consumers) or 'none declared')+'.'}]
-    for index,check in enumerate(failed):statements.append({'id':'failure-'+str(index),'text':'Independent failed expectation '+check['check_id']+' ('+check['expectation_type']+'). No common cause established.'})
+    for index,check in enumerate(failed):statements.append({'id':'failure-'+str(index),'text':'Initial-run independent failed expectation '+check['check_id']+' ('+check['expectation_type']+'). No common cause established.'})
+    for index,check in enumerate(current_failed):
+        statements.append({'id':'current-failure-'+str(index),'text':'Latest supplied run failed expectation '+check['check_id']+' ('+check['expectation_type']+'). Aggregate counts: '+json.dumps(check['aggregate'],sort_keys=True)+'. No common cause established.'})
     for index,reason in enumerate(sorted(set(reasons))):statements.append({'id':'reason-'+str(index),'text':'Evidence gap: '+reason+'.'})
     books=rows(data['runbook_sources'],'runbook sources',20);unique(books)
     for book in books:
@@ -233,10 +244,10 @@ def run(data,ai):
     by_statement={s['id']:s for s in statements}
     narrative=[by_statement[key] for key in selected] if selected else statements
     return result(SPEC['id'],'Retest evidence prepared; no data mutation, causal verdict or automatic ticket closure.',
-                  {'initial_failed_checks':len(failed),'potential_consumers':len(consumers),'evidence_gaps':len(set(reasons))},
+                  {'initial_failed_checks':len(failed),'current_failed_checks':len(current_failed),'potential_consumers':len(consumers),'evidence_gaps':len(set(reasons))},
                   [{'code':reason,'severity':'review','message':reason} for reason in sorted(set(reasons))],
                   [{'action':'human_accept_evidence','owner_id':owners[0] if len(owners)==1 else None}],
                   status=status,reasons=sorted(set(reasons)),owner_id=owners[0] if len(owners)==1 else None,
-                  potentially_affected_consumers=consumers,failed_checks=failed,baseline_handoff=statements,narrative=narrative,
+                  potentially_affected_consumers=consumers,failed_checks=failed,initial_failed_checks=failed,current_failed_checks=current_failed,baseline_handoff=statements,narrative=narrative,
                   evidence_runs=[{'run_id':r['run_id'],'artifact_sha256':r['artifact_sha256'],'suite_sha256':r['suite_sha256']} for r in runs],
                   exception_note_present='exception_note' in data)

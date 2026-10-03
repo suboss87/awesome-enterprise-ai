@@ -21,3 +21,5 @@ Independent review, CI integration, source authorization and real-user acceptanc
 ## Ownership and licensing
 
 Project code, data, dbt-shaped fixture and narratives are original and use the repository license. No upstream implementation or community text is copied. GX is a development-only fixture generator, distributed upstream under Apache-2.0; no GX runtime source is vendored. Generated fixtures contain only the synthetic rows included here. See `examples/native/provenance.json` for artifact hashes and actual development dependency versions.
+
+Positive assessed coverage is required for every check, including a nonmissing population when GX reports missing counts. Missing population evidence, empty batches and all-missing assessed sets cannot establish repair. Current failures are reported independently of the initial failure set. These safeguards still cannot prove that a governed partition was fully loaded or that a malicious operator's inputs are authentic.

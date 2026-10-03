@@ -143,6 +143,39 @@ class EvidenceTests(unittest.TestCase):
   manifest=json.loads((ROOT/'examples/dbt-manifest.json').read_text())
   next(iter(manifest['nodes'].values())).pop('depends_on')
   with self.assertRaises(InputError):import_dbt(manifest,True)
+ def test_assessed_coverage_required(self):
+  for aggregate in ({'element_count':0},{},{'element_count':3,'missing_count':3},{'element_count':3,'missing_count':4}):
+   with self.subTest(aggregate=aggregate):
+    self.setUp();self.data['runs'][1]['checks'][1]['aggregate']=aggregate
+    out=self.evaluate();self.assertEqual(out['status'],'unverified')
+    self.assertIn('assessed_coverage_unverified',out['reasons'])
+ def test_genuine_empty_gx_retest_cannot_prove_repair(self):
+  native=ROOT/'examples/native';provenance=json.loads((native/'empty-provenance.json').read_text())
+  for name,sha in provenance['artifact_sha256'].items():self.assertEqual(hashlib.sha256((native/name).read_bytes()).hexdigest(),sha)
+  suite=json.loads((native/'empty-suite.json').read_text());runs=[]
+  for name in ('empty-baseline-gx.json','empty-gx.json'):
+   raw,sha=read(native/name);binding={**self.binding,'artifact_sha256':sha}
+   item=import_gx(raw,suite,binding,sha)
+   self.assertTrue(item['complete']);self.assertEqual(item['issues'],[])
+   runs.append(item)
+  self.assertTrue(json.loads((native/'empty-gx.json').read_text())['success'])
+  self.data['runs']=runs;self.data['exported_at']=self.data['as_of']=provenance['created_at']
+  out=self.evaluate();self.assertEqual(out['status'],'unverified')
+  self.assertEqual(out['reasons'],['assessed_coverage_unverified'])
+ def test_changed_current_failure_is_visible(self):
+  self.raw['results'][1]['success']=False
+  self.raw['results'][1]['result']['unexpected_count']=2
+  self.raw['success']=False
+  self.raw['statistics'].update(successful_expectations=1,unsuccessful_expectations=1,success_percent=50.0)
+  self.data['runs'][1]=self.native()
+  out=self.evaluate();self.assertEqual(out['status'],'still_failing')
+  a=self.data['runs'][0]['checks'][0]['id'];b=self.data['runs'][1]['checks'][1]['id']
+  self.assertEqual([c['check_id'] for c in out['initial_failed_checks']],[a])
+  self.assertEqual([c['check_id'] for c in out['current_failed_checks']],[b])
+  self.assertEqual(out['current_failed_checks'][0]['aggregate']['unexpected_count'],2)
+  current=[s['text'] for s in out['baseline_handoff'] if s['id'].startswith('current-failure-')]
+  self.assertEqual(len(current),1);self.assertIn(b,current[0]);self.assertIn('"unexpected_count": 2',current[0])
+  self.assertIn('Initial-run',next(s['text'] for s in out['baseline_handoff'] if s['id']=='failure-0'))
  def test_json_boundary(self):
   with tempfile.TemporaryDirectory() as temp:
    p=Path(temp)/'x.json'
