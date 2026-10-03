@@ -18,6 +18,13 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from enterprise_ai.catalog import SLUGS
 
+# Original completed assessment protocol predates context.json. Frozen for legacy
+# compatibility; never infer a smaller batch from whichever files remain.
+LEGACY_BATCH_PROJECTS=(
+    'customer-resolution','incident-operations','exposure-review','business-insights',
+    'inventory-decisions','asset-operations','claims-intake','proposal-operations',
+    'account-intelligence','workforce-onboarding')
+
 
 def digest(raw): return hashlib.sha256(raw).hexdigest()
 
@@ -95,11 +102,14 @@ def require_clean_checkout(root):
         raise ValueError('Commit or isolate working-tree changes before preparing a revision-bound assessment')
 
 
-def prepare(folder,context_path):
+def prepare(folder,context_path,projects=None):
     # Caller writes the actual verification and unresolved gaps before scoring.
     context=read(context_path)
-    if set(context.get('projects',{}))!=set(SLUGS) or not context.get('verification'):
-        raise ValueError('Explicit verification and all ten project gaps are required')
+    projects=list(SLUGS if projects is None else projects)
+    if not projects or len(set(projects))!=len(projects) or not set(projects)<=set(SLUGS):
+        raise ValueError('Select distinct known projects')
+    if set(context.get('projects',{}))!=set(projects) or not context.get('verification'):
+        raise ValueError('Explicit verification and exactly the selected project gaps are required')
     require_clean_checkout(ROOT)
     folder.mkdir(parents=True,exist_ok=False)
     questions=read(ROOT/'quality/questions.json')
@@ -107,12 +117,12 @@ def prepare(folder,context_path):
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     common=[*sorted((ROOT/'enterprise_ai').glob('*.py')),*sorted((ROOT/'tests').glob('test_*.py')),
             ROOT/'docs/DEPLOYMENT.md',ROOT/'docs/ADOPTION-ROADMAP.md']
-    for slug in SLUGS:
+    for slug in projects:
         project=ROOT/'projects'/slug
         paths=common+[project/'workflow.py',project/'README.md',project/'tests/test_workflow.py']
         if (project/'GOVERNANCE.md').exists():paths.append(project/'GOVERNANCE.md')
         # Proposal review implementation only affects this workflow. Avoid irrelevant judge context.
-        paths=[p for p in paths if slug=='proposal-operations' or p.name not in ('proposal_review.py','test_proposal_review.py')]
+        paths=[p for p in paths if slug=='proposal-operations' or p.name not in ('proposal_review.py','test_proposal_review.py','proposal_sources.py','test_proposal_sources.py')]
         files={str(p.relative_to(ROOT)):p.read_text() for p in paths}
         outputs={p.name:read(p) for p in (ROOT/'evaluation/2026-09-30').glob(slug+'--*.json')}
         state={'project':slug,'scope':read(ROOT/'quality/rubric.json')['deployment_scope'],
@@ -161,8 +171,19 @@ def summarize(folder):
     weights={k:v['weight'] for k,v in rubric['dimensions'].items()}
     if any(not math.isfinite(v) or v<=0 for v in weights.values()) or abs(sum(weights.values())-1)>1e-9:
         raise ValueError('Weights must be positive and sum to one')
+    # The frozen context defines this batch, not today's growing catalog.
+    context_path=folder/'context.json'
+    manifest_paths=list(folder.glob('*-manifest.json'))
+    # An added, unbound context cannot redefine a legacy batch.
+    context_bound=bool(manifest_paths) and all('context_sha256' in read(p) for p in manifest_paths)
+    projects=read(context_path).get('projects',{}) if context_path.exists() and context_bound else LEGACY_BATCH_PROJECTS
+    if not projects or not set(projects)<=set(SLUGS):
+        raise ValueError('Assessment context must identify known projects')
+    manifests={p.name.removesuffix('-manifest.json') for p in folder.glob('*-manifest.json')}
+    if manifests!=set(projects):
+        raise ValueError('Assessment manifests differ from frozen project scope')
     rows=[]
-    for slug in SLUGS:
+    for slug in projects:
         request,manifest=validate_bundle(folder,slug,allow_completed_legacy=True)
         request_raw=(folder/f'{slug}-request.json').read_bytes()
         response_raw=(folder/f'{slug}-response.json').read_bytes();response=json.loads(response_raw)
@@ -186,11 +207,11 @@ def summarize(folder):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     sub=parser.add_subparsers(dest='command',required=True)
-    p=sub.add_parser('prepare');p.add_argument('folder',type=Path);p.add_argument('--context',required=True,type=Path)
+    p=sub.add_parser('prepare');p.add_argument('folder',type=Path);p.add_argument('--context',required=True,type=Path);p.add_argument('--project',choices=SLUGS,action='append')
     p=sub.add_parser('assess');p.add_argument('folder',type=Path);p.add_argument('--project',choices=SLUGS,required=True)
     p=sub.add_parser('summarize');p.add_argument('folder',type=Path)
     args=parser.parse_args()
-    if args.command=='prepare':prepare(args.folder,args.context)
+    if args.command=='prepare':prepare(args.folder,args.context,args.project)
     elif args.command=='assess':assess(args.folder,args.project)
     else:print(json.dumps(summarize(args.folder),indent=2))
 
