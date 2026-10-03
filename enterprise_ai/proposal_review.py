@@ -185,13 +185,29 @@ class Ledger:
             FROM decisions WHERE draft_id=? AND requirement_id=? ORDER BY sequence DESC LIMIT 1''',
             (identity, requirement)).fetchone()
 
+    def recheck_policy(self, identity, current):
+        """Check local immutable state/policy after lock acquisition, without network."""
+        packet, output = self.read(identity)
+        if day(current.get('as_of')) != today():
+            raise InputError('Current input as_of must be today in UTC')
+        if packet_binding(packet) != packet_binding(current):
+            raise InputError('Requirements or source snapshot changed; generate and review a new draft')
+        validate(current, output)
+        if any('provenance' in source for source in packet['sources']):
+            policy = self.db.execute('SELECT manifest_path FROM source_policies WHERE draft_id=?', (identity,)).fetchone()
+            if not policy:
+                raise InputError('GitHub draft has no bound operator policy; stage again')
+            _, manifest = policy_file(policy[0])
+            check_policy_binding(packet, manifest)
+
     def decide(self, identity, requirement, current, decision, expected_revision, note):
         if decision not in ('approve', 'reject'):
             raise InputError('Unknown decision')
         text(note, 'review note', 2000)
+        rows, current = self.current_rows(identity, current)
         self.db.execute('BEGIN IMMEDIATE')
         try:
-            rows, current = self.current_rows(identity, current)
+            self.recheck_policy(identity, current)
             if requirement not in rows:
                 raise InputError('Unknown requirement')
             if decision == 'approve' and rows[requirement]['status'] != 'supported':
@@ -210,9 +226,10 @@ class Ledger:
             raise
 
     def export(self, identity, current=None):
+        rows, current = self.current_rows(identity, current)
         self.db.execute('BEGIN')
         try:
-            rows, current = self.current_rows(identity, current)
+            self.recheck_policy(identity, current)
             approved = []
             for requirement, row in rows.items():
                 decision = self.latest(identity, requirement)
