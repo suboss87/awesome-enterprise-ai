@@ -123,6 +123,18 @@ class SourceTests(unittest.TestCase):
             ps._run_refresh([sys.executable, '-c', 'import time;time.sleep(30)'], b'', timeout=0.1)
         self.assertLess(time.monotonic()-started, 3)
 
+    def test_failed_selector_setup_still_reaps_child(self):
+        started = []
+        original = subprocess.Popen
+        def capture(*args, **kwargs):
+            child = original(*args, **kwargs); started.append(child); return child
+        with patch.object(ps.subprocess, 'Popen', side_effect=capture), patch.object(ps.selectors, 'DefaultSelector', side_effect=OSError('fixture failure')):
+            with self.assertRaises(OSError):
+                ps._run_refresh([sys.executable, '-c', 'import time;time.sleep(30)'], b'', timeout=5)
+        self.assertEqual(1, len(started))
+        self.assertIsNotNone(started[0].poll())
+        self.assertTrue(started[0].stdin.closed and started[0].stdout.closed)
+
     def test_worker_output_is_capped_before_process_completion(self):
         code = "import os,time;os.write(1,b'x'*1000001);time.sleep(30)"
         started = time.monotonic()

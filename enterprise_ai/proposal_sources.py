@@ -224,15 +224,16 @@ def _run_refresh(command, payload, timeout=100):
     deadline = time.monotonic() + timeout
     output = bytearray()
     pending = memoryview(payload)
-    selector = selectors.DefaultSelector()
-    os.set_blocking(process.stdin.fileno(), False)
-    os.set_blocking(process.stdout.fileno(), False)
-    selector.register(process.stdout, selectors.EVENT_READ)
-    if pending:
-        selector.register(process.stdin, selectors.EVENT_WRITE)
-    else:
-        process.stdin.close()
+    selector = None
     try:
+        selector = selectors.DefaultSelector()
+        os.set_blocking(process.stdin.fileno(), False)
+        os.set_blocking(process.stdout.fileno(), False)
+        selector.register(process.stdout, selectors.EVENT_READ)
+        if pending:
+            selector.register(process.stdin, selectors.EVENT_WRITE)
+        else:
+            process.stdin.close()
         while selector.get_map():
             remaining = deadline - time.monotonic()
             if remaining <= 0:
@@ -260,7 +261,6 @@ def _run_refresh(command, payload, timeout=100):
     except subprocess.TimeoutExpired:
         raise InputError('GitHub source refresh exceeded 100-second deadline; export withheld') from None
     finally:
-        selector.close()
         # Kill/reap the owned group without buffering any remaining output.
         try:
             os.killpg(process.pid, signal.SIGKILL)
@@ -269,6 +269,8 @@ def _run_refresh(command, payload, timeout=100):
         process.stdin.close()
         process.stdout.close()
         process.wait()
+        if selector is not None:
+            selector.close()
 
 
 def collect(manifest, requirements):
