@@ -173,7 +173,10 @@ def summarize(folder):
         raise ValueError('Weights must be positive and sum to one')
     # The frozen context defines this batch, not today's growing catalog.
     context_path=folder/'context.json'
-    projects=read(context_path).get('projects',{}) if context_path.exists() else LEGACY_BATCH_PROJECTS
+    manifest_paths=list(folder.glob('*-manifest.json'))
+    # An added, unbound context cannot redefine a legacy batch.
+    context_bound=bool(manifest_paths) and all('context_sha256' in read(p) for p in manifest_paths)
+    projects=read(context_path).get('projects',{}) if context_path.exists() and context_bound else LEGACY_BATCH_PROJECTS
     if not projects or not set(projects)<=set(SLUGS):
         raise ValueError('Assessment context must identify known projects')
     manifests={p.name.removesuffix('-manifest.json') for p in folder.glob('*-manifest.json')}

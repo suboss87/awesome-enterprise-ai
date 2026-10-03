@@ -96,6 +96,13 @@ class PreparationTests(unittest.TestCase):
             (base/'context.json').write_text(json.dumps({'projects':{'customer-resolution':[]}}))
             with self.assertRaisesRegex(ValueError,'manifests differ'):quality.summarize(base)
 
+    def test_injected_context_cannot_shrink_an_unbound_legacy_batch(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base=Path(tmp)
+            (base/'customer-resolution-manifest.json').write_text('{}')
+            (base/'context.json').write_text(json.dumps({'projects':{'customer-resolution':[]}}))
+            with self.assertRaisesRegex(ValueError,'manifests differ'):quality.summarize(base)
+
     def test_legacy_batch_cannot_shrink_when_context_is_absent(self):
         with tempfile.TemporaryDirectory() as tmp:
             base=Path(tmp)
