@@ -1,0 +1,28 @@
+{
+  "bindings": [
+    {
+      "artifact_sha256": "ace965ffb2041480b4a48dddc9a3a67c8302aef1f3374aab4a0e63060da3e7f4",
+      "environment_id": "prod",
+      "asset_id": "orders",
+      "dbt_unique_id": "source.synthetic.orders",
+      "partition": "2026-09-30",
+      "owner_ids": [
+        "team:data-platform"
+      ],
+      "datasource_name": "synthetic_sales",
+      "data_asset_name": "orders"
+    },
+    {
+      "artifact_sha256": "e016250300e1d938297cac2cdfda04cf2f8e8c58a353fc25816c1aea777ca5c8",
+      "environment_id": "prod",
+      "asset_id": "orders",
+      "dbt_unique_id": "source.synthetic.orders",
+      "partition": "2026-09-30",
+      "owner_ids": [
+        "team:data-platform"
+      ],
+      "datasource_name": "synthetic_sales",
+      "data_asset_name": "orders"
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "exported_at": "2026-10-03T01:39:37.596014+00:00",
+  "as_of": "2026-10-03T01:39:37.596014+00:00",
+  "max_age_hours": 72,
+  "runs": [
+    {
+      "run_id": "{\"run_name\":\"failed\",\"run_time\":\"2026-10-03T07:09:37.545014+05:30\"}",
+      "completed_at": "2026-10-03T01:39:37.545014+00:00",
+      "batch_fingerprint": "8a7451005eab23a6ad6d34568ce23dc7",
+      "suite_sha256": "91ca21d7ea1eb498a18b08feb97a50045683c3bbdf63f5cda95a790d609885c2",
+      "artifact_sha256": "ace965ffb2041480b4a48dddc9a3a67c8302aef1f3374aab4a0e63060da3e7f4",
+      "exporter_version": "1.8.0",
+      "scope": {
+        "environment_id": "prod",
+        "asset_id": "orders",
+        "dbt_unique_id": "source.synthetic.orders",
+        "partition": "2026-09-30"
+      },
+      "owner_ids": [
+        "team:data-platform"
+      ],
+      "complete": true,
+      "issues": [],
+      "checks": [
+        {
+          "id": "83f9e2f3-b2b8-444b-8d21-a619d8ad3129",
+          "expectation_type": "expect_column_values_to_not_be_null",
+          "semantic_arguments": {
+            "column": "order_id"
+          },
+          "configuration_sha256": "fc9f2d0815482943c57cee45fec399c6e6502dd3f82e4dfdc717ab8f524e116f",
+          "state": "fail",
+          "aggregate": {
+            "element_count": 3,
+            "unexpected_count": 1
+          }
+        },
+        {
+          "id": "a0a8b78a-c04f-4d89-98d4-508edd983d3e",
+          "expectation_type": "expect_column_values_to_be_between",
+          "semantic_arguments": {
+            "column": "amount",
+            "min_value": 0.0,
+            "max_value": 10000.0
+          },
+          "configuration_sha256": "6c77eb03525861d956ce65bae1a261d2028e218daa7bb76789727f7f5538c324",
+          "state": "pass",
+          "aggregate": {
+            "element_count": 3,
+            "unexpected_count": 0,
+            "missing_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "run_id": "{\"run_name\":\"repaired\",\"run_time\":\"2026-10-03T07:09:37.578508+05:30\"}",
+      "completed_at": "2026-10-03T01:39:37.578508+00:00",
+      "batch_fingerprint": "a9f89c49917610e7c7e1b7af545c3c22",
+      "suite_sha256": "91ca21d7ea1eb498a18b08feb97a50045683c3bbdf63f5cda95a790d609885c2",
+      "artifact_sha256": "e016250300e1d938297cac2cdfda04cf2f8e8c58a353fc25816c1aea777ca5c8",
+      "exporter_version": "1.8.0",
+      "scope": {
+        "environment_id": "prod",
+        "asset_id": "orders",
+        "dbt_unique_id": "source.synthetic.orders",
+        "partition": "2026-09-30"
+      },
+      "owner_ids": [
+        "team:data-platform"
+      ],
+      "complete": true,
+      "issues": [],
+      "checks": [
+        {
+          "id": "83f9e2f3-b2b8-444b-8d21-a619d8ad3129",
+          "expectation_type": "expect_column_values_to_not_be_null",
+          "semantic_arguments": {
+            "column": "order_id"
+          },
+          "configuration_sha256": "fc9f2d0815482943c57cee45fec399c6e6502dd3f82e4dfdc717ab8f524e116f",
+          "state": "pass",
+          "aggregate": {
+            "element_count": 3,
+            "unexpected_count": 0
+          }
+        },
+        {
+          "id": "a0a8b78a-c04f-4d89-98d4-508edd983d3e",
+          "expectation_type": "expect_column_values_to_be_between",
+          "semantic_arguments": {
+            "column": "amount",
+            "min_value": 0.0,
+            "max_value": 10000.0
+          },
+          "configuration_sha256": "6c77eb03525861d956ce65bae1a261d2028e218daa7bb76789727f7f5538c324",
+          "state": "pass",
+          "aggregate": {
+            "element_count": 3,
+            "unexpected_count": 0,
+            "missing_count": 0
+          }
+        }
+      ]
+    }
+  ],
+  "lineage": {
+    "schema": "https://schemas.getdbt.com/dbt/manifest/v12.json",
+    "generated_at": "2026-10-03T01:39:37.596014+00:00",
+    "declared_complete": true,
+    "nodes": [
+      {
+        "id": "model.synthetic.revenue",
+        "dependencies": [
+          "source.synthetic.orders"
+        ],
+        "exposure": false,
+        "owner_id": null
+      },
+      {
+        "id": "source.synthetic.orders",
+        "dependencies": [],
+        "exposure": false,
+        "owner_id": null
+      },
+      {
+        "id": "exposure.synthetic.finance",
+        "dependencies": [
+          "model.synthetic.revenue"
+        ],
+        "exposure": true,
+        "owner_id": "team:finance"
+      },
+      {
+        "id": "exposure.synthetic.operations",
+        "dependencies": [
+          "model.synthetic.revenue"
+        ],
+        "exposure": true,
+        "owner_id": "team:operations"
+      }
+    ]
+  },
+  "runbook_sources": [],
+  "narrative_mode": "template"
+}
