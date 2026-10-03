@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import selectors
 import signal
 import re
 import subprocess
@@ -219,19 +220,57 @@ def _run_refresh(command, payload, timeout=100):
     root = Path(__file__).resolve().parents[1]
     env = os.environ.copy(); env['PYTHONPATH'] = str(root)
     process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                               stderr=subprocess.PIPE, cwd=root, env=env, start_new_session=True)
+                               stderr=subprocess.DEVNULL, cwd=root, env=env, start_new_session=True)
+    deadline = time.monotonic() + timeout
+    output = bytearray()
+    pending = memoryview(payload)
+    selector = None
     try:
-        output, _ = process.communicate(payload, timeout=timeout)
-        return process.returncode, output
+        selector = selectors.DefaultSelector()
+        os.set_blocking(process.stdin.fileno(), False)
+        os.set_blocking(process.stdout.fileno(), False)
+        selector.register(process.stdout, selectors.EVENT_READ)
+        if pending:
+            selector.register(process.stdin, selectors.EVENT_WRITE)
+        else:
+            process.stdin.close()
+        while selector.get_map():
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise subprocess.TimeoutExpired(command, timeout)
+            for key, _ in selector.select(remaining):
+                if key.fileobj is process.stdin:
+                    try:
+                        count = os.write(process.stdin.fileno(), pending[:16384])
+                        pending = pending[count:]
+                    except BrokenPipeError:
+                        pending = pending[:0]
+                    if not pending:
+                        selector.unregister(process.stdin)
+                        process.stdin.close()
+                else:
+                    chunk = os.read(process.stdout.fileno(), min(65536, 1000001-len(output)))
+                    output.extend(chunk)
+                    if len(output) > 1000000:
+                        raise InputError('Source worker response exceeds limit')
+                    if not chunk:
+                        selector.unregister(process.stdout)
+                        process.stdout.close()
+        process.wait(timeout=max(0, deadline-time.monotonic()))
+        return process.returncode, bytes(output)
     except subprocess.TimeoutExpired:
         raise InputError('GitHub source refresh exceeded 100-second deadline; export withheld') from None
     finally:
-        # Terminate the entire owned group, including a stalled gh credential process.
+        # Kill/reap the owned group without buffering any remaining output.
         try:
             os.killpg(process.pid, signal.SIGKILL)
         except ProcessLookupError:
             pass
-        process.communicate()
+        process.stdin.close()
+        process.stdout.close()
+        process.wait()
+        if selector is not None:
+            selector.close()
 
 
 def collect(manifest, requirements):

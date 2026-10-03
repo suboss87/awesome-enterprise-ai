@@ -123,6 +123,31 @@ class SourceTests(unittest.TestCase):
             ps._run_refresh([sys.executable, '-c', 'import time;time.sleep(30)'], b'', timeout=0.1)
         self.assertLess(time.monotonic()-started, 3)
 
+    def test_failed_selector_setup_still_reaps_child(self):
+        started = []
+        original = subprocess.Popen
+        def capture(*args, **kwargs):
+            child = original(*args, **kwargs); started.append(child); return child
+        with patch.object(ps.subprocess, 'Popen', side_effect=capture), patch.object(ps.selectors, 'DefaultSelector', side_effect=OSError('fixture failure')):
+            with self.assertRaises(OSError):
+                ps._run_refresh([sys.executable, '-c', 'import time;time.sleep(30)'], b'', timeout=5)
+        self.assertEqual(1, len(started))
+        self.assertIsNotNone(started[0].poll())
+        self.assertTrue(started[0].stdin.closed and started[0].stdout.closed)
+
+    def test_worker_output_is_capped_before_process_completion(self):
+        code = "import os,time;os.write(1,b'x'*1000001);time.sleep(30)"
+        started = time.monotonic()
+        with self.assertRaisesRegex(InputError, 'response exceeds'):
+            ps._run_refresh([sys.executable, '-c', code], b'', timeout=5)
+        self.assertLess(time.monotonic()-started, 3)
+
+    def test_worker_stderr_is_discarded_and_payload_is_streamed(self):
+        code = "import os,sys;os.write(2,b'x'*2000000);data=sys.stdin.buffer.read();sys.stdout.buffer.write(data)"
+        payload = b'p'*400000
+        status, output = ps._run_refresh([sys.executable, '-c', code], payload, timeout=5)
+        self.assertEqual((0, payload), (status, output))
+
     def test_malformed_worker_response_is_sanitized(self):
         with patch.object(ps, '_run_refresh', return_value=(2, b'{"error":"Malformed or unavailable GitHub source"}')):
             with self.assertRaisesRegex(InputError, 'Malformed'):
@@ -153,6 +178,56 @@ class BoundLedgerTests(unittest.TestCase):
         self.assertEqual(3, self.mock.call_count)  # stage, approve, export
         self.mock.side_effect = InputError('GitHub unavailable')
         with self.assertRaises(InputError): self.ledger.export(self.identity)
+
+    def test_source_refresh_does_not_lock_unrelated_local_decisions(self):
+        manual = copy.deepcopy(self.packet)
+        del manual['sources'][0]['provenance']
+        local_id = self.ledger.stage(manual, self.output)
+        peer = Ledger(self.root/'reviews.sqlite')
+        self.addCleanup(peer.close)
+        peer.db.execute('PRAGMA busy_timeout=50')
+        completed = []
+        def refresh(policy, requirements):
+            previous = peer.latest(local_id, 'req-1')
+            peer.decide(local_id, 'req-1', manual, 'approve', previous[0] if previous else 0, 'Independent local review')
+            completed.append(True)
+            return ps._collect(policy, requirements, FixtureGitHub())
+        self.mock.side_effect = refresh
+        self.ledger.decide(self.identity, 'req-1', None, 'approve', 0, 'Verified')
+        self.ledger.export(self.identity)
+        self.assertEqual(2, len(completed))
+
+    def test_policy_rechecked_after_refresh_before_transaction_decision(self):
+        original = self.ledger.current_rows
+        def revoke_after_refresh(*args):
+            result = original(*args)
+            revoked = copy.deepcopy(self.policy); revoked['sources'][0]['approval'] = 'revoked'
+            self.policy_path.write_text(json.dumps(revoked))
+            return result
+        with patch.object(self.ledger, 'current_rows', side_effect=revoke_after_refresh):
+            with self.assertRaises(InputError):
+                self.ledger.decide(self.identity, 'req-1', None, 'approve', 0, 'Stale policy')
+        self.assertIsNone(self.ledger.latest(self.identity, 'req-1'))
+
+    def test_utc_day_change_after_refresh_blocks_decision_and_export(self):
+        original = self.ledger.current_rows
+        tomorrow = today()+timedelta(days=1)
+        for operation in ('decide', 'export'):
+            clock_patch = patch('enterprise_ai.proposal_review.today', return_value=tomorrow)
+            def cross_midnight(*args):
+                result = original(*args)
+                clock_patch.start()
+                return result
+            try:
+                with patch.object(self.ledger, 'current_rows', side_effect=cross_midnight):
+                    with self.subTest(operation=operation), self.assertRaisesRegex(InputError, 'today'):
+                        if operation == 'decide':
+                            self.ledger.decide(self.identity, 'req-1', None, 'approve', 0, 'Yesterday')
+                        else:
+                            self.ledger.export(self.identity)
+            finally:
+                clock_patch.stop()
+            self.assertIsNone(self.ledger.latest(self.identity, 'req-1'))
 
     def test_manual_input_cannot_bypass_stored_github_binding(self):
         for current in (self.packet, {**self.packet, 'sources': []}):

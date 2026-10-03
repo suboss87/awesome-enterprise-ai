@@ -1,0 +1,12 @@
+{
+  "request_sha256": "9e36d2dd27c34bccde12de0d64727543fd16364d2db3e14db45ec6bf4e8b27ad",
+  "started_at": "2026-10-03T01:58:09.245595+00:00",
+  "endpoint": "https://api.typesafe.ai/v1/systemone",
+  "response_sha256": "7fe857d46c352a2b05afb9493cd71bb470a75299d9b73c1947f6567e888fe3b1",
+  "model": "jev-1.13.0",
+  "usage": {
+    "input_tokens": 12096,
+    "output_tokens": 56
+  },
+  "validated": true
+}
