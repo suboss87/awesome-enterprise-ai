@@ -1,4 +1,6 @@
 """Version-aware RFP answer matrix with conservative evidence status handling."""
+import hashlib
+from enterprise_ai.proposal_sources import validate_provenance
 from enterprise_ai.common import (InputError, obj, text, day, rows, unique, object_schema,
     array_schema, string_schema, EVIDENCE_SCHEMA, evidence, finding, result)
 
@@ -19,7 +21,13 @@ def run(data, ai):
     source_rows = rows(data['sources'], 'sources', 100)
     validity = {}
     for source in source_rows:
-        obj(source, ['id', 'text', 'valid_from', 'valid_until', 'approval'])
+        obj(source, ['id', 'text', 'valid_from', 'valid_until', 'approval'], ['provenance'])
+        if 'provenance' in source:
+            validate_provenance(source['provenance'])
+            raw = text(source['text']).encode('utf-8')
+            if (hashlib.sha256(raw).hexdigest() != source['provenance']['text_sha256'] or
+                hashlib.sha1(b'blob ' + str(len(raw)).encode() + b'\0' + raw).hexdigest() != source['provenance']['blob_sha']):
+                raise InputError('Source provenance does not match text')
         text(source['text']); start = day(source['valid_from']); end = day(source['valid_until'])
         if start > end: raise InputError('Source validity period is reversed')
         if source['approval'] not in ('approved', 'draft', 'revoked', 'superseded'):
