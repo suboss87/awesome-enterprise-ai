@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 .verified/
+
+# Local working notes
+tasks/
+memory/
