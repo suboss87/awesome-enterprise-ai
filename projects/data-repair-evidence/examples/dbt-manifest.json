@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "dbt_schema_version": "https://schemas.getdbt.com/dbt/manifest/v12.json",
+    "generated_at": "2026-10-03T01:39:37.596014+00:00"
+  },
+  "sources": {
+    "source.synthetic.orders": {
+      "unique_id": "source.synthetic.orders"
+    }
+  },
+  "nodes": {
+    "model.synthetic.revenue": {
+      "unique_id": "model.synthetic.revenue",
+      "depends_on": {
+        "nodes": [
+          "source.synthetic.orders"
+        ]
+      }
+    }
+  },
+  "exposures": {
+    "exposure.synthetic.finance": {
+      "unique_id": "exposure.synthetic.finance",
+      "depends_on": {
+        "nodes": [
+          "model.synthetic.revenue"
+        ]
+      },
+      "owner": {
+        "name": "team:finance"
+      }
+    },
+    "exposure.synthetic.operations": {
+      "unique_id": "exposure.synthetic.operations",
+      "depends_on": {
+        "nodes": [
+          "model.synthetic.revenue"
+        ]
+      },
+      "owner": {
+        "name": "team:operations"
+      }
+    }
+  }
+}

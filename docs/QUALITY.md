@@ -42,3 +42,8 @@ Proposal Evidence remains experimental. A local OS-account ledger does not estab
 - [Rubric design request](../quality/2026-10-02/rubric-review-request.json) and [Jev’s typed design review](../quality/2026-10-02/rubric-review-response.json).
 
 Resolved model: `jev-1.13.0`. Full requests and responses were retained privately with hashes; public artifacts contain the judgments and source manifests. Requests used only repository code and synthetic/public evidence. No unchanged request was resampled. No new live workflow inference was performed in this hardening pass; the historical September 30 live cases remain explicitly historical.
+
+
+## Data Repair Evidence, October 3
+
+The new experimental workflow received 49.97/100 on a scoped artifact assessment using the same rubric anchors. Jev selected `publish_experiment` and prioritized `source_integration`. This is not a matched before/after comparison or production approval. [Evidence, raw distributions and limitations](../quality/2026-10-03/data-repair.md).

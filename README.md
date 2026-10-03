@@ -18,7 +18,7 @@ I love coding, especially when it helps untangle a problem that keeps coming bac
 
 I use this collection to work through those problems from first principles: who needs help, what decision are they making, and where does AI actually earn its place? I care about the surrounding workflow as much as the model. Each project gives you runnable code, examples you can inspect, and a clear account of what still needs work before you connect it to your systems.
 
-**Current stage: nine reviewed reference workflows and one experimental project.** All ten have a browser journey, CLI, examples and tests. Proposal Evidence remains experimental while its operational review hold is open. They are not complete replacements for enterprise systems or pre-certified deployments. [Read the tested scope and remaining limits.](docs/VERIFICATION.md)
+**Current stage: nine reviewed reference workflows and two experimental projects.** All eleven have a browser journey, CLI, examples and tests. Proposal Evidence and Data Repair Evidence remain experimental pending target-environment acceptance. They are not complete replacements for enterprise systems or pre-certified deployments. [Read the tested scope and remaining limits.](docs/VERIFICATION.md)
 
 ## Choose your workflow
 
@@ -31,6 +31,7 @@ I use this collection to work through those problems from first principles: who 
 | Supply chain: replenishment decisions compete for a limited budget | [Inventory Planning Workbench](projects/inventory-decisions/) | Transparent reorder proposals, budget constraints and planning-note interpretation |
 | Operations: equipment alerts need recent readings and history | [Equipment Monitoring Workbench](projects/asset-operations/) | Persistent threshold observations, stale-data findings and maintenance context |
 | Insurance: incomplete evidence delays an adjuster’s review | [Claims Intake Workbench](projects/claims-intake/) | A document checklist, conflicting facts and missing-information requests |
+| Data operations: a green job may not prove a repair | [Data Repair Evidence](projects/data-repair-evidence/) · experimental | Same-scope retest checks, declared consumer lineage and a review handoff; optional AI sentence prioritization |
 | Proposals: answers must match current, approved evidence | [Proposal Evidence Workbench](projects/proposal-operations/) · experimental | A sourced response matrix and local review ledger that withholds changed or expired answers |
 | Sales: meeting commitments and CRM records drift apart | [Account Review Workbench](projects/account-intelligence/) | Quoted observations, date conflicts and missing next steps; no invented forecast |
 | People operations: onboarding tasks depend on each other | [Onboarding Readiness Desk](projects/workforce-onboarding/) | Applicable tasks, prerequisite gaps and a readiness checklist |
@@ -42,7 +43,7 @@ I use this collection to work through those problems from first principles: who 
 
 ## Try it in two minutes
 
-Python **3.11+**. No third-party Python packages are required for the ten-workflow workspace.
+Python **3.11+**. No third-party Python packages are required for the workflow workspace.
 
 ```sh
 git clone https://github.com/suboss87/awesome-enterprise-ai.git
@@ -80,7 +81,7 @@ projects/<workflow>/
 enterprise_ai/                # Shared CLI, provider and local browser workspace
 ```
 
-The workflow interprets text where interpretation helps. Ordinary code handles arithmetic, date windows, prerequisites and exact matching. Results preserve uncertainty and require human review. None of the ten writes to a CRM, ERP, claim system or infrastructure control plane.
+The workflow interprets text where interpretation helps. Ordinary code handles arithmetic, date windows, prerequisites and exact matching. Results preserve uncertainty and require human review. None of these workflows writes to a CRM, ERP, claim system or infrastructure control plane.
 
 ## Adopt one small piece
 
