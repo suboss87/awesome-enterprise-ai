@@ -12,7 +12,7 @@ python3 scripts/verify_workflows.py
 
 **153 tests pass locally**: 25 shared runtime, input-boundary and server tests, plus 128 project tests. Ten CLI example replays also pass.
 
-The verifier runs the shared runtime/security tests, each workflow's business-rule tests, and all ten CLI example replays. Tests exercise invalid inputs, missing evidence, conflicting records, exact arithmetic and human-review boundaries. Recorded-response tests do not measure live model quality.
+The verifier runs the shared runtime/security tests, each workflow's business-rule tests, and every catalog workflow's CLI example replay. Tests exercise invalid inputs, missing evidence, conflicting records, exact arithmetic and human-review boundaries. Recorded-response tests do not measure live model quality.
 
 The GitHub `enterprise-workflows` job runs this command on pushes, pull requests, manual runs and the existing daily schedule. The two earlier projects keep their own verification jobs.
 
@@ -91,3 +91,12 @@ The scorer itself received a separate integrity review after inference. It now r
 GitHub review then identified two additional domain boundaries and two scorer provenance gaps. Space-separated timestamps are now rejected as standalone account dates. An actual proposal with 100 requirements and a result larger than 800 KB completes the worker/CLI/staging path; review imports share the 10 MB serialized result bound while source inputs stay at 500 KB. Scoring preparation now requires a clean checkout and binds the entire request before inference, including saved evaluation data. Fourteen scorer tests pass. The published Jev follow-up remains tied to b9120fa; these later fixes are covered by regression tests, not retroactively attributed to that model assessment.
 
 Final integrated local verification passes **203 tests across 11 suites and ten CLI replays**, including the large-proposal and complete assessment-binding regressions. GitHub CI verifies the publication commit separately.
+
+
+## October 3: current collection verification
+
+The collection now includes eleven workflows: nine reference implementations and two experiments, Proposal Evidence and Data Repair Evidence. Integrated local verification passes **262 tests and eleven CLI replays** after the proposal source recovery fixes. Historical counts and assessments above describe their original revisions.
+
+Data Repair Evidence adds 26 tests, genuine GX 1.8.0 fail/pass exports with recorded provenance, and an explicitly authored dbt manifest fixture. Independent checks cover scope identity, unchanged check semantics, incomplete retests, stale evidence, missing ownership and privacy boundaries. A real Chromium replay exposed numeric JSON normalization drift; the corrected journey returned HTTP 200 with no console errors.
+
+One frozen live model trial preserved the expected facts but selected the same four sentences as the zero-call template. It does not demonstrate AI benefit. Jev selected `publish_experiment`, with 49.97/100 readiness evidence and source integration as the next priority. See [the scoped assessment](../quality/2026-10-03/data-repair.md). No authenticated source integration, enterprise business acceptance or production readiness is claimed.
