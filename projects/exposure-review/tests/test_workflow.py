@@ -17,7 +17,7 @@ class WorkflowTests(unittest.TestCase):
     def run_workflow(self):
         return self.module.run(self.data,ReplayAI(self.responses))
     def test_frozen_business_cases(self):
-        cases=json.loads((ROOT/'evaluation/cases.json').read_text())['cases']
+        cases=json.loads((ROOT/'evaluation/ecosystem-cases.json').read_text())['cases']
         self.assertGreaterEqual(len(cases),8)
         for case in cases:
             with self.subTest(case=case['id']):
@@ -25,6 +25,43 @@ class WorkflowTests(unittest.TestCase):
                 for key,value in case['expected_metrics'].items():self.assertEqual(result['metrics'][key],value)
                 self.assertEqual([f['code'] for f in result['findings']],case['expected_finding_codes'])
                 self.assertTrue(result['human_review_required'])
+    def test_same_name_cross_ecosystem_cannot_match_affected_or_fixed(self):
+        # Distinct real package names exist on PyPI and npm; advisory facts here are synthetic.
+        for version in ('1.0','1.1'):
+            self.data['inventory'][0].update(ecosystem='npm',package='requests',version=version)
+            self.data['advisories'][0].update(ecosystem='pypi',package='requests')
+            result=self.run_workflow()
+            self.assertEqual('ecosystem_mismatch',result['matches'][0]['status'])
+            self.assertEqual(1,result['metrics']['unknown_matches'])
+            self.assertEqual(0,result['metrics']['affected_matches'])
+            self.assertEqual('npm',result['matches'][0]['inventory_identity']['ecosystem'])
+
+    def test_missing_ecosystem_is_rejected_before_model(self):
+        for field in ('inventory','advisories'):
+            packet=copy.deepcopy(self.data);del packet[field][0]['ecosystem']
+            ai=ReplayAI([])
+            with self.assertRaises(InputError):self.module.run(packet,ai)
+            self.assertEqual([],ai.calls)
+
+    def test_opaque_purl_is_not_inferred_or_allowed_to_conflict(self):
+        self.data['inventory'][0]['package']='pkg:pypi/example'
+        with self.assertRaises(InputError):self.run_workflow()
+
+    def test_ecosystem_namespace_is_explicit_and_case_sensitive(self):
+        for value in ('PyPI',' pypi','',None):
+            self.data['inventory'][0]['ecosystem']=value
+            with self.assertRaises(InputError):self.run_workflow()
+
+    def test_exact_versions_remain_unlisted_without_normalization(self):
+        self.data['inventory'][0]['version']='v1.0'
+        self.assertEqual('version_unlisted',self.run_workflow()['matches'][0]['status'])
+
+    def test_historical_cases_require_explicit_contract_migration(self):
+        historical=json.loads((ROOT/'evaluation/cases.json').read_text())
+        for case in historical['cases']:
+            with self.subTest(case=case['id']),self.assertRaises(InputError):
+                self.module.run(case['input'],ReplayAI([]))
+
     def test_unknown_input_field(self):
         self.data['auto_execute']=True
         with self.assertRaises(InputError):self.run_workflow()
