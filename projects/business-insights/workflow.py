@@ -38,7 +38,8 @@ def run(data,ai):
     if plan['status']=='clarify':
         text(plan['clarification'],'clarification')
         return result(SPEC['id'],'A business definition needs clarification.',{'matched_records':0},
-            [finding('clarification','review','Clarify the question',plan['clarification'])],plan=plan,table=[])
+            [finding('clarification','review','Clarify the question',plan['clarification'])],
+            answer_status='withheld',plan=plan,table=[])
     if plan['clarification']:
         raise InputError('A ready plan cannot contain unresolved clarification')
     start=day(plan['start_date']) if plan['start_date'] else None
@@ -49,12 +50,14 @@ def run(data,ai):
     if not currency and len(currencies)>1 and plan['measure']!='units':
         return result(SPEC['id'],'Choose a reporting currency before combining amounts.',
             {'matched_records':0},[finding('mixed_currency','review','Multiple currencies',
-            'Currency conversion is not configured. Select one currency.')],plan=plan,table=[])
+            'Currency conversion is not configured. Select one currency.')],
+            answer_status='withheld',plan=plan,table=[])
     currency=currency or ('' if plan['measure']=='units' else next(iter(currencies)))
     if (currency and currency not in currencies) or set(plan['regions'])-regions or set(plan['products'])-products:
         return result(SPEC['id'],'The requested filters are not present in this dataset.',
             {'matched_records':0},[finding('unknown_filter','review','Check the source data',
-            'No answer was inferred for an unknown currency, product or region.')],plan=plan,table=[])
+            'No answer was inferred for an unknown currency, product or region.')],
+            answer_status='withheld',plan=plan,table=[])
     groups=defaultdict(lambda:{'value':Decimal(0),'records':[]})
     matched=[]
     for row in records:
@@ -78,5 +81,6 @@ def run(data,ai):
     return result(SPEC['id'],f"{plan['measure'].replace('_',' ').capitalize()} across {len(matched)} matching records.",
         {'matched_records':len(matched),'groups':len(table),'total':str(total) if matched else None,'unit':'units' if plan['measure']=='units' else currency},
         findings,plan=plan,table=table,
+        answer_status='calculated' if matched else 'withheld',
         calculation={'revenue':'sum(revenue)','net_revenue':'sum(revenue - refund)','cost':'sum(cost)',
                      'gross_profit':'sum(revenue - refund - cost)','units':'sum(units)'}[plan['measure']])

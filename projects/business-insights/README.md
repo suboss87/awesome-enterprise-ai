@@ -27,6 +27,8 @@ For your own question, edit a copy of the input and use `--mode live` with `OPEN
 
 AI interprets language. It does not execute SQL, calculate totals, change records or invent missing measures.
 
+The planner's `plan.status` describes whether it could form a supported plan. The outer `answer_status` describes the workflow outcome: `calculated` means a value was produced, while `withheld` means a review finding prevented an answer. A ready plan can still be withheld when currencies or filters need attention, or when no rows match. Both outcomes remain subject to human review.
+
 ## Input contract
 
 See [the complete example](examples/input.json).
@@ -47,6 +49,7 @@ Supported measures: gross revenue, net revenue (revenue minus refunds), cost, gr
 - Compare answers with an independently calculated report before trusting a new data mapping.
 - Mixed currencies cannot be summed as money without an explicit currency choice. There is no FX conversion.
 - No matching rows produces `total: null` and a `no_data` finding, not a claim of zero business activity.
+- When a finding blocks the answer, `answer_status` is `withheld`; inspect the finding before using the plan or metrics.
 - Unknown dimensions, margin, forecasting and growth are outside the contract. The model can still misinterpret a supported question; inspect its returned plan.
 - No warehouse connector, row-level authorization or hosted multiuser service is supplied. Use an authorized export for the first trial.
 
