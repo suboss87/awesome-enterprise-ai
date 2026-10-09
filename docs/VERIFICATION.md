@@ -52,6 +52,8 @@ python3 scripts/evaluate_workflows.py --cases evaluation/live-cases.json \
   --output /tmp/enterprise-ai-fresh-run --workers 2
 ```
 
+This command reproduces the 2026-09-30 evaluation contract. Its frozen Business Insights inputs predate the required `source_snapshot` contract and therefore are historical evidence, not replayable against the current workflow without a separately versioned migration. Keep the original inputs and result snapshots unchanged; prepare and freeze a new case set with adapter-declared snapshot metadata before any new inference.
+
 This command makes actual model calls and incurs provider usage. Use a new output directory; the evaluator refuses to overwrite an existing run. Synthetic snapshots can be inspected without a provider key.
 
 ## Reproduce or extend evaluation
@@ -102,3 +104,7 @@ Data Repair Evidence adds 34 tests, genuine GX 1.8.0 fail/pass exports with reco
 One frozen live model trial preserved the expected facts but selected the same four sentences as the zero-call template. It does not demonstrate AI benefit. Jev selected `publish_experiment`, with 49.97/100 readiness evidence and source integration as the next priority. See [the scoped assessment](../quality/2026-10-03/data-repair.md). No authenticated source integration, enterprise business acceptance or production readiness is claimed.
 
 Late release review reproduced passing empty GX batches and omitted newly failing checks. Corrections require meaningful assessed coverage under explicitly supported expectation semantics and expose both initial and current failures with aggregate counts. Actual empty GX output, missing/inconsistent coverage, unknown expectation semantics and shifted-failure regressions are retained. Independent probes and a fresh browser replay passed. Jev selected `publish_experimental_fix` for this correction; the original numerical assessment remains unchanged.
+
+## Current source and timing contracts: October 9
+
+After the Business Insights snapshot contract, Customer Resolution binding/currency checks, and Inventory Planning receipt-date horizon were added, the integrated verifier passes **286 tests across 12 suites and eleven CLI replays**. The three updated browser journeys passed at desktop, tablet and mobile widths with no page errors. Tests and replays use synthetic examples; this is not live inference, an adopter trial or production acceptance. The three-project Jev assessment is recorded separately in [the focused quality review](QUALITY.md#focused-retrofit-review-october-9-2026).

@@ -28,11 +28,11 @@ All fields shown in `examples/input.json` are required except `order.delivered_o
 
 - `as_of`: explicit ISO date, not the machine clock.
 - `policy.return_window_days`: integer 0–365; `max_refund_cents`: integer minor units 0–1,000,000,000.
-- `order`: unique case-bound `id`; `status` is pending, shipped, delivered, or cancelled; `total_cents` and `refunded_cents` are nonnegative integers; refunded cannot exceed total. Future delivery is invalid.
-- `message`: case-bound `id` and `text` (10,000 characters maximum).
+- `order`: unique case-bound `id`, matching `customer_ref`, uppercase ISO-style `currency`, status (pending, shipped, delivered, or cancelled), and nonnegative `total_cents` / `refunded_cents`; refunded cannot exceed total. Future delivery is invalid.
+- `message`: case-bound `id`, the same `customer_ref`, and `text` (10,000 characters maximum). A mismatch is rejected before the model call.
 - `tool_state`: ready, blocked, or uncertain, supplied by the operator or adapter. Ready means tool state is known, not authorization to execute.
 
-All money must already be normalized to one currency with two minor-unit decimals. No exchange conversion, tax computation, partial-line allocation, return eligibility exceptions, or payment reconciliation is inferred. The caller must bind the message to the correct authenticated customer and order.
+All money must already be normalized to the order's declared currency and minor unit. The reference checks that the message and order carry the same customer reference, then includes currency with every amount. This identifier equality does not authenticate a person or prove the adapter's join is correct. The caller must derive both fields from an authenticated, case-scoped source. No exchange conversion, tax computation, partial-line allocation, return eligibility exceptions, or payment reconciliation is inferred.
 
 ## AI and rules
 

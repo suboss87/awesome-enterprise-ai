@@ -6,11 +6,11 @@ The collection provides small pieces of a business process. Adoption means conne
 
 | Workflow | Existing work product | Next integration and acceptance evidence |
 |---|---|---|
-| Customer resolution | Policy-checked order proposal | Authorized support/order exports; prove case-to-customer binding, correct monetary interpretation and safe handling of uncertain transaction outcomes |
+| Customer resolution | Policy-checked order proposal; message/order customer-reference equality and currency-bound amounts | Trusted support/order exports; prove authenticated case-to-customer binding, currency/minor-unit semantics and safe handling of uncertain transaction outcomes |
 | Incident investigation | Timeline and competing explanations | Alert/log export with provenance; compare unsupported cause claims and useful next checks against existing incident summaries |
 | Vulnerability review | Version matches and owner queue | SBOM/scan import with package identity and version semantics; prove unknown inventory never becomes a clearance |
-| Business insights | Exact totals and source-linked analysis plan | Authorized reporting export and agreed business definitions; verify ambiguous questions and source grain against independently computed reports |
-| Inventory planning | Transparent replenishment scenario | Dated receipts and demand exports; compare planner corrections and stock decisions with the existing reorder method |
+| Business insights | Exact totals, source-linked analysis plan and adapter-declared snapshot freshness/completeness/coverage | Authorized reporting export that attests these fields, plus agreed business definitions; verify ambiguous questions and source grain against independently computed reports |
+| Inventory planning | Transparent replenishment scenario that accounts for dated receipts within its planning horizon | Trusted dated receipt and demand exports; compare planner corrections and stock decisions with the existing reorder method |
 | Equipment monitoring | Persistent observations and maintenance context | Monitoring/work-order exports; verify freshness, missed alarms and unsupported diagnosis on historical incidents |
 | Claims intake | Evidence checklist and information requests | Approved OCR and claim/policy exports; measure missing evidence, identity conflicts and extraction failures on representative packets |
 | Proposal evidence | Approved-source response matrix | Product-document version feeds; invalidate answers when evidence expires or changes, and measure reviewer corrections |

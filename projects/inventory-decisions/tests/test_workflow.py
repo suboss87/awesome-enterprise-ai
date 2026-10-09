@@ -74,4 +74,32 @@ class WorkflowTests(unittest.TestCase):
         elif SLUG=='inventory-decisions':self.assertEqual(result['plan'][0]['target_units'],22)
         else:self.assertEqual(result['statuses'][0]['consecutive_high_readings'],2)
 
+    def test_open_order_without_eta_is_rejected_before_model(self):
+        if SLUG!='inventory-decisions':return
+        self.data['items'][0]['on_order']=5
+        ai=ReplayAI([])
+        with self.assertRaises(InputError):self.module.run(self.data,ai)
+        self.assertEqual(ai.calls,[])
+
+    def test_late_open_order_is_excluded_from_horizon_position_and_flagged(self):
+        if SLUG!='inventory-decisions':return
+        from datetime import date, timedelta
+        item=self.data['items'][0]
+        item['on_order']=5
+        item['on_order_available_on']=(date.fromisoformat(self.data['as_of'])+timedelta(days=item['lead_days']+item['review_days']+1)).isoformat()
+        output=self.run_workflow()
+        self.assertEqual(output['plan'][0]['included_open_order_units'],0)
+        self.assertEqual(output['plan'][0]['open_order_after_horizon_units'],5)
+        self.assertIn('open_order_after_horizon',[finding['code'] for finding in output['findings']])
+
+    def test_open_order_on_horizon_is_included(self):
+        if SLUG!='inventory-decisions':return
+        from datetime import date, timedelta
+        item=self.data['items'][0]
+        item['on_order']=5
+        item['on_order_available_on']=(date.fromisoformat(self.data['as_of'])+timedelta(days=item['lead_days']+item['review_days'])).isoformat()
+        output=self.run_workflow()
+        self.assertEqual(output['plan'][0]['included_open_order_units'],5)
+        self.assertEqual(output['plan'][0]['inventory_position'],10)
+
 if __name__=='__main__':unittest.main()

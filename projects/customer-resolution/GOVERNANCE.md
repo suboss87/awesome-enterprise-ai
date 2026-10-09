@@ -17,6 +17,6 @@ Before evaluating, the owner must record the target population, labeled holdout,
 
 ## Controls and remaining proof
 
-Implemented: integer refund limits, delivery/window checks, quoted intent and explicit non-execution. Unverified: source authorization, current order reconciliation, real support outcomes and transaction recovery. A deployment needs read-only order access scoped to the case and supervised handoff to the existing transaction system; any write path requires a separate approval and idempotency design.
+Implemented: integer refund limits, explicit order currency in the proposal, matching message/order customer references, delivery/window checks, quoted intent and explicit non-execution. The reference equality check is not authentication and cannot prove that a trusted adapter performed the right customer-to-order join. Unverified: source authorization, current order reconciliation, real support outcomes and transaction recovery. A deployment needs read-only order access scoped to the case and supervised handoff to the existing transaction system; any write path requires a separate approval and idempotency design.
 
 Start with [project cases](evaluation/cases.json) and [tests](tests/test_workflow.py). Synthetic replay tests verify rules, not production accuracy. Apply the [shared acceptance rubric](../../quality/README.md), read [current assessments](../../docs/QUALITY.md), and follow [deployment boundaries](../../docs/DEPLOYMENT.md).
