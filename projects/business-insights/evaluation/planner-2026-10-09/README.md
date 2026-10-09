@@ -10,7 +10,11 @@ The public case file preserves every original question, record, expected outcome
 and scoring rule. Evaluator author metadata was omitted and labeling provenance clarified, so its
 SHA256 differs from the frozen trial. [Results](results.json) record both hashes.
 The runner froze cases, model and source hashes before inference and verified
-unchanged source hashes after the calls.
+unchanged source hashes after the calls. The [immutable trial records](https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/projects/business-insights/evaluation/planner-2026-10-09/trial)
+retain the frozen source snapshots, requests, provider responses and every output.
+The [original case file](https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/projects/business-insights/evaluation/planner-2026-10-09/cases.json)
+can be checked against the original corpus hash. These are historical records;
+current code evaluates a new study rather than reproducing those live calls.
 
 ## Results before the correction
 

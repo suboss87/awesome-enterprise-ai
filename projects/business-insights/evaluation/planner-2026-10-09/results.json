@@ -976,6 +976,8 @@
     "model": "gpt-5.5-2026-04-23",
     "original_cases_sha256": "5962a87c8b8099d2b5ba3c14c106dd9263eec4dadd0cd281971dbbd87730f7cc",
     "public_cases_sha256": "49d4133509a95861a3a2b6496196fe2a6cce3dae5fc17b2eed00a6685a27465e",
-    "note": "Original observed results, including failures. Public case metadata differs from the frozen trial; all case inputs and expected labels are identical. Evaluator metadata omitted and labeling provenance clarified. Provider response identifiers omitted."
+    "note": "Original observed results, including failures. Public case metadata differs from the frozen trial; all case inputs and expected labels are identical. Evaluator metadata omitted and labeling provenance clarified. Provider response identifiers omitted.",
+    "original_record": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/projects/business-insights/evaluation/planner-2026-10-09/trial",
+    "original_cases": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/projects/business-insights/evaluation/planner-2026-10-09/cases.json"
   }
 }

@@ -19,7 +19,10 @@
       "weighted_100": 51.05,
       "first_priority": "source_integration",
       "source_commit": "758cfe9bbecf369911fee0172b704214917b2516",
-      "production_designation": "blocked: target-environment acceptance unverified"
+      "production_designation": "blocked: target-environment acceptance unverified",
+      "request_sha256": "c4b686a6a4af3a58f73315fb5923cd8f2edc91cb5f947a5342c4bc440fcf145b",
+      "response_sha256": "ae2d3aaae4011923958de087a23bc92ed06b16351d477f2ff865e5ee2e2f3749",
+      "evidence_record": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/quality/2026-10-09/ten-workflows/full"
     },
     {
       "project": "incident-operations",
@@ -37,7 +40,10 @@
       "weighted_100": 50.41,
       "first_priority": "source_integration",
       "source_commit": "758cfe9bbecf369911fee0172b704214917b2516",
-      "production_designation": "blocked: target-environment acceptance unverified"
+      "production_designation": "blocked: target-environment acceptance unverified",
+      "request_sha256": "4a8392e57d0443d2265a3827d83ec8e514e019b15985e4df7c4d4e2f4d24c168",
+      "response_sha256": "4ee0404aadde224b0141648740fbde7770171e1879a61f3a57994596f373e575",
+      "evidence_record": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/quality/2026-10-09/ten-workflows/full"
     },
     {
       "project": "exposure-review",
@@ -55,7 +61,10 @@
       "weighted_100": 50.66,
       "first_priority": "source_integration",
       "source_commit": "758cfe9bbecf369911fee0172b704214917b2516",
-      "production_designation": "blocked: target-environment acceptance unverified"
+      "production_designation": "blocked: target-environment acceptance unverified",
+      "request_sha256": "4bad3c4feefbbf57ae20e6986a536049135d37fcf90fd220ff63becbce4f7d67",
+      "response_sha256": "db633b15126511ebf889d118797067df00fe6833695b9ea7a97adde867e6add6",
+      "evidence_record": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/quality/2026-10-09/ten-workflows/full"
     },
     {
       "project": "business-insights",
@@ -73,7 +82,10 @@
       "weighted_100": 51.53,
       "first_priority": "source_integration",
       "source_commit": "758cfe9bbecf369911fee0172b704214917b2516",
-      "production_designation": "blocked: target-environment acceptance unverified"
+      "production_designation": "blocked: target-environment acceptance unverified",
+      "request_sha256": "1c41cd72825ea9a461909eb7e6560f6f3d5891964da882b29b68c8092cb13ec1",
+      "response_sha256": "3f0347505b5426b5f3c61abc30d2d4a76135c50dca07bd88498f583260e86466",
+      "evidence_record": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/quality/2026-10-09/ten-workflows/focused"
     },
     {
       "project": "inventory-decisions",
@@ -91,7 +103,10 @@
       "weighted_100": 51.9,
       "first_priority": "source_integration",
       "source_commit": "758cfe9bbecf369911fee0172b704214917b2516",
-      "production_designation": "blocked: target-environment acceptance unverified"
+      "production_designation": "blocked: target-environment acceptance unverified",
+      "request_sha256": "7516dfeececaf3472a08647acc20cbd8ad07c1ff87783b4f0d2ab7da3067f721",
+      "response_sha256": "3b2ed87c13d375c1cd445d29e71f728396f98812ddf45c19de293c6af3523d61",
+      "evidence_record": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/quality/2026-10-09/ten-workflows/full"
     },
     {
       "project": "asset-operations",
@@ -109,7 +124,10 @@
       "weighted_100": 50.04,
       "first_priority": "source_integration",
       "source_commit": "758cfe9bbecf369911fee0172b704214917b2516",
-      "production_designation": "blocked: target-environment acceptance unverified"
+      "production_designation": "blocked: target-environment acceptance unverified",
+      "request_sha256": "f23054e70b621522518a2d3f7b52c2b69cac0f1a73772f3be130b786fe99acf8",
+      "response_sha256": "9400ea757e1f9081962daf6ecf8b46f8d11e47516b8ca997489e4c931f5061cb",
+      "evidence_record": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/quality/2026-10-09/ten-workflows/full"
     },
     {
       "project": "claims-intake",
@@ -127,7 +145,10 @@
       "weighted_100": 50.65,
       "first_priority": "source_integration",
       "source_commit": "758cfe9bbecf369911fee0172b704214917b2516",
-      "production_designation": "blocked: target-environment acceptance unverified"
+      "production_designation": "blocked: target-environment acceptance unverified",
+      "request_sha256": "acb9b7d03d9b0076156b656516583dd51c19e36c5f238953d2ff0f4e827f9260",
+      "response_sha256": "91859ec9b5c9a5f5431e56e8d03d898cd733a9cab8c81d7473aa0a3ee0d50aa2",
+      "evidence_record": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/quality/2026-10-09/ten-workflows/full"
     },
     {
       "project": "proposal-operations",
@@ -145,7 +166,10 @@
       "weighted_100": 54.2,
       "first_priority": "source_integration",
       "source_commit": "758cfe9bbecf369911fee0172b704214917b2516",
-      "production_designation": "blocked: target-environment acceptance unverified"
+      "production_designation": "blocked: target-environment acceptance unverified",
+      "request_sha256": "2c49e169b93d43de4b80e2b659127da32ba11f69234d9743d45b00413ee150f0",
+      "response_sha256": "7940afb04fa28910ac77866e9c445d467c4a3c0e3b8a07e9efb3490b28a9ae7a",
+      "evidence_record": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/quality/2026-10-09/ten-workflows/focused"
     },
     {
       "project": "account-intelligence",
@@ -163,7 +187,10 @@
       "weighted_100": 50.95,
       "first_priority": "source_integration",
       "source_commit": "758cfe9bbecf369911fee0172b704214917b2516",
-      "production_designation": "blocked: target-environment acceptance unverified"
+      "production_designation": "blocked: target-environment acceptance unverified",
+      "request_sha256": "d68845fb628472f45e9b137c30ab813e35801c92e3e047221e7cb9c3680ea60b",
+      "response_sha256": "a2f0d6ecab833ddd5f65f0fd93ded42b8ce56b19b6731309420fd6371512bdcd",
+      "evidence_record": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/quality/2026-10-09/ten-workflows/full"
     },
     {
       "project": "workforce-onboarding",
@@ -181,7 +208,11 @@
       "weighted_100": 49.31,
       "first_priority": "source_integration",
       "source_commit": "758cfe9bbecf369911fee0172b704214917b2516",
-      "production_designation": "blocked: target-environment acceptance unverified"
+      "production_designation": "blocked: target-environment acceptance unverified",
+      "request_sha256": "821ab964b1206566a3cf78a153b6b93c13ac444d6b88f75fa4c9aafb8ef0afc5",
+      "response_sha256": "95f229d8828bda3bf4a77928eecfad07255b241f63a866de795e37f69e531427",
+      "evidence_record": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/quality/2026-10-09/ten-workflows/full"
     }
-  ]
+  ],
+  "original_record": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/quality/2026-10-09/ten-workflows"
 }

@@ -37,7 +37,11 @@ packets with partial runtime context.
 | Account review | 50.95 | Source integration |
 | Onboarding | 49.31 | Source integration |
 
-[Per-dimension results](../quality/assessment-summary.json) retain these outcomes.
+[Per-dimension results](../quality/assessment-summary.json) retain these outcomes
+and original response hashes. [Immutable assessment records](https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/quality/2026-10-09/ten-workflows)
+provide the actual judgments, probability distributions and source manifests.
+Business Insights and Proposal Evidence use the `focused` records; the other
+eight use `full`. These historical records remain inspectable in Git history.
 All ten remain blocked from production designation. Earlier reviews also required
 adopter validation; none established enterprise readiness. Data Repair Evidence
 remains an experiment, with no demonstrated advantage for its optional AI step.
