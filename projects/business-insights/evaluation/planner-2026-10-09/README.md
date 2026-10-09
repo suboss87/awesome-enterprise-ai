@@ -47,10 +47,13 @@ For “How profitable were we in September 2026?” the live planner guessed
 operating profit or another business definition. The failed response remains in
 [the original case](trial/09-live/output.json).
 
-Current workflow code requires clarification before calling a model when profit
-language does not explicitly specify gross profit or the supported deduction
-formula. Regression checks include the observed failure and fresh wording
-variants, plus preservation of explicit gross-profit calculations. This repairs
+Current workflow code withholds generic profitable/profitability or plural-profits
+language and negated gross-profit requests before inference. Bare profit language
+requires an explicit gross-profit mention or the supported deduction formula.
+These conservative lexical checks may request clarification on otherwise valid
+phrasing; they do not prove arbitrary language is unambiguous. Regression checks
+include the observed failure, fresh wording variants and preservation of explicit
+gross-profit calculations. This repairs
 a demonstrated failure with a deterministic rule. It does not establish general
 semantic correctness. No new live pass or improved live accuracy is claimed.
 
