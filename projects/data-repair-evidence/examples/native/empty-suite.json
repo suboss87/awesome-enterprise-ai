@@ -1,0 +1,30 @@
+{
+  "name": "order_contract",
+  "id": "f4693532-7e80-4d81-8954-4a01fb292445",
+  "expectations": [
+    {
+      "type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "order_id"
+      },
+      "meta": {},
+      "id": "d59eb506-ab6a-481d-9496-956ceb47c9e7",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "amount",
+        "min_value": 0.0,
+        "max_value": 10000.0
+      },
+      "meta": {},
+      "id": "62fbc32c-7435-4c5c-8ca9-a4c8389ddb20",
+      "severity": "critical"
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "1.8.0"
+  },
+  "notes": null
+}
