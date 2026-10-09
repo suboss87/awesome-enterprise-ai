@@ -45,7 +45,7 @@ class PlannerEvaluationTests(unittest.TestCase):
 
     def test_false_calculation_is_counted_separately(self):
         case=next(c for c in CASES if c['id']=='ambiguous-profit-meaning')
-        output=json.loads((ROOT/'projects/business-insights/evaluation/planner-2026-10-09/trial/09-live/output.json').read_text())
+        output=json.loads((ROOT/'projects/business-insights/evaluation/planner-2026-10-09/regressions/undefined-profit.json').read_text())
         self.assertTrue(compare(output,case['expected'],case['input'])['false_ready'])
 
     def test_rules_do_not_invent_a_filter_from_grouping(self):

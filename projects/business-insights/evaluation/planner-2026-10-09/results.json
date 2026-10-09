@@ -86,7 +86,6 @@
         {
           "mode": "live",
           "model": "gpt-5.5-2026-04-23",
-          "response_id": "resp_03ffde41238a2ae6016ac8f2927f8887d1bdd082e5fba08994",
           "usage": {
             "input_tokens": 459,
             "input_tokens_details": {
@@ -164,7 +163,6 @@
         {
           "mode": "live",
           "model": "gpt-5.5-2026-04-23",
-          "response_id": "resp_075beb1199543af4016ac8f29585d087d18e8965c20e8a546e",
           "usage": {
             "input_tokens": 462,
             "input_tokens_details": {
@@ -242,7 +240,6 @@
         {
           "mode": "live",
           "model": "gpt-5.5-2026-04-23",
-          "response_id": "resp_0860596c37b60f6d016ac8f29894b087d1943a9995c368a933",
           "usage": {
             "input_tokens": 465,
             "input_tokens_details": {
@@ -320,7 +317,6 @@
         {
           "mode": "live",
           "model": "gpt-5.5-2026-04-23",
-          "response_id": "resp_03264d2cb7beb221016ac8f29dc98887d1ae949a5fc8e9a98a",
           "usage": {
             "input_tokens": 466,
             "input_tokens_details": {
@@ -398,7 +394,6 @@
         {
           "mode": "live",
           "model": "gpt-5.5-2026-04-23",
-          "response_id": "resp_0dbcaf37f3fc8ec2016ac8f29f5c9487d182278c1d552d2309",
           "usage": {
             "input_tokens": 461,
             "input_tokens_details": {
@@ -476,7 +471,6 @@
         {
           "mode": "live",
           "model": "gpt-5.5-2026-04-23",
-          "response_id": "resp_014e042e8f057dda016ac8f2a2b47887d18bf143aad5414115",
           "usage": {
             "input_tokens": 463,
             "input_tokens_details": {
@@ -554,7 +548,6 @@
         {
           "mode": "live",
           "model": "gpt-5.5-2026-04-23",
-          "response_id": "resp_0e0a04b51a94cfb0016ac8f2acd43c87d1acd4ea86ee3cfce0",
           "usage": {
             "input_tokens": 456,
             "input_tokens_details": {
@@ -632,7 +625,6 @@
         {
           "mode": "live",
           "model": "gpt-5.5-2026-04-23",
-          "response_id": "resp_0bd15eab8f1e9600016ac8f2b28cd487d189f59d75d24ad0dd",
           "usage": {
             "input_tokens": 456,
             "input_tokens_details": {
@@ -710,7 +702,6 @@
         {
           "mode": "live",
           "model": "gpt-5.5-2026-04-23",
-          "response_id": "resp_00e6b20fd2f1881d016ac8f2b7f8a087d1aa598fe9b0eaa461",
           "usage": {
             "input_tokens": 455,
             "input_tokens_details": {
@@ -788,7 +779,6 @@
         {
           "mode": "live",
           "model": "gpt-5.5-2026-04-23",
-          "response_id": "resp_0ecc44fb970c73e1016ac8f2bad83887d18d24cedfb5b844ab",
           "usage": {
             "input_tokens": 450,
             "input_tokens_details": {
@@ -866,7 +856,6 @@
         {
           "mode": "live",
           "model": "gpt-5.5-2026-04-23",
-          "response_id": "resp_0443cfee500eaa14016ac8f2bedc9087d1b07f8aff4c476807",
           "usage": {
             "input_tokens": 458,
             "input_tokens_details": {
@@ -944,7 +933,6 @@
         {
           "mode": "live",
           "model": "gpt-5.5-2026-04-23",
-          "response_id": "resp_0ea2dc0e1dc7a2a2016ac8f2c3bf3487d18f07a2b2c11bca9b",
           "usage": {
             "input_tokens": 455,
             "input_tokens_details": {
@@ -983,5 +971,13 @@
     "enterprise_ai/catalog.py": "7ee52b87f440e2c663784340a28186ff01fa18b463d1691b4058035a017954ef"
   },
   "frozen_source_unchanged": true,
-  "limits": "Synthetic labels independently authored before inference. Not customer data, domain-owner ground truth, production acceptance, a representative target population or proof of business value. No model was called to generate or label these cases."
+  "limits": "Synthetic labels independently authored before inference. Not customer data, domain-owner ground truth, production acceptance, a representative target population or proof of business value. The evaluated planner was not used to generate or label these cases.",
+  "publication": {
+    "model": "gpt-5.5-2026-04-23",
+    "original_cases_sha256": "5962a87c8b8099d2b5ba3c14c106dd9263eec4dadd0cd281971dbbd87730f7cc",
+    "public_cases_sha256": "49d4133509a95861a3a2b6496196fe2a6cce3dae5fc17b2eed00a6685a27465e",
+    "note": "Original observed results, including failures. Public case metadata differs from the frozen trial; all case inputs and expected labels are identical. Evaluator metadata omitted and labeling provenance clarified. Provider response identifiers omitted.",
+    "original_record": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/projects/business-insights/evaluation/planner-2026-10-09/trial",
+    "original_cases": "https://github.com/suboss87/awesome-enterprise-ai/tree/148e7986f9a2507de408ffc548f3bc9635792c11/projects/business-insights/evaluation/planner-2026-10-09/cases.json"
+  }
 }

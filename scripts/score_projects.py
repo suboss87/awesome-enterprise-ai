@@ -125,7 +125,7 @@ def prepare(folder,context_path,projects=None):
             paths.extend([ROOT/'scripts/evaluate_business_planner.py',
                 project/'evaluation/planner-2026-10-09/cases.json',
                 project/'evaluation/planner-2026-10-09/README.md',
-                project/'evaluation/planner-2026-10-09/trial/report.json'])
+                project/'evaluation/planner-2026-10-09/results.json'])
         if (project/'GOVERNANCE.md').exists():paths.append(project/'GOVERNANCE.md')
         # Proposal review implementation only affects this workflow. Avoid irrelevant judge context.
         paths=[p for p in paths if slug=='proposal-operations' or p.name not in ('proposal_review.py','test_proposal_review.py','proposal_sources.py','test_proposal_sources.py')]

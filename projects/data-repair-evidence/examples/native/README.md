@@ -2,7 +2,9 @@
 
 `failed-gx.json` and `repaired-gx.json` were produced by actual local GX **1.8.0** runs, not handcrafted validation JSON. `suite.json` is the same native suite used for both. The two independently authored dataframes are included. One initially missing `order_id` is repaired; native content fingerprints consequently differ. Times and IDs come from actual execution. Hashes, Python version and every installed development distribution are recorded in `provenance.json`.
 
-PyPI's [1.8.0 release metadata](https://pypi.org/pypi/great-expectations/1.8.0/json) was checked before installation: first upload `2025-10-23T20:16:19.780175Z`, older than 14 days on the research date, 2026-10-03. Installation excluded **all** distributions newer than 2026-09-18. This environment was temporary and is not a runtime requirement.
+GX is used only to generate the synthetic fixtures. It is not a workspace runtime
+requirement. The reproducible environment pins GX 1.8.0 and excludes development
+distributions newer than 2026-09-18.
 
 Recreate in a disposable environment (requires uv and network access):
 

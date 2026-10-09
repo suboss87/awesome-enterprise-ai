@@ -1,10 +1,9 @@
 {
   "provenance": {
     "kind": "independent_synthetic_labels",
-    "author": "Independent read-only audit agent; not the workflow implementation or model under evaluation",
     "created_date": "2026-10-09",
     "source_records": "Current public fictional Business Insights example records S1, S2, S3 and source_snapshot; one explicitly identified currency variant",
-    "limits": "Synthetic labels independently authored before inference. Not customer data, domain-owner ground truth, production acceptance, a representative target population or proof of business value. No model was called to generate or label these cases.",
+    "limits": "Synthetic labels independently authored before inference. Not customer data, domain-owner ground truth, production acceptance, a representative target population or proof of business value. The evaluated planner was not used to generate or label these cases.",
     "normalization": {
       "dates": "For ready plans, empty start_date/end_date normalize to the declared coverage boundaries. Expected labels record those effective dates. Explicit and relative date meanings remain unchanged.",
       "currency": "For ready monetary plans, an empty currency normalizes to the sole dataset currency when there is exactly one. It remains empty with several currencies, and for unspecified currency on units. Explicit currency filters remain explicit.",
@@ -12,7 +11,8 @@
       "excluded_fields": "question_quote and clarification wording are not scored. Clarify plans require only status=clarify, with a withheld answer; ancillary schema-required placeholder fields are not semantically scored.",
       "withholding": "Mixed-currency and unknown-filter cases deliberately permit a ready intent plan followed by a withheld workflow answer. This policy must be independently reviewed before live calls; alternative valid clarification behavior must not be silently relabeled after inference."
     },
-    "manual_arithmetic": "S1 net1100 and gross profit450; S2 net800 and gross profit300; S3 net400 and gross profit200. USD September gross2000, net1900, cost1150, gross profit750, units20; full coverage units24."
+    "manual_arithmetic": "S1 net1100 and gross profit450; S2 net800 and gross profit300; S3 net400 and gross profit200. USD September gross2000, net1900, cost1150, gross profit750, units20; full coverage units24.",
+    "publication": "Public copy: evaluator author metadata omitted and labeling provenance clarified; all questions, records, expected outcomes and scoring rules are unchanged from the frozen trial."
   },
   "cases": [
     {

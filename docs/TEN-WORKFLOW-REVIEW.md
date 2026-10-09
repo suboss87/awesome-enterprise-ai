@@ -35,8 +35,9 @@ readable columns and scroll within the result pane.
 
 The [Business Insights planner study](../projects/business-insights/evaluation/planner-2026-10-09/)
 preserves a real failed model response. A deterministic clarification rule fixes
-that observed ambiguity, including a negated gross-profit mention. The historical
-trial remains unchanged; it does not demonstrate a general AI advantage.
+that observed ambiguity, including a negated gross-profit mention. The public
+results retain the original case outcomes; they do not demonstrate a general
+AI advantage.
 
 ## Production acceptance
 

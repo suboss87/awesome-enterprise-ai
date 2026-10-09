@@ -1,6 +1,6 @@
 # Frozen acceptance and value evaluation
 
-The ten case families were frozen in the research/build contract before this implementation. The local regression suite covers them; synthetic fault mutations are deliberately authored tests, not falsely presented as additional native GX runs.
+The ten acceptance case families were defined before implementation. The local regression suite covers them; synthetic fault mutations are deliberately authored tests, not falsely presented as additional native GX runs.
 
 | Frozen case | Required outcome | Regression methods |
 | --- | --- | --- |
