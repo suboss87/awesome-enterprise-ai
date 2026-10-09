@@ -1,0 +1,29 @@
+{
+  "commit": "758cfe9bbecf369911fee0172b704214917b2516",
+  "request_sha256": "f23054e70b621522518a2d3f7b52c2b69cac0f1a73772f3be130b786fe99acf8",
+  "rubric_sha256": "d33fcd2ba2b93a1d737b8c85f9396fa9b4b87cf46193e808c3edf0f4039d6938",
+  "context_sha256": "c1fb2fadcad3d19b79bd5ee87c24ff2c2d3be6a098d9417a3272fccca3d68bbd",
+  "files": {
+    "enterprise_ai/__init__.py": "3063b4bb11adb626a9baaf2a07b8528f540a3891eec59d469e8575ac2f31c3a8",
+    "enterprise_ai/__main__.py": "4442f62e6c056958dd893b39bfa645a6ec3b413dc8d5861639587f35cc9f74aa",
+    "enterprise_ai/catalog.py": "7ee52b87f440e2c663784340a28186ff01fa18b463d1691b4058035a017954ef",
+    "enterprise_ai/common.py": "65f064b82cc4612b52d6560bbaac34f05c5657672a96256f3a47de690c9d3d8a",
+    "enterprise_ai/execution.py": "d7533631c526b66b49b8517ef34495be4011205169c58086e49dcc6538ad27da",
+    "enterprise_ai/provider.py": "4da2d135bcea97fdbb0884d20a7664c47fb4f09b4fe615c969ff4c5f5527b1e7",
+    "enterprise_ai/server.py": "9252d9b9cc88d9d7648767231d0461b42a7d7117b8c6609e6a8972b3f1699329",
+    "enterprise_ai/worker.py": "885c13a3c0d3b292bc4a6d17ddfde18e157b62074a05210a1db19ea053bdca6b",
+    "tests/test_business_planner_evaluation.py": "46e80385f5724a8def7be930c5483b3dd6a071c90086d3303a5e044708ae1bb1",
+    "tests/test_execution.py": "f803c9fb97a49670349c68b093d0b9c7ab8a486448929469c7e1bf82b6d7c082",
+    "tests/test_quality.py": "caff7e601ac55a9bc39dd9bb006093c1c997e694b5751b4129d612667fa6f04b",
+    "tests/test_review_regressions.py": "219bd165ca670f8ab9bcea5d0e12ecea02e78444e7aac52cfbf898ac3d9ee693",
+    "tests/test_runtime.py": "ca0173135f647c878e4aebbc1eec9049530c21cf8709c8d548440be7a50866ed",
+    "tests/test_server.py": "07ea05bd168b8299a54c2e075beee6598d51a17ce0f3006723476f8fed9db4de",
+    "docs/DEPLOYMENT.md": "8bd1e30a0aa5586e42e494544c341348cbb80441e5585ef9eebc1c5518dd2c63",
+    "docs/ADOPTION-ROADMAP.md": "eb7105132ce5a7e3e8206c014d1ac84775489d56ea9e79379278d09c05d4b58c",
+    "projects/asset-operations/workflow.py": "977bea47d28524f0feaca61b4015a7f1b4970e4ac012cac7a60e0f4d2d1da1c1",
+    "projects/asset-operations/README.md": "02d0b692fdd0cd68a51998f821f31f4154cbe96fdd6cce2673a66d87bc8ae3f7",
+    "projects/asset-operations/tests/test_workflow.py": "d97b09bda83162323fb24d42f62a0fbf0e5eb9f7cf33611eb759001808e0bf31",
+    "projects/asset-operations/evaluation/cases.json": "4407dc63fd4841a57635ef6fb938aa7cb80d2ecea332876ce85f5131635914d3",
+    "projects/asset-operations/GOVERNANCE.md": "570028687af76b24be957b72c8fc3902e5962c467e79b4b57d1f65c46465a56c"
+  }
+}

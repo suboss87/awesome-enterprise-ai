@@ -60,3 +60,36 @@ After source-bound snapshot checks, customer/order binding and currency labels, 
 All three remain blocked from production designation. The new controls consume caller/adapter-provided source facts; they do not authenticate users, verify source systems, or replace business-owner acceptance. No live inference or adopter trial was performed for this revision. The eight unchanged workflows were not reassessed.
 
 The [focused summary](../quality/2026-10-09/retrofit/summary.json), [Jev judgments](../quality/2026-10-09/retrofit/), source manifests and [verification context](../quality/2026-10-09/retrofit/context.json) are public. Full requests remain private; their hashes are retained in the manifests.
+
+## Ten-workflow domain review: October 9
+
+After independent audits and five workflow repairs, Jev assessed the original ten
+at `758cfe9bbecf369911fee0172b704214917b2516` using unchanged rubric 1.0.0.
+Each packet assigned its relevant business domain and disclosed incomplete
+deployment evidence. These are model roles, not professional sign-offs.
+
+| Project | Score /100 | First priority |
+|---|---:|---|
+| Customer resolution | 51.05 | Source integration |
+| Incident investigation | 50.41 | Source integration |
+| Vulnerability review | 50.66 | Source integration |
+| Business insights | 51.53 | Source integration |
+| Inventory planning | 51.90 | Source integration |
+| Equipment monitoring | 50.04 | Source integration |
+| Claims intake | 50.65 | Source integration |
+| Proposal evidence | 54.20 | Source integration |
+| Account review | 50.95 | Source integration |
+| Onboarding | 49.31 | Source integration |
+
+All ten remain blocked from production designation. The [assessment record](../quality/2026-10-09/ten-workflows/)
+retains actual responses, manifests and two HTTP400 failures. The two rejected
+requests were replaced with independently reviewed, smaller packets containing
+the relevant code and unfavorable evidence. Eight successful calls were not
+repeated. Focused packets provide partial runtime context, so these are not
+controlled before/after comparisons or proof that every small score movement is
+meaningful. No high-score target was supplied to the judge.
+
+The [business review](TEN-WORKFLOW-REVIEW.md) lists enforceable controls and the
+remaining adopter evidence. The [planner study](../projects/business-insights/evaluation/planner-2026-10-09/)
+preserves its original false-ready answer and makes no improved live accuracy
+claim after the deterministic correction.

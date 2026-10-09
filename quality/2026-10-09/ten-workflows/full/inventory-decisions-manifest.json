@@ -1,0 +1,29 @@
+{
+  "commit": "758cfe9bbecf369911fee0172b704214917b2516",
+  "request_sha256": "7516dfeececaf3472a08647acc20cbd8ad07c1ff87783b4f0d2ab7da3067f721",
+  "rubric_sha256": "d33fcd2ba2b93a1d737b8c85f9396fa9b4b87cf46193e808c3edf0f4039d6938",
+  "context_sha256": "c1fb2fadcad3d19b79bd5ee87c24ff2c2d3be6a098d9417a3272fccca3d68bbd",
+  "files": {
+    "enterprise_ai/__init__.py": "3063b4bb11adb626a9baaf2a07b8528f540a3891eec59d469e8575ac2f31c3a8",
+    "enterprise_ai/__main__.py": "4442f62e6c056958dd893b39bfa645a6ec3b413dc8d5861639587f35cc9f74aa",
+    "enterprise_ai/catalog.py": "7ee52b87f440e2c663784340a28186ff01fa18b463d1691b4058035a017954ef",
+    "enterprise_ai/common.py": "65f064b82cc4612b52d6560bbaac34f05c5657672a96256f3a47de690c9d3d8a",
+    "enterprise_ai/execution.py": "d7533631c526b66b49b8517ef34495be4011205169c58086e49dcc6538ad27da",
+    "enterprise_ai/provider.py": "4da2d135bcea97fdbb0884d20a7664c47fb4f09b4fe615c969ff4c5f5527b1e7",
+    "enterprise_ai/server.py": "9252d9b9cc88d9d7648767231d0461b42a7d7117b8c6609e6a8972b3f1699329",
+    "enterprise_ai/worker.py": "885c13a3c0d3b292bc4a6d17ddfde18e157b62074a05210a1db19ea053bdca6b",
+    "tests/test_business_planner_evaluation.py": "46e80385f5724a8def7be930c5483b3dd6a071c90086d3303a5e044708ae1bb1",
+    "tests/test_execution.py": "f803c9fb97a49670349c68b093d0b9c7ab8a486448929469c7e1bf82b6d7c082",
+    "tests/test_quality.py": "caff7e601ac55a9bc39dd9bb006093c1c997e694b5751b4129d612667fa6f04b",
+    "tests/test_review_regressions.py": "219bd165ca670f8ab9bcea5d0e12ecea02e78444e7aac52cfbf898ac3d9ee693",
+    "tests/test_runtime.py": "ca0173135f647c878e4aebbc1eec9049530c21cf8709c8d548440be7a50866ed",
+    "tests/test_server.py": "07ea05bd168b8299a54c2e075beee6598d51a17ce0f3006723476f8fed9db4de",
+    "docs/DEPLOYMENT.md": "8bd1e30a0aa5586e42e494544c341348cbb80441e5585ef9eebc1c5518dd2c63",
+    "docs/ADOPTION-ROADMAP.md": "eb7105132ce5a7e3e8206c014d1ac84775489d56ea9e79379278d09c05d4b58c",
+    "projects/inventory-decisions/workflow.py": "60397cb23a4d6fa360c68f1f9ee2a6e5c4fa1860d04a73370058eb7674a2bc7e",
+    "projects/inventory-decisions/README.md": "d7ea18cb8e317b3345ddb214d6d13199506b19f5c192bdd2460c16e3c495d56f",
+    "projects/inventory-decisions/tests/test_workflow.py": "6edada118ac7c18a5a2c61c15649ba4fbaff972d9177e564c6c85799b69b59ad",
+    "projects/inventory-decisions/evaluation/cases.json": "84b6c5d512bc17aa7f86daa5e8f22764b6db174ce94b0e55ed24018413a8a3f0",
+    "projects/inventory-decisions/GOVERNANCE.md": "fc183bbeb18d870f9dfd6c710784097de5c49c79ecb825b630adb34ae04121b6"
+  }
+}
