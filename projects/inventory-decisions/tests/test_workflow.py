@@ -102,4 +102,37 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(output['plan'][0]['included_open_order_units'],5)
         self.assertEqual(output['plan'][0]['inventory_position'],10)
 
+    def test_horizon_receipt_does_not_hide_shortage_before_arrival(self):
+        self.data['notes']=[];self.responses=[{'note_reviews':[]}]
+        self.data['items'][0].update(on_hand=20,on_order=100,on_order_available_on='2026-09-10',
+            lead_days=3,review_days=4,capacity_units=200)
+        out=self.run_workflow()
+        self.assertEqual(out['plan'][0]['requested_units'],0)
+        self.assertEqual(out['plan'][0]['projected_units_before_receipt'],-8)
+        self.assertIn('pre_receipt_shortfall',[f['code'] for f in out['findings']])
+
+    def test_receipt_today_has_no_pre_receipt_demand(self):
+        self.data['items'][0].update(on_order=100,on_order_available_on=self.data['as_of'])
+        self.assertEqual(self.run_workflow()['plan'][0]['projected_units_before_receipt'],5)
+
+    def test_falsey_eta_is_not_null(self):
+        for value in ({},[],False,0,''):
+            with self.subTest(value=value):
+                self.data['items'][0]['on_order_available_on']=value
+                ai=ReplayAI([])
+                with self.assertRaises(InputError):self.module.run(self.data,ai)
+                self.assertEqual(ai.calls,[])
+
+    def test_currency_must_use_ascii_letters(self):
+        self.data['currency']='ÜSD'
+        ai=ReplayAI([])
+        with self.assertRaises(InputError):self.module.run(self.data,ai)
+        self.assertEqual(ai.calls,[])
+
+    def test_calendar_overflow_is_input_error_before_model(self):
+        self.data['items'][0]['lead_days']=10000000
+        ai=ReplayAI([])
+        with self.assertRaises(InputError):self.module.run(self.data,ai)
+        self.assertEqual(ai.calls,[])
+
 if __name__=='__main__':unittest.main()

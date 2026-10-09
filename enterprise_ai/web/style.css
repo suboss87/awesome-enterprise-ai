@@ -2,3 +2,4 @@
 .answer-status{font-size:13px;line-height:1.5;padding:13px 15px;margin:0 0 18px;border-left:4px solid var(--accent);border-radius:0 4px 4px 0;background:#e9f5f4;color:#174f52}.answer-status.withheld{border-color:#b16c21;background:#fff4e3;color:#71400c}.answer-status.calculated{border-color:#338260;background:#e8f3eb;color:#214d38}
 
 @media(max-width:640px){.table-wrap{overflow-x:auto;overscroll-behavior-x:contain}.table-wrap table{min-width:640px}.table-wrap th{white-space:nowrap}}
+.table-wrap{overscroll-behavior-x:contain}.table-wrap th{white-space:nowrap;overflow-wrap:normal}.table-wrap td{min-width:100px}

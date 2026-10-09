@@ -27,7 +27,7 @@ The example requests a return ten days after delivery. It proposes review of the
 All fields shown in `examples/input.json` are required except `order.delivered_on`, which is required only for delivered orders. Unknown fields are rejected.
 
 - `as_of`: explicit ISO date, not the machine clock.
-- `policy.return_window_days`: integer 0–365; `max_refund_cents`: integer minor units 0–1,000,000,000.
+- `policy.return_window_days`: integer 0–365; `max_refund_cents`: integer minor units 0–1,000,000,000; `currency` must equal the order currency. A cap in another currency is rejected before inference.
 - `order`: unique case-bound `id`, matching `customer_ref`, uppercase ISO-style `currency`, status (pending, shipped, delivered, or cancelled), and nonnegative `total_cents` / `refunded_cents`; refunded cannot exceed total. Future delivery is invalid.
 - `message`: case-bound `id`, the same `customer_ref`, and `text` (10,000 characters maximum). A mismatch is rejected before the model call.
 - `tool_state`: ready, blocked, or uncertain, supplied by the operator or adapter. Ready means tool state is known, not authorization to execute.

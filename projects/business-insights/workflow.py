@@ -2,6 +2,7 @@
 from collections import defaultdict
 from datetime import datetime
 from decimal import Decimal
+import re
 from enterprise_ai.common import (obj,text,rows,unique,integer,money,day,object_schema,
     array_schema,string_schema,finding,result,InputError)
 
@@ -31,6 +32,8 @@ def validate_snapshot(value,as_of):
     if exported.tzinfo is None or exported.utcoffset() is None:
         raise InputError('exported_at must include a timezone offset')
     data_as_of=day(value['data_as_of'])
+    if data_as_of>exported.date():
+        raise InputError('data_as_of cannot follow the export date in its declared source timezone')
     coverage_start=day(value['coverage_start'])
     coverage_end=day(value['coverage_end'])
     if coverage_start>coverage_end or coverage_end>data_as_of:
@@ -62,6 +65,17 @@ def run(data,ai):
     if preflight_holds:
         return result(SPEC['id'],'Source readiness checks require review.',
             {'matched_records':0},preflight_holds,answer_status='withheld',source_snapshot=snapshot,table=[])
+    profit_words=re.search(r'\b(profit|profits|profitable|profitability)\b',question,re.I)
+    ambiguous_profit_words=re.search(r'\b(profits|profitable|profitability)\b',question,re.I)
+    explicit_gross_profit=re.search(r'\bgross[ _-]+profit\b',question,re.I)
+    negated_gross_profit=re.search(r"\b(?:no|not|without|except|exclude|excluding|don't|do not)\s+(?:\w+\s+){0,3}gross[ _-]+profit\b",question,re.I)
+    explicit_profit_formula=re.search(r'\brevenue\s+minus\s+refunds\s+(?:and|minus)\s+cost\b',question,re.I)
+    if ambiguous_profit_words or negated_gross_profit or (profit_words and not (explicit_gross_profit or explicit_profit_formula)):
+        clarification='Do you mean gross profit (revenue minus refunds and cost), or another profit definition?'
+        return result(SPEC['id'],'A business definition needs clarification.',{'matched_records':0},
+            [finding('ambiguous_profit_definition','review','Define the profit measure',clarification)],
+            answer_status='withheld',source_snapshot=snapshot,table=[],
+            plan={'status':'clarify','clarification':clarification,'question_quote':question})
     records=rows(data['records'],minimum=1);unique(records)
     currencies=set();regions=set();products=set()
     for row in records:
@@ -71,7 +85,7 @@ def run(data,ai):
             raise InputError('A record date falls outside the declared snapshot coverage')
         for field in ('region','product','currency'):
             text(row[field],field,100)
-        if len(row['currency'])!=3 or not row['currency'].isalpha() or row['currency']!=row['currency'].upper():
+        if len(row['currency'])!=3 or (not row['currency'].isascii() or not row['currency'].isalpha()) or row['currency']!=row['currency'].upper():
             raise InputError('Currency must be a three-letter uppercase code')
         for field in ('revenue','refund','cost'):
             if money(row[field])<0:

@@ -4,7 +4,8 @@
     "claimant_id": "ORG-8",
     "incident_date": "2026-09-12",
     "currency": "USD",
-    "amount": "1500.00"
+    "amount": "1500.00",
+    "policy_id": "POL-SYNTHETIC-1"
   },
   "requirements": [
     {

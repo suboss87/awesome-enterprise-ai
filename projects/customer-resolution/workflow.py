@@ -12,15 +12,17 @@ SCHEMA = object_schema({'intent': string_schema(['cancel', 'return', 'refund', '
 def run(data, ai):
     obj(data, ['as_of', 'policy', 'order', 'message', 'tool_state'])
     today = day(data['as_of'])
-    policy = obj(data['policy'], ['return_window_days', 'max_refund_cents'])
+    policy = obj(data['policy'], ['return_window_days', 'max_refund_cents', 'currency'])
     window = integer(policy['return_window_days'], maximum=365)
     cap = integer(policy['max_refund_cents'])
     order = obj(data['order'], ['id', 'customer_ref', 'currency', 'status', 'total_cents', 'refunded_cents'], ['delivered_on'])
     text(order['id'], 'order id', 128)
     text(order['customer_ref'], 'order customer reference', 128)
     text(order['currency'], 'order currency', 3)
-    if len(order['currency']) != 3 or not order['currency'].isalpha() or order['currency'] != order['currency'].upper():
+    if len(order['currency']) != 3 or (not order['currency'].isascii() or not order['currency'].isalpha()) or order['currency'] != order['currency'].upper():
         raise InputError('Order currency must be a three-letter uppercase code')
+    if policy['currency'] != order['currency']:
+        raise InputError('Refund policy currency must match the order currency; no conversion is performed')
     if order['status'] not in ('pending', 'shipped', 'delivered', 'cancelled'):
         raise InputError('Unsupported order status')
     total = integer(order['total_cents']); refunded = integer(order['refunded_cents'], maximum=total)

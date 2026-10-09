@@ -28,6 +28,8 @@ Unknown fields, duplicate identifiers, invalid types and unsupported source quot
 
 Target = ceil(mean daily units × (lead_days + review_days)) + safety_units. Position = on_hand − reserved + open-order units expected by the end of the lead plus review horizon. Later receipts are excluded from that position and surfaced as a review finding; they still count against storage capacity. Requested = max(0,target − position). Capacity ceiling = max(0,capacity_units − on_hand − on_order). Proposed = min(requested,capacity ceiling). Integer-cent costs are exact. Budget overrun is a finding; no hidden allocation priority. Notes remain separate review annotations.
 
+An in-horizon receipt does not make its units available immediately. `projected_units_before_receipt` subtracts mean demand through the days before arrival from unreserved on-hand stock. A negative balance produces `pre_receipt_shortfall`, even when the final horizon position needs no replenishment. Receipt units are assumed available at the start of their declared date. This is a deterministic timing scenario, not a probabilistic stockout forecast; there is one aggregate receipt date per SKU. Impossible calendar horizons and non-null malformed receipt dates are rejected before inference.
+
 All results require human review. `findings` expose actionable conditions; `actions` are review recommendations only. The workflow does not write to enterprise systems.
 
 ## Evaluation

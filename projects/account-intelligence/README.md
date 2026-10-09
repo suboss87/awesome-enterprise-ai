@@ -26,8 +26,8 @@ The example reports a meeting proposal for November 1 against an October 15 CRM 
 
 - `as_of`: ISO review date.
 - `account`: `id` and `name`.
-- `opportunities`: up to 100 records with unique `id`, matching `account_id`, `title`, integer `amount_cents`, `stage`, ISO `close_date`, and `next_step` (empty when missing).
-- Stages: prospect, qualified, proposal, won, lost. Won/lost amounts are excluded from open pipeline. All monetary values must use the same currency and minor-unit convention; no conversion is performed.
+- `opportunities`: up to 100 records with unique `id`, matching `account_id`, `title`, integer `amount_cents`, three-letter uppercase ASCII `currency`, `stage`, ISO `close_date`, and `next_step` (empty when missing).
+- Stages: prospect, qualified, proposal, won, lost. Won/lost amounts are excluded from open pipeline. Values must already use the declared currency's minor-unit convention; no conversion is performed. `pipeline_by_currency` records separate balances. With multiple active currencies, `open_pipeline_cents` and its `currency` are null and a review finding prevents treating the balances as a combined total.
 - `meetings`: up to 100 records with unique `id`, matching `account_id`, ISO `date` no later than `as_of`, and `text` up to 10,000 characters.
 
 Unknown fields and cross-account records are rejected. Each observation must quote exactly one known opportunity ID matching its target. A quote without an ID is accepted only when the full meeting names exactly that target opportunity ID. Missing or multiple associations fail validation; even a single supplied opportunity is not assumed to be the subject of unnamed notes. Include explicit opportunity IDs in source exports rather than assigning them by inference.

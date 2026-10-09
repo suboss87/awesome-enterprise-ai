@@ -1,0 +1,176 @@
+{
+  "id": "resp_0ecc44fb970c73e1016ac8f2bad83887d18d24cedfb5b844ab",
+  "object": "response",
+  "created_at": 1791554234,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1791554238,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 8000,
+  "max_tool_calls": null,
+  "model": "gpt-5.5-2026-04-23",
+  "moderation": null,
+  "output": [
+    {
+      "id": "rs_0ecc44fb970c73e1016ac8f2bb4d9487d18aee384ec48fcec0",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqyPK-0aizhvVTL4WqVGTpxTNa0Pafglxc3irPCckImXEHhpiVUVmnQtKiUvuTNxdbD2KPNnzgRaVcDRJdTAPj27eriU95BCQ9CzAsFla2GXOUCFEefUQaMo3qneDcj__Lgx9AL4nQ5jRtB3zPFiqD8MS3raoRJx8G9tjl7wdvIUY9N5Mevr5UmvwvVO2svotb73zUVn9fS0CZvtY0b9ajUJMjPH4ubaPSGVX81qM4dxLu0N1UDwKgUHusWwvvZQlLwzh0VHILULBOau97QWcv8PNC_UTfc1sF-nxDORLOgx6ZHyey_93r9yqqjAVsOvP6dqlNkiHmM-xmtuMa5_GzFtchgZs-6IW-8zIW4LRu4vYujTcC76kaS_NXKp9q0tHlWCJgYvcynEELd0Ym1oZjofcRm6yuYc0UdkwU_vTnCfrYAGWtZqm-FopO0ARF_OYyi0919yfg4KIJnU_Ng9eGB-OQsKNOS6OrP2D8cNGXa_lhcqR5Ebgg5tBHAz7r1NGxsgnBSYDvPFn1h1FdDNEfO5_LSXo51MyIvcaanLfJ_pbTvIo4hL8uq0waKslPUOqjeirca6CrElMF8RmSf6gkUszQJuNCjh3ITWhlOSqv80WPoPY6qjRk_N6osIcYKhJuldqr4oCzQPdAio2nqotqH_i_gFCqQvEaV6pmkSSljiX3RffNpQ_dArMZKgvfVcp6wXcN0Il1ppbF5WUtvRNIGEPmkc6Dq2sZSQjGNx22fHAMJWhQp0sl3-n-8tZOPCexQ_gXJtkvLvpaIjfB9zzt2xvY6VzmW0fpNXSLfVphQxDNRlS_47K2hyEMkS1EAPoYEEYfHRGmIpCQl-iwR_NHLnabKvkANKu1xXztthr9t938eJSgbZ25vxSqlX-AdsWj-wgB5GqGPY6WLZrmSVCh-Rb97xbRXI855QGe-kdUqeR9AqvNOfBIncx1jfWdlwFugx4ZycZ0WlnhE-euSdyy3gwejr42svSN4jIAE7m4EBZo4RDMwJFPFLpaZeZtIfcIWY03Cs4J5XoVQRuomQWKY5rksU9NDG6H0TcQUBTPdIuMACQ5Edm149PcVDoaxuxSzpuZkTfA9EGoIGzj2iYc2vS9_apEWabfgYAn4hMolZqUI0xAbA9EZuAa_S5O96TQbwom3XlaYSQZqJLNS309JmmK4k9yHBJYSXyi2Yuqb2OMrE23_dgdK9Ah6NwZWx0X_6BxEpW_zrIbeSM0wP-C2ZlvBKKWzxhAekU96sk6f9SG4w2TfiacBCSf9p2Ld8e2dZf7wftcXfInU4tGRJ4hXaRHCHb7jNB2K0e1l5yviftEcdV8NZlpwCHYZrbsX5iEcSjKhh1fRpQTRupxXAzrvkGLlGq-gFmVwZmX09cck8NzzorOg1g1Rgl7Ieq_vvHZ87My7Rt3ODWOGbXH4VaFv2XDh7V2m8IOfIBX65eCyAlJ3oVi084VWCkPRxme6G1sL8BQ8t3lozvQWFCbuyi0KfiVMkBGLhaePAuNRw9gomyKLFjMAa3uog7DARrDlMYOF-7FHtjqauQht0Ga6J6iRUwEIW3jJzYmH2kd_q7wJWofeDRWaKnQ0W2z3f7O2FC1VePFLHUd0gkyXoQIjt463ktiwr_S2YFrGsFn7duERD104at_DqCCKsZQkd4T4L0x79FJTEBIkFJZE9lcJr7b5aYm_Dy5cobjQu-4wM61AS3iGBLKY6PnrhUdIbIUWbqNPYNAASbTsMSq28vEaqOOF3mqr1YAAaYxUwguO4Pl4c-F2-37Wn0tDw0Rwj0KtXdJLg_-5QN8UFK3kNcRYYTm9r2M2mSJBlsAl5vIMU_YkhAYCpk6dOcfNN5AEgh6rax0cTsS1W94WC8-J5Ftclum6pse9lWY9Jk14C187lEHeaI0taMSOjwLHkX-vpiHc70AhOZxsQNsV-VOtVzMhs6r-jXs98AeLP2VnktWMPd2vCRkOESpvpMSBLCA3FkrP1aB4Fk-8fPr3qfRJnKD0gARwes1zNFjXcs2ZLb5jVlZG6gaYsnqS6XaezOQtFQdUf6pyTcQW5qXEe8aHp8to6rSA6z4nU968kPfD1TE2s3DV3igMRu5N23uMHEB5PSZglEyd97tleU-Uy0Kz3w7u9wcMTCBUYGSYZN96KxSSvYePim3igvnN1A7Gch4PbMAIW1LKq41v94ixZOyWRhFWN6FJXREzN1zDQEzH6nyiDAvAcayrRn7wN_jvXBzSqACZe2POr4q_O7Vyfydze6uIaWlqCNdnVAsH7WVraNSg7QXuPmVTM69eXh1AAC3Kc2n6Z_8SJuBVjzTPnsAA-eF0csAFozcCGxkg5GDpsZdbXj3p9sU01TSqqx4CtSZx-8XJsQecAEinWlFvFPAYaHBjqx5K4rzGRFHnGt7p-XgjhP7HjHdKXw=",
+      "summary": []
+    },
+    {
+      "id": "msg_0ecc44fb970c73e1016ac8f2bdaef487d1bcf6782619679d82",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"status\":\"ready\",\"measure\":\"gross_profit\",\"group_by\":\"none\",\"start_date\":\"2026-09-01\",\"end_date\":\"2026-09-30\",\"currency\":\"USD\",\"regions\":[],\"products\":[],\"clarification\":\"\",\"question_quote\":\"How profitable were we in September 2026?\"}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "current_turn",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "description": null,
+      "name": "enterprise_workflow",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ready",
+              "clarify"
+            ]
+          },
+          "measure": {
+            "type": "string",
+            "enum": [
+              "revenue",
+              "net_revenue",
+              "cost",
+              "gross_profit",
+              "units"
+            ]
+          },
+          "group_by": {
+            "type": "string",
+            "enum": [
+              "none",
+              "region",
+              "product",
+              "month"
+            ]
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "end_date": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "regions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "clarification": {
+            "type": "string"
+          },
+          "question_quote": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "measure",
+          "group_by",
+          "start_date",
+          "end_date",
+          "currency",
+          "regions",
+          "products",
+          "clarification",
+          "question_quote"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 450,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 280,
+    "output_tokens_details": {
+      "reasoning_tokens": 207
+    },
+    "total_tokens": 730
+  },
+  "user": null,
+  "metadata": {}
+}

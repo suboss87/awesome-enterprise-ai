@@ -39,7 +39,7 @@ See [the complete example](examples/input.json).
 | `question` | The requested analysis; ambiguous or unsupported requests require clarification |
 | `as_of` | ISO business date for relative time expressions |
 | `source_snapshot.source_system`, `snapshot_id` | Adapter-declared source and immutable extract identity |
-| `source_snapshot.exported_at`, `data_as_of` | Extract time with timezone and last date represented |
+| `source_snapshot.exported_at`, `data_as_of` | Extract time in the declared source timezone and last business date represented; the latter cannot follow the timestamp's local calendar date |
 | `source_snapshot.schema_version`, `metric_definition_version` | Versions used to interpret fields and business measures |
 | `source_snapshot.metric_definition_status` | Must be `approved`; unknown or unapproved business definitions withhold totals |
 | `source_snapshot.row_grain` | What one record represents; the adapter must prevent duplicate business events |
@@ -75,3 +75,7 @@ Tests cover exact calculations, filtering, unsupported requests, snapshot comple
 ## Governance and acceptance
 
 See [domain review responsibilities, evaluation metrics and deployment gates](GOVERNANCE.md).
+
+## Independent planner study, October 9
+
+[Twelve independently labeled synthetic questions](evaluation/planner-2026-10-09/) exposed an ambiguous-profit answer that the lexical baseline withheld. The original failed inference is retained. A deterministic clarification gate now prevents that observed failure before inference; no improved live accuracy or enterprise acceptance is claimed.

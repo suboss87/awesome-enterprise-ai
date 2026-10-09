@@ -39,6 +39,36 @@ class BusinessCases(unittest.TestCase):
         self.assertIsNone(out['forecast_probability'])
         self.assertTrue(all(not o['crm_changed'] for o in out['observations']))
 
+    def test_mixed_pipeline_is_split_without_combined_total(self):
+        data=json.loads((PROJECT/'examples/input.json').read_text())
+        other=copy.deepcopy(data['opportunities'][0])
+        other.update(id='opp-2',currency='EUR',amount_cents=200)
+        data['opportunities'].append(other)
+        out=WORKFLOW.run(data,ReplayAI([{'observations':[]}]))
+        self.assertIsNone(out['metrics']['open_pipeline_cents'])
+        self.assertIsNone(out['metrics']['currency'])
+        self.assertEqual(out['pipeline_by_currency'],[{'currency':'EUR','amount_cents':200},{'currency':'USD','amount_cents':1000000}])
+        self.assertIn('mixed_pipeline_currency',[f['code'] for f in out['findings']])
+
+    def test_closed_currency_does_not_contaminate_open_pipeline(self):
+        data=json.loads((PROJECT/'examples/input.json').read_text())
+        other=copy.deepcopy(data['opportunities'][0])
+        other.update(id='opp-2',currency='EUR',stage='won')
+        data['opportunities'].append(other)
+        out=WORKFLOW.run(data,ReplayAI([{'observations':[]}]))
+        self.assertEqual(out['metrics']['open_pipeline_cents'],1000000)
+        self.assertEqual(out['metrics']['currency'],'USD')
+
+    def test_missing_or_invalid_currency_rejected_before_model(self):
+        for value in (None,'usd','EURO','ÜSD'):
+            with self.subTest(value=value):
+                data=json.loads((PROJECT/'examples/input.json').read_text())
+                if value is None:del data['opportunities'][0]['currency']
+                else:data['opportunities'][0]['currency']=value
+                ai=ReplayAI([])
+                with self.assertRaises(InputError):WORKFLOW.run(data,ai)
+                self.assertEqual(ai.calls,[])
+
     def test_duplicate_observations_rejected(self):
         data = json.loads((PROJECT / 'examples/input.json').read_text())
         responses = json.loads((PROJECT / 'examples/responses.json').read_text())

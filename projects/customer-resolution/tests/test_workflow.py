@@ -63,14 +63,29 @@ class BusinessCases(unittest.TestCase):
     def test_currency_is_carried_into_proposal_and_metrics(self):
         data = json.loads((PROJECT / 'examples/input.json').read_text())
         data['order']['currency'] = 'EUR'
+        data['policy']['currency'] = 'EUR'
         ai = ReplayAI(json.loads((PROJECT / 'examples/responses.json').read_text()))
         output = WORKFLOW.run(data, ai)
         self.assertEqual(output['actions'][0]['currency'], 'EUR')
         self.assertEqual(output['metrics']['currency'], 'EUR')
 
+    def test_currency_mismatch_cannot_reinterpret_policy_cap(self):
+        data = json.loads((PROJECT / 'examples/input.json').read_text())
+        data['order']['currency'] = 'JPY'
+        ai = ReplayAI([])
+        with self.assertRaises(InputError): WORKFLOW.run(data, ai)
+        self.assertEqual(ai.calls, [])
+
+    def test_missing_policy_currency_rejected_before_model(self):
+        data = json.loads((PROJECT / 'examples/input.json').read_text())
+        del data['policy']['currency']
+        ai = ReplayAI([])
+        with self.assertRaises(InputError): WORKFLOW.run(data, ai)
+        self.assertEqual(ai.calls, [])
+
     def test_invalid_currency_rejected_before_model(self):
         data = json.loads((PROJECT / 'examples/input.json').read_text())
-        data['order']['currency'] = 'usd'
+        data['order']['currency'] = 'ÜSD'
         ai = ReplayAI([])
         with self.assertRaises(InputError): WORKFLOW.run(data, ai)
         self.assertEqual(ai.calls, [])

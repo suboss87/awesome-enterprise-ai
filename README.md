@@ -18,7 +18,7 @@ I love coding, especially when it helps untangle a problem that keeps coming bac
 
 I use this collection to work through those problems from first principles: who needs help, what decision are they making, and where does AI actually earn its place? I care about the surrounding workflow as much as the model. Each project gives you runnable code, examples you can inspect, and a clear account of what still needs work before you connect it to your systems.
 
-**Current stage: nine reviewed reference workflows and two experimental projects.** All eleven have a browser journey, CLI, examples and tests. Proposal Evidence and Data Repair Evidence remain experimental pending target-environment acceptance. They are not complete replacements for enterprise systems or pre-certified deployments. [Read the tested scope and remaining limits.](docs/VERIFICATION.md)
+**Current stage: nine reviewed reference workflows and two experimental projects.** All eleven have a browser journey, CLI, examples and tests. Proposal Evidence and Data Repair Evidence remain experimental pending target-environment acceptance. They are not complete replacements for enterprise systems or pre-certified deployments. [Read the tested scope and remaining limits.](docs/VERIFICATION.md) [See the ten-workflow business review.](docs/TEN-WORKFLOW-REVIEW.md)
 
 ## Choose your workflow
 

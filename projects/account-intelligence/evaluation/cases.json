@@ -17,7 +17,8 @@
             "amount_cents": 1000000,
             "stage": "proposal",
             "close_date": "2026-10-15",
-            "next_step": "Confirm procurement review."
+            "next_step": "Confirm procurement review.",
+            "currency": "USD"
           }
         ],
         "meetings": [
@@ -83,7 +84,8 @@
             "amount_cents": 1000000,
             "stage": "proposal",
             "close_date": "2026-09-01",
-            "next_step": "Confirm procurement review."
+            "next_step": "Confirm procurement review.",
+            "currency": "USD"
           }
         ],
         "meetings": [
@@ -147,7 +149,8 @@
             "amount_cents": 1000000,
             "stage": "proposal",
             "close_date": "2026-10-15",
-            "next_step": ""
+            "next_step": "",
+            "currency": "USD"
           }
         ],
         "meetings": [
@@ -211,7 +214,8 @@
             "amount_cents": 1000000,
             "stage": "won",
             "close_date": "2026-10-15",
-            "next_step": "Confirm procurement review."
+            "next_step": "Confirm procurement review.",
+            "currency": "USD"
           }
         ],
         "meetings": [
@@ -276,7 +280,8 @@
             "amount_cents": 1000000,
             "stage": "proposal",
             "close_date": "2026-10-15",
-            "next_step": "Confirm procurement review."
+            "next_step": "Confirm procurement review.",
+            "currency": "USD"
           }
         ],
         "meetings": []
@@ -312,7 +317,8 @@
             "amount_cents": 1000000,
             "stage": "proposal",
             "close_date": "2026-10-15",
-            "next_step": "Confirm procurement review."
+            "next_step": "Confirm procurement review.",
+            "currency": "USD"
           }
         ],
         "meetings": [
@@ -376,7 +382,8 @@
             "amount_cents": 1000000,
             "stage": "proposal",
             "close_date": "2026-10-15",
-            "next_step": "Confirm procurement review."
+            "next_step": "Confirm procurement review.",
+            "currency": "USD"
           }
         ],
         "meetings": [
@@ -438,7 +445,8 @@
             "amount_cents": 1000000,
             "stage": "proposal",
             "close_date": "2026-10-15",
-            "next_step": "Confirm procurement review."
+            "next_step": "Confirm procurement review.",
+            "currency": "USD"
           }
         ],
         "meetings": [
@@ -500,7 +508,8 @@
             "amount_cents": 1000000,
             "stage": "proposal",
             "close_date": "2026-10-15",
-            "next_step": "Confirm procurement review."
+            "next_step": "Confirm procurement review.",
+            "currency": "USD"
           }
         ],
         "meetings": [
@@ -562,7 +571,8 @@
             "amount_cents": true,
             "stage": "proposal",
             "close_date": "2026-10-15",
-            "next_step": "Confirm procurement review."
+            "next_step": "Confirm procurement review.",
+            "currency": "USD"
           }
         ],
         "meetings": [

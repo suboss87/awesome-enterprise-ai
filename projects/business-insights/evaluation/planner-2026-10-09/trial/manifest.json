@@ -1,0 +1,29 @@
+{
+  "started_at": "2026-10-09T13:56:32.814677+00:00",
+  "cases_sha256": "5962a87c8b8099d2b5ba3c14c106dd9263eec4dadd0cd281971dbbd87730f7cc",
+  "model": "gpt-5.5-2026-04-23",
+  "offline": false,
+  "source_sha256": {
+    "scripts/evaluate_business_planner.py": "a78f62b393d7b19c1362b5a1e03109860d2f877ad572bb778f0138e2cf27bbe4",
+    "projects/business-insights/workflow.py": "3c70b53eb5b8a269974720231e49a1fe1fa45cf1c8898e1a0d5039b56d233528",
+    "enterprise_ai/provider.py": "4da2d135bcea97fdbb0884d20a7664c47fb4f09b4fe615c969ff4c5f5527b1e7",
+    "enterprise_ai/common.py": "65f064b82cc4612b52d6560bbaac34f05c5657672a96256f3a47de690c9d3d8a",
+    "enterprise_ai/catalog.py": "7ee52b87f440e2c663784340a28186ff01fa18b463d1691b4058035a017954ef"
+  },
+  "provenance": {
+    "kind": "independent_synthetic_labels",
+    "author": "Independent read-only audit agent; not the workflow implementation or model under evaluation",
+    "created_date": "2026-10-09",
+    "source_records": "Current public fictional Business Insights example records S1, S2, S3 and source_snapshot; one explicitly identified currency variant",
+    "limits": "Synthetic labels independently authored before inference. Not customer data, domain-owner ground truth, production acceptance, a representative target population or proof of business value. No model was called to generate or label these cases.",
+    "normalization": {
+      "dates": "For ready plans, empty start_date/end_date normalize to the declared coverage boundaries. Expected labels record those effective dates. Explicit and relative date meanings remain unchanged.",
+      "currency": "For ready monetary plans, an empty currency normalizes to the sole dataset currency when there is exactly one. It remains empty with several currencies, and for unspecified currency on units. Explicit currency filters remain explicit.",
+      "filters": "Compare regions/products as sorted sets; each expected filter uses the exact requested source spelling, including an unknown requested region that must be withheld downstream.",
+      "excluded_fields": "question_quote and clarification wording are not scored. Clarify plans require only status=clarify, with a withheld answer; ancillary schema-required placeholder fields are not semantically scored.",
+      "withholding": "Mixed-currency and unknown-filter cases deliberately permit a ready intent plan followed by a withheld workflow answer. This policy must be independently reviewed before live calls; alternative valid clarification behavior must not be silently relabeled after inference."
+    },
+    "manual_arithmetic": "S1 net1100 and gross profit450; S2 net800 and gross profit300; S3 net400 and gross profit200. USD September gross2000, net1900, cost1150, gross profit750, units20; full coverage units24."
+  },
+  "protocol": "Freeze labels/config before calls. Exact normalized plan, answer status, expected metrics, tables and false-ready rate are separate. Mixed-currency and unknown-filter clarification may safely withhold while failing strict plan agreement. Failures remain in every denominator. Rules use visible questions; oracle is not human performance."
+}
