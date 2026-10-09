@@ -16,8 +16,11 @@ def run(data, ai):
     text(account['id'], 'account id', 128); text(account['name'], 'account name', 256)
     opportunities = rows(data['opportunities'], 'opportunities', 100)
     for op in opportunities:
-        obj(op, ['id', 'account_id', 'title', 'amount_cents', 'stage', 'close_date', 'next_step'])
+        obj(op, ['id', 'account_id', 'title', 'amount_cents', 'currency', 'stage', 'close_date', 'next_step'])
         text(op['title'], 'title', 256); integer(op['amount_cents'])
+        text(op['currency'], 'currency', 3)
+        if len(op['currency'])!=3 or (not op['currency'].isascii() or not op['currency'].isalpha()) or op['currency']!=op['currency'].upper():
+            raise InputError('Opportunity currency must be a three-letter uppercase code')
         if op['account_id'] != account['id']: raise InputError('Cross-account opportunity rejected')
         if op['stage'] not in ('prospect', 'qualified', 'proposal', 'won', 'lost'): raise InputError('Unknown stage')
         day(op['close_date'])
@@ -58,6 +61,12 @@ def run(data, ai):
         elif item['proposed_date'] != '': raise InputError('Only a date change may propose a date')
         observations.append({**item, 'review_status': 'unreviewed', 'crm_changed': False})
     active = [o for o in opportunities if o['stage'] not in ('won', 'lost')]
+    balances = {}
+    for op in active:
+        balances[op['currency']] = balances.get(op['currency'], 0) + op['amount_cents']
+    if len(balances)>1:
+        findings.append(finding('mixed_pipeline_currency', 'review', 'Pipeline currencies cannot be combined',
+            'Review the separate currency balances; no exchange rate or combined total is inferred.'))
     for op in active:
         if day(op['close_date']) < today:
             findings.append(finding('overdue_close', 'review', 'Open opportunity past close date', op['id'], [op['id']]))
@@ -67,9 +76,11 @@ def run(data, ai):
     if latest is None or (today - latest).days > 30:
         findings.append(finding('stale_engagement', 'review', 'No recent meeting recorded', 'No supplied meeting within 30 days.'))
     return result(SPEC['id'], 'Account review uses recorded CRM values and quoted meeting statements.',
-                  {'open_pipeline_cents': sum(o['amount_cents'] for o in active), 'active_opportunities': len(active),
+                  {'open_pipeline_cents': sum(balances.values()) if len(balances)<=1 else None,
+                   'currency': next(iter(balances)) if len(balances)==1 else None, 'active_opportunities': len(active),
                    'meeting_observations': len(observations)}, findings,
                   [{'action': 'review_meeting_observation', 'opportunity_id': o['opportunity_id'], 'kind': o['kind']} for o in observations],
                   account=account, opportunities=opportunities, observations=observations,
+                  pipeline_by_currency=[{'currency':currency,'amount_cents':balances[currency]} for currency in sorted(balances)],
                   latest_meeting_date=latest.isoformat() if latest else None,
                   forecast_probability=None)

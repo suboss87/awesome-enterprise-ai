@@ -1,0 +1,6 @@
+{
+  "request_sha256": "72115330dddf09cb69479764e6337aa82c8cc1282d370a781dc79eaa8aa2fffb",
+  "started_at": "2026-10-09T14:05:16.105848+00:00",
+  "endpoint": "https://api.typesafe.ai/v1/systemone",
+  "error_type": "HTTPError"
+}

@@ -10,9 +10,11 @@ PROMPT='''Classify each supplied document using ONLY the requested document type
 
 def run(data,ai):
     obj(data,['claim','requirements','documents'])
-    claim=obj(data['claim'],['id','claimant_id','incident_date','currency','amount'])
-    for k in ('id','claimant_id','currency'):
+    claim=obj(data['claim'],['id','claimant_id','policy_id','incident_date','currency','amount'])
+    for k in ('id','claimant_id','policy_id','currency'):
         text(claim[k],k,128)
+    if len(claim['currency'])!=3 or (not claim['currency'].isascii() or not claim['currency'].isalpha()) or claim['currency']!=claim['currency'].upper():
+        raise InputError('Claim currency must be a three-letter uppercase code')
     day(claim['incident_date'])
     if money(claim['amount'])<0:
         raise InputError('Claim amount cannot be negative')
@@ -62,7 +64,7 @@ def run(data,ai):
                 if not any(re.search(r'(?<![\w-])'+re.escape(value)+r'(?![\w-])',e['quote']) for e in field['evidence']):
                     raise InputError('Identity, date and currency fields must appear literally in cited text')
             fields[key]=value
-            if key in ('claimant_id','incident_date','currency') and value!=claim[key]:
+            if key in ('claimant_id','policy_id','incident_date','currency') and value!=claim[key]:
                 conflict=True
                 findings.append(finding('identity_or_event_conflict','review','Claim facts disagree',
                     f"{item['document_id']}: {key} differs from the submitted claim.",[e['source_id'] for e in field['evidence']]))

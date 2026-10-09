@@ -1,0 +1,44 @@
+{
+  "id": "relative-month-to-business-date",
+  "mode": "live",
+  "strict_plan_agreement": true,
+  "answer_status_agreement": true,
+  "metrics_agreement": true,
+  "table_agreement": true,
+  "false_ready": false,
+  "safe_clarification_equivalent": false,
+  "latency_seconds": 10.2032,
+  "calls": [
+    {
+      "mode": "live",
+      "model": "gpt-5.5-2026-04-23",
+      "response_id": "resp_014e042e8f057dda016ac8f2a2b47887d18bf143aad5414115",
+      "usage": {
+        "input_tokens": 463,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 175,
+        "output_tokens_details": {
+          "reasoning_tokens": 95
+        },
+        "total_tokens": 638
+      },
+      "schema_sha256": "63b6e99c66a314fb9e999029fbe68827b73a8658401224ea7c1ed2022ffcd2c4",
+      "prompt_sha256": "509d8ad5a9504aa1cd62a22ee5ab85fb56a4532eba277bb951145ee043a319dc"
+    }
+  ],
+  "provider_usage": {
+    "input_tokens": 463,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 175,
+    "output_tokens_details": {
+      "reasoning_tokens": 95
+    },
+    "total_tokens": 638
+  }
+}

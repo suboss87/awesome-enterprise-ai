@@ -1,0 +1,44 @@
+{
+  "id": "cost-filter-inclusive",
+  "mode": "live",
+  "strict_plan_agreement": true,
+  "answer_status_agreement": true,
+  "metrics_agreement": true,
+  "table_agreement": true,
+  "false_ready": false,
+  "safe_clarification_equivalent": false,
+  "latency_seconds": 1.5678,
+  "calls": [
+    {
+      "mode": "live",
+      "model": "gpt-5.5-2026-04-23",
+      "response_id": "resp_03264d2cb7beb221016ac8f29dc98887d1ae949a5fc8e9a98a",
+      "usage": {
+        "input_tokens": 466,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 90,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 556
+      },
+      "schema_sha256": "63b6e99c66a314fb9e999029fbe68827b73a8658401224ea7c1ed2022ffcd2c4",
+      "prompt_sha256": "509d8ad5a9504aa1cd62a22ee5ab85fb56a4532eba277bb951145ee043a319dc"
+    }
+  ],
+  "provider_usage": {
+    "input_tokens": 466,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 90,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 556
+  }
+}

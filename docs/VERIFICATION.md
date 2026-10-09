@@ -108,3 +108,11 @@ Late release review reproduced passing empty GX batches and omitted newly failin
 ## Current source and timing contracts: October 9
 
 After the Business Insights snapshot contract, Customer Resolution binding/currency checks, and Inventory Planning receipt-date horizon were added, the integrated verifier passes **286 tests across 12 suites and eleven CLI replays**. The three updated browser journeys passed at desktop, tablet and mobile widths with no page errors. Tests and replays use synthetic examples; this is not live inference, an adopter trial or production acceptance. The three-project Jev assessment is recorded separately in [the focused quality review](QUALITY.md#focused-retrofit-review-october-9-2026).
+
+## Ten-workflow audit and planner trial: October 9
+
+The next independent audit repaired policy denomination, claim-policy binding, mixed-currency pipeline totals, shortages before inventory receipt and source extraction chronology. Integrated verification passes **312 tests across 12 suites and eleven CLI replays**. Browser replays of all five changed workflows returned HTTP 200 without console errors; wide account tables were visually checked and made readable at desktop and mobile widths. The eleventh experimental Data Repair workflow remains in those integrated checks but is outside this ten-project assessment.
+
+The [independently labeled twelve-case planner trial](../projects/business-insights/evaluation/planner-2026-10-09/) measured 10/12 strict plan agreements and 11/12 correct answer states for the live model, including one unsafe calculation among six expected holds. Rules had 11/12 answer states and no unsafe calculations. A subsequent deterministic clarification fix is regression-tested; no improved live score is claimed. Original labels, failed output, provider usage and hash-matched original source are retained.
+
+[The ten-workflow review](TEN-WORKFLOW-REVIEW.md) separates tested business controls from remaining adopter acceptance. Historical September inference inputs predate the new customer policy currency, claim policy ID, account currency and inventory contracts as well as analytics snapshot metadata. Keep that historical study unchanged; use current project fixtures or separately versioned inputs for a new study.

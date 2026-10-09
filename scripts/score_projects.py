@@ -120,6 +120,12 @@ def prepare(folder,context_path,projects=None):
     for slug in projects:
         project=ROOT/'projects'/slug
         paths=common+[project/'workflow.py',project/'README.md',project/'tests/test_workflow.py']
+        if (project/'evaluation/cases.json').exists():paths.append(project/'evaluation/cases.json')
+        if slug=='business-insights':
+            paths.extend([ROOT/'scripts/evaluate_business_planner.py',
+                project/'evaluation/planner-2026-10-09/cases.json',
+                project/'evaluation/planner-2026-10-09/README.md',
+                project/'evaluation/planner-2026-10-09/trial/report.json'])
         if (project/'GOVERNANCE.md').exists():paths.append(project/'GOVERNANCE.md')
         # Proposal review implementation only affects this workflow. Avoid irrelevant judge context.
         paths=[p for p in paths if slug=='proposal-operations' or p.name not in ('proposal_review.py','test_proposal_review.py','proposal_sources.py','test_proposal_sources.py')]

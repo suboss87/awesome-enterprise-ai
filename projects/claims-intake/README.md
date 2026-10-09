@@ -33,12 +33,14 @@ See [the complete example](examples/input.json).
 
 | Field | Meaning |
 |---|---|
-| `claim` | Claim ID, claimant ID, ISO incident date, currency and decimal-string amount |
+| `claim` | Claim ID, claimant ID, policy ID, ISO incident date, three-letter uppercase ASCII currency and decimal-string amount |
 | `requirements` | Unique document types and their required fields |
 | `documents[].id` | Unique document identifier |
 | `documents[].pages` | Globally unique page IDs and text from your approved ingestion system |
 
 Supported extracted fields: `claimant_id`, `incident_date`, `amount`, `currency`, `policy_id`. Identity, date and currency values must appear literally in cited text. Amounts may normalize thousands separators. Documents can be marked `unknown`; missing fields are not invented.
+
+An extracted policy ID must match the supplied claim policy ID. A mismatch is a review finding and excludes that document from satisfying requirements, even if its other fields match. The caller must obtain the claim policy binding from an authorized source; string equality does not authenticate the policy or establish coverage.
 
 ## Review and adoption
 

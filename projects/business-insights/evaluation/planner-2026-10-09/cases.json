@@ -1,0 +1,967 @@
+{
+  "provenance": {
+    "kind": "independent_synthetic_labels",
+    "author": "Independent read-only audit agent; not the workflow implementation or model under evaluation",
+    "created_date": "2026-10-09",
+    "source_records": "Current public fictional Business Insights example records S1, S2, S3 and source_snapshot; one explicitly identified currency variant",
+    "limits": "Synthetic labels independently authored before inference. Not customer data, domain-owner ground truth, production acceptance, a representative target population or proof of business value. No model was called to generate or label these cases.",
+    "normalization": {
+      "dates": "For ready plans, empty start_date/end_date normalize to the declared coverage boundaries. Expected labels record those effective dates. Explicit and relative date meanings remain unchanged.",
+      "currency": "For ready monetary plans, an empty currency normalizes to the sole dataset currency when there is exactly one. It remains empty with several currencies, and for unspecified currency on units. Explicit currency filters remain explicit.",
+      "filters": "Compare regions/products as sorted sets; each expected filter uses the exact requested source spelling, including an unknown requested region that must be withheld downstream.",
+      "excluded_fields": "question_quote and clarification wording are not scored. Clarify plans require only status=clarify, with a withheld answer; ancillary schema-required placeholder fields are not semantically scored.",
+      "withholding": "Mixed-currency and unknown-filter cases deliberately permit a ready intent plan followed by a withheld workflow answer. This policy must be independently reviewed before live calls; alternative valid clarification behavior must not be silently relabeled after inference."
+    },
+    "manual_arithmetic": "S1 net1100 and gross profit450; S2 net800 and gross profit300; S3 net400 and gross profit200. USD September gross2000, net1900, cost1150, gross profit750, units20; full coverage units24."
+  },
+  "cases": [
+    {
+      "id": "gross-before-deductions",
+      "input": {
+        "question": "For September 2026, total gross revenue before subtracting refunds or cost. Use USD.",
+        "as_of": "2026-09-30",
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "sample-sales-close-2026-09",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-lines/1",
+          "metric_definition_version": "finance-metrics/2026-Q3",
+          "metric_definition_status": "approved",
+          "row_grain": "one posted sales line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        },
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "plan": {
+          "status": "ready",
+          "measure": "revenue",
+          "group_by": "none",
+          "start_date": "2026-09-01",
+          "end_date": "2026-09-30",
+          "currency": "USD",
+          "regions": [],
+          "products": []
+        },
+        "answer_status": "calculated",
+        "metrics": {
+          "matched_records": 2,
+          "groups": 1,
+          "total": "2000.00",
+          "unit": "USD"
+        },
+        "table": [
+          {
+            "group": "All records",
+            "value": "2000.00",
+            "record_ids": [
+              "S1",
+              "S2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "net-after-refunds-by-product",
+      "input": {
+        "question": "For September 1 through September 30, 2026, show revenue minus refunds by product in USD.",
+        "as_of": "2026-09-30",
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "sample-sales-close-2026-09",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-lines/1",
+          "metric_definition_version": "finance-metrics/2026-Q3",
+          "metric_definition_status": "approved",
+          "row_grain": "one posted sales line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        },
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "plan": {
+          "status": "ready",
+          "measure": "net_revenue",
+          "group_by": "product",
+          "start_date": "2026-09-01",
+          "end_date": "2026-09-30",
+          "currency": "USD",
+          "regions": [],
+          "products": []
+        },
+        "answer_status": "calculated",
+        "metrics": {
+          "matched_records": 2,
+          "groups": 1,
+          "total": "1900.00",
+          "unit": "USD"
+        },
+        "table": [
+          {
+            "group": "Sensors",
+            "value": "1900.00",
+            "record_ids": [
+              "S1",
+              "S2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gross-profit-not-margin",
+      "input": {
+        "question": "Show September 2026 gross profit by region in USD: subtract refunds and recorded cost from revenue, with no percentage calculation.",
+        "as_of": "2026-09-30",
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "sample-sales-close-2026-09",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-lines/1",
+          "metric_definition_version": "finance-metrics/2026-Q3",
+          "metric_definition_status": "approved",
+          "row_grain": "one posted sales line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        },
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "plan": {
+          "status": "ready",
+          "measure": "gross_profit",
+          "group_by": "region",
+          "start_date": "2026-09-01",
+          "end_date": "2026-09-30",
+          "currency": "USD",
+          "regions": [],
+          "products": []
+        },
+        "answer_status": "calculated",
+        "metrics": {
+          "matched_records": 2,
+          "groups": 2,
+          "total": "750.00",
+          "unit": "USD"
+        },
+        "table": [
+          {
+            "group": "North",
+            "value": "450.00",
+            "record_ids": [
+              "S1"
+            ]
+          },
+          {
+            "group": "South",
+            "value": "300.00",
+            "record_ids": [
+              "S2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "cost-filter-inclusive",
+      "input": {
+        "question": "Sum recorded cost in USD for product Sensors and region North from September 5 to September 15, 2026, inclusive.",
+        "as_of": "2026-09-30",
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "sample-sales-close-2026-09",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-lines/1",
+          "metric_definition_version": "finance-metrics/2026-Q3",
+          "metric_definition_status": "approved",
+          "row_grain": "one posted sales line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        },
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "plan": {
+          "status": "ready",
+          "measure": "cost",
+          "group_by": "none",
+          "start_date": "2026-09-05",
+          "end_date": "2026-09-15",
+          "currency": "USD",
+          "regions": [
+            "North"
+          ],
+          "products": [
+            "Sensors"
+          ]
+        },
+        "answer_status": "calculated",
+        "metrics": {
+          "matched_records": 1,
+          "groups": 1,
+          "total": "650.00",
+          "unit": "USD"
+        },
+        "table": [
+          {
+            "group": "All records",
+            "value": "650.00",
+            "record_ids": [
+              "S1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "units-full-coverage-months",
+      "input": {
+        "question": "Count total recorded units, not units net of returns, by calendar month across the entire declared complete coverage.",
+        "as_of": "2026-09-30",
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "sample-sales-close-2026-09",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-lines/1",
+          "metric_definition_version": "finance-metrics/2026-Q3",
+          "metric_definition_status": "approved",
+          "row_grain": "one posted sales line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        },
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "plan": {
+          "status": "ready",
+          "measure": "units",
+          "group_by": "month",
+          "start_date": "2026-08-31",
+          "end_date": "2026-09-30",
+          "currency": "",
+          "regions": [],
+          "products": []
+        },
+        "answer_status": "calculated",
+        "metrics": {
+          "matched_records": 3,
+          "groups": 2,
+          "total": "24",
+          "unit": "units"
+        },
+        "table": [
+          {
+            "group": "2026-08",
+            "value": "4",
+            "record_ids": [
+              "S3"
+            ]
+          },
+          {
+            "group": "2026-09",
+            "value": "20",
+            "record_ids": [
+              "S1",
+              "S2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "relative-month-to-business-date",
+      "input": {
+        "question": "Using the supplied business date, total net revenue in USD from the start of this month through that date, inclusive.",
+        "as_of": "2026-09-15",
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "sample-sales-close-2026-09",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-lines/1",
+          "metric_definition_version": "finance-metrics/2026-Q3",
+          "metric_definition_status": "approved",
+          "row_grain": "one posted sales line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        },
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "plan": {
+          "status": "ready",
+          "measure": "net_revenue",
+          "group_by": "none",
+          "start_date": "2026-09-01",
+          "end_date": "2026-09-15",
+          "currency": "USD",
+          "regions": [],
+          "products": []
+        },
+        "answer_status": "calculated",
+        "metrics": {
+          "matched_records": 2,
+          "groups": 1,
+          "total": "1900.00",
+          "unit": "USD"
+        },
+        "table": [
+          {
+            "group": "All records",
+            "value": "1900.00",
+            "record_ids": [
+              "S1",
+              "S2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "money-currency-unspecified",
+      "input": {
+        "question": "Total gross revenue for September 2026 across the supplied records.",
+        "as_of": "2026-09-30",
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "sample-sales-close-2026-09",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-lines/1",
+          "metric_definition_version": "finance-metrics/2026-Q3",
+          "metric_definition_status": "approved",
+          "row_grain": "one posted sales line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        },
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "EUR",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "plan": {
+          "status": "ready",
+          "measure": "revenue",
+          "group_by": "none",
+          "start_date": "2026-09-01",
+          "end_date": "2026-09-30",
+          "currency": "",
+          "regions": [],
+          "products": []
+        },
+        "answer_status": "withheld",
+        "metrics": {
+          "matched_records": 0
+        },
+        "table": []
+      }
+    },
+    {
+      "id": "missing-region-not-zero",
+      "input": {
+        "question": "What is total net revenue in USD for region East in September 2026?",
+        "as_of": "2026-09-30",
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "sample-sales-close-2026-09",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-lines/1",
+          "metric_definition_version": "finance-metrics/2026-Q3",
+          "metric_definition_status": "approved",
+          "row_grain": "one posted sales line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        },
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "plan": {
+          "status": "ready",
+          "measure": "net_revenue",
+          "group_by": "none",
+          "start_date": "2026-09-01",
+          "end_date": "2026-09-30",
+          "currency": "USD",
+          "regions": [
+            "East"
+          ],
+          "products": []
+        },
+        "answer_status": "withheld",
+        "metrics": {
+          "matched_records": 0
+        },
+        "table": []
+      }
+    },
+    {
+      "id": "covered-empty-day-not-zero",
+      "input": {
+        "question": "Total net revenue in USD for September 2, 2026 only.",
+        "as_of": "2026-09-30",
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "sample-sales-close-2026-09",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-lines/1",
+          "metric_definition_version": "finance-metrics/2026-Q3",
+          "metric_definition_status": "approved",
+          "row_grain": "one posted sales line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        },
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "plan": {
+          "status": "ready",
+          "measure": "net_revenue",
+          "group_by": "none",
+          "start_date": "2026-09-02",
+          "end_date": "2026-09-02",
+          "currency": "USD",
+          "regions": [],
+          "products": []
+        },
+        "answer_status": "withheld",
+        "metrics": {
+          "matched_records": 0,
+          "groups": 0,
+          "total": null,
+          "unit": "USD"
+        },
+        "table": []
+      }
+    },
+    {
+      "id": "ambiguous-profit-meaning",
+      "input": {
+        "question": "How profitable were we in September 2026?",
+        "as_of": "2026-09-30",
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "sample-sales-close-2026-09",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-lines/1",
+          "metric_definition_version": "finance-metrics/2026-Q3",
+          "metric_definition_status": "approved",
+          "row_grain": "one posted sales line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        },
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "plan": {
+          "status": "clarify"
+        },
+        "answer_status": "withheld",
+        "metrics": {
+          "matched_records": 0
+        },
+        "table": []
+      }
+    },
+    {
+      "id": "unsupported-profit-margin",
+      "input": {
+        "question": "What percentage of gross revenue remained as profit margin in September 2026, in USD?",
+        "as_of": "2026-09-30",
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "sample-sales-close-2026-09",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-lines/1",
+          "metric_definition_version": "finance-metrics/2026-Q3",
+          "metric_definition_status": "approved",
+          "row_grain": "one posted sales line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        },
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "plan": {
+          "status": "clarify"
+        },
+        "answer_status": "withheld",
+        "metrics": {
+          "matched_records": 0
+        },
+        "table": []
+      }
+    },
+    {
+      "id": "unsupported-salesperson-group",
+      "input": {
+        "question": "Sum net revenue in USD for September 2026 separately for each salesperson.",
+        "as_of": "2026-09-30",
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "sample-sales-close-2026-09",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-lines/1",
+          "metric_definition_version": "finance-metrics/2026-Q3",
+          "metric_definition_status": "approved",
+          "row_grain": "one posted sales line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        },
+        "records": [
+          {
+            "id": "S1",
+            "date": "2026-09-05",
+            "region": "North",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "1200.00",
+            "refund": "100.00",
+            "cost": "650.00",
+            "units": 12
+          },
+          {
+            "id": "S2",
+            "date": "2026-09-15",
+            "region": "South",
+            "product": "Sensors",
+            "currency": "USD",
+            "revenue": "800.00",
+            "refund": "0.00",
+            "cost": "500.00",
+            "units": 8
+          },
+          {
+            "id": "S3",
+            "date": "2026-08-31",
+            "region": "North",
+            "product": "Controls",
+            "currency": "USD",
+            "revenue": "400.00",
+            "refund": "0.00",
+            "cost": "200.00",
+            "units": 4
+          }
+        ]
+      },
+      "expected": {
+        "plan": {
+          "status": "clarify"
+        },
+        "answer_status": "withheld",
+        "metrics": {
+          "matched_records": 0
+        },
+        "table": []
+      }
+    }
+  ]
+}

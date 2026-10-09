@@ -1,0 +1,176 @@
+{
+  "id": "resp_0860596c37b60f6d016ac8f29894b087d1943a9995c368a933",
+  "object": "response",
+  "created_at": 1791554200,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1791554205,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 8000,
+  "max_tool_calls": null,
+  "model": "gpt-5.5-2026-04-23",
+  "moderation": null,
+  "output": [
+    {
+      "id": "rs_0860596c37b60f6d016ac8f2990f3487d1826a354e80db3303",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqyPKd1fq2pwlPwYE9Xt1eEkGqjx_ggJke_dWR3CyJ6NF1HKRNqK0LHjgHqaVt84Q62WOJ77VyC1iY5lXEZZL6SmPq8v_WP9nVkgIXwQIXzB3lGpWtOQOt3-Sain6co9qOQODdP0XEFTLIRuCfZyi80Fg0bQWwUfjlBepEw6W8i6VKBQjJ3cLF8-ZTRjqBe_uVv3AHgGKQamZ731_fxySWEsYuk59-0XpDWyzFaARD-gA__0rxRlmENajeRZmQRRuZuDeVYoxH8baYxWeGHmtrdSh9s-h9nCCAW-IXH6IPuJOdRlpvo5Puy7d3CjqNeXgR_RYzaQCYXE63hfrhmaVkgTpPNi6crkmJ82JBKJiOlhLO-8398n-Eyg0JLKM_XHBdTvLjfwIHauLLbXXwPlca_wKs_c9s0_ovOP3V5njvG0K3tQ9AnSCwWWMnZnAUdrYNH9ti9S1T-yS-CyvRWtbi08n-uhUHwsxP5_A4c-V4r3ul1AoVGAwSRkg5foMx9i6yJx-h2mhqP07bbjiDmfyvwBmu1dXpk2kl43lz8QUayoi5V1zuAocMoxMmmnYlqW0I55qcfpLPIqI1Q5lWVGx_wOFIIQr9Lob7Fq0dYwr6BlPX-HB7rGEU_aUib6Evf7j20RwhB7GWK-JeJfMlqY7fNBqcfmQuE3IFBj1MZjIT0u6scNOmxlgGkbJi4-4KaX1_cG-gecMylIwnh43RuMZNjsjr07zCJVeK4aucOLQv60MqCpyLzbTvUIIGpGv2CNHBL3xIKOFDL7gGtXReCmZdjSv3enm5vLdksbTXa9kEM7Fuv7lbEgQcRVyNch7ymoJaV_bHcNqnDtqqTDOYIEB7Sam63tjBq6Wwqyw04CvqXPZrtyhlZDlVtDl51XEb5soLfAQ7FFuYc2UJvsf9isrt0DgfXk5G_PSRIiSgufdgdhORZy9tVZRT-myLHNqYQbVTKxYpl1Ts3xOZrG89FjlGH-JE1ekNkdqRm-kidHhnsxdHVlOnAo6jrGTBPqFif2WRFst7iIpu6KaD388NM9hE0szo3bt5iWIqMSEo-d5KbtvmNDt81FjXz8xx_WYj4gxphv9aQcT9YIJRyjUXqitfvaIA-H8u2pLXctQlXR2jhYCCqUEYCEeBaNPuLUTEEtFhUUQ4rZA-FA5LFAHcQ_B8gv4sb7BUqhRVwn5_e4ucOe96yQhf9z6b8VupxQXOTATw40PrO0bpi1o530ioHrfhFBV9Z_iK0DI_dhvAhlla5RQIc-tEUvmfi6FtzPmo7aNBLy36RzusgiGS0iqHs25swBmbeSRp8e_GRcT_N1xL160tgQgrEOxn66rcVupvqEx4TrvVzqvKeGRKFcyaCPD2VZONIxnyPkw_Jod8Vy0fsEz99jF-i-CPYRV_fxmMqFrG2TAmLIIzH_Jyp-e1IhgsoYmo148yudCI_R0ta2ii7rIddQL00Roy36ptH5jvS5UimdHckSBBJOU1rrkTCU7bs6gi4Udy0djwZe-St6qFH4sBJq9Uu2PztS-j9FHgNHoA51pu3JUy0qzr28sJEzAyILeP5P6fL6Ro8Je6-HQri94bAL77c6mF2XEPA-04liwnjJhkaSDUeodU2wdcNWyDHlEW_BW5ttk5MuIznMcMgYttIraURfQS8VIRx6L8mdEu9Wjexv37yKHo4MNed65KoLREPftnMhZcI4NHB4KcI7BStioPg6_T4R19MvwIOTrMSgSZP612wxNlpGH4ye-gumgUZdBhW6x1gTP4lIKKhEva9JcVAmTm7G9CBr7cD0FMsSxdSguEqy5tibTfhweW-wgHOilsr414VTybps1dsI0MYBUrtHBFIUvZ_W8tC2HamSikPn44QAdTvSLEck9MIQMh4XEg-KsziCv8L0SOPHmbK6T86zshN80aikgxql0uow0gWNMByvrjyLBpbTPmSsRCU4DiPN92QgkSH9YmPJAjQUzz5T78qIHh_6roPg-6pwnXnOb_VVCBzQxHAgdifksrUJicsq3K4oFtQJ_Wv7VMmXPrrYGTluT5S0YbwBeH5HTQ0LrB8DTVB13vlyv8HZ9FTrh3OydCLydZFQvBQBSzHQ1NkGBcYXcw0rXhVpSoPPlh8fEbIYeOiEzsXFsC5g2tG6xnosWofgdn6jpxQpjST9E_TSbz7bwbXu3CnKYE7-Eu_km_o3FvAROiBNe_KmoWIYqOY6OkIdU9kpOp16e5jWJci9VmWLjyjB4MKev7cE3hRJWsbzDVy2zTf4lJLzMV98atsJ3hE0kXFHxdiaphex4SnHe5KuiChJJIbuQs3rS5hklg3HYINpGGDEVhsM98xxTOMwBdmCxnbWvRZye9-VnD6lcIZ61jhsyzVcYcQg-nHwSi3QbYqVbKgEKnrzp9ss2m1lsPcUmNm1bmHnHUk9URmfzmOQirmF08TkHad0Ze6pPt9dWU9nVVxojf3CQ8fAC8MFViRt8IT6Q-O8q_GZLJd6xYCllhUHQbGjfZ2hGREdnFy1RwBXWeFM0rXVW7E_2Gw4hCzf-B801nLjyFM_0NuC07ies_wsUD1J5i5t62AbRgg_V9Nnl9Qs7O8YzaoD6JKqPuTlfADI8KiH8tMl5uMRZMk4Ul9wwgfqEvBbqwufCI-tz0D5B41bASxG4OHf5L7N32cjIke2aYOAc6nfrgT2tGo70ZAN1Shv_hgkM52Pmr8L5DIgimOaM3mfGttB_XVzN1bEgiRta4BPkZXvUHwmaPy52Xu18p7TUGIf8JG2gnwNFk6fKHaR0u0dSqunL-9mKvljuh1xC6Y7pD15uLi2Kmsh4ykE5aVrOzyvfLGMvsGN8puz9DyPJ5D4YStDGjL7mTTrtE14rCj4X0G_LdKrXxf6CuCShwYYBrAbKzUzy4C7z9Q7Nh2tkcLblQTYi9iM-fYkoJpSrKawVQGM8IUepaq9J0eDfwDgPi6NWHUvRX8p8p_M3-r3Od0XYzeuOJ_V8zApvWkNd2kkN5uMPkTUf7DzjivuEd4657zPvRyJE7_NcMV_iG1WpDrNM7i-aAEcFPdMfwqg9xfEM6o1I8uNruInS0zy3Ml81p1PAtdYFQeXHbJUt6_dn4CW9XHsdqpulgAOiZcFu1Guux1yaQmYfQbEO4ufM3YwQ7uuXwMkLW_hEZfUsokEBPtS1cG2iMBW-WGCmE1pKW9EJiIhX6KNQa9rHQ4WpSc5SRYGOn0z6wNrYv8dqjwBJy1g0Lq6PSAAPYHVS6pJ--e6dRlr7wZ1Njg7ESsmPIcry260RKXJQ1dquhOi41_NPXdDaxY-pLfQDwT-8M0N4tVjwV43RpxJbTT105my3Kst8G5QnZJoAZD373Oi_xOi_rS0P9Gw==",
+      "summary": []
+    },
+    {
+      "id": "msg_0860596c37b60f6d016ac8f29c8b9887d1b84d487d97809a6c",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"status\":\"ready\",\"measure\":\"gross_profit\",\"group_by\":\"region\",\"start_date\":\"2026-09-01\",\"end_date\":\"2026-09-30\",\"currency\":\"USD\",\"regions\":[],\"products\":[],\"clarification\":\"\",\"question_quote\":\"Show September 2026 gross profit by region in USD: subtract refunds and recorded cost from revenue, with no percentage calculation.\"}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "current_turn",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "description": null,
+      "name": "enterprise_workflow",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ready",
+              "clarify"
+            ]
+          },
+          "measure": {
+            "type": "string",
+            "enum": [
+              "revenue",
+              "net_revenue",
+              "cost",
+              "gross_profit",
+              "units"
+            ]
+          },
+          "group_by": {
+            "type": "string",
+            "enum": [
+              "none",
+              "region",
+              "product",
+              "month"
+            ]
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "end_date": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "regions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "clarification": {
+            "type": "string"
+          },
+          "question_quote": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "measure",
+          "group_by",
+          "start_date",
+          "end_date",
+          "currency",
+          "regions",
+          "products",
+          "clarification",
+          "question_quote"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 465,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 422,
+    "output_tokens_details": {
+      "reasoning_tokens": 334
+    },
+    "total_tokens": 887
+  },
+  "user": null,
+  "metadata": {}
+}

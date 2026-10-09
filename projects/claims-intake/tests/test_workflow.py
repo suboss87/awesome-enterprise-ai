@@ -28,6 +28,32 @@ class ClaimsTests(unittest.TestCase):
         self.data['claim']['amount']='1700.00';out=self.run_case()
         self.assertIn('amount_difference',[f['code'] for f in out['findings']])
         self.assertEqual(out['decision'],'NO_COVERAGE_OR_PAYMENT_DECISION')
+
+    def test_other_policy_document_cannot_satisfy_requirement(self):
+        self.data['requirements'][0]['required_fields'].append('policy_id')
+        self.data['documents'][0]['pages'][0]['text']+=' Policy POL-OTHER.'
+        self.answer['documents'][0]['fields'].append({'field':'policy_id','value':'POL-OTHER',
+            'evidence':[{'source_id':'P1','quote':'Policy POL-OTHER.'}]})
+        out=self.run_case()
+        self.assertEqual(out['checklist'][0]['status'],'missing_or_incomplete')
+        self.assertIn('identity_or_event_conflict',[f['code'] for f in out['findings']])
+
+    def test_matching_policy_document_can_satisfy_requirement(self):
+        self.data['requirements'][0]['required_fields'].append('policy_id')
+        self.data['documents'][0]['pages'][0]['text']+=' Policy POL-SYNTHETIC-1.'
+        self.answer['documents'][0]['fields'].append({'field':'policy_id','value':'POL-SYNTHETIC-1',
+            'evidence':[{'source_id':'P1','quote':'Policy POL-SYNTHETIC-1.'}]})
+        self.assertEqual(self.run_case()['checklist'][0]['status'],'present_for_review')
+
+    def test_missing_policy_and_invalid_currency_rejected_before_model(self):
+        for field,value in [('policy_id',None),('currency','usd'),('currency','ÜSD')]:
+            with self.subTest(field=field):
+                data=copy.deepcopy(self.data)
+                if value is None:del data['claim'][field]
+                else:data['claim'][field]=value
+                ai=ReplayAI([])
+                with self.assertRaises(InputError):load('claims-intake').run(data,ai)
+                self.assertEqual(ai.calls,[])
     def test_empty_packet(self):
         self.data['documents']=[];out=load('claims-intake').run(self.data,ReplayAI([]))
         self.assertEqual(out['metrics']['incomplete_requirements'],2)

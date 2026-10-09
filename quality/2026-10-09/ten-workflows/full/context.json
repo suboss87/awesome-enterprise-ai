@@ -1,0 +1,57 @@
+{
+  "verification": {
+    "review_instruction": "Review each project critically in its assigned business domain as a Fortune-enterprise adoption evaluator. This is a model review role, not a claim of real credentials or enterprise approval. Use frozen rubric anchors and actual code over claims. No score targets; do not count planned work as evidence.",
+    "checks": "scripts/verify_workflows.py passes 312 tests across 12 suites and eleven CLI example replays. The ten originally selected workflows are assessed; the eleventh Data Repair experiment remains in integrated tests only.",
+    "independent_review": "Two independent read-only audits cover five projects each, followed by fresh diff, corpus and evaluator review. Reproduced policy currency, claim policy, account currency, pre-receipt shortage, invalid ETA/calendar and impossible export chronology gaps were repaired. A negated-profit bypass was independently found and repaired before final assessment.",
+    "browser": "All five changed workflow examples return HTTP 200 with no console errors. Wide account tables were visually checked at desktop and mobile widths. Ambiguous and negated profitability questions hold in the real browser without a model call.",
+    "live_planner_trial": "Twelve independently authored and reviewed synthetic cases were frozen before one live pass. Original model: 10/12 strict plans, 11/12 answer states, 1/6 false-ready holds, mean latency 4.519 seconds. Rules: 11/12 answer states, 0/6 false-ready; parser developed with visible questions. Source hashes match. Original failure retained; subsequent deterministic correction regression-tested, no improved live accuracy claimed.",
+    "production": "No business-owner or domain-owner acceptance, representative enterprise dataset, target identity/security/provider/load/recovery approval, or measured business benefit. Historical September trials use old contracts; current source supersedes those input schemas. No production approval is claimed."
+  },
+  "shared_gaps": [
+    "Single-user local preview, not a multi-tenant enterprise deployment. Enterprise authentication/row authorization, provider/data approval, retention and operational owner remain adopter responsibilities.",
+    "No named target adopter or deployment environment has been validated. All supplied records are fictional. Original provenance and OSS notices retained; no invented personal deployment or savings.",
+    "The frozen rubric is unchanged, uncalibrated and evidence-based. Do not interpret high score or typedpriority as certification."
+  ],
+  "projects": {
+    "customer-resolution": [
+      "Assigned domain review role: Retail support and payment operations reviewer",
+      "Authenticated customer/case/order/payment source joining and current policy authority remain unverified; no transaction write or reconciliation connector."
+    ],
+    "incident-operations": [
+      "Assigned domain review role: Enterprise SRE and incident operations reviewer",
+      "No authoritative log/alert source adapter or coverage/completeness validation; no independent representative incident-cause interpretation study."
+    ],
+    "exposure-review": [
+      "Assigned domain review role: Enterprise vulnerability management reviewer",
+      "No authoritative SBOM/advisory importer; exact ecosystem/name/version equality does not implement range, backport or ecosystem normalization semantics."
+    ],
+    "business-insights": [
+      "Assigned domain review role: Finance analytics and enterprise reporting reviewer",
+      "Source metadata are trusted caller assertions, not authorized warehouse evidence. The independent twelve-case synthetic trial exposed false-ready profitability; its deterministic correction was reviewed but is not a new live holdout. No demonstrated general AI advantage or metric-owner acceptance."
+    ],
+    "inventory-decisions": [
+      "Assigned domain review role: Supply chain and replenishment planning reviewer",
+      "One caller-supplied aggregate receipt date per SKU, no ERP/supplier/UOM provenance; mean-demand scenarios provide no seasonality or service-level forecast, or representative planner adoption study."
+    ],
+    "asset-operations": [
+      "Assigned domain review role: Manufacturing reliability and maintenance reviewer",
+      "No authenticated sensor/work-order feeds, no independent domain review of history-summary/safety semantics; threshold observations are not diagnosis or control."
+    ],
+    "claims-intake": [
+      "Assigned domain review role: Insurance claims operations reviewer",
+      "Claim policy binding/page text remain supplied inputs, not trusted claim/OCR/policy integration; no representative claims reviewer or extraction/completeness holdout."
+    ],
+    "proposal-operations": [
+      "Assigned domain review role: Enterprise procurement and proposal response reviewer",
+      "Authenticated allowlisted GitHub document ingestion and local exact-content review exist; organizational reviewer identity, business-approved product source authority and enterprise review/retention acceptance do not."
+    ],
+    "account-intelligence": [
+      "Assigned domain review role: Revenue operations and account planning reviewer",
+      "Currency grouping is enforced, but CRM/meeting authorization, freshness and trusted opportunity joining remain unverified; blocker classification lacks a domain-owner representative holdout."
+    ],
+    "workforce-onboarding": [
+      "Assigned domain review role: HR and identity onboarding operations reviewer",
+      "Supplied-task dependencies are validated, but a complete authorized role checklist and authenticated HR/IT completion proof are absent. Omitted mandatory tasks cannot be discovered by matching supplied tasks."
+    ]
+  }
+}

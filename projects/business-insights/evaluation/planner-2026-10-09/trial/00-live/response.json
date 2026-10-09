@@ -1,0 +1,176 @@
+{
+  "id": "resp_03ffde41238a2ae6016ac8f2927f8887d1bdd082e5fba08994",
+  "object": "response",
+  "created_at": 1791554194,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1791554197,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 8000,
+  "max_tool_calls": null,
+  "model": "gpt-5.5-2026-04-23",
+  "moderation": null,
+  "output": [
+    {
+      "id": "rs_03ffde41238a2ae6016ac8f293a6a487d1b9cc1d52d483d4cf",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqyPKVAVI41N_qkd-jNSC84VKJM8yRpIIu81TRAwI4Hb8ZpP-b61GukJ03qCB8FHe6UPOvyYBeS82VNw59T6JAQ1RloMXW3MG8tC4vzBDeKY7IvEsbgdWffmr7wVKaDos5qyAAi3xNXY6J2gQeVFUY8mpAAkDMgzGUVeF9KbCRlXo4NtVtKmbIJ9IoDwayJ0j0R617XDv0WpaCzQG5ggaWasLbsSMmsfQS5j3RzfxSXVkI_1e3zjxQs185woofKbXh3UQUwJaWrqYd6Q0gkpRCVYeXKcZawxVIELB7M_JMgItjVa1MZpXRoyazMu0kY3Vmh2HnB_1bceCNBc5WeMNJeZQWcmhx8E8EHtGaGaNs2GFcIupm2iziGEgMZ-pP62eWb5lExJh3B887IAV4Z_MBT8x4oZzH1nsgIu-19RvnyO5Ntos2zDZBh0cEyHSPUIRpdnf0NBJWs5mG15qUnxfNecEXxCI6CHO5rxsUo5GJw2MOtxRmHQvKRH_PsISVHWqKziFHQ4Zmx5BKu871wSBhTBeSVZ_vKzdvPeZNGU0i7PSVojXYHWaqiCNToc2rZ1LYon_FOtY6PoQSOtbTO3OA_51pDHhgD5fVVaVc2WpmA3wfH1HIzR08A6dRyg3q3tZMSnxJYKsMu092Z7CFGfbE5WdTqnxHHyn3hyA0jacj82Ub4d6FY77xaaMFVnpX-YPeUx_xE5mPzlsJACd9UZnO1mScPVh-6yrkbLBaZXTb8Jnvj09BCQFLfTxsr94WEl0IlMH0UHLYkaslP8jAuRvUf8In0bv1M624ZcoqBnPo84Ekl5r6_vWnVFK0opX5Qt6F8mSA3dw-Fserzcl7iQSOnJ3Ozz9Qe0BAxvMVMPxKn-j2hweZu1-nEC-blPSXVZfxMBru43Jiw0j5bBgHy-DcqYPn92zud_BwYagHUAYcsIF446sZTwnbWJ-JiGoCjEVMqmTbSuxOl6UW07NmGKex1ftsXkPvEkaJFxM5KG2qXzmZlk528FCONJzjRj3fMpVz2WpmekK7Aotkz9SZFnv5xOHMTH9cNR-C4hOzg87eE11DNzZTeabu0aDkUlzxv9xuNZrV7O8JheqWqfCkSbF-PcQWz_svnS__9CWuKm6CYVF7rn95HjzrxZcbZXi6e2dZRoZhzBQTL9iZgI9PPhQbeDSG4em1TrV3TNUtPPBUhNch5GZT9on_T-eOX3ovypmxwM4npxnyx7Wnv_YIqftCSI43Altmfr-eY5WCfppuDTvwAVT8MfIl1P2fzf_5RHvSIthBU28hxIaINtVlThJV24ag9Anmk7iRJLO71CDevlTFsCNEYJXu4ZUqfQLx3Er8GS0O_xsiHOB6Wm4-PxRqVzudDP_SbfzM8WrYTQ0OSAGE77f08n8eItiO-0LDoSfqIjw12u2XkI9QU_aOBALX42w6dZiJsKOmUsMRlEolsj6spA4Dru_ToxZbQ4YUfaO7qy5fczadYBmbB2ZzMBX_kaUwfFY4BpN-XpJmzJUhsD99rPBcVoyfbudBmBRDtv3wE10q4xujm_lxHrO_4mS1OK8qUtPDfMYLsMQfSGrCPuU647v7wOCQNps6ZGyAfx7SaxYvG0Et4yCRjpo-4x4MbEqjlg==",
+      "summary": []
+    },
+    {
+      "id": "msg_03ffde41238a2ae6016ac8f2946d6087d1842ad820df9e4cab",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"status\":\"ready\",\"measure\":\"revenue\",\"group_by\":\"none\",\"start_date\":\"2026-09-01\",\"end_date\":\"2026-09-30\",\"currency\":\"USD\",\"regions\":[],\"products\":[],\"clarification\":\"\",\"question_quote\":\"For September 2026, total gross revenue before subtracting refunds or cost. Use USD.\"}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "current_turn",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "description": null,
+      "name": "enterprise_workflow",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ready",
+              "clarify"
+            ]
+          },
+          "measure": {
+            "type": "string",
+            "enum": [
+              "revenue",
+              "net_revenue",
+              "cost",
+              "gross_profit",
+              "units"
+            ]
+          },
+          "group_by": {
+            "type": "string",
+            "enum": [
+              "none",
+              "region",
+              "product",
+              "month"
+            ]
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "end_date": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "regions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "clarification": {
+            "type": "string"
+          },
+          "question_quote": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "measure",
+          "group_by",
+          "start_date",
+          "end_date",
+          "currency",
+          "regions",
+          "products",
+          "clarification",
+          "question_quote"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 459,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 155,
+    "output_tokens_details": {
+      "reasoning_tokens": 73
+    },
+    "total_tokens": 614
+  },
+  "user": null,
+  "metadata": {}
+}

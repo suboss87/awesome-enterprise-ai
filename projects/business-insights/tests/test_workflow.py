@@ -40,6 +40,26 @@ class BusinessInsightsTests(unittest.TestCase):
         out=self.run_case();self.assertEqual(out['answer_status'],'withheld')
         self.assertEqual(out['plan']['status'],'clarify')
         self.assertEqual(out['findings'][0]['code'],'clarification')
+
+    def test_ambiguous_profit_cannot_become_a_model_selected_metric(self):
+        for question in ('How profitable were we in September 2026?',
+                         'Show our profit for September 2026.',
+                         'What was profitability last month?',
+                         'What were our profits in USD?',
+                         'I do not mean gross profit. How profitable were we in September 2026?',
+                         'Do not calculate gross profit. Show profit in September 2026.'):
+            with self.subTest(question=question):
+                self.data['question']=question
+                ai=ReplayAI([]);out=load('business-insights').run(self.data,ai)
+                self.assertEqual(out['answer_status'],'withheld')
+                self.assertEqual(out['plan']['status'],'clarify')
+                self.assertNotIn('total',out['metrics'])
+                self.assertEqual(ai.calls,[])
+
+    def test_explicit_gross_profit_is_still_supported(self):
+        self.data['question']='How much gross profit did we have in September 2026 in USD?'
+        self.plan.update(measure='gross_profit',question_quote=self.data['question'])
+        self.assertEqual(self.run_case()['metrics']['total'],'750.00')
     def test_unknown_region_is_not_zero_answer(self):
         self.plan['regions']=['West'];out=self.run_case()
         self.assertEqual(out['answer_status'],'withheld')
@@ -108,6 +128,16 @@ class BusinessInsightsTests(unittest.TestCase):
         self.data['source_snapshot']['exported_at']='2026-10-09T08:00:00'
         with self.assertRaises(InputError):self.run_case()
 
+    def test_export_cannot_precede_its_declared_business_data(self):
+        self.data['source_snapshot']['exported_at']='2020-01-01T00:00:00+00:00'
+        ai=ReplayAI([])
+        with self.assertRaises(InputError):load('business-insights').run(self.data,ai)
+        self.assertEqual(ai.calls,[])
+
+    def test_export_uses_declared_source_timezone_calendar_day(self):
+        self.data['source_snapshot']['exported_at']='2026-09-30T00:15:00+14:00'
+        self.assertEqual(self.run_case()['answer_status'],'calculated')
+
     def test_snapshot_export_time_accepts_both_offset_signs(self):
         for stamp in ('2026-10-09T08:00:00Z','2026-10-09T08:00:00+05:30','2026-10-09T08:00:00-05:00'):
             with self.subTest(stamp=stamp):
@@ -131,6 +161,12 @@ class BusinessInsightsTests(unittest.TestCase):
     def test_duplicate_source_rejected(self):
         self.data['records'].append(copy.deepcopy(self.data['records'][0]))
         with self.assertRaises(InputError):self.run_case()
+    def test_currency_must_use_ascii_letters(self):
+        self.data['records'][0]['currency']='ÜSD'
+        ai=ReplayAI([])
+        with self.assertRaises(InputError):load('business-insights').run(self.data,ai)
+        self.assertEqual(ai.calls,[])
+
     def test_float_money_rejected(self):
         self.data['records'][0]['revenue']=1200.0
         with self.assertRaises(InputError):self.run_case()

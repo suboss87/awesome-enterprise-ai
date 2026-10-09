@@ -1,0 +1,176 @@
+{
+  "id": "resp_0e0a04b51a94cfb0016ac8f2acd43c87d1acd4ea86ee3cfce0",
+  "object": "response",
+  "created_at": 1791554220,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1791554225,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 8000,
+  "max_tool_calls": null,
+  "model": "gpt-5.5-2026-04-23",
+  "moderation": null,
+  "output": [
+    {
+      "id": "rs_0e0a04b51a94cfb0016ac8f2adbf5887d19d0aa5df62d24bbb",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqyPKxWFSTgMlqr3qyTofCRbDf0eo_Bz7E_4RHOPkH94NNBpjnI1jwkn18VHR8v1z67jEmhl3xeaKNmJK75VPDl9GtDW1llVidfaIvAGEWHZf5fXoMkHjWznp24YvTtxEelWoyMpakgzrZ554OdgwuVFy2yTfq5gnz2mGFX_16cnmb4aEQ4qTT3_zsFb_evRQGBnIrGfhnvywDkq0Qm0ugzADwqceOUyWLU8DY98rkoRWhtN9FNWfMNL2qWs9sYFx3KfC_BJSpHBEULl4OxxCbzXi4UNXUWQ8hG6n7RelofTK1t-2twbbOrqFi7EkUZOJeaUrSjQKcu1iR_299Fp9UWx2uc8x1XV8CfUR-0QN0WCmRONfyFk1dCJIdRPnyJKRq_fM02hpIfQZiWvjNgYAj_tS_eCzvwHtjTp_LgNM-rBWuKJ8yQfkOpdBvEPBQRTMMb-eaPPbk02WgC4FILL7riXHHZimUF6GhVhfcJPzlt760ivmmyHfoZv5ep5VfRUYCMzZOjKjgeu1HSfz_ayxqzuqEQdQlH0a1r7YCYHODdOmBoU0heOR76-3Aw-VMcmJgs6lvJlh1rqBSuhCC7BFqcF2cApkzI4BA-lfySic0aUDp4C5PcBdL0lalSmaV3TeR7vUnYXX2G7I4WZxo9MzGtWHH9D8f-YVxqxRTL2xdnprnTEzBNFNoTpoGpjb5c0CNj5Y9Xcd7qb1kHLASc1PamUNpHVPkbXADtYyeJ9pmxL8HuJxoqMr7H0YJv0nfEW2JgIAY8nldtMzEwF27IW3-V56iU45O_OT7kyN7DkR8AR0y4YQwbJFAVR3cUf_5UHA0V5SwwQlp5uTXP4aqzo4GgX-VMXiJJcRjw6PQKT5595_F0CMelbKt5_Uh3O7-dsO0piPpq79M2oR05EIsn05Sj6xgkdK-cho3XnSI49EJvZFlwQRKWhlG1_uSmicPoKAVWzIPHRInXdiptsevJHWLmWFXl03-cUK4T2g4KLdMlAVXHDKkmfLsflxNEw-xk_AiDIH4WO-xbZiuEZ7EkBMnH_BLZBsHna6aW2rkvZ-wkbNIrlklRo_FmgI32Rla51UhrvaPfIU30GoobJhfT5700YiVz2-b2DCTho8PmQpEPXnwaS2X7OCsBBr02_2lH3G4cOFPW6YvUbQ-Tmx1EEKNOn0tAVMdYA7kztdj7ifpGH6OKIviT95vcexZJon5TcIbn5QImZDWK3QNZlU-wJjX3dun6OKeG_vCgLwu7wpvoLQPj8ku1jdIz6lRZg2Seq0vnIRHnOnPofiQO5aWfx9gDhuLwPeCyPx5m6XnA9zMnxSOpZuZa2CdQVUKqqkOC5rHphXKkFgqawx_YIG7zWPQnLDwIm0tqsVNaEkBlC6yCYOzLQswU_Ye3MWg8ZOc2p6TZEkhai_ihoxdOPu6mWhwvErKmlxTWc5pkdn16AdroEwqG-DV4uwovMPC2HP0ic3-tdEav4uwF73QDosCipOTmyA1OO2LwleO9IKdAOWZmHuyU-VTckU0YcmGHJPtX0cL6qqbceHFJtLm1OR6mVjzy46GmnJaC0_LCNILD_2w28Ugt3CdCJDMWMQUznrqLK2CTSaASOBm2eze1XrRKVdNcj0-Jn84Fpj9DJZW2-5208yr2I5J6OByV37ADmM8JNVFSz5cxp_R6oV-4rgnqvkGenAcw_4bRyDpf6iZVOvKBHRwXvlZA2s5MC3QLoPCb8NuBj7uaBkMRIigmhvJSoA-HqhlvK2yh7sPI10FABMHCZVnDgJlRWHfjCIWoczah8Ndq0K50YdbtQShwe1QxBqJqPMAzw9LpkIi1bfV4eLtZCoipF5kieHVnOSwko6sK-LEnFxbxRvrZx0lqxK12Ziti8L-i6zA8F9tNhkdcyoFreWJechgunckSWgORbkbi9FKe_P7ypI3rA9rhcEm-_UL5wSgNUDkWQghVop0SJmWm8EGUKoLf6S8TScjjmUr9k-zCglCBZyVL6GPxsgiQSIy07i7Oxrjo8YQ57-img_v_4d_5jLk72Og9T-BZ575vk2xXe8OaXFoL-8t4mUrzXmfAo_fZGvdE4zQKOYdGAsgejA4fLYaAdxmsEKKpNMupjO66YP5kjspqqhLM5ZTERay9dauKdBHwUvfdb2dDC-8csPtgEPNs21y3uXNZICfbNEfgUOhqsN_qfaotXjogbiWFapbHyCuhts1brJI7nVygOxhPB13KL8fGF0lgJP5wM5yad19Sma4fLf4Sx2iC1VUa1SyYxFTA61epKIMWUVyWtAFP3IO0ruOazeheIYaHtjGWfpH9_Qas-mc8Njs1RmmQmKVK6XGQKRkxQ6Y4BgqzivMKXUacGFAf4-h4SDqiFddE9OaaD70ElZ9assEPRvKp-I-G9fVqUARzYQUBAu9SLx9tGg9ekYHvqjxSIwJufj5Ncy-AzICRqQbpTRLvzoITFtC3eyyA-UMr-tMFyv6zNZMEn9-C_D7BNgZh7DSXNDL9BFL4mk69cvQQHYI0I_W8s-EKACmsAFZSb3sNObCA9VuaH4hwgjxUoR2tbbxa5lMnvXAOCH3_KDfuSr8HXc4EQAkk5RXXcNjRys-hVQgSLb7H6GcLmXQy5sOZ4ngloyGUFBritv1vd505QOVLnDr4KXknC_ooXJLFfOY0XnpZPK0SlbxNaT72lZxBJJcIEF3HyDEHnSHLa-ro5WVQSJxYjJHARJoHq9Uz4UHVUR-_NF_odI102uqtnkh2ZCPuJuCY2RLb3c-cbRFJlm-fnJXR_ZfZWB5c3mwlXrzm2LtdSLT7kRqQ7jigV7UD3AoS9Jb60KZeF0ADdbqabZ5G56QclLgThR1fVQzXNypsSA62cAYP7_Asp1nkCTydc5td9Tre97SoAukUtL56vvdp_AM_Z6s-Vw-MgJx8lsUUA3uTCO4Ph3zCM05ZFktWCV_oItyipuCS1Bk5W96B78zzhyEdLpYrADDiHNh_yG_M4zi1Owl6oOsjGhfnb920-BQMavkpKETQg47MDKxpipX_8o4cKfuPp2Bz-g0RAPv2UQFuKlPa7ZT4lRuMETnHLdGzuAL3kESPA0HHf6szOQijmGIlejMCFHCeaOGNpJbEHWiPDTxi4XbRp1D_uLHbi74LOjM51RD2gunjE_-qwDwDX_aLaCjSTlf3H-3cH8uNOLiiOT9whvctepp7eXGxqrlhqzm2AArS1OCljIG8gi6eyq5YphATVwQZawxYrB6DuxEs1IbtjJy5U0Mc4cjzAeeZF8BQUIqmoOFwOv3wthzAvkkbtCa-5k5VCxjDvJQ9WfzbrdwcIqcI4myeQUFFmwrpF3o4q39A2HKApsEyTUDQqGW6A1rSQupbD3Y-54ufXrYvtn9QTkUSaTn7wC3LLBqIX5KxmTd9JZ7bxTl9GF3fb3MDkKXV4M96sVF7KXn07zobOQOBYWE8lNFeKInERR0k7uQ1mJq",
+      "summary": []
+    },
+    {
+      "id": "msg_0e0a04b51a94cfb0016ac8f2b129dc87d1981aef329ef120f9",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"status\":\"ready\",\"measure\":\"revenue\",\"group_by\":\"none\",\"start_date\":\"2026-09-01\",\"end_date\":\"2026-09-30\",\"currency\":\"\",\"regions\":[],\"products\":[],\"clarification\":\"\",\"question_quote\":\"Total gross revenue for September 2026 across the supplied records.\"}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "current_turn",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "description": null,
+      "name": "enterprise_workflow",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ready",
+              "clarify"
+            ]
+          },
+          "measure": {
+            "type": "string",
+            "enum": [
+              "revenue",
+              "net_revenue",
+              "cost",
+              "gross_profit",
+              "units"
+            ]
+          },
+          "group_by": {
+            "type": "string",
+            "enum": [
+              "none",
+              "region",
+              "product",
+              "month"
+            ]
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "end_date": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "regions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "clarification": {
+            "type": "string"
+          },
+          "question_quote": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "measure",
+          "group_by",
+          "start_date",
+          "end_date",
+          "currency",
+          "regions",
+          "products",
+          "clarification",
+          "question_quote"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 456,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 385,
+    "output_tokens_details": {
+      "reasoning_tokens": 311
+    },
+    "total_tokens": 841
+  },
+  "user": null,
+  "metadata": {}
+}

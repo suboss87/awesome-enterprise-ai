@@ -323,6 +323,7 @@
         "budget_gap_cents": 0
       },
       "expected_finding_codes": [
+        "pre_receipt_shortfall",
         "lead_time_shortfall",
         "notes_need_review"
       ]

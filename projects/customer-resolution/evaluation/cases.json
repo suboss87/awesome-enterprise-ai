@@ -7,7 +7,8 @@
         "as_of": "2026-09-30",
         "policy": {
           "return_window_days": 30,
-          "max_refund_cents": 10000
+          "max_refund_cents": 10000,
+          "currency": "USD"
         },
         "order": {
           "id": "order-1",
@@ -52,7 +53,8 @@
         "as_of": "2026-09-30",
         "policy": {
           "return_window_days": 30,
-          "max_refund_cents": 10000
+          "max_refund_cents": 10000,
+          "currency": "USD"
         },
         "order": {
           "id": "order-1",
@@ -98,7 +100,8 @@
         "as_of": "2026-09-30",
         "policy": {
           "return_window_days": 30,
-          "max_refund_cents": 10000
+          "max_refund_cents": 10000,
+          "currency": "USD"
         },
         "order": {
           "id": "order-1",
@@ -144,7 +147,8 @@
         "as_of": "2026-09-30",
         "policy": {
           "return_window_days": 30,
-          "max_refund_cents": 10000
+          "max_refund_cents": 10000,
+          "currency": "USD"
         },
         "order": {
           "id": "order-1",
@@ -190,7 +194,8 @@
         "as_of": "2026-09-30",
         "policy": {
           "return_window_days": 30,
-          "max_refund_cents": 10000
+          "max_refund_cents": 10000,
+          "currency": "USD"
         },
         "order": {
           "id": "order-1",
@@ -237,7 +242,8 @@
         "as_of": "2026-09-30",
         "policy": {
           "return_window_days": 30,
-          "max_refund_cents": 10000
+          "max_refund_cents": 10000,
+          "currency": "USD"
         },
         "order": {
           "id": "order-1",
@@ -283,7 +289,8 @@
         "as_of": "2026-09-30",
         "policy": {
           "return_window_days": 30,
-          "max_refund_cents": 10000
+          "max_refund_cents": 10000,
+          "currency": "USD"
         },
         "order": {
           "id": "order-1",
@@ -326,7 +333,8 @@
         "as_of": "2026-09-30",
         "policy": {
           "return_window_days": 30,
-          "max_refund_cents": 10000
+          "max_refund_cents": 10000,
+          "currency": "USD"
         },
         "order": {
           "id": "order-1",
@@ -372,7 +380,8 @@
         "as_of": "2026-09-30",
         "policy": {
           "return_window_days": 30,
-          "max_refund_cents": 10000
+          "max_refund_cents": 10000,
+          "currency": "USD"
         },
         "order": {
           "id": "order-1",
@@ -414,7 +423,8 @@
         "as_of": "2026-09-30",
         "policy": {
           "return_window_days": 30,
-          "max_refund_cents": 10000
+          "max_refund_cents": 10000,
+          "currency": "USD"
         },
         "order": {
           "id": "order-1",

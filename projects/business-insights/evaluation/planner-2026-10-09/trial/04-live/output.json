@@ -1,0 +1,62 @@
+{
+  "project": "business-insights",
+  "summary": "Units across 3 matching records in the covered period.",
+  "metrics": {
+    "matched_records": 3,
+    "groups": 2,
+    "total": "24",
+    "unit": "units"
+  },
+  "findings": [],
+  "actions": [],
+  "human_review_required": true,
+  "plan": {
+    "status": "ready",
+    "measure": "units",
+    "group_by": "month",
+    "start_date": "2026-08-31",
+    "end_date": "2026-09-30",
+    "currency": "",
+    "regions": [],
+    "products": [],
+    "clarification": "",
+    "question_quote": "Count total recorded units, not units net of returns, by calendar month across the entire declared complete coverage."
+  },
+  "table": [
+    {
+      "group": "2026-08",
+      "value": "4",
+      "record_ids": [
+        "S3"
+      ]
+    },
+    {
+      "group": "2026-09",
+      "value": "20",
+      "record_ids": [
+        "S1",
+        "S2"
+      ]
+    }
+  ],
+  "source_snapshot": {
+    "source_system": "Fictional finance export",
+    "snapshot_id": "sample-sales-close-2026-09",
+    "exported_at": "2026-10-09T08:00:00+00:00",
+    "data_as_of": "2026-09-30",
+    "schema_version": "sales-lines/1",
+    "metric_definition_version": "finance-metrics/2026-Q3",
+    "metric_definition_status": "approved",
+    "row_grain": "one posted sales line",
+    "coverage_start": "2026-08-31",
+    "coverage_end": "2026-09-30",
+    "completeness": "complete",
+    "freshness": "current"
+  },
+  "coverage": {
+    "start": "2026-08-31",
+    "end": "2026-09-30"
+  },
+  "answer_status": "calculated",
+  "calculation": "sum(units)"
+}

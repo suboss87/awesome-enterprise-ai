@@ -12,7 +12,8 @@
       "amount_cents": 1000000,
       "stage": "proposal",
       "close_date": "2026-10-15",
-      "next_step": "Confirm procurement review."
+      "next_step": "Confirm procurement review.",
+      "currency": "USD"
     }
   ],
   "meetings": [
