@@ -14,11 +14,14 @@
           "status": "delivered",
           "total_cents": 5000,
           "refunded_cents": 0,
-          "delivered_on": "2026-09-20"
+          "delivered_on": "2026-09-20",
+          "customer_ref": "customer-demo-1",
+          "currency": "USD"
         },
         "message": {
           "id": "msg-1",
-          "text": "I want to return this order."
+          "text": "I want to return this order.",
+          "customer_ref": "customer-demo-1"
         },
         "tool_state": "ready"
       },
@@ -56,11 +59,14 @@
           "status": "delivered",
           "total_cents": 5000,
           "refunded_cents": 0,
-          "delivered_on": "2026-08-01"
+          "delivered_on": "2026-08-01",
+          "customer_ref": "customer-demo-1",
+          "currency": "USD"
         },
         "message": {
           "id": "msg-1",
-          "text": "I want to return this order."
+          "text": "I want to return this order.",
+          "customer_ref": "customer-demo-1"
         },
         "tool_state": "ready"
       },
@@ -99,11 +105,14 @@
           "status": "delivered",
           "total_cents": 5000,
           "refunded_cents": 0,
-          "delivered_on": "2026-09-20"
+          "delivered_on": "2026-09-20",
+          "customer_ref": "customer-demo-1",
+          "currency": "USD"
         },
         "message": {
           "id": "msg-1",
-          "text": "I want to return this order."
+          "text": "I want to return this order.",
+          "customer_ref": "customer-demo-1"
         },
         "tool_state": "uncertain"
       },
@@ -142,11 +151,14 @@
           "status": "delivered",
           "total_cents": 5000,
           "refunded_cents": 0,
-          "delivered_on": "2026-09-20"
+          "delivered_on": "2026-09-20",
+          "customer_ref": "customer-demo-1",
+          "currency": "USD"
         },
         "message": {
           "id": "msg-1",
-          "text": "I want to return this order."
+          "text": "I want to return this order.",
+          "customer_ref": "customer-demo-1"
         },
         "tool_state": "blocked"
       },
@@ -185,11 +197,14 @@
           "status": "delivered",
           "total_cents": 5000,
           "refunded_cents": 5000,
-          "delivered_on": "2026-09-20"
+          "delivered_on": "2026-09-20",
+          "customer_ref": "customer-demo-1",
+          "currency": "USD"
         },
         "message": {
           "id": "msg-1",
-          "text": "I want to return this order."
+          "text": "I want to return this order.",
+          "customer_ref": "customer-demo-1"
         },
         "tool_state": "ready"
       },
@@ -229,11 +244,14 @@
           "status": "delivered",
           "total_cents": 5000,
           "refunded_cents": 0,
-          "delivered_on": "2026-09-20"
+          "delivered_on": "2026-09-20",
+          "customer_ref": "customer-demo-1",
+          "currency": "USD"
         },
         "message": {
           "id": "msg-1",
-          "text": "I want to return this order."
+          "text": "I want to return this order.",
+          "customer_ref": "customer-demo-1"
         },
         "tool_state": "ready"
       },
@@ -271,11 +289,14 @@
           "id": "order-1",
           "status": "pending",
           "total_cents": 5000,
-          "refunded_cents": 0
+          "refunded_cents": 0,
+          "customer_ref": "customer-demo-1",
+          "currency": "USD"
         },
         "message": {
           "id": "msg-1",
-          "text": "Please cancel my order."
+          "text": "Please cancel my order.",
+          "customer_ref": "customer-demo-1"
         },
         "tool_state": "ready"
       },
@@ -312,11 +333,14 @@
           "status": "delivered",
           "total_cents": 5000,
           "refunded_cents": 0,
-          "delivered_on": "2026-09-20"
+          "delivered_on": "2026-09-20",
+          "customer_ref": "customer-demo-1",
+          "currency": "USD"
         },
         "message": {
           "id": "msg-1",
-          "text": "Please cancel my order."
+          "text": "Please cancel my order.",
+          "customer_ref": "customer-demo-1"
         },
         "tool_state": "ready"
       },
@@ -355,11 +379,14 @@
           "status": "delivered",
           "total_cents": 5000,
           "refunded_cents": 0,
-          "delivered_on": "2026-10-01"
+          "delivered_on": "2026-10-01",
+          "customer_ref": "customer-demo-1",
+          "currency": "USD"
         },
         "message": {
           "id": "msg-1",
-          "text": "I want to return this order."
+          "text": "I want to return this order.",
+          "customer_ref": "customer-demo-1"
         },
         "tool_state": "ready"
       },
@@ -394,11 +421,14 @@
           "status": "delivered",
           "total_cents": 5000,
           "refunded_cents": 0,
-          "delivered_on": "2026-09-20"
+          "delivered_on": "2026-09-20",
+          "customer_ref": "customer-demo-1",
+          "currency": "USD"
         },
         "message": {
           "id": "msg-1",
-          "text": "I want to return this order."
+          "text": "I want to return this order.",
+          "customer_ref": "customer-demo-1"
         },
         "tool_state": "ready"
       },

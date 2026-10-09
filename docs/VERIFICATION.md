@@ -52,6 +52,8 @@ python3 scripts/evaluate_workflows.py --cases evaluation/live-cases.json \
   --output /tmp/enterprise-ai-fresh-run --workers 2
 ```
 
+This command reproduces the 2026-09-30 evaluation contract. Its frozen Business Insights inputs predate the required `source_snapshot` contract and therefore are historical evidence, not replayable against the current workflow without a separately versioned migration. Keep the original inputs and result snapshots unchanged; prepare and freeze a new case set with adapter-declared snapshot metadata before any new inference.
+
 This command makes actual model calls and incurs provider usage. Use a new output directory; the evaluator refuses to overwrite an existing run. Synthetic snapshots can be inspected without a provider key.
 
 ## Reproduce or extend evaluation

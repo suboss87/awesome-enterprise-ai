@@ -20,13 +20,13 @@ Live mode sends the supplied records to the configured fixed model provider thro
 
 ## Input contract
 
-`as_of` ISO day, uppercase three-letter `currency`, integer `budget_cents`, `items`, and `notes`. Each item requires unique `sku`, nonnegative integer `on_hand`, `reserved`, `on_order`, `lead_days`, `review_days`, `safety_units`, `capacity_units`, `unit_cost_cents`, and contiguous daily `history` ending yesterday with explicit zero-demand days. History entries require `date`, `units`. Notes have unique `id`, existing `sku`, and `text`. All items share one currency.
+`as_of` ISO day, uppercase three-letter `currency`, integer `budget_cents`, `items`, and `notes`. Each item requires unique `sku`, explicit `unit_of_measure`, nonnegative integer `on_hand`, `reserved`, `on_order`, `lead_days`, `review_days`, `safety_units`, `capacity_units`, `unit_cost_cents`, and contiguous daily `history` ending yesterday with explicit zero-demand days. Positive open-order quantity requires `on_order_available_on`; zero quantity requires null. History entries require `date`, `units`. Notes have unique `id`, existing `sku`, and `text`. All items share one currency.
 
 Unknown fields, duplicate identifiers, invalid types and unsupported source quotations fail without producing a successful analysis. Refer to the runnable JSON example for the full shape. Inputs and model output have bounded lengths/counts. No model-generated URLs or commands are executed.
 
 ## Output and decisions
 
-Target = ceil(mean daily units × (lead_days + review_days)) + safety_units. Position = on_hand − reserved + on_order. Requested = max(0,target − position). Capacity ceiling = max(0,capacity_units − on_hand − on_order). Proposed = min(requested,capacity ceiling). Integer-cent costs are exact. Budget overrun is a finding; no hidden allocation priority. Notes remain separate review annotations.
+Target = ceil(mean daily units × (lead_days + review_days)) + safety_units. Position = on_hand − reserved + open-order units expected by the end of the lead plus review horizon. Later receipts are excluded from that position and surfaced as a review finding; they still count against storage capacity. Requested = max(0,target − position). Capacity ceiling = max(0,capacity_units − on_hand − on_order). Proposed = min(requested,capacity ceiling). Integer-cent costs are exact. Budget overrun is a finding; no hidden allocation priority. Notes remain separate review annotations.
 
 All results require human review. `findings` expose actionable conditions; `actions` are review recommendations only. The workflow does not write to enterprise systems.
 
@@ -44,7 +44,7 @@ The tests also reject fabricated quotations, foreign sources, duplicate IDs, mis
 
 ## Limits
 
-No seasonality forecast, supplier integration, purchases or optimization guarantee. Capacity is conservative: all pending units are counted, without modeled consumption before arrival. Existing orders count in position without delivery dates, so late receipts require rerunning with corrected assumptions. No service-level or stockout probability is estimated. Budget findings require a planner to prioritize items.
+No seasonality forecast, supplier integration, purchases or optimization guarantee. Capacity is conservative: all pending units are counted, without modeled consumption before arrival. The caller supplies receipt dates; the workflow does not verify them with a supplier or ERP. No service-level or stockout probability is estimated. Budget findings require a planner to prioritize items.
 
 Exact quotation checks cannot guarantee semantic entailment or defeat every prompt injection. Human reviewers must verify substantive interpretations. This is an original bounded reference workflow, not a copy of an upstream enterprise application. See the collection license and security guidance.
 

@@ -40,7 +40,21 @@
             "cost": "200.00",
             "units": 4
           }
-        ]
+        ],
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "bi-eval-synthetic-sep-2026",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-ledger-v1",
+          "metric_definition_version": "finance-metrics-v1",
+          "metric_definition_status": "approved",
+          "row_grain": "one row per sales ledger line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        }
       },
       "expected": {
         "metrics.total": "1900.00",
@@ -86,7 +100,21 @@
             "cost": "200.00",
             "units": 4
           }
-        ]
+        ],
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "bi-eval-synthetic-sep-2026",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-ledger-v1",
+          "metric_definition_version": "finance-metrics-v1",
+          "metric_definition_status": "approved",
+          "row_grain": "one row per sales ledger line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        }
       },
       "expected": {
         "metrics.total": "2000.00",
@@ -132,7 +160,21 @@
             "cost": "200.00",
             "units": 4
           }
-        ]
+        ],
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "bi-eval-synthetic-sep-2026",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-ledger-v1",
+          "metric_definition_version": "finance-metrics-v1",
+          "metric_definition_status": "approved",
+          "row_grain": "one row per sales ledger line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        }
       },
       "expected": {
         "metrics.total": "750.00"
@@ -177,7 +219,21 @@
             "cost": "200.00",
             "units": 4
           }
-        ]
+        ],
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "bi-eval-synthetic-sep-2026",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-ledger-v1",
+          "metric_definition_version": "finance-metrics-v1",
+          "metric_definition_status": "approved",
+          "row_grain": "one row per sales ledger line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        }
       },
       "expected": {
         "metrics.total": "1100.00",
@@ -223,7 +279,21 @@
             "cost": "200.00",
             "units": 4
           }
-        ]
+        ],
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "bi-eval-synthetic-sep-2026",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-ledger-v1",
+          "metric_definition_version": "finance-metrics-v1",
+          "metric_definition_status": "approved",
+          "row_grain": "one row per sales ledger line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        }
       },
       "expected": {
         "metrics.total": "2300.00",
@@ -269,7 +339,21 @@
             "cost": "200.00",
             "units": 4
           }
-        ]
+        ],
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "bi-eval-synthetic-sep-2026",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-ledger-v1",
+          "metric_definition_version": "finance-metrics-v1",
+          "metric_definition_status": "approved",
+          "row_grain": "one row per sales ledger line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        }
       },
       "expected": {
         "metrics.total": "20",
@@ -315,7 +399,21 @@
             "cost": "200.00",
             "units": 4
           }
-        ]
+        ],
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "bi-eval-synthetic-sep-2026",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-ledger-v1",
+          "metric_definition_version": "finance-metrics-v1",
+          "metric_definition_status": "approved",
+          "row_grain": "one row per sales ledger line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        }
       },
       "expected": {
         "finding_codes": [
@@ -326,7 +424,7 @@
     {
       "id": "no-data",
       "input": {
-        "question": "What was net revenue in January 2025 in USD?",
+        "question": "What was net revenue on September 1, 2026 in USD?",
         "as_of": "2026-09-30",
         "records": [
           {
@@ -362,7 +460,21 @@
             "cost": "200.00",
             "units": 4
           }
-        ]
+        ],
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "bi-eval-synthetic-sep-2026",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-ledger-v1",
+          "metric_definition_version": "finance-metrics-v1",
+          "metric_definition_status": "approved",
+          "row_grain": "one row per sales ledger line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        }
       },
       "expected": {
         "finding_codes": [
@@ -420,7 +532,21 @@
             "cost": "650.00",
             "units": 12
           }
-        ]
+        ],
+        "source_snapshot": {
+          "source_system": "Fictional finance export",
+          "snapshot_id": "bi-eval-synthetic-sep-2026",
+          "exported_at": "2026-10-09T08:00:00+00:00",
+          "data_as_of": "2026-09-30",
+          "schema_version": "sales-ledger-v1",
+          "metric_definition_version": "finance-metrics-v1",
+          "metric_definition_status": "approved",
+          "row_grain": "one row per sales ledger line",
+          "coverage_start": "2026-08-31",
+          "coverage_end": "2026-09-30",
+          "completeness": "complete",
+          "freshness": "current"
+        }
       },
       "expected": {
         "finding_codes": [

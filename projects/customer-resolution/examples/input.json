@@ -9,11 +9,14 @@
     "status": "delivered",
     "total_cents": 5000,
     "refunded_cents": 0,
-    "delivered_on": "2026-09-20"
+    "delivered_on": "2026-09-20",
+    "customer_ref": "customer-demo-1",
+    "currency": "USD"
   },
   "message": {
     "id": "msg-1",
-    "text": "I want to return this order."
+    "text": "I want to return this order.",
+    "customer_ref": "customer-demo-1"
   },
   "tool_state": "ready"
 }

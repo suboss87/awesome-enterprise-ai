@@ -53,6 +53,28 @@ class BusinessCases(unittest.TestCase):
         data['order']['refunded_cents'] = 6000
         with self.assertRaises(InputError): WORKFLOW.run(data, ReplayAI([]))
 
+    def test_message_order_binding_mismatch_rejected_before_model(self):
+        data = json.loads((PROJECT / 'examples/input.json').read_text())
+        data['message']['customer_ref'] = 'different-customer'
+        ai = ReplayAI([])
+        with self.assertRaises(InputError): WORKFLOW.run(data, ai)
+        self.assertEqual(ai.calls, [])
+
+    def test_currency_is_carried_into_proposal_and_metrics(self):
+        data = json.loads((PROJECT / 'examples/input.json').read_text())
+        data['order']['currency'] = 'EUR'
+        ai = ReplayAI(json.loads((PROJECT / 'examples/responses.json').read_text()))
+        output = WORKFLOW.run(data, ai)
+        self.assertEqual(output['actions'][0]['currency'], 'EUR')
+        self.assertEqual(output['metrics']['currency'], 'EUR')
+
+    def test_invalid_currency_rejected_before_model(self):
+        data = json.loads((PROJECT / 'examples/input.json').read_text())
+        data['order']['currency'] = 'usd'
+        ai = ReplayAI([])
+        with self.assertRaises(InputError): WORKFLOW.run(data, ai)
+        self.assertEqual(ai.calls, [])
+
 
 def make_test(case):
     def test(self):

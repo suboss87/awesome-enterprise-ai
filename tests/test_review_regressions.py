@@ -29,8 +29,9 @@ class ReviewRegressions(unittest.TestCase):
         self.assertEqual(out['metrics']['total'],'20')
     def test_empty_period_is_unknown_not_zero(self):
         data,responses=self.example('business-insights')
-        responses[0].update(start_date='2020-01-01',end_date='2020-01-31')
+        responses[0].update(start_date='2026-09-01',end_date='2026-09-01')
         out=load('business-insights').run(data,ReplayAI(responses))
+        self.assertEqual(out['answer_status'],'withheld')
         self.assertIsNone(out['metrics']['total'])
         self.assertIn('no_data',[f['code'] for f in out['findings']])
     def test_amount_sentence_punctuation_and_full_number_bounds(self):

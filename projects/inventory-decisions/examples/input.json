@@ -22,7 +22,9 @@
           "date": "2026-09-02",
           "units": 4
         }
-      ]
+      ],
+      "unit_of_measure": "each",
+      "on_order_available_on": null
     }
   ],
   "notes": [

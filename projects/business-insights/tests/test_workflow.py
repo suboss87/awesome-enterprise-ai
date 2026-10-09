@@ -46,11 +46,73 @@ class BusinessInsightsTests(unittest.TestCase):
         self.assertEqual(out['findings'][0]['code'],'unknown_filter')
         self.assertNotIn('total',out['metrics']);self.assertEqual(out['table'],[])
     def test_empty_period_is_not_zero_business(self):
-        self.plan.update(start_date='2025-01-01',end_date='2025-01-31')
+        self.plan.update(start_date='2026-09-01',end_date='2026-09-01')
         out=self.run_case();self.assertEqual(out['answer_status'],'withheld')
         self.assertEqual(out['findings'][0]['code'],'no_data')
         self.assertEqual(out['metrics']['matched_records'],0)
         self.assertIsNone(out['metrics']['total']);self.assertEqual(out['table'],[])
+
+    def test_incomplete_snapshot_is_withheld_before_model_call(self):
+        self.data['source_snapshot']['completeness']='partial'
+        ai=ReplayAI([]);out=load('business-insights').run(self.data,ai)
+        self.assertEqual(out['answer_status'],'withheld')
+        self.assertEqual(out['findings'][0]['code'],'snapshot_incomplete')
+        self.assertEqual(ai.calls,[])
+        self.assertNotIn('total',out['metrics'])
+
+    def test_untrusted_freshness_and_definition_states_are_withheld_before_model(self):
+        for field,value,code in [('freshness','stale','snapshot_freshness'),
+                                 ('freshness','unknown','snapshot_freshness'),
+                                 ('metric_definition_status','unapproved','metric_definition_unapproved'),
+                                 ('metric_definition_status','unknown','metric_definition_unapproved')]:
+            with self.subTest(field=field,value=value):
+                self.data['source_snapshot'][field]=value
+                ai=ReplayAI([]);out=load('business-insights').run(self.data,ai)
+                self.assertEqual(out['answer_status'],'withheld')
+                self.assertEqual(out['findings'][0]['code'],code)
+                self.assertEqual(ai.calls,[])
+                self.assertNotIn('total',out['metrics'])
+                self.data['source_snapshot'][field]='current' if field=='freshness' else 'approved'
+
+    def test_period_outside_complete_snapshot_is_withheld(self):
+        self.plan['start_date']='2026-08-01'
+        out=self.run_case()
+        self.assertEqual(out['answer_status'],'withheld')
+        self.assertEqual(out['findings'][0]['code'],'snapshot_coverage')
+        self.assertNotIn('total',out['metrics']);self.assertEqual(out['table'],[])
+
+    def test_entirely_later_or_earlier_period_is_withheld(self):
+        for start,end in [('2026-10-01',''),('','2026-08-30')]:
+            with self.subTest(start=start,end=end):
+                self.plan['start_date']=start;self.plan['end_date']=end
+                out=self.run_case()
+                self.assertEqual(out['answer_status'],'withheld')
+                self.assertEqual(out['findings'][0]['code'],'snapshot_coverage')
+                self.assertNotIn('total',out['metrics'])
+        self.plan['start_date']='';self.plan['end_date']=''
+
+    def test_record_outside_declared_coverage_is_rejected(self):
+        self.data['source_snapshot']['coverage_start']='2026-09-01'
+        with self.assertRaises(InputError):self.run_case()
+
+    def test_snapshot_identity_and_coverage_are_returned_for_review(self):
+        out=self.run_case()
+        self.assertEqual(out['source_snapshot']['snapshot_id'],'sample-sales-close-2026-09')
+        self.assertEqual(out['coverage'],{'start':'2026-08-31','end':'2026-09-30'})
+
+    def test_later_question_as_of_can_use_an_older_complete_snapshot(self):
+        self.data['as_of']='2026-10-02'
+        self.assertEqual(self.run_case()['answer_status'],'calculated')
+
+    def test_snapshot_export_time_requires_timezone(self):
+        self.data['source_snapshot']['exported_at']='2026-10-09T08:00:00'
+        with self.assertRaises(InputError):self.run_case()
+
+    def test_snapshot_export_time_accepts_both_offset_signs(self):
+        for stamp in ('2026-10-09T08:00:00Z','2026-10-09T08:00:00+05:30','2026-10-09T08:00:00-05:00'):
+            with self.subTest(stamp=stamp):
+                self.data['source_snapshot']['exported_at']=stamp
+                self.assertEqual(self.run_case()['answer_status'],'calculated')
 
     def test_cli_keeps_ready_plan_distinct_from_withheld_answer(self):
         self.data['records'][1]['currency']='EUR';self.plan['currency']=''
