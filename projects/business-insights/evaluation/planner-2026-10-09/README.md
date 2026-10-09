@@ -6,13 +6,11 @@ with one declared currency variant. Labels include exact arithmetic, record IDs,
 effective dates, filters and whether an answer should be withheld. This is a
 small development study, not representative analyst or domain-owner acceptance.
 
-The original corpus SHA256 is
-`5962a87c8b8099d2b5ba3c14c106dd9263eec4dadd0cd281971dbbd87730f7cc`.
-It remains unchanged. The runner freezes cases, model and source hashes before
-calls; all twelve attempted live calls and their provider responses are retained.
-The final source hashes match the initial ones. The original source snapshots
-in `trial/source/` reproduce those hashes, including the workflow before the
-correction described below. They are historical evidence, not current code.
+The public case file preserves every original question, record, expected outcome
+and scoring rule. Evaluator author metadata was omitted and labeling provenance clarified, so its
+SHA256 differs from the frozen trial. [Results](results.json) record both hashes.
+The runner froze cases, model and source hashes before inference and verified
+unchanged source hashes after the calls.
 
 ## Results before the correction
 
@@ -25,8 +23,7 @@ correction described below. They are historical evidence, not current code.
 The live model was `gpt-5.5-2026-04-23`, with medium reasoning and the collection's
 fixed structured-output schema. Mean observed live latency was 4.519 seconds;
 rules averaged 0.0009 seconds in this local run. Twelve calls completed without
-transport failures. Provider IDs and actual token usage are in the retained
-responses and [report](trial/report.json); no monetary cost or human time savings
+transport failures. Per-case outcomes and actual token usage are in the [results](results.json); no monetary cost or human time savings
 is inferred from them.
 
 The rules parser was developed with visible questions. It recognizes a narrow
@@ -45,7 +42,7 @@ only other permitted equivalence. No labels were changed after inference.
 For “How profitable were we in September 2026?” the live planner guessed
 `gross_profit` and returned USD750.00. Profitability could mean a margin,
 operating profit or another business definition. The failed response remains in
-[the original case](trial/09-live/output.json).
+[the failed result](regressions/undefined-profit.json).
 
 Current workflow code withholds generic profitable/profitability or plural-profits
 language and negated gross-profit requests before inference. Bare profit language

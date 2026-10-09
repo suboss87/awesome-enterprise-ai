@@ -17,11 +17,12 @@ The [rubric](rubric.json) scores eight dimensions from 0 to 4. The descriptions 
 
 The weighted result is `sum(weight × score / 4) × 100`. Read the individual dimensions and probability distributions too. A single number hides too much.
 
-## What Jev does
+## Model review
 
-Jev reviewed the proposed rubric, then scored the actual code, tests, saved synthetic outputs, deployment limits and independently reproduced defects. It returns typed judgments. It does not write a technical rationale or certify a deployment. The dimensions and mandatory gates were accepted as usable in that design review; this is not a validation of the judge against domain experts.
-
-The questions are frozen in [questions.json](questions.json). [Current results](../docs/QUALITY.md) retain the earlier assessment and show the changed evidence. I don't rerun unchanged evidence to obtain a better score.
+The automated reviewer scores code, tests, synthetic results and disclosed limits
+against [fixed questions](questions.json). It is an uncalibrated model judge,
+not a domain expert or a deployment authority. [Current results](../docs/QUALITY.md)
+include the low scores and remaining adoption gaps. A score is not an error rate.
 
 ## Production requires separate acceptance
 
@@ -33,7 +34,7 @@ A high average cannot compensate for a failed production gate. Each project need
 4. A business owner who accepts the workflow, escalation process and measured results.
 5. Supported provenance and maturity claims, including required notices for reused code.
 
-Missing evidence blocks production designation. The internal target is at least 3 in every dimension plus all gates; it is an improvement target, not an industry standard. Each project's `GOVERNANCE.md` explains its particular decisions, sensitive data and acceptance risks. Keep target-environment sign-offs and sensitive cases in the adopter's controlled system, not a public GitHub issue.
+Missing evidence blocks production designation. Each project's `GOVERNANCE.md` explains its particular decisions, sensitive data and acceptance risks. Keep target-environment sign-offs and sensitive cases in the adopter's controlled system, not a public GitHub issue.
 
 ## Reproduce a new assessment
 

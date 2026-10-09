@@ -6,7 +6,7 @@
 
 Open-source workflows for customer service, operations, security and business teams.
 
-[Explore the collection](#choose-your-workflow) · [Run the workspace](#try-it-in-two-minutes) · [Adoption guide](ADOPTION.md) · [What we tested](docs/VERIFICATION.md) · [Quality scores](docs/QUALITY.md)
+[Explore the collection](#choose-your-workflow) · [Run the workspace](#try-it-in-two-minutes) · [Adoption guide](ADOPTION.md) · [What we tested](docs/VERIFICATION.md) · [Quality and limits](docs/QUALITY.md)
 
 </div>
 
@@ -96,9 +96,9 @@ The workflow interprets text where interpretation helps. Ordinary code handles a
 
 Useful additions solve a distinct, recurring problem. Improvements to an existing workflow count too: better evidence, an adapter that really works, clearer failure behavior, or a smaller setup burden.
 
-I’m growing this toward 20–30 useful projects. I look for repeated problems in community discussions and real enterprise work, then check what existing tools already solve. Reuse should keep its attribution and add something useful. Daily CI reruns the checks; new projects need their own evaluations, governance decisions and a documented deployment path.
+I start with a recurring business problem, keep the workflow small, and test where it can fail. Daily CI reruns the checks. Every addition needs its own evaluation cases, governance decisions and a documented deployment path. Required source and license notices stay with any reused material.
 
-[Quality rubric and current scores](docs/QUALITY.md) · [Production acceptance](quality/README.md)
+[Quality and acceptance](docs/QUALITY.md) · [Production acceptance](quality/README.md)
 
 [Suggest a problem](CONTRIBUTING.md) · [Verification runs](https://github.com/suboss87/awesome-enterprise-ai/actions/workflows/verify.yml) · [Report a vulnerability](SECURITY.md)
 
