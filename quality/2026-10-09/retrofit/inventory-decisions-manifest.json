@@ -1,0 +1,27 @@
+{
+  "commit": "4ea17a8326750186009f3bd951070769ad72336c",
+  "request_sha256": "fc4363ef0368286510b5eefc6e0aea653502dad9146251db2188b229c54e9133",
+  "rubric_sha256": "d33fcd2ba2b93a1d737b8c85f9396fa9b4b87cf46193e808c3edf0f4039d6938",
+  "context_sha256": "47635c44854c6b414f91da2a9c9de2791410241eaa92ed78791e723c8645bc88",
+  "files": {
+    "enterprise_ai/__init__.py": "3063b4bb11adb626a9baaf2a07b8528f540a3891eec59d469e8575ac2f31c3a8",
+    "enterprise_ai/__main__.py": "4442f62e6c056958dd893b39bfa645a6ec3b413dc8d5861639587f35cc9f74aa",
+    "enterprise_ai/catalog.py": "dbd9e3e0071d5e10dc705f0e49cf86d23a17af8f9742155efe3fd008e7f123aa",
+    "enterprise_ai/common.py": "65f064b82cc4612b52d6560bbaac34f05c5657672a96256f3a47de690c9d3d8a",
+    "enterprise_ai/execution.py": "d7533631c526b66b49b8517ef34495be4011205169c58086e49dcc6538ad27da",
+    "enterprise_ai/provider.py": "4da2d135bcea97fdbb0884d20a7664c47fb4f09b4fe615c969ff4c5f5527b1e7",
+    "enterprise_ai/server.py": "9252d9b9cc88d9d7648767231d0461b42a7d7117b8c6609e6a8972b3f1699329",
+    "enterprise_ai/worker.py": "885c13a3c0d3b292bc4a6d17ddfde18e157b62074a05210a1db19ea053bdca6b",
+    "tests/test_execution.py": "f803c9fb97a49670349c68b093d0b9c7ab8a486448929469c7e1bf82b6d7c082",
+    "tests/test_quality.py": "caff7e601ac55a9bc39dd9bb006093c1c997e694b5751b4129d612667fa6f04b",
+    "tests/test_review_regressions.py": "219bd165ca670f8ab9bcea5d0e12ecea02e78444e7aac52cfbf898ac3d9ee693",
+    "tests/test_runtime.py": "ca0173135f647c878e4aebbc1eec9049530c21cf8709c8d548440be7a50866ed",
+    "tests/test_server.py": "07ea05bd168b8299a54c2e075beee6598d51a17ce0f3006723476f8fed9db4de",
+    "docs/DEPLOYMENT.md": "8bd1e30a0aa5586e42e494544c341348cbb80441e5585ef9eebc1c5518dd2c63",
+    "docs/ADOPTION-ROADMAP.md": "65a103f7c0d5b88010fa182b944f5d2f68368c2fb88a92b1762fe7d2d4c1f959",
+    "projects/inventory-decisions/workflow.py": "152fad2ebec05dc7b55f9c342c85ea4a5d83c14f011813b7e7749606efd6daf0",
+    "projects/inventory-decisions/README.md": "7585a4030db7da7949681e3c271fa07622728eadb2faed307cde21855faa7883",
+    "projects/inventory-decisions/tests/test_workflow.py": "759b00a4ca15462668dd330bbc48a6b1526978382be6db6edd73b0dfa51c08f0",
+    "projects/inventory-decisions/GOVERNANCE.md": "fc183bbeb18d870f9dfd6c710784097de5c49c79ecb825b630adb34ae04121b6"
+  }
+}

@@ -42,3 +42,17 @@ Proposal Evidence remains experimental. A local OS-account ledger does not estab
 - [Rubric design request](../quality/2026-10-02/rubric-review-request.json) and [Jev’s typed design review](../quality/2026-10-02/rubric-review-response.json).
 
 Resolved model: `jev-1.13.0`. Full requests and responses were retained privately with hashes; public artifacts contain the judgments and source manifests. Requests used only repository code and synthetic/public evidence. No unchanged request was resampled. No new live workflow inference was performed in this hardening pass; the historical September 30 live cases remain explicitly historical.
+
+## Focused retrofit review: October 9, 2026
+
+After source-bound snapshot checks, customer/order binding and currency labels, and dated inventory receipts were added, Jev reviewed those three changed workflows at commit `4ea17a8326750186009f3bd951070769ad72336c` using the same frozen rubric. All three selected source integration as the first priority. Their scores remain evidence judgments, not measured accuracy or production approvals.
+
+| Project | Score /100 | First priority |
+|---|---:|---|
+| [business-insights](../projects/business-insights/) | 50.39 | Source integration |
+| [customer-resolution](../projects/customer-resolution/) | 50.23 | Source integration |
+| [inventory-decisions](../projects/inventory-decisions/) | 49.98 | Source integration |
+
+All three remain blocked from production designation. The new controls consume caller/adapter-provided source facts; they do not authenticate users, verify source systems, or replace business-owner acceptance. No live inference or adopter trial was performed for this revision. The eight unchanged workflows were not reassessed.
+
+The [focused summary](../quality/2026-10-09/retrofit/summary.json), [Jev judgments](../quality/2026-10-09/retrofit/), source manifests and [verification context](../quality/2026-10-09/retrofit/context.json) are public. Full requests remain private; their hashes are retained in the manifests.
