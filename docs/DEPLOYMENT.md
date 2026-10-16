@@ -2,7 +2,7 @@
 
 ## What ships
 
-Ten independently scoped Python workflows share a command-line interface and a single-user browser workspace. Python 3.11+ is the only local runtime dependency. The browser is served locally, with no external fonts, analytics or CDN dependencies. Inputs and results use JSON contracts; there are no packaged Salesforce, ServiceNow, SAP, insurer or equipment-control connectors.
+Eleven independently scoped Python workflows share a command-line interface and a single-user browser workspace. Python 3.11+ is the only local runtime dependency. The browser is served locally, with no external fonts, analytics or CDN dependencies. Inputs and results use JSON contracts; there are no packaged Salesforce, ServiceNow, SAP, insurer or equipment-control connectors.
 
 The included HTTP server binds only to `127.0.0.1`. Keep it there. It is a local evaluation interface, **not a multiuser application server**. Do not expose it through a public tunnel, reverse proxy or shared workstation as though its session token were enterprise authentication.
 
@@ -47,3 +47,13 @@ Receipts are unsigned local records. Protect their directory and retention using
 Proposal Evidence also offers an optional local review ledger. Its SQLite file retains proposal inputs, answers and review notes. It has a different data-retention boundary from the stateless preview server. Read the [project's review instructions](../projects/proposal-operations/README.md) before enabling it.
 
 The worker wire response is capped at 5 MB. The final serialized CLI result, including its receipt and indentation, is capped at 10 MB. Proposal review accepts result files up to that same 10 MB boundary; input and current-source packets remain capped at 500 KB. An output that exceeds the serialized boundary fails without emitting a partial business result.
+
+
+## Protected batch execution
+
+Use the [operator runbook](OPERATIONS.md) for an immutable checkout or the pinned
+non-root container. `--run-dir` creates a new private directory, saves the result
+and its hash-bound completion receipt, and keeps business records out of stdout.
+The local browser server remains a preview and must not be exposed as a service.
+The [production checklist](PRODUCTION-CHECKLIST.md) records the acceptance still
+needed for each workflow. A packaged job is not an approved enterprise deployment.

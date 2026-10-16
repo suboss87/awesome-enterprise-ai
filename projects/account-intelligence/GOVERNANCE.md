@@ -4,7 +4,7 @@
 
 The revenue-operations owner owns CRM definitions; the account owner reviews each meeting observation. Output reconciles recorded opportunities, quoted blockers, next steps and proposed close dates. It must not update CRM, send outreach, invent win probabilities or replace official forecasts.
 
-CRM and meeting notes contain commercial and personal information. Export only the authorized account and preserve literal opportunity IDs in notes. Refresh CRM values before considering edits. All amounts must share a currency/minor-unit convention; the contract does not convert currencies or verify source-system permissions.
+CRM and meeting notes contain commercial and personal information. Export only the authorized account and preserve literal opportunity IDs in notes. Refresh CRM values before considering edits. Each opportunity must declare its currency and use the documented minor-unit convention. Open pipeline balances remain separate by currency; mixed-currency totals are withheld. The contract does not convert currencies or verify source-system permissions.
 
 ## Acceptance evidence
 

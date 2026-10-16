@@ -93,3 +93,13 @@ One live model call selected the same four evidence sentences as the template. I
 A successful GX result alone is insufficient: every supplied check must report a positive `element_count`. Population semantics are explicitly supported for `expect_column_values_to_be_null` and `expect_column_values_to_not_be_null` (all rows), and `expect_column_values_to_be_between`, `expect_column_values_to_be_in_set`, and `expect_column_values_to_not_be_in_set` (nonmissing rows). All require explicit `unexpected_count`; range/membership also require explicit `missing_count`. At least one row must have been assessed, and unexpected counts cannot exceed that assessed population. Unknown expectation types remain unverified; missing counts are never inferred as zero. Empty, unknown or all-missing assessed populations produce `unverified`, even when GX reports a pass. This conservative gate does not certify that every business row was checked; operators still own partition coverage and source completeness. Expectations without these population aggregates are not sufficient for readiness in this version.
 
 Outputs distinguish `initial_failed_checks` from `current_failed_checks` (the latest supplied run). Each contains the relevant check IDs and aggregate counts; current failures also appear in the full baseline handoff. The legacy `failed_checks` field remains an alias for initial failures for compatibility. A retest can resolve one check while exposing another; the new failure must remain visible and the status stays `still_failing` when the run is otherwise comparable.
+
+
+## Operational use and acceptance
+
+Use the [protected batch runbook](../../docs/OPERATIONS.md) to keep each result
+private and preserve its execution receipt. Complete this project's
+[GOVERNANCE.md](GOVERNANCE.md) and the [production checklist](../../docs/PRODUCTION-CHECKLIST.md)
+with the intended business and platform owners before production use. Public
+examples and CI verify the documented cases; they do not establish enterprise
+approval or remove the project's stated limits.

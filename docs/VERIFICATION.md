@@ -10,7 +10,7 @@ Run from the repository root:
 python3 scripts/verify_workflows.py
 ```
 
-**312 tests across 12 suites and eleven CLI example replays pass** at the October 9 revision. Historical inference results below describe the code and contracts used for those studies.
+**320 tests across 12 suites and eleven CLI example replays pass** at the October 16 revision. Historical inference results below describe the code and contracts used for those studies.
 
 The verifier runs the shared runtime/security tests, each workflow's business-rule tests, and every catalog workflow's CLI example replay. Tests exercise invalid inputs, missing evidence, conflicting records, exact arithmetic and human-review boundaries. Recorded-response tests do not measure live model quality.
 
@@ -118,3 +118,28 @@ the new customer policy currency, claim policy ID, account currency and inventor
 contracts as well as analytics snapshot metadata. Keep that historical study
 unchanged; use current project fixtures or separately versioned inputs for a new
 study. [Quality and limits](QUALITY.md) describes the current review outcomes.
+
+## Protected operator artifacts: October 16
+
+The `--run-dir` path creates a fresh private directory before inference. Tests
+exercise actual replay jobs for all eleven workflows, exact result/receipt hash
+binding, restrictive permissions, rejected directory reuse and symlinks, sanitized
+input failures, and cleanup when artifact publication fails. The existing worker
+deadline and business rules remain in force. No new live accuracy or business
+value is inferred from these checks.
+
+The isolated batch CI job additionally builds the digest-pinned runtime and runs
+all eleven examples with no network, a read-only application filesystem,
+non-root identity, no Linux capabilities, no new privileges and bounded resources.
+Its success must be checked for the selected revision; configuration alone is
+not execution evidence. These synthetic jobs do not establish authorized live
+source/provider integration, production capacity or business-owner acceptance.
+
+
+The first actual isolated-container run passed all four jobs at revision
+`51b06059ed87a6117eb8293677bde175e0732652` ([CI record](https://github.com/suboss87/awesome-enterprise-ai/actions/runs/38838549910)).
+It built the pinned image and exercised every workflow, existing-result
+preservation, private file modes, the actual read-only mount, non-root identity,
+no-new-privileges, zero effective capabilities and a rejected-input job. The
+320-test Python 3.11 host suite also passed. No provider calls or enterprise
+production acceptance were part of this verification.
