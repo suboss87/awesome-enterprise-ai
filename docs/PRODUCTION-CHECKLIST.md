@@ -11,7 +11,7 @@ cover execution and artifacts; they do not approve a business process.
 
 ## Repository delivery checks
 
-- [x] Each original workflow has its own problem statement, implementation,
+- [x] Each workspace workflow has its own problem statement, implementation,
   examples, evaluation cases, tests and governance boundary.
 - [x] Model interpretation is separated from deterministic amounts, dates,
   prerequisites and evidence checks.
