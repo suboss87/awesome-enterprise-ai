@@ -57,7 +57,9 @@ Provider usage applies. Approval of the provider and data flow is required first
 ## Isolated container jobs
 
 The Dockerfile pins the official Python runtime by digest, copies application
-files explicitly and runs as a non-root user. It installs no application packages
+code files explicitly and runs as a non-root user. Inputs, examples, evaluation
+records and run outputs are excluded from the build context and image. It
+installs no application packages
 and exposes no ports. Rebuild and reevaluate when updating the pinned image;
 image provenance and vulnerability review remain the deployment owner's duty.
 
@@ -67,17 +69,19 @@ docker run --rm --network=none --read-only --cap-drop=ALL \
   --security-opt=no-new-privileges:true --pids-limit=64 --memory=256m --cpus=1 \
   --user "$(id -u):$(id -g)" \
   --mount "type=bind,src=$HOME/.enterprise-ai-runs,dst=/runs" \
+  --mount "type=bind,src=$PWD/projects,dst=/fixtures,readonly" \
   enterprise-ai:reviewed run customer-resolution \
-  --input projects/customer-resolution/examples/input.json --mode replay \
-  --responses projects/customer-resolution/examples/responses.json \
+  --input /fixtures/customer-resolution/examples/input.json --mode replay \
+  --responses /fixtures/customer-resolution/examples/responses.json \
   --run-dir /runs/container-support-001
 ```
 
-Use a non-root host user who can access the container engine. The input example
-is in the image. Real inputs need a separately authorized **read-only** mount;
+Use a non-root host user who can access the container engine. The example above
+mounts the checkout's fictional fixtures read-only. No inputs are stored in the
+image. Real inputs need a separately authorized **read-only** mount;
 never mount the Docker socket or the entire home directory. The writable run
-mount must belong to the selected UID/GID. The memory and process limits are exercised by the container checks below. A
-passing run verifies the supplied examples at that revision, not capacity for
+mount must belong to the selected UID/GID. The memory and process limits are
+exercised by the container checks below. A passing run verifies the supplied examples at that revision, not capacity for
 every business packet. Account for provider latency and use the existing worker deadline.
 
 `--network=none` is appropriate for replay. Live jobs require an administrator's

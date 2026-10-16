@@ -22,10 +22,11 @@ def main():
             '--cap-drop=ALL','--security-opt=no-new-privileges:true',
             '--pids-limit=64','--memory=256m','--cpus=1',
             '--user',f'{os.getuid()}:{os.getgid()}',
-            '--mount',f'type=bind,src={runs},dst=/runs',args.image]
+            '--mount',f'type=bind,src={runs},dst=/runs',
+            '--mount',f'type=bind,src={ROOT / "projects"},dst=/fixtures,readonly',args.image]
         for slug in SLUGS:
-            job=['run',slug,'--input',f'projects/{slug}/examples/input.json',
-                '--mode','replay','--responses',f'projects/{slug}/examples/responses.json',
+            job=['run',slug,'--input',f'/fixtures/{slug}/examples/input.json',
+                '--mode','replay','--responses',f'/fixtures/{slug}/examples/responses.json',
                 '--run-dir',f'/runs/{slug}']
             run=subprocess.run(command+job,capture_output=True,text=True,timeout=180,check=True)
             log=json.loads(run.stdout)
@@ -47,6 +48,8 @@ def main():
         # Actually exercise read-only/non-root/no-new-privilege controls, not just Docker flags.
         probe_code="""import os,pathlib
 assert os.getuid()!=0
+assert not list(pathlib.Path('/app').rglob('*.json'))
+assert not list(pathlib.Path('/app/projects').rglob('examples'))
 assert os.statvfs('/app').f_flag & os.ST_RDONLY
 lines=pathlib.Path('/proc/self/status').read_text().splitlines()
 assert any(line.split()==['NoNewPrivs:','1'] for line in lines)
