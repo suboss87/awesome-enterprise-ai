@@ -57,3 +57,13 @@ Run `python3 -m enterprise_ai serve` from the collection root to try this workfl
 ## Governance and acceptance
 
 See [domain review responsibilities, evaluation metrics and deployment gates](GOVERNANCE.md).
+
+
+## Operational use and acceptance
+
+Use the [protected batch runbook](../../docs/OPERATIONS.md) to keep each result
+private and preserve its execution receipt. Complete this project's
+[GOVERNANCE.md](GOVERNANCE.md) and the [production checklist](../../docs/PRODUCTION-CHECKLIST.md)
+with the intended business and platform owners before production use. Public
+examples and CI verify the documented cases; they do not establish enterprise
+approval or remove the project's stated limits.

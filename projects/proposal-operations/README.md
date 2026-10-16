@@ -64,12 +64,14 @@ The optional CLI adds durable human decisions to an immutable draft snapshot. It
 Prepare a private working directory outside the repository, export the latest source/requirement packet from your authorized system, and set its `as_of` to today's UTC date. Do not change historical validity dates to make evidence pass. The following commands assume that packet is saved as `$HOME/.proposal-review/current.json`:
 
 ```sh
+umask 077
+set -C  # Refuse to overwrite files written by the remaining shell redirections.
 mkdir -m 700 "$HOME/.proposal-review"
 python3 -m enterprise_ai run proposal-operations \
   --input "$HOME/.proposal-review/current.json" --mode live \
-  > "$HOME/.proposal-review/result.json"
+  --run-dir "$HOME/.proposal-review/draft-run"
 python3 -m enterprise_ai.proposal_review --db "$HOME/.proposal-review/reviews.sqlite" stage \
-  --input "$HOME/.proposal-review/current.json" --result "$HOME/.proposal-review/result.json"
+  --input "$HOME/.proposal-review/current.json" --result "$HOME/.proposal-review/draft-run/result.json"
 ```
 
 Set `DRAFT_ID` to the returned SHA-256 identifier. Inspect the actual draft, all evidence and unresolved requirements before deciding. `inspect` returns the current decision sequence, or null for a never-reviewed row; use revision `0` only for its first decision.
@@ -136,10 +138,10 @@ python3 -m enterprise_ai.proposal_sources \
   > "$HOME/.proposal-review/github-input.json"
 python3 -m enterprise_ai run proposal-operations \
   --input "$HOME/.proposal-review/github-input.json" --mode live \
-  > "$HOME/.proposal-review/github-result.json"
+  --run-dir "$HOME/.proposal-review/github-run"
 python3 -m enterprise_ai.proposal_review --db "$HOME/.proposal-review/reviews.sqlite" stage \
   --input "$HOME/.proposal-review/github-input.json" \
-  --result "$HOME/.proposal-review/github-result.json" \
+  --result "$HOME/.proposal-review/github-run/result.json" \
   --source-manifest "$HOME/.proposal-review/sources.json"
 # Set DRAFT_ID to the returned identifier, then inspect the actual answer and evidence.
 python3 -m enterprise_ai.proposal_review --db "$HOME/.proposal-review/reviews.sqlite" decide \
@@ -169,3 +171,13 @@ Run `python3 -m unittest discover -s tests -p test_proposal_sources.py -v` for t
 Source refresh runs before SQLite decision/export transactions. A slow GitHub request therefore does not hold a database lock across network I/O. After acquiring the local transaction, the ledger rechecks the current UTC date, immutable draft binding, source eligibility and operator policy before checking the decision revision. This remains a point-in-time check, not an atomic lock on GitHub.
 
 The source worker is read incrementally with a one-megabyte output limit. Exceeding the limit terminates and reaps the owned process group immediately; stderr is discarded rather than buffered. Input writes and output reads share the existing wall-clock deadline.
+
+
+## Operational use and acceptance
+
+Use the [protected batch runbook](../../docs/OPERATIONS.md) to keep each result
+private and preserve its execution receipt. Complete this project's
+[GOVERNANCE.md](GOVERNANCE.md) and the [production checklist](../../docs/PRODUCTION-CHECKLIST.md)
+with the intended business and platform owners before production use. Public
+examples and CI verify the documented cases; they do not establish enterprise
+approval or remove the project's stated limits.

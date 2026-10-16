@@ -63,3 +63,13 @@ This is an intentional input-contract change. Older packets missing `ecosystem` 
 Regression tests use `requests`, a name published independently on [PyPI](https://pypi.org/project/requests/) and [npm](https://www.npmjs.com/package/requests?activeTab=dependencies), verified October 3, 2026. Their fixture advisory text and version lists are **synthetic**, not claims about a real vulnerability in either package. Both affected-looking and fixed-looking version collisions must produce `ecosystem_mismatch`, never an affected/fixed match.
 
 Historical live trials under `evaluation/2026-09-30/` and `evaluation/live-cases.json` describe the earlier contract and remain unchanged. They do not establish current-contract live accuracy. Create a separately identified migrated dataset before a new inference evaluation; do not silently rewrite historical evidence. No dependency was added or installed for this fix.
+
+
+## Operational use and acceptance
+
+Use the [protected batch runbook](../../docs/OPERATIONS.md) to keep each result
+private and preserve its execution receipt. Complete this project's
+[GOVERNANCE.md](GOVERNANCE.md) and the [production checklist](../../docs/PRODUCTION-CHECKLIST.md)
+with the intended business and platform owners before production use. Public
+examples and CI verify the documented cases; they do not establish enterprise
+approval or remove the project's stated limits.

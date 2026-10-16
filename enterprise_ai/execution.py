@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 import time
 import uuid
 from datetime import datetime, timezone
@@ -107,9 +108,42 @@ def execute_bounded(slug, data, mode='live', responses=None, *, deadline_seconds
 
 
 def write_receipt(path, receipt):
-    """Opt-in private new file, never overwrite an existing receipt or symlink."""
-    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
-    fd = os.open(Path(path), flags, 0o600)
-    with os.fdopen(fd, 'w', encoding='utf-8') as stream:
-        json.dump(receipt, stream, indent=2, allow_nan=False)
-        stream.write('\n')
+    """Atomically publish private JSON; never replace an existing path or symlink.
+
+    Requires a trusted POSIX directory on a filesystem supporting hard links.
+    Serialization and write failures never expose a partially written final file.
+    """
+    raw = (json.dumps(receipt, indent=2, ensure_ascii=False, allow_nan=False)+'\n').encode()
+    _write_private(path, raw)
+
+
+def _write_private(path, raw):
+    path = Path(path)
+    fd, temporary = tempfile.mkstemp(prefix='.enterprise-ai-', dir=path.parent)
+    try:
+        with os.fdopen(fd, 'wb') as stream:
+            os.fchmod(stream.fileno(), 0o600)
+            stream.write(raw)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.link(temporary, path)  # Atomic exclusive publication, including dangling links.
+    finally:
+        os.unlink(temporary)
+
+
+def write_run_artifacts(directory, output):
+    """Publish result then its hash-bound receipt as the completion marker."""
+    directory = Path(directory)
+    raw = (json.dumps(output, indent=2, ensure_ascii=False, allow_nan=False)+'\n').encode()
+    if len(raw) > MAX_RESULT_FILE_BYTES:
+        raise InputError('Serialized result exceeds file size limit')
+    receipt = dict(output['execution']['receipt'])
+    receipt['result_sha256'] = hashlib.sha256(raw).hexdigest()
+    receipt['result_bytes'] = len(raw)
+    result = directory/'result.json'
+    _write_private(result, raw)
+    try:
+        write_receipt(directory/'receipt.json', receipt)
+    except BaseException:
+        result.unlink()
+        raise

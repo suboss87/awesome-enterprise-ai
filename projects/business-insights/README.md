@@ -79,3 +79,13 @@ See [domain review responsibilities, evaluation metrics and deployment gates](GO
 ## Independent planner study, October 9
 
 [Twelve independently labeled synthetic questions](evaluation/planner-2026-10-09/) exposed an ambiguous-profit answer that the lexical baseline withheld. The original failed inference is retained. A deterministic clarification gate now prevents that observed failure before inference; no improved live accuracy or enterprise acceptance is claimed.
+
+
+## Operational use and acceptance
+
+Use the [protected batch runbook](../../docs/OPERATIONS.md) to keep each result
+private and preserve its execution receipt. Complete this project's
+[GOVERNANCE.md](GOVERNANCE.md) and the [production checklist](../../docs/PRODUCTION-CHECKLIST.md)
+with the intended business and platform owners before production use. Public
+examples and CI verify the documented cases; they do not establish enterprise
+approval or remove the project's stated limits.

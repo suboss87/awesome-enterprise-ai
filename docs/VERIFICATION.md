@@ -118,3 +118,19 @@ the new customer policy currency, claim policy ID, account currency and inventor
 contracts as well as analytics snapshot metadata. Keep that historical study
 unchanged; use current project fixtures or separately versioned inputs for a new
 study. [Quality and limits](QUALITY.md) describes the current review outcomes.
+
+## Protected operator artifacts: October 16
+
+The `--run-dir` path creates a fresh private directory before inference. Tests
+exercise actual replay jobs for all eleven workflows, exact result/receipt hash
+binding, restrictive permissions, rejected directory reuse and symlinks, sanitized
+input failures, and cleanup when artifact publication fails. The existing worker
+deadline and business rules remain in force. No new live accuracy or business
+value is inferred from these checks.
+
+The isolated batch CI job additionally builds the digest-pinned runtime and runs
+all eleven examples with no network, a read-only application filesystem,
+non-root identity, no Linux capabilities, no new privileges and bounded resources.
+Its success must be checked for the selected revision; configuration alone is
+not execution evidence. These synthetic jobs do not establish authorized live
+source/provider integration, production capacity or business-owner acceptance.

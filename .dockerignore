@@ -1,0 +1,14 @@
+**
+!enterprise_ai/
+!enterprise_ai/**
+!projects/
+!projects/**
+!LICENSE
+**/__pycache__/
+**/*.pyc
+**/tests/
+**/evaluation/
+**/.git/
+**/.env*
+**/memory/
+**/tasks/
