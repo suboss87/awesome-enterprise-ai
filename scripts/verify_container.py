@@ -47,6 +47,7 @@ def main():
         # Actually exercise read-only/non-root/no-new-privilege controls, not just Docker flags.
         probe_code="""import os,pathlib
 assert os.getuid()!=0
+assert os.statvfs('/app').f_flag & os.ST_RDONLY
 lines=pathlib.Path('/proc/self/status').read_text().splitlines()
 assert any(line.split()==['NoNewPrivs:','1'] for line in lines)
 assert int(next(line.split()[1] for line in lines if line.startswith('CapEff:')),16)==0
