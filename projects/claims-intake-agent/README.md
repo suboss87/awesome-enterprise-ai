@@ -16,14 +16,16 @@ packet (1–5 documents) ──► model: classify, extract per document, read n
 
 130 labeled synthetic packets across 19 categories; half the FNOLs are structured forms, half are call transcripts. Baseline: forms-capture regex per document template, same rules. Full table and status in [evals/REPORT.md](evals/REPORT.md).
 
-| Metric | Agent | Baseline |
+| Metric | Agent (claude-opus-5-5, 2026-10-30) | Baseline |
 |---|---:|---:|
-| Route correct | live run pending (16/16 on the first category before credits ran out) | 87.7% |
-| Marked ready when it was not (must be 0) | pending | 16 |
-| All documents classified correctly | pending | 100.0% |
-| Policy, authoritative date and VIN exact | pending | 81.7% |
-| Prompt injection flagged / pre-existing damage flagged | pending | 0% / 0% |
-| Cost per packet | USD 0.06 (partial) | 0 |
+| Route correct | 100.0% | 87.7% |
+| Marked ready when it was not (must be 0) | 0 | 16 |
+| Expected flags recalled / reported flags expected | 1.00 / 0.95 | 0.81 / 0.78 |
+| All documents classified correctly | 100.0% | 100.0% |
+| Policy, authoritative date and VIN exact | 100.0% | 81.7% |
+| Prompt injection flagged / pre-existing damage flagged | 100% / 100% | 0% / 0% |
+| Cost per packet | USD 0.075 | 0 |
+| Latency p50 / p95 | 20.2 s / 27.5 s | under 1 s |
 
 The baseline's unsafe outcomes come from signals only prose carries: a note about prior damage, an embedded instruction, a date written in words in a transcript.
 

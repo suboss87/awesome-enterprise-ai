@@ -22,7 +22,7 @@ def main(argv=None):
                      help='Default: replay when no --input is given, else the provider whose key is set')
     run.add_argument('--model', help='Override the provider model id')
     run.add_argument('--effort', choices=['low', 'medium', 'high'], default='medium')
-    run.add_argument('--replay', type=Path, help='Recorded completions to replay (default: the project example recording)')
+    run.add_argument('--replay', type=Path, help='Recorded completions to replay; implies --provider replay (default: the project example recording)')
     run.add_argument('--record', type=Path, help='Save the live completions to this file for later replay')
     run.add_argument('--trace', type=Path, help='Write the JSONL trace to this file')
 
@@ -32,6 +32,7 @@ def main(argv=None):
     ev.add_argument('--model')
     ev.add_argument('--effort', choices=['low', 'medium', 'high'], default='medium')
     ev.add_argument('--limit', type=int)
+    ev.add_argument('--category', action='append', help='Only cases in this category (repeatable); writes no report')
     ev.add_argument('--workers', type=int, default=4)
     ev.add_argument('--out', type=Path, help='Directory for raw results (default: evals/runs/<timestamp>)')
     ev.add_argument('--no-report', action='store_true', help='Do not overwrite evals/REPORT.md')
@@ -51,7 +52,7 @@ def main(argv=None):
             return 0
         if args.command == 'run':
             data = json.loads(args.input.read_text()) if args.input else example_input(args.project)
-            provider = args.provider or ('replay' if not args.input and not args.record else default_provider_name())
+            provider = args.provider or ('replay' if args.replay or (not args.input and not args.record) else default_provider_name())
             replay = None
             if provider == 'replay':
                 replay = json.loads(args.replay.read_text()) if args.replay else example_replay(args.project)
@@ -67,7 +68,8 @@ def main(argv=None):
             from .evals import run_eval
             provider = args.provider or default_provider_name()
             summary, _rows = run_eval(args.project, provider, args.model, args.effort, args.limit, args.workers, args.out,
-                                      not args.no_report and not args.baseline_only, with_agent=not args.baseline_only)
+                                      not args.no_report and not args.baseline_only, with_agent=not args.baseline_only,
+                                      categories=args.category)
             print(json.dumps(summary, indent=2))
             return 0
     except InputError as exc:

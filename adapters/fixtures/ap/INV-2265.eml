@@ -1,0 +1,37 @@
+From: billing@acme-fasteners.example
+To: ap@northwind.example
+Subject: Rechnung INV-2265 / PO-50047
+Date: Tue, 06 Oct 2026 09:14:00 +0100
+Message-ID: <inv-2265@acme-fasteners.example>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============2837918381397798660=="
+
+--===============2837918381397798660==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Sehr geehrte Damen und Herren,
+
+anbei unsere Rechnung INV-2265 zu Bestellung PO-50047.
+
+Mit freundlichen Grüßen
+Acme Fasteners Ltd
+
+--===============2837918381397798660==
+Content-Type: text/plain
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="INV-2265.txt"
+MIME-Version: 1.0
+
+QWNtZSBGYXN0ZW5lcnMgTHRkClVTdC1JZE5yLjogR0IxMjM0NTY3ODkKClJFQ0hOVU5HIC8gSU5W
+T0lDRQpSZWNobnVuZ3NudW1tZXIgLyBJbnZvaWNlIE5vLjogSU5WLTIyNjUKRGF0dW0gLyBEYXRl
+OiAwNi4xMC4yMDI2CkJlc3RlbGx1bmcgLyBQTzogUE8tNTAwNDcKClBvcyAgQXJ0aWtlbCAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNZW5nZSAgIEVpbnplbHByZWlzICAg
+QmV0cmFnCjEgICAgRGVncmVhc2VyIGNvbmNlbnRyYXRlLCAyMCBMICAgICAgICAgICAgICAgICAg
+ICA1MCAgICAgIDcyLDE1ICAgICAgICAgMy42MDcsNTAKMiAgICBGb3JrbGlmdCBzZXJ2aWNlIHZp
+c2l0ICAgICAgICAgICAgICAgICAgICAgICAgIDEyICAgICAgNDEwLDAwICAgICAgICA0LjkyMCww
+MAoKTmV0dG9iZXRyYWcgLyBOZXQ6IDguNTI3LDUwCk13U3QuIDIwJSAvIFZBVDogMS43MDUsNTAK
+R2VzYW10YmV0cmFnIC8gVG90YWw6IDEwLjIzMywwMCBVU0QKCk5vdGU6IGJhbGFuY2Ugb2YgdGhl
+IG9yZGVyIHNoaXBzIG5leHQgd2Vlay4=
+
+--===============2837918381397798660==--

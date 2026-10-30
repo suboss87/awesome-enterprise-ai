@@ -24,6 +24,8 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Runtime tests
         run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Adapter tests
+        run: python3 -m unittest discover -s adapters/tests -t . -p 'test_*.py' -v
       - name: Project tests
         run: |
           set -e

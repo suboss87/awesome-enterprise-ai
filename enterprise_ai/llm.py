@@ -80,18 +80,26 @@ def _post(url, headers, body, timeout):
     return loads(raw)
 
 
+UNSUPPORTED_IN_STRICT = ('minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum',
+                         'minLength', 'maxLength', 'minItems', 'maxItems', 'pattern', 'format')
+
+
 def _strict(schema):
-    """Tools use strict schemas: every property required, no extras."""
+    """Tools use strict schemas: every property required, no extras.
+
+    Strict mode (Anthropic and OpenAI) rejects numeric and string bounds, so they
+    move into the description. The local validator in common.validate_schema still
+    enforces them on every tool input and on the final result."""
     schema = json.loads(json.dumps(schema))
-    if schema.get('type') == 'object':
-        schema['additionalProperties'] = False
-        schema['required'] = list(schema.get('properties', {}))
-        for value in schema.get('properties', {}).values():
-            _strict_inplace(value)
+    _strict_inplace(schema)
     return schema
 
 
 def _strict_inplace(schema):
+    bounds = {k: schema.pop(k) for k in UNSUPPORTED_IN_STRICT if k in schema}
+    if bounds:
+        note = ', '.join(f'{k} {v}' for k, v in bounds.items())
+        schema['description'] = (schema.get('description', '').rstrip('. ') + f' ({note})').strip()
     if schema.get('type') == 'object':
         schema['additionalProperties'] = False
         schema['required'] = list(schema.get('properties', {}))
@@ -99,6 +107,9 @@ def _strict_inplace(schema):
             _strict_inplace(value)
     elif schema.get('type') == 'array' and isinstance(schema.get('items'), dict):
         _strict_inplace(schema['items'])
+    for branch in schema.get('anyOf', []):
+        if isinstance(branch, dict):
+            _strict_inplace(branch)
 
 
 class Provider:

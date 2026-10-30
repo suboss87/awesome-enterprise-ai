@@ -17,8 +17,19 @@ from datetime import datetime, timezone
 
 from enterprise_ai.common import InputError
 
-REASON_CODES = ['bad_deploy', 'config_change', 'dependency_outage', 'capacity_exhaustion',
-                'certificate_expiry', 'data_corruption', 'unknown']
+REASON_DEFINITIONS = {
+    'bad_deploy': 'A code deploy on the causal component introduced the error; the error text matches the changed files.',
+    'config_change': 'A configuration or feature-flag change on the causal component introduced the error.',
+    'dependency_outage': 'The causal component stopped serving without a change on it: crash or restart loop (OOMKilled, exit codes), '
+                         'connection refused, leader lost, listener stopped, queue dropping requests. Callers see timeouts and 503s. '
+                         'Name the component that stopped, not its callers.',
+    'capacity_exhaustion': 'A resource limit on the causal component was reached under load and requests were rejected: disk full, '
+                           'connection pool exhausted, file descriptors exhausted. A WARN as the limit approached precedes the errors.',
+    'certificate_expiry': 'A TLS certificate on the causal component expired; handshakes fail.',
+    'data_corruption': 'Stored data on the causal component is malformed or inconsistent and reads or writes fail.',
+    'unknown': 'The telemetry does not show the cause. Name the missing data in data_gaps.',
+}
+REASON_CODES = list(REASON_DEFINITIONS)
 ROUTES = ['confirmed', 'unconfirmed', 'insufficient_evidence']
 HYPOTHESIS_STATUS = ['supported', 'ruled_out', 'untested']
 LEVELS = ['DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL']

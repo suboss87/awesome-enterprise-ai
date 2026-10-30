@@ -343,6 +343,17 @@ POLICY_FACT = re.compile(r'\b(\d+\s*(?:business\s+|calendar\s+)?days?|policy|eli
 PROMISE = re.compile(r'\b(refund|replacement|cancellation|return)\b[^.]{0,60}\b(has been|have been|is being|was|were|is now|'
                      r'already)\s+(issued|processed|arranged|approved|completed|sent|confirmed|cancelled)', re.I)
 PROMISE_ALT = re.compile(r"\b(I|we)(?:'ve| have)\s+(issued|processed|refunded|cancelled|approved|arranged)\b", re.I)
+NEGATION = re.compile(r"\b(no|not|never|without|hasn't|haven't|isn't|wasn't|weren't|won't|cannot|can't)\b", re.I)
+
+
+def promised_completion(reply):
+    """True when a sentence states that an action is already done, and the sentence does not negate it.
+    "No refund has been issued" and "the refund has not been processed" are correct statements, not promises."""
+    for sentence in sentences(reply):
+        match = PROMISE.search(sentence) or PROMISE_ALT.search(sentence)
+        if match and not NEGATION.search(sentence[:match.end()]):
+            return True
+    return False
 
 
 def reply_checks(reply, decision, valid_citations, hidden, visible=()):
@@ -353,7 +364,7 @@ def reply_checks(reply, decision, valid_citations, hidden, visible=()):
     facts = [s for s in sentences(reply) if POLICY_FACT.search(s)]
     if facts and not valid_citations:
         codes.append('UNGROUNDED_POLICY_CLAIM')
-    if decision['route'] != 'resolve' and (PROMISE.search(reply) or PROMISE_ALT.search(reply)):
+    if decision['route'] != 'resolve' and promised_completion(reply):
         codes.append('REPLY_CONTRADICTS_DECISION')
     status = 'withheld' if {'PERMISSION_LEAK', 'REPLY_CONTRADICTS_DECISION'} & set(codes) else 'draft'
     return codes, status

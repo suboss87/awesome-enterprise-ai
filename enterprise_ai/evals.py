@@ -28,12 +28,19 @@ def _is_account_failure(exc):
     return any(marker in text for marker in ('HTTP 401', 'HTTP 402', 'HTTP 403', 'no credits', 'insufficient_quota', 'billing', 'Set ANTHROPIC_API_KEY', 'Set OPENAI_API_KEY'))
 
 
-def load_cases(slug, limit=None):
+def load_cases(slug, limit=None, categories=None):
     path = ROOT/'projects'/slug/'evals/cases.jsonl'
     cases = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
     ids = [c['id'] for c in cases]
     if len(set(ids)) != len(ids):
         raise InputError('Duplicate case ids')
+    if categories:
+        wanted = set(categories)
+        known = {c.get('category') for c in cases}
+        missing = wanted - known
+        if missing:
+            raise InputError(f'Unknown categories: {sorted(missing)}')
+        cases = [c for c in cases if c.get('category') in wanted]
     return cases[:limit] if limit else cases
 
 
@@ -103,10 +110,13 @@ def _percentile(values, pct):
     return values[index]
 
 
-def run_eval(slug, provider='anthropic', model=None, effort='medium', limit=None, workers=4, out_dir=None, write_report=True, with_agent=True):
+def run_eval(slug, provider='anthropic', model=None, effort='medium', limit=None, workers=4, out_dir=None, write_report=True,
+             with_agent=True, categories=None):
     scorer = load_scorer(slug)
     baseline = load_baseline(slug)
-    cases = load_cases(slug, limit)
+    cases = load_cases(slug, limit, categories)
+    if categories or limit:
+        write_report = False  # a partial run never replaces the committed report
     with ThreadPoolExecutor(max_workers=max(1, min(workers, 8))) as pool:
         rows = list(pool.map(lambda c: _run_case(slug, c, provider, model, effort, scorer, baseline, with_agent), cases))
     metrics = scorer.METRICS
