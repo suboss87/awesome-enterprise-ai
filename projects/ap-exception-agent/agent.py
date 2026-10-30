@@ -70,7 +70,7 @@ def validate(data):
     return invoice, erp, policy
 
 
-def build_tools(erp, policy, drafts):
+def build_tools(erp, policy):
     def lookup_vendor(name, tax_id):
         vendor, how = matching.find_vendor(erp, name, tax_id)
         if vendor is None:
@@ -93,8 +93,7 @@ def build_tools(erp, policy, drafts):
         return policy
 
     def send_vendor_query(vendor_id, subject, body):
-        drafts.append({'vendor_id': vendor_id, 'subject': subject, 'body': body})
-        return 'recorded'
+        return 'recorded'  # writes are never executed; the loop records the proposal
 
     def release_for_payment(invoice_number, amount):
         return 'recorded'
@@ -119,8 +118,7 @@ def build_tools(erp, policy, drafts):
 
 def run(data, provider, trace):
     invoice, erp, policy = validate(data)
-    drafts = []
-    agent = Agent(SPEC['id'], SYSTEM_PROMPT, build_tools(erp, policy, drafts), RESULT_SCHEMA, max_steps=14)
+    agent = Agent(SPEC['id'], SYSTEM_PROMPT, build_tools(erp, policy), RESULT_SCHEMA, max_steps=14)
     sources = {invoice['id']: invoice['text']}
     task = [f"Review date: {data['as_of']}. Document id: {invoice['id']} received by {invoice['channel']}.",
             records_block('document', invoice['text'])]
@@ -131,6 +129,7 @@ def run(data, provider, trace):
     outcome = agent.run('\n\n'.join(task), provider, trace, sources)
     result = outcome['result']
     verdict = matching.match(result['extracted'], erp, policy, result['document_type'], result['flags'], result['risk_notes'])
+    drafts = [p['input'] for p in outcome['proposed_actions'] if p['tool'] == 'send_vendor_query']
     drafted = drafts[0] if drafts else None
     output = matching.build_output(result['extracted'], verdict, result['document_type'], drafted, result['evidence'], invoice['id'])
     output['model_recommendation'] = {'route': result['recommended_route'], 'flags': result['flags'],

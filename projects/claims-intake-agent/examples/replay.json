@@ -1,0 +1,164 @@
+[
+ {
+  "content": [
+   {
+    "type": "tool_use",
+    "id": "call_WdpLiD7gILTepceJRHH1D0aO",
+    "name": "lookup_policy",
+    "input": {
+     "policy_number": "PA-2026-00156"
+    }
+   },
+   {
+    "type": "tool_use",
+    "id": "call_ULLGNCHyYHgbFuQGbEW8tsRw",
+    "name": "get_required_documents",
+    "input": {
+     "loss_type": "collision",
+     "third_party_or_injury": true
+    }
+   }
+  ],
+  "stop_reason": "tool_use",
+  "model": "gpt-5.5-2026-04-23",
+  "response_id": "resp_0a798d2be064f115016ae47f92e45887d28e411b485b869787",
+  "usage": {
+   "input_tokens": 1633,
+   "output_tokens": 124,
+   "cache_read_input_tokens": 0
+  }
+ },
+ {
+  "content": [
+   {
+    "type": "tool_use",
+    "id": "call_VrCf7i8zmglSnLuQbCDM8o9K",
+    "name": "finish",
+    "input": {
+     "extractions": [
+      {
+       "document_id": "CLM-0056-fnol",
+       "document_type": "fnol_form",
+       "fields": {
+        "claimant_name": "Sofia Adeyemi",
+        "policy_number": "PA-2026-00156",
+        "incident_date": "2026-10-11",
+        "incident_location": "143 Harbor Road, Ashford",
+        "vin": "HRHJ8J4DEMFW1GRX9",
+        "plate": "LH47 HWT",
+        "loss_type": "collision",
+        "damage_area": "right",
+        "third_party_or_injury": true,
+        "police_report_filed": true,
+        "estimate_total": 0,
+        "report_number": "",
+        "notes": "FNOL states another vehicle was involved and nobody was hurt. Date conflict: FNOL incident date is 2026-10-11, while police report incident date is 2026-10-09."
+       }
+      },
+      {
+       "document_id": "CLM-0056-police",
+       "document_type": "police_report",
+       "fields": {
+        "claimant_name": "Sofia Adeyemi",
+        "policy_number": "",
+        "incident_date": "2026-10-09",
+        "incident_location": "143 Harbor Road, Ashford",
+        "vin": "HRHJ8J4DEMFW1GRX9",
+        "plate": "LH47 HWT",
+        "loss_type": "collision",
+        "damage_area": "right",
+        "third_party_or_injury": true,
+        "police_report_filed": true,
+        "estimate_total": 0,
+        "report_number": "ASH-2026-78212",
+        "notes": "Police report lists no citations issued. Date conflict: police report incident date is 2026-10-09, while FNOL incident date is 2026-10-11."
+       }
+      },
+      {
+       "document_id": "CLM-0056-estimate",
+       "document_type": "repair_estimate",
+       "fields": {
+        "claimant_name": "",
+        "policy_number": "",
+        "incident_date": "",
+        "incident_location": "",
+        "vin": "HRHJ8J4DEMFW1GRX9",
+        "plate": "LH47 HWT",
+        "loss_type": "",
+        "damage_area": "right",
+        "third_party_or_injury": false,
+        "police_report_filed": false,
+        "estimate_total": 1465,
+        "report_number": "",
+        "notes": "Estimate includes replace passenger door, replace right quarter panel, and paint/materials. Estimate total does not exceed the policy declared value found in the policy lookup. Date conflict exists between FNOL and police report."
+       }
+      },
+      {
+       "document_id": "CLM-0056-photos",
+       "document_type": "photo_notes",
+       "fields": {
+        "claimant_name": "",
+        "policy_number": "",
+        "incident_date": "",
+        "incident_location": "",
+        "vin": "",
+        "plate": "",
+        "loss_type": "",
+        "damage_area": "right",
+        "third_party_or_injury": false,
+        "police_report_filed": false,
+        "estimate_total": 0,
+        "report_number": "",
+        "notes": "Photos describe passenger door scraped with paint transfer, right quarter panel scraped with paint transfer, passenger door shattered, and a wide shot of the right of the vehicle. Date conflict exists between FNOL and police report."
+       }
+      }
+     ],
+     "flags": [
+      "DATE_CONFLICT"
+     ],
+     "risk_notes": [
+      "DATE_CONFLICT: FNOL says the incident was on 11 October 2026; police report says Date of incident: 2026-10-09.",
+      "Policy lookup found policy PA-2026-00156 active for the FNOL loss date, named insured/listed driver Sofia Adeyemi, vehicle VIN HRHJ8J4DEMFW1GRX9 plate LH47 HWT, and collision coverage.",
+      "Required collision documents with third party involvement are present: fnol_form, repair_estimate, photo_notes, and police_report.",
+      "No pre-existing damage, suspicious request, or prompt injection found in the supplied documents."
+     ],
+     "recommended_route": "conflicts_for_adjuster",
+     "evidence": [
+      {
+       "source_id": "CLM-0056-fnol",
+       "quote": "Caller identified as Sofia Adeyemi, policy PA-2026-00156."
+      },
+      {
+       "source_id": "CLM-0056-fnol",
+       "quote": "Caller: On 11 October 2026 my Toyota Camry (plate LH47 HWT) was struck on the right by another vehicle while stopped at a junction."
+      },
+      {
+       "source_id": "CLM-0056-police",
+       "quote": "Date of incident: 2026-10-09"
+      },
+      {
+       "source_id": "CLM-0056-police",
+       "quote": "Report No: ASH-2026-78212"
+      },
+      {
+       "source_id": "CLM-0056-estimate",
+       "quote": "Estimate total: $1,465.00"
+      },
+      {
+       "source_id": "CLM-0056-photos",
+       "quote": "IMG_4: wide shot of the right of the vehicle"
+      }
+     ]
+    }
+   }
+  ],
+  "stop_reason": "tool_use",
+  "model": "gpt-5.5-2026-04-23",
+  "response_id": "resp_073584dbe32d174b016ae47f9669b087d28702531002a04dfc",
+  "usage": {
+   "input_tokens": 1912,
+   "output_tokens": 2235,
+   "cache_read_input_tokens": 1536
+  }
+ }
+]
