@@ -37,3 +37,15 @@ Raw per-case results land in `evals/runs/<timestamp>/` and stay out of git.
 - Labels are never edited to make a run pass. A wrong label is fixed in the generator with a note in the report.
 - Initial failures stay in the report's failure table. Regressions are added as test cases.
 - A synthetic result is evidence about the harness. Adoption needs the same harness on the adopter's own labeled sample.
+
+## Cheap re-checks
+
+After a prompt or rule fix, re-run only the affected categories:
+
+```sh
+python3 -m enterprise_ai eval incident-investigation-agent --category dependency_outage_no_deploy --category capacity_exhaustion --out /tmp/check
+```
+
+A filtered or `--limit` run writes its rows and summary to `--out` but never replaces the committed `evals/REPORT.md`.
+When the re-check passes, run the full set so the report reflects one complete run. Each defect found this way gets a row
+in [FAILURE-LOG.md](FAILURE-LOG.md).

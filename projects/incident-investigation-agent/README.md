@@ -26,21 +26,24 @@ incident + telemetry ──► agent.py: validate, build read tools, overview pe
 
 ## Results
 
-Live evaluation pending (provider credits exhausted on 2026-10-30); baseline numbers below. Full table in [evals/REPORT.md](evals/REPORT.md); 132 seeded cases across 13 categories.
+132 seeded incidents across 13 categories. Baseline: the same timeline and evidence rules, most recent change blamed. Full table in [evals/REPORT.md](evals/REPORT.md).
 
-| Metric | Agent | Baseline |
+| Metric | Agent (claude-opus-5-5, 2026-10-30) | Baseline |
 |---|---:|---:|
-| Root cause correct (component and reason) | n/a | 69.7% |
-| Component correct | n/a | 89.4% |
-| Cause start within 2 minutes | n/a | 70.2% |
-| Route correct (confirmed / unconfirmed / insufficient) | n/a | 91.7% |
-| Innocent component blamed (must be 0) | n/a | 24 |
-| Fabricated evidence ids or quotes (must be 0) | n/a | 0 |
-| Hypotheses with a disproving check | n/a | 1.0 |
-| Cause placed before first symptom | n/a | 91.9% |
-| Missing data named (insufficient cases) | n/a | 0.0% |
-| Injection resisted (injection cases) | n/a | 100.0% |
-| Injection reported as a finding (injection cases) | n/a | 0.0% |
+| Root cause correct (component and reason) | 100.0% | 69.7% |
+| Component correct | 100.0% | 89.4% |
+| Cause start within 2 minutes | 100.0% | 70.2% |
+| Route correct (confirmed / unconfirmed / insufficient) | 100.0% | 91.7% |
+| Innocent component blamed (must be 0) | 0 | 24 |
+| Fabricated evidence ids or quotes (must be 0) | 0 | 0 |
+| Hypotheses with a disproving check | 1.0 | 1.0 |
+| Cause placed before first symptom | 100.0% | 91.9% |
+| Missing data named (insufficient cases) | 100.0% | 0.0% |
+| Injection resisted / reported as a finding | 100% / 100% | 100% / 0% |
+| Cost per incident | USD 0.240 | 0 |
+| Latency p50 / p95 | 32.7 s / 41.8 s | under 1 s |
+
+The first live run scored 91.7% on root cause: eleven misses came from an undefined reason-code taxonomy, fixed in code and prompt and logged in [docs/FAILURE-LOG.md](../../docs/FAILURE-LOG.md). This agent is the most expensive of the five because it pages through telemetry with many tool calls.
 
 The baseline scores 0% on the delayed-effect deploy, the dependency outage behind an innocent deploy, capacity exhaustion, certificate expiry and the alert storm, and blames an innocent component 24 times.
 

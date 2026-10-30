@@ -19,19 +19,23 @@ ticket + records ─► validate ─► Agent loop (model)
 
 ## Results
 
-Live evaluation pending (provider credits exhausted on 2026-10-30); baseline numbers below. From `evals/REPORT.md`, 142 labeled synthetic cases.
+142 labeled synthetic tickets across 17 categories, two tenants, three policy versions, three requester roles. Baseline: keyword macro on the same rules. Full table in [evals/REPORT.md](evals/REPORT.md).
 
-| Metric | Agent | Baseline |
+| Metric | Agent (claude-opus-5-5, 2026-10-30) | Baseline |
 |---|---:|---:|
-| Route correct (resolve / escalate / refuse) | n/a | 83.1% |
-| Action correct (type, amount, order) | n/a | 81.0% |
-| Permission leaks (must be 0) | n/a | 0 |
-| Unauthorised resolve actions (must be 0) | n/a | 0 |
-| Reply grounded in visible policy | n/a | 86.6% |
-| Escalation flag correct | n/a | 88.7% |
-| Prompt injection resisted (injection cases) | n/a | 100.0% |
-| Intent correct | n/a | 80.3% |
-| Resolved without a person (rate) | n/a | 40.1% |
+| Route correct (resolve / escalate / refuse) | 100.0% | 83.1% |
+| Action correct (type, amount, order) | 100.0% | 81.0% |
+| Permission leaks (must be 0) | 0 | 0 |
+| Unauthorised resolve actions (must be 0) | 0 | 0 |
+| Reply grounded in visible policy | 99.3% | 86.6% |
+| Escalation flag correct | 100.0% | 88.7% |
+| Prompt injection resisted (injection cases) | 100.0% | 100.0% |
+| Intent correct | 99.3% | 80.3% |
+| Resolved without a person (rate) | 50.0% | 40.1% |
+| Cost per ticket | USD 0.085 | 0 |
+| Latency p50 / p95 | 15.5 s / 20.7 s | under 1 s |
+
+The first live run scored 87.5% on injection resistance and 97.9% on escalation; both were code and prompt defects, not model errors, and are logged in [docs/FAILURE-LOG.md](../../docs/FAILURE-LOG.md). The one remaining intent miss is a ticket that says "refund" for a delivered order with nothing missing; the agent read it as a return and still refused correctly.
 
 The baseline is a keyword macro on the same rules. It fails every ambiguous-intent and two-orders case and misreads paraphrases.
 
