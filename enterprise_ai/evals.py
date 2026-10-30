@@ -25,7 +25,9 @@ class EvalAborted(InputError):
 
 def _is_account_failure(exc):
     text = str(exc)
-    return any(marker in text for marker in ('HTTP 401', 'HTTP 402', 'HTTP 403', 'no credits', 'insufficient_quota', 'billing', 'Set ANTHROPIC_API_KEY', 'Set OPENAI_API_KEY'))
+    markers = ('HTTP 401', 'HTTP 402', 'HTTP 403', 'no credits', 'insufficient_quota', 'billing',
+               'usage limits', 'regain access', 'Set ANTHROPIC_API_KEY', 'Set OPENAI_API_KEY')
+    return any(marker in text for marker in markers)
 
 
 def load_cases(slug, limit=None, categories=None):

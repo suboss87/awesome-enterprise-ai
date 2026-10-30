@@ -136,3 +136,13 @@ class SchemaTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class AccountFailureDetection(unittest.TestCase):
+    def test_spend_limit_and_credit_messages_abort_the_eval(self):
+        from enterprise_ai.evals import _is_account_failure
+        for text in ('Provider returned HTTP 429: You have no credits remaining.',
+                     'Provider returned HTTP 400: You have reached your specified API usage limits. You will regain access on 2026-11-01',
+                     'Provider returned HTTP 401: invalid x-api-key'):
+            self.assertTrue(_is_account_failure(Exception(text)), text)
+        self.assertFalse(_is_account_failure(Exception('Provider returned HTTP 529: overloaded')))
