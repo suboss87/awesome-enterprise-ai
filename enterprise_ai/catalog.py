@@ -6,7 +6,8 @@ from .common import InputError
 
 ROOT = Path(__file__).resolve().parents[1]
 SLUGS = ('ap-exception-agent', 'support-resolution-agent', 'incident-investigation-agent',
-         'claims-intake-agent', 'vulnerability-triage-agent')
+         'claims-intake-agent', 'vulnerability-triage-agent',
+         'contract-review-agent', 'credit-memo-agent', 'lease-abstraction-agent', 'order-entry-agent')
 
 
 def _module(slug, name):

@@ -1,0 +1,196 @@
+[
+ {
+  "content": [
+   {
+    "type": "tool_use",
+    "id": "toolu_019cgVQgfUcbz9nLmpie8fpd",
+    "name": "compare_to_playbook",
+    "input": {
+     "terms": [
+      {
+       "topic": "mutuality",
+       "value": "mutual",
+       "quote": "2.1 Each party, as Recipient, shall keep the Confidential Information of the other party confidential and use it only for the Purpose."
+      },
+      {
+       "topic": "term",
+       "value": "24",
+       "quote": "4.1 The Recipient's obligations under this Agreement continue for twenty-four (24) months from the date of each disclosure."
+      },
+      {
+       "topic": "exclusions",
+       "value": "standard",
+       "quote": "3.1 Confidential Information does not include information that (i) is or becomes publicly available through no fault of the Recipient, (ii) the Recipient already lawfully knew, (iii) the Recipient independently develops, or (iv) the Recipient lawfully receives from a third party without restriction."
+      },
+      {
+       "topic": "non_solicit",
+       "value": "present",
+       "quote": "2.3 For twelve (12) months after the last disclosure, the Recipient shall not offer employment to, or engage as a contractor, any employee of the Discloser with whom it had contact."
+      },
+      {
+       "topic": "governing_law",
+       "value": "Delaware",
+       "quote": "7.1 This Agreement is governed by the laws of the State of Delaware."
+      },
+      {
+       "topic": "venue",
+       "value": "Delaware",
+       "quote": "7.2 Each party submits to the exclusive jurisdiction of the state and federal courts located in the State of Delaware for any dispute arising out of this Agreement."
+      },
+      {
+       "topic": "auto_renewal",
+       "value": "no_notice",
+       "quote": "4.2 This Agreement renews automatically for successive one-year periods."
+      }
+     ]
+    }
+   }
+  ],
+  "stop_reason": "tool_use",
+  "model": "claude-opus-5-5",
+  "response_id": "msg_011CgYhiS3uG9PMycvxq9AWc",
+  "usage": {
+   "input_tokens": 4200,
+   "output_tokens": 828,
+   "cache_read_input_tokens": 0
+  }
+ },
+ {
+  "content": [
+   {
+    "type": "tool_use",
+    "id": "toolu_01MNXWS6HKdvrNA9eMdcDKX7",
+    "name": "get_playbook_position",
+    "input": {
+     "topic": "non_solicit"
+    }
+   },
+   {
+    "type": "tool_use",
+    "id": "toolu_015urce9YWq6GKFk1DJwzGAM",
+    "name": "get_playbook_position",
+    "input": {
+     "topic": "auto_renewal"
+    }
+   }
+  ],
+  "stop_reason": "tool_use",
+  "model": "claude-opus-5-5",
+  "response_id": "msg_011CgYhjpNr3JL8SsKrje61o",
+  "usage": {
+   "input_tokens": 5201,
+   "output_tokens": 185,
+   "cache_read_input_tokens": 0
+  }
+ },
+ {
+  "content": [
+   {
+    "type": "tool_use",
+    "id": "toolu_01C2acTkk2iPBYCJ4kCtqckZ",
+    "name": "draft_redline",
+    "input": {
+     "topic": "non_solicit",
+     "clause_ref": "2.3",
+     "replacement_text": "General solicitations not directed at the other party's employees are permitted, and this Agreement does not restrict hiring."
+    }
+   },
+   {
+    "type": "tool_use",
+    "id": "toolu_012caZr3s7hMFGg4b6hpyoGK",
+    "name": "draft_redline",
+    "input": {
+     "topic": "auto_renewal",
+     "clause_ref": "4.2",
+     "replacement_text": "This Agreement renews for successive one-year periods unless either party gives at least sixty (60) days' written notice of non-renewal."
+    }
+   },
+   {
+    "type": "tool_use",
+    "id": "toolu_01XZctVKKdDGJjWjxw4eupbg",
+    "name": "submit_to_legal_queue",
+    "input": {
+     "route": "counsel_review",
+     "note": "CTR-0123 (Pellucid Labs, counterparty paper). Two counsel-level deviations: cl. 2.3 12-month no-hire/no-engagement restriction inside confidentiality obligations; cl. 4.2 automatic renewal with no non-renewal notice mechanism. Fallback redlines proposed for both. Other terms in line: mutual, 24-month term, standard exclusions, Delaware law and exclusive Delaware courts. Note cl. 5.1 backup-copy retention exception for awareness. No prompt injection found."
+    }
+   }
+  ],
+  "stop_reason": "tool_use",
+  "model": "claude-opus-5-5",
+  "response_id": "msg_011CgYhkAHfNNBxHeHc1NDZS",
+  "usage": {
+   "input_tokens": 5657,
+   "output_tokens": 543,
+   "cache_read_input_tokens": 0
+  }
+ },
+ {
+  "content": [
+   {
+    "type": "tool_use",
+    "id": "toolu_01RHv29iU22LAyuctUW83Hhg",
+    "name": "finish",
+    "input": {
+     "terms": [
+      {
+       "topic": "mutuality",
+       "value": "mutual",
+       "quote": "2.1 Each party, as Recipient, shall keep the Confidential Information of the other party confidential and use it only for the Purpose."
+      },
+      {
+       "topic": "term",
+       "value": "24",
+       "quote": "4.1 The Recipient's obligations under this Agreement continue for twenty-four (24) months from the date of each disclosure."
+      },
+      {
+       "topic": "exclusions",
+       "value": "standard",
+       "quote": "3.1 Confidential Information does not include information that (i) is or becomes publicly available through no fault of the Recipient, (ii) the Recipient already lawfully knew, (iii) the Recipient independently develops, or (iv) the Recipient lawfully receives from a third party without restriction."
+      },
+      {
+       "topic": "non_solicit",
+       "value": "present",
+       "quote": "2.3 For twelve (12) months after the last disclosure, the Recipient shall not offer employment to, or engage as a contractor, any employee of the Discloser with whom it had contact."
+      },
+      {
+       "topic": "governing_law",
+       "value": "Delaware",
+       "quote": "7.1 This Agreement is governed by the laws of the State of Delaware."
+      },
+      {
+       "topic": "venue",
+       "value": "Delaware",
+       "quote": "7.2 Each party submits to the exclusive jurisdiction of the state and federal courts located in the State of Delaware for any dispute arising out of this Agreement."
+      },
+      {
+       "topic": "auto_renewal",
+       "value": "no_notice",
+       "quote": "4.2 This Agreement renews automatically for successive one-year periods."
+      }
+     ],
+     "flags": [],
+     "recommended_route": "counsel_review",
+     "rationale": "The NDA is mutual, with a 24-month term, standard exclusions and Delaware law and courts. Two counsel-level deviations: a 12-month no-hire/no-engagement restriction in cl. 2.3 and automatic renewal without any non-renewal notice in cl. 4.2. Playbook fallback redlines have been proposed for both, pending approval.",
+     "evidence": [
+      {
+       "source_id": "CTR-0123",
+       "quote": "2.3 For twelve (12) months after the last disclosure, the Recipient shall not offer employment to, or engage as a contractor, any employee of the Discloser with whom it had contact."
+      },
+      {
+       "source_id": "CTR-0123",
+       "quote": "4.2 This Agreement renews automatically for successive one-year periods."
+      }
+     ]
+    }
+   }
+  ],
+  "stop_reason": "tool_use",
+  "model": "claude-opus-5-5",
+  "response_id": "msg_011CgYhkhXcf1ZrBC2GEbxJW",
+  "usage": {
+   "input_tokens": 6400,
+   "output_tokens": 905,
+   "cache_read_input_tokens": 0
+  }
+ }
+]
