@@ -48,4 +48,7 @@ def example_input(slug):
 
 def example_replay(slug):
     path = ROOT/'projects'/slug/'examples/replay.json'
+    if not path.is_file():
+        raise InputError(f'{slug} has no recorded example yet. Record one with: python3 -m enterprise_ai run {slug} '
+                         f'--input projects/{slug}/examples/input.json --provider anthropic --record {path.relative_to(ROOT)}')
     return json.loads(path.read_text())
