@@ -72,7 +72,7 @@ def main(argv=None):
             return 0
     except InputError as exc:
         print(f'Failed: {exc}', file=sys.stderr)
-        return 2
+        return 2  # an aborted eval writes no report
     except (OSError, json.JSONDecodeError) as exc:
         print(f'Failed to read input: {exc}', file=sys.stderr)
         return 2

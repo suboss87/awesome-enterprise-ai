@@ -19,6 +19,15 @@ from .common import InputError
 from .runner import execute
 
 
+class EvalAborted(InputError):
+    """The run stopped early because the provider account rejected calls (credits, key). Nothing is reported."""
+
+
+def _is_account_failure(exc):
+    text = str(exc)
+    return any(marker in text for marker in ('HTTP 401', 'HTTP 402', 'HTTP 403', 'no credits', 'insufficient_quota', 'billing', 'Set ANTHROPIC_API_KEY', 'Set OPENAI_API_KEY'))
+
+
 def load_cases(slug, limit=None):
     path = ROOT/'projects'/slug/'evals/cases.jsonl'
     cases = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
@@ -44,6 +53,8 @@ def _run_case(slug, case, provider, model, effort, scorer, baseline, with_agent=
         row['agent_summary'] = output.get('summary')
         row['agent_route'] = output.get('metrics', {}).get('route')
     except InputError as exc:
+        if _is_account_failure(exc):
+            raise EvalAborted(f'Provider account problem on case {case["id"]}: {exc}') from exc
         row['agent'] = scorer.score(case, None)
         row['agent_error'] = str(exc)
         row['agent_latency_ms'] = round((time.monotonic()-started)*1000)
