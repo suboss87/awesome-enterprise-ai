@@ -59,7 +59,7 @@ class Trace:
 
 
 class Agent:
-    def __init__(self, name, system_prompt, tools, result_schema, max_steps=12):
+    def __init__(self, name, system_prompt, tools, result_schema, max_steps=12, result_check=None):
         if not 1 <= max_steps <= 40:
             raise InputError('max_steps must be between 1 and 40')
         names = [t.name for t in tools]
@@ -70,6 +70,7 @@ class Agent:
         self.tools = {t.name: t for t in tools}
         self.result_schema = result_schema
         self.max_steps = max_steps
+        self.result_check = result_check  # optional callable(result) raising InputError to reject a finish
 
     def _tool_specs(self):
         specs = [t.spec() for t in self.tools.values()]
@@ -118,6 +119,8 @@ class Agent:
                         validate_schema(call['input'], self.result_schema)
                         if sources is not None and 'evidence' in call['input']:
                             check_evidence(call['input']['evidence'], sources)
+                        if self.result_check is not None:
+                            self.result_check(call['input'])
                     except InputError as exc:
                         trace.event('finish_rejected', step=step, reason=str(exc))
                         results.append({'type': 'tool_result', 'tool_use_id': call['id'], 'is_error': True,

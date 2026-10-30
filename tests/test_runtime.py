@@ -75,6 +75,17 @@ class AgentLoopTests(unittest.TestCase):
         self.assertEqual(out['steps'], 2)
         self.assertIn('finish rejected', provider.requests[1]['messages'][-1]['content'][0]['content'])
 
+    def test_agent_specific_result_check_rejects_and_lets_the_model_correct(self):
+        def check(result):
+            if result['answer'] == 'leak':
+                raise InputError('answer must not be leak')
+        agent = make_agent([])
+        agent.result_check = check
+        provider = ScriptedProvider([completion(call('finish', answer='leak', evidence=[])), completion(call('finish', answer='safe', evidence=[]))])
+        out = agent.run('task', provider, Trace('t', 'scripted'))
+        self.assertEqual(out['result']['answer'], 'safe')
+        self.assertIn('must not be leak', provider.requests[1]['messages'][-1]['content'][0]['content'])
+
     def test_prose_without_finish_is_nudged_then_fails_at_step_limit(self):
         agent = make_agent([])
         agent.max_steps = 2

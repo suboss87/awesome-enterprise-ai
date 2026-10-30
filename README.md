@@ -22,6 +22,8 @@ Each agent uses a model for what models are good at: reading messy documents, no
 | [Claims Intake Agent](projects/claims-intake-agent/) | A large carrier cut claim setup time 48% by automating first notice of loss. | FNOL form, police report, estimate, photo notes. | Completeness against coverage, conflict arbitration, triage. | [evals/REPORT.md](projects/claims-intake-agent/evals/REPORT.md) |
 | [Vulnerability Triage Agent](projects/vulnerability-triage-agent/) | 71 to 88% of SCA findings are false positives without reachability. | Advisories, reachability hints; writes justifications and tickets. | KEV, EPSS, reachability ranking; VEX status needs a named approver. | [evals/REPORT.md](projects/vulnerability-triage-agent/evals/REPORT.md) |
 
+Live results are committed for the AP Exception Agent. The other four show baseline numbers and a pending note until their live runs complete; the harness and cases are in place.
+
 Every project folder has the same parts: `README.md`, `agent.py`, `baseline.py`, `evals/` with 100 or more labeled cases and a committed report, `GOVERNANCE.md`, `tests/`, `examples/`. The [project standard](CONTRIBUTING.md) lists what each must contain.
 
 ## Run one in two minutes
