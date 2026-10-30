@@ -3,3 +3,4 @@
 
 @media(max-width:640px){.table-wrap{overflow-x:auto;overscroll-behavior-x:contain}.table-wrap table{min-width:640px}.table-wrap th{white-space:nowrap}}
 .table-wrap{overscroll-behavior-x:contain}.table-wrap th{white-space:nowrap;overflow-wrap:normal}.table-wrap td{min-width:100px}
+ol.trace{list-style:none;padding:0;margin:8px 0 0;border-left:2px solid var(--line);font-size:12px}ol.trace li{padding:4px 0 4px 12px;position:relative;color:var(--muted)}ol.trace li::before{content:'';position:absolute;left:-6px;top:9px;width:8px;height:8px;border-radius:50%;background:var(--line)}ol.trace li.model_call{color:var(--ink)}ol.trace li.model_call::before{background:var(--accent)}ol.trace li.tool_call::before{background:#8ab}ol.trace li.finish_rejected::before,ol.trace li.nudge::before{background:var(--alert)}

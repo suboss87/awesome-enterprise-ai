@@ -1,4 +1,4 @@
-name: Verify projects
+name: Verify
 
 on:
   push:
@@ -11,71 +11,45 @@ permissions:
   contents: read
 
 jobs:
-  rag-scope-check:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
-        with:
-          python-version: '3.11'
-      - name: Check out the reviewed project revision
-        uses: actions/checkout@v6
-        with:
-          repository: suboss87/rag-scope-check
-          ref: c07538117764b4a39de377091cdb50b2117b4831
-          path: .verified/rag-scope-check
-          persist-credentials: false
-      - name: Run project tests
-        working-directory: .verified/rag-scope-check
-        run: python3 -m unittest discover -s tests -v
-      - name: Reproduce failure and correction
-        run: python3 scripts/verify_rag_demo.py .verified/rag-scope-check
-  invoice-exception-brief:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    defaults:
-      run:
-        working-directory: projects/invoice-exception-brief
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
-        with:
-          python-version: '3.11'
-      - name: Test invoice evidence and report safety
-        run: python3 -m unittest discover -s tests -v
-      - name: Reproduce clean evidence
-        run: python3 -m invoice_exception_brief examples/clean.json
-      - name: Reproduce a delivery exception
-        run: |
-          set +e
-          python3 -m invoice_exception_brief examples/partial_receipt.json > /tmp/partial-receipt.json
-          result=$?
-          set -e
-          test "$result" -eq 1
-
-  enterprise-workflows:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
-        with:
-          python-version: '3.11'
-      - name: Verify collection workflows, runtime and local workspace boundaries
-        run: python3 scripts/verify_workflows.py
-
-  isolated-batch-jobs:
+  offline:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      matrix:
+        python: ['3.11', '3.13']
     steps:
       - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
       - uses: actions/setup-python@v6
         with:
-          python-version: '3.11'
-      - name: Build the pinned non-root runtime
-        run: docker build --pull --tag enterprise-ai:ci .
-      - name: Verify every workflow with read-only files, resource limits and no network
-        run: python3 scripts/verify_container.py
+          python-version: ${{ matrix.python }}
+      - name: Runtime tests
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Project tests
+        run: |
+          set -e
+          for p in projects/*/; do
+            echo "== $p"
+            python3 -m unittest discover -s "$p/tests" -t . -p 'test_*.py' -v
+          done
+      - name: Example replays
+        run: |
+          set -e
+          for slug in $(python3 -m enterprise_ai list | awk '{print $1}'); do
+            python3 -m enterprise_ai run "$slug" > /dev/null
+            echo "replay ok: $slug"
+          done
+      - name: Baseline evals
+        run: |
+          set -e
+          for slug in $(python3 -m enterprise_ai list | awk '{print $1}'); do
+            python3 -m enterprise_ai eval "$slug" --baseline-only --out "/tmp/base-$slug" > /dev/null
+            echo "baseline ok: $slug"
+          done
+      - name: Generators are deterministic
+        run: |
+          set -e
+          for p in projects/*/; do
+            cp "$p/evals/cases.jsonl" /tmp/before.jsonl
+            python3 "$p/evals/generate_cases.py" > /dev/null
+            cmp /tmp/before.jsonl "$p/evals/cases.jsonl"
+          done

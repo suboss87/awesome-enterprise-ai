@@ -1,25 +1,41 @@
-"""Explicit project allowlist. No user-controlled import paths."""
+"""Explicit allowlist of agents. No user-controlled import paths."""
 import importlib.util
 from pathlib import Path
+
 from .common import InputError
 
-ROOT=Path(__file__).resolve().parents[1]
-SLUGS=('customer-resolution','incident-operations','exposure-review','business-insights',
-       'inventory-decisions','asset-operations','claims-intake','proposal-operations',
-       'account-intelligence','workforce-onboarding','data-repair-evidence')
+ROOT = Path(__file__).resolve().parents[1]
+SLUGS = ('ap-exception-agent', 'support-resolution-agent', 'incident-investigation-agent',
+         'claims-intake-agent', 'vulnerability-triage-agent')
 
 
-def load(slug):
+def _module(slug, name):
     if slug not in SLUGS:
         raise InputError('Unknown project')
-    path=ROOT/'projects'/slug/'workflow.py'
+    path = ROOT/'projects'/slug/name
     if not path.is_file():
-        raise InputError('Project implementation is not available yet')
-    spec=importlib.util.spec_from_file_location('enterprise_project_'+slug.replace('-','_'),path)
-    module=importlib.util.module_from_spec(spec)
+        raise InputError(f'{slug}/{name} is not available')
+    spec = importlib.util.spec_from_file_location(f"enterprise_ai_projects.{slug.replace('-', '_')}.{path.stem}", path)
+    module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
 
 
+def load_agent(slug):
+    return _module(slug, 'agent.py')
+
+
+def load_baseline(slug):
+    return _module(slug, 'baseline.py')
+
+
+def load_scorer(slug):
+    return _module(slug, 'evals/score.py')
+
+
+def available():
+    return [s for s in SLUGS if (ROOT/'projects'/s/'agent.py').is_file()]
+
+
 def catalog():
-    return [load(slug).SPEC for slug in SLUGS if (ROOT/'projects'/slug/'workflow.py').exists()]
+    return [load_agent(s).SPEC for s in available()]

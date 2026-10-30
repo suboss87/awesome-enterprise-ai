@@ -1,85 +1,82 @@
+"""CLI: list, run, eval, serve."""
 import argparse
-import hashlib
 import json
 import sys
-import time
 from pathlib import Path
-from .catalog import catalog, load
-from .common import InputError, ReplayAI, loads
-from .provider import LiveAI
+
+from .catalog import catalog
+from .common import InputError
+from .llm import default_provider_name
+from .runner import example_input, example_replay, execute
 
 
-def execute(slug,data,mode='live',responses=None):
-    if mode not in ('live','replay'):
-        raise InputError('Unknown execution mode')
-    if mode=='live' and responses is not None:
-        raise InputError('Recorded responses require replay mode')
-    encoded=json.dumps(data,ensure_ascii=False,sort_keys=True,allow_nan=False).encode()
-    if len(encoded)>500000:
-        raise InputError('Input exceeds 500 KB')
-    ai=LiveAI() if mode=='live' else ReplayAI(responses or [])
-    output=load(slug).run(data,ai)
-    if mode=='replay' and ai.responses:
-        raise InputError('Replay contains unused responses')
-    output['execution']={'mode':mode,'calls':ai.calls,'input_sha256':hashlib.sha256(encoded).hexdigest()}
-    return output
+def main(argv=None):
+    parser = argparse.ArgumentParser(prog='enterprise_ai', description='Enterprise AI agents with evals and approval gates')
+    sub = parser.add_subparsers(dest='command', required=True)
+    sub.add_parser('list', help='List the agents in the collection')
 
+    run = sub.add_parser('run', help='Run one agent on one input')
+    run.add_argument('project')
+    run.add_argument('--input', type=Path, help='JSON input file (default: the project example)')
+    run.add_argument('--provider', choices=['anthropic', 'openai', 'replay'], default=None,
+                     help='Default: replay when no --input is given, else the provider whose key is set')
+    run.add_argument('--model', help='Override the provider model id')
+    run.add_argument('--effort', choices=['low', 'medium', 'high'], default='medium')
+    run.add_argument('--replay', type=Path, help='Recorded completions to replay (default: the project example recording)')
+    run.add_argument('--record', type=Path, help='Save the live completions to this file for later replay')
+    run.add_argument('--trace', type=Path, help='Write the JSONL trace to this file')
 
-def main():
-    parser=argparse.ArgumentParser(description='Enterprise AI workflows')
-    sub=parser.add_subparsers(dest='command',required=True)
-    sub.add_parser('list')
-    run=sub.add_parser('run');run.add_argument('project');run.add_argument('--input',required=True,type=Path)
-    run.add_argument('--mode',choices=['live','replay'],default='live')
-    run.add_argument('--responses',type=Path,help='Explicit recorded model responses for offline demonstration')
-    artifacts=run.add_mutually_exclusive_group()
-    artifacts.add_argument('--receipt',type=Path,help='Write a new private execution receipt, including failures')
-    artifacts.add_argument('--run-dir',type=Path,help='Create a private new run directory for result and hash-bound receipt; no business output on stdout')
-    run.add_argument('--deadline-seconds',type=float,default=120,help='Wall-clock worker deadline, at most 300 seconds')
-    serve=sub.add_parser('serve');serve.add_argument('--port',type=int,default=8765)
-    args=parser.parse_args()
+    ev = sub.add_parser('eval', help='Run the labeled cases for one agent and write evals/REPORT.md')
+    ev.add_argument('project')
+    ev.add_argument('--provider', choices=['anthropic', 'openai'], default=None)
+    ev.add_argument('--model')
+    ev.add_argument('--effort', choices=['low', 'medium', 'high'], default='medium')
+    ev.add_argument('--limit', type=int)
+    ev.add_argument('--workers', type=int, default=4)
+    ev.add_argument('--out', type=Path, help='Directory for raw results (default: evals/runs/<timestamp>)')
+    ev.add_argument('--no-report', action='store_true', help='Do not overwrite evals/REPORT.md')
+    ev.add_argument('--baseline-only', action='store_true', help='Score only the rules baseline; no model calls')
+
+    serve = sub.add_parser('serve', help='Local browser workspace')
+    serve.add_argument('--port', type=int, default=8765)
+    args = parser.parse_args(argv)
     try:
-        if args.command=='list':
-            print(json.dumps(catalog(),indent=2));return
-        if args.command=='serve':
-            from .server import serve
-            serve(args.port);return
-        from .execution import execute_bounded, write_receipt, write_run_artifacts, WorkflowFailure, start_receipt, finish_receipt
-        if args.run_dir:
-            args.run_dir.mkdir(mode=0o700)  # Fail before inference if the path exists.
-            args.run_dir.chmod(0o700)
-        receipt_path=args.run_dir/'receipt.json' if args.run_dir else args.receipt
-        preflight=start_receipt(args.project,args.mode)
-        started=time.monotonic()
-        def read_bounded(path,limit):
-            with path.open('rb') as stream:
-                raw=stream.read(limit+1)
-            if len(raw)>limit:
-                raise InputError('Input file exceeds size limit')
-            return loads(raw)
-        output=None
-        try:
-            data=read_bounded(args.input,500000)
-            responses=read_bounded(args.responses,5000000) if args.responses else None
-            output=execute_bounded(args.project,data,args.mode,responses,deadline_seconds=args.deadline_seconds)
-            if args.run_dir:
-                write_run_artifacts(args.run_dir,output)
-        except (InputError,OSError,UnicodeError,RecursionError,ValueError,TypeError) as exc:
-            receipt=exc.receipt if isinstance(exc,WorkflowFailure) else finish_receipt(
-                dict(output['execution']['receipt']) if output else preflight,started,'failed',
-                'artifact_publication_failed' if output else 'input_rejected')
-            if receipt_path:
-                write_receipt(receipt_path,receipt)
-            raise InputError(str(exc) if isinstance(exc,WorkflowFailure) else 'Input could not be read or validated; no result produced') from None
-        if args.run_dir:
-            print(json.dumps({'status':'succeeded','run_id':output['execution']['receipt']['run_id']}))
-        else:
-            if args.receipt:
-                write_receipt(args.receipt,output['execution']['receipt'])
-            print(json.dumps(output,indent=2,ensure_ascii=False))
-    except (InputError,OSError,UnicodeError,RecursionError) as exc:
-        print('Workflow failed: '+str(exc),file=sys.stderr);sys.exit(2)
+        if args.command == 'list':
+            for spec in catalog():
+                print(f"{spec['id']:32s} {spec['title']}  [{spec['category']}]")
+            return 0
+        if args.command == 'serve':
+            from .server import serve as serve_http
+            serve_http(args.port)
+            return 0
+        if args.command == 'run':
+            data = json.loads(args.input.read_text()) if args.input else example_input(args.project)
+            provider = args.provider or ('replay' if not args.input and not args.record else default_provider_name())
+            replay = None
+            if provider == 'replay':
+                replay = json.loads(args.replay.read_text()) if args.replay else example_replay(args.project)
+            output = execute(args.project, data, provider, replay=replay, record=bool(args.record), model=args.model, effort=args.effort)
+            if args.record:
+                args.record.write_text(json.dumps(output['execution'].pop('recording'), indent=1, ensure_ascii=False) + '\n')
+                print(f'Recorded {args.record}', file=sys.stderr)
+            if args.trace:
+                args.trace.write_text(''.join(json.dumps(e) + '\n' for e in output['execution']['events']))
+            print(json.dumps(output, indent=2, ensure_ascii=False))
+            return 0
+        if args.command == 'eval':
+            from .evals import run_eval
+            provider = args.provider or default_provider_name()
+            summary, _rows = run_eval(args.project, provider, args.model, args.effort, args.limit, args.workers, args.out,
+                                      not args.no_report and not args.baseline_only, with_agent=not args.baseline_only)
+            print(json.dumps(summary, indent=2))
+            return 0
+    except InputError as exc:
+        print(f'Failed: {exc}', file=sys.stderr)
+        return 2
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f'Failed to read input: {exc}', file=sys.stderr)
+        return 2
 
 
-if __name__=='__main__':
-    main()
+if __name__ == '__main__':
+    sys.exit(main())
