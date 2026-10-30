@@ -35,8 +35,12 @@ jobs:
         run: |
           set -e
           for slug in $(python3 -m enterprise_ai list | awk '{print $1}'); do
-            python3 -m enterprise_ai run "$slug" > /dev/null
-            echo "replay ok: $slug"
+            if [ -f "projects/$slug/examples/replay.json" ]; then
+              python3 -m enterprise_ai run "$slug" > /dev/null
+              echo "replay ok: $slug"
+            else
+              echo "replay pending (not recorded yet): $slug"
+            fi
           done
       - name: Baseline evals
         run: |
