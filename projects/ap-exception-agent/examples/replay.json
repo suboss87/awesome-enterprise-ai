@@ -1,0 +1,170 @@
+[
+ {
+  "content": [
+   {
+    "type": "tool_use",
+    "id": "call_zIh6jnjotmJFNzfabtgWr49K",
+    "name": "lookup_vendor",
+    "input": {
+     "name": "Acme Fasteners Ltd",
+     "tax_id": "GB123456789"
+    }
+   },
+   {
+    "type": "tool_use",
+    "id": "call_XY2Zv1xZiIZLOnGYsnUeCvIR",
+    "name": "lookup_po",
+    "input": {
+     "po_number": "PO-50047"
+    }
+   },
+   {
+    "type": "tool_use",
+    "id": "call_l8z7Yl4pblYWgveCKLLp4PkV",
+    "name": "lookup_goods_receipts",
+    "input": {
+     "po_number": "PO-50047"
+    }
+   },
+   {
+    "type": "tool_use",
+    "id": "call_YdTcr4le3MozXAuEkv3CNDOO",
+    "name": "get_policy",
+    "input": {}
+   }
+  ],
+  "stop_reason": "tool_use",
+  "model": "gpt-5.5-2026-04-23",
+  "response_id": "resp_0807576d5bfe2503016ae47b05a8d087d2a8fbd7c138d23d4f",
+  "usage": {
+   "input_tokens": 1328,
+   "output_tokens": 143,
+   "cache_read_input_tokens": 0
+  }
+ },
+ {
+  "content": [
+   {
+    "type": "tool_use",
+    "id": "call_sP5a5MVQdm6DcCvb7088CJa7",
+    "name": "search_ap_ledger",
+    "input": {
+     "vendor_id": "V-1001",
+     "invoice_number": "INV-2265",
+     "gross_total": 10233
+    }
+   }
+  ],
+  "stop_reason": "tool_use",
+  "model": "gpt-5.5-2026-04-23",
+  "response_id": "resp_08d3a837bb127043016ae47b0aec2c87d28f19e0be9f894339",
+  "usage": {
+   "input_tokens": 1828,
+   "output_tokens": 94,
+   "cache_read_input_tokens": 0
+  }
+ },
+ {
+  "content": [
+   {
+    "type": "tool_use",
+    "id": "call_yjScF9sLWTtXr4m0IkZxgjIq",
+    "name": "send_vendor_query",
+    "input": {
+     "vendor_id": "V-1001",
+     "subject": "Clarification requested for invoice INV-2265 against PO-50047",
+     "body": "Dear Acme Fasteners Ltd,\n\nWe are reviewing invoice INV-2265 for PO-50047. Our receiving records show accepted quantities of 25 for Degreaser concentrate, 20 L and 6 for Forklift service visit, while the invoice bills 50 and 12 respectively. Could you please confirm whether a corrected invoice should be issued for the received/accepted quantities, or provide supporting receipt/service documentation for the remaining quantities?\n\nThank you."
+    }
+   }
+  ],
+  "stop_reason": "tool_use",
+  "model": "gpt-5.5-2026-04-23",
+  "response_id": "resp_0653fbe690d37d5a016ae47b104eb087d2b132242d99be94a3",
+  "usage": {
+   "input_tokens": 1889,
+   "output_tokens": 476,
+   "cache_read_input_tokens": 1536
+  }
+ },
+ {
+  "content": [
+   {
+    "type": "tool_use",
+    "id": "call_LjeLEEK3SmONxda0gu1iJDc6",
+    "name": "finish",
+    "input": {
+     "document_type": "invoice",
+     "extracted": {
+      "vendor_name": "Acme Fasteners Ltd",
+      "vendor_tax_id": "GB123456789",
+      "invoice_number": "INV-2265",
+      "invoice_date": "2026-10-06",
+      "po_numbers": [
+       "PO-50047"
+      ],
+      "currency": "USD",
+      "lines": [
+       {
+        "po_number": "PO-50047",
+        "sku": "",
+        "description": "Degreaser concentrate, 20 L",
+        "qty": 50,
+        "unit_price": 72.15,
+        "line_total": 3607.5
+       },
+       {
+        "po_number": "PO-50047",
+        "sku": "",
+        "description": "Forklift service visit",
+        "qty": 12,
+        "unit_price": 410,
+        "line_total": 4920
+       }
+      ],
+      "subtotal": 8527.5,
+      "tax_total": 1705.5,
+      "gross_total": 10233,
+      "bank_iban": ""
+     },
+     "flags": [
+      "QTY_EXCEEDS_RECEIPT"
+     ],
+     "risk_notes": [
+      "Invoice quantities exceed accepted goods receipt quantities for both PO lines: PO line 1 billed 50 vs 25 accepted, and PO line 2 billed 12 vs 6 accepted. A vendor clarification/correction query was drafted as a proposal for human approval."
+     ],
+     "recommended_route": "human_review",
+     "evidence": [
+      {
+       "source_id": "doc-047",
+       "quote": "Rechnungsnummer / Invoice No.: INV-2265"
+      },
+      {
+       "source_id": "doc-047",
+       "quote": "Gesamtbetrag / Total: 10.233,00 USD"
+      },
+      {
+       "source_id": "doc-047",
+       "quote": "1    Degreaser concentrate, 20 L                    50      72,15         3.607,50"
+      },
+      {
+       "source_id": "doc-047",
+       "quote": "2    Forklift service visit                         12      410,00        4.920,00"
+      },
+      {
+       "source_id": "doc-047",
+       "quote": "Note: balance of the order ships next week."
+      }
+     ]
+    }
+   }
+  ],
+  "stop_reason": "tool_use",
+  "model": "gpt-5.5-2026-04-23",
+  "response_id": "resp_0f37901f9cbabcf3016ae47b1bbb1087d29787cf4f68f729f1",
+  "usage": {
+   "input_tokens": 2060,
+   "output_tokens": 476,
+   "cache_read_input_tokens": 1536
+  }
+ }
+]

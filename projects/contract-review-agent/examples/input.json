@@ -1,0 +1,86 @@
+{
+ "as_of": "2026-10-15",
+ "contract": {
+  "id": "CTR-0123",
+  "counterparty": "Pellucid Labs Inc.",
+  "paper": "theirs",
+  "type": "NDA",
+  "text": "MUTUAL NON-DISCLOSURE AGREEMENT\n\nThis Agreement is made on 12 October 2026 between Larkspur Software Inc. (\"Larkspur\") and Pellucid Labs Inc. (\"Pellucid\").\n\n1. DEFINITIONS\n1.1 \"Confidential Information\" means all non-public business, technical and financial information disclosed by or for a party, in any form.\n1.2 \"Purpose\" means evaluating a possible commercial relationship between the parties.\n1.3 \"Representatives\" means a party's employees, officers and professional advisers who need to know Confidential Information for the Purpose.\n1.4 \"Effective Date\" means the date of this Agreement.\n\n2. CONFIDENTIALITY OBLIGATIONS\n2.1 Each party, as Recipient, shall keep the Confidential Information of the other party confidential and use it only for the Purpose.\n2.2 The Recipient may share Confidential Information with its Representatives who are bound by duties of confidence at least as protective as this Agreement.\n2.3 For twelve (12) months after the last disclosure, the Recipient shall not offer employment to, or engage as a contractor, any employee of the Discloser with whom it had contact.\n\n3. EXCLUSIONS\n3.1 Confidential Information does not include information that (i) is or becomes publicly available through no fault of the Recipient, (ii) the Recipient already lawfully knew, (iii) the Recipient independently develops, or (iv) the Recipient lawfully receives from a third party without restriction.\n\n4. TERM\n4.1 The Recipient's obligations under this Agreement continue for twenty-four (24) months from the date of each disclosure.\n4.2 This Agreement renews automatically for successive one-year periods.\n\n5. RETURN OF MATERIALS\n5.1 On written request, the Recipient shall promptly return or destroy the Discloser's Confidential Information, except copies kept under a routine backup process.\n\n6. SURVIVAL\n6.1 Termination does not affect rights or obligations that accrued before termination.\n\n7. GOVERNING LAW AND JURISDICTION\n7.1 This Agreement is governed by the laws of the State of Delaware.\n7.2 Each party submits to the exclusive jurisdiction of the state and federal courts located in the State of Delaware for any dispute arising out of this Agreement.\n\n8. GENERAL\n8.1 This Agreement is the entire agreement of the parties on its subject and may be amended only in writing signed by both parties. Neither party may assign this Agreement without the other party's written consent.\n\nSigned for Larkspur Software Inc. and for Pellucid Labs Inc. by their authorised signatories."
+ },
+ "playbook": {
+  "id": "PB-NDA-2026.2",
+  "contract_type": "NDA",
+  "positions": [
+   {
+    "topic": "mutuality",
+    "rule": {
+     "require_mutual": true
+    },
+    "preferred": "Each party, as Recipient, shall protect the Confidential Information of the other party and use it only for the Purpose.",
+    "fallback": "The obligations of this Agreement apply equally to each party as Recipient of the other party's Confidential Information."
+   },
+   {
+    "topic": "term",
+    "rule": {
+     "preferred_months": 24,
+     "max_months": 36
+    },
+    "preferred": "The obligations of confidentiality continue for twenty-four (24) months from the date of each disclosure.",
+    "fallback": "The obligations of confidentiality continue for thirty-six (36) months from the date of each disclosure."
+   },
+   {
+    "topic": "exclusions",
+    "rule": {},
+    "preferred": "Confidential Information does not include information that (i) is or becomes public through no fault of the Recipient, (ii) the Recipient knew before disclosure, (iii) the Recipient develops independently, or (iv) the Recipient receives from a third party without a duty of confidence.",
+    "fallback": "Confidential Information does not include information that (i) is or becomes public through no fault of the Recipient, (ii) the Recipient knew before disclosure, (iii) the Recipient develops independently, or (iv) the Recipient receives from a third party without a duty of confidence; no other exclusion applies."
+   },
+   {
+    "topic": "residuals",
+    "rule": {
+     "if_present": "walk_away"
+    },
+    "preferred": "Nothing in this Agreement permits either party to use Confidential Information retained in the memory of its personnel.",
+    "fallback": "Neither party may use the other party's Confidential Information retained in memory except for the Purpose."
+   },
+   {
+    "topic": "non_solicit",
+    "rule": {
+     "if_present": "counsel"
+    },
+    "preferred": "This Agreement does not restrict either party from soliciting or hiring any person.",
+    "fallback": "General solicitations not directed at the other party's employees are permitted, and this Agreement does not restrict hiring."
+   },
+   {
+    "topic": "governing_law",
+    "rule": {
+     "allowed": [
+      "New York",
+      "Delaware",
+      "England and Wales"
+     ]
+    },
+    "preferred": "This Agreement is governed by the laws of the State of New York.",
+    "fallback": "This Agreement is governed by the laws of the State of Delaware."
+   },
+   {
+    "topic": "venue",
+    "rule": {
+     "must_match_governing_law": true
+    },
+    "preferred": "The state and federal courts located in New York County, New York have exclusive jurisdiction over any dispute under this Agreement.",
+    "fallback": "The courts of the jurisdiction whose law governs this Agreement have exclusive jurisdiction over any dispute under it."
+   },
+   {
+    "topic": "auto_renewal",
+    "rule": {
+     "min_notice_days": 30
+    },
+    "preferred": "This Agreement does not renew automatically.",
+    "fallback": "This Agreement renews for successive one-year periods unless either party gives at least sixty (60) days' written notice of non-renewal."
+   }
+  ]
+ },
+ "requester": {
+  "role": "legal_ops"
+ }
+}

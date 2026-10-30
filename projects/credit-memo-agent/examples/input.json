@@ -1,0 +1,95 @@
+{
+ "as_of": "2026-10-30",
+ "request": {
+  "id": "CR-24063",
+  "borrower": "Redline Fleet Services Inc",
+  "facility": {
+   "type": "revolver",
+   "amount": 2450000,
+   "tenor_months": 24,
+   "rate": 7.25,
+   "purpose": "Working capital line"
+  },
+  "collateral": [
+   {
+    "type": "accounts_receivable",
+    "description": "Eligible trade receivables",
+    "appraised_value": 3183000,
+    "appraisal_date": "2026-03-12"
+   },
+   {
+    "type": "inventory",
+    "description": "Finished goods inventory",
+    "appraised_value": 2818000,
+    "appraisal_date": "2026-09-23"
+   }
+  ],
+  "guarantors": [
+   {
+    "name": "Tomasz Kowal",
+    "net_worth": 5980000,
+    "liquidity": 270000,
+    "personal_cash_flow": 139000
+   },
+   {
+    "name": "Dana Whitfield",
+    "net_worth": 6130000,
+    "liquidity": 820000,
+    "personal_cash_flow": 103000
+   }
+  ]
+ },
+ "statements": [
+  {
+   "id": "is-202606",
+   "kind": "income_statement",
+   "period_end": "2026-06-30",
+   "fiscal_year_end": "06-30",
+   "text": "Redline Fleet Services Inc\nSTATEMENT OF INCOME\nFor the year ended June 30, 2026\nPrepared by Calloway Reyes & Co.\n\nNet sales                                         13,266,500\nCost of goods sold                                 7,405,353\nGross profit                                       5,861,147\nOperating expenses                                 4,537,641\nOperating income                                   1,323,506\nInterest expense                                      89,249\nIncome before taxes                                1,234,257\n\nNotes\n1. Operating expenses include depreciation of 313,647 and amortization of 73,483.\n2. Related party transactions: sales to Ridgeback Holdings LLC, an entity owned by guarantor Tomasz Kowal, totaled 1,905,900 for the year."
+  },
+  {
+   "id": "bs-202606",
+   "kind": "balance_sheet",
+   "period_end": "2026-06-30",
+   "fiscal_year_end": "06-30",
+   "text": "Redline Fleet Services Inc\nBALANCE SHEET\nAs of June 30, 2026\n\nCash                                                 519,207\nAccounts receivable                                1,355,708\nInventory                                          1,009,570\nTotal current assets                               2,884,485\nProperty and equipment, net                        3,412,943\nTotal assets                                       6,297,428\n\nAccounts payable and accrued expenses              1,295,881\nLine of credit                                             -\nCurrent portion of long-term debt                    140,416\nTotal current liabilities                          1,436,297\nLong-term debt, net of current portion               904,509\nTotal liabilities                                  2,340,806\nMembers' equity                                    3,956,622\nTotal liabilities and members' equity              6,297,428"
+  },
+  {
+   "id": "cf-202606",
+   "kind": "cash_flow",
+   "period_end": "2026-06-30",
+   "fiscal_year_end": "06-30",
+   "text": "Redline Fleet Services Inc\nSTATEMENT OF CASH FLOWS\nFor the year ended June 30, 2026\n\nNet income                                         1,234,257\nDepreciation and amortization                        387,130\nChange in working capital                          (132,665)\nNet cash from operating activities                 1,488,722\nPurchases of property and equipment                (376,376)\nNet cash used in investing activities              (376,376)\nPrincipal payments on long-term debt               (140,416)\nDistributions to members                         (1,009,724)\nNet cash used in financing activities            (1,150,140)\nNet change in cash                                  (37,794)"
+  }
+ ],
+ "credit_policy": {
+  "min_dscr": 1.25,
+  "max_leverage": 3.5,
+  "max_ltv": {
+   "real_estate": 75.0,
+   "equipment": 50.0,
+   "accounts_receivable": 80.0,
+   "inventory": 50.0
+  },
+  "min_current_ratio": 1.2,
+  "max_tenor_months": {
+   "term_loan": 84,
+   "revolver": 24,
+   "cre_mortgage": 120
+  },
+  "add_back_rules": {
+   "allowed": [
+    "depreciation",
+    "amortization",
+    "one_time_documented",
+    "owner_discretionary_documented"
+   ]
+  },
+  "related_party_rule": {
+   "max_pct_of_revenue": 10.0
+  },
+  "interim_required_if_fye_older_than_days": 180,
+  "appraisal_max_age_days": 365,
+  "revenue_tolerance_pct": 5.0
+ }
+}

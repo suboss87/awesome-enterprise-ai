@@ -1,0 +1,35 @@
+{
+ "as_of": "2026-10-30",
+ "lease": {
+  "id": "LSE-0012",
+  "documents": [
+   {
+    "id": "LSE-0012-L",
+    "kind": "lease",
+    "effective_date": "2022-04-05",
+    "text": "OFFICE LEASE\n\nThis Office Lease (this \"Lease\") is dated April 5, 2022 and is made between Harborview Office Owner LLC (\"Landlord\") and Orbis Analytics Inc. (\"Tenant\").\n\nARTICLE 1 - PREMISES\nSection 1.1 Landlord leases to Tenant Suite 1550 of One Granite Plaza (the \"Premises\"), containing 22,700 rentable square feet (2,109 square meters) of rentable area.\n\nARTICLE 2 - TERM\nSection 2.1 The term of this Lease is sixty (60) months (the \"Term\"), commencing on June 1, 2022 (the \"Commencement Date\") and expiring on May 31, 2027 (the \"Expiration Date\").\n\nARTICLE 3 - EXTENSION OPTION\nSection 3.1 Tenant has one (1) option to extend the Term for five (5) years each at the Prevailing Market Rent, exercisable by written notice to Landlord given not less than nine (9) months and not more than twelve (12) months before the expiration of the then-current Term.\n\nARTICLE 4 - BASE RENT\nSection 4.1 Monthly Base Rent is payable in advance on the first day of each month according to the following schedule:\n| Months 1-12 | $24,350.00 per month |\n| Months 13-24 | $25,202.25 per month |\n| Months 25-36 | $26,084.33 per month |\n| Months 37-48 | $26,997.28 per month |\n| Months 49-60 | $27,942.18 per month |\n\nARTICLE 5 - OPERATING EXPENSES\nSection 5.1 This is a net lease. Tenant shall pay Tenant's Share of Operating Expenses and Taxes, provided that Controllable Operating Expenses shall not increase by more than six percent (6%) per calendar year on a cumulative basis.\n\nARTICLE 6 - SECURITY DEPOSIT\nSection 6.1 Upon execution of this Lease, Tenant shall deposit $48,700.00 with Landlord as a security deposit.\n\nARTICLE 7 - ASSIGNMENT AND SUBLETTING\nSection 7.1 Tenant shall not assign this Lease or sublet any part of the Premises without Landlord's prior written consent, which Landlord may grant or withhold in its sole discretion.\n\nARTICLE 8 - HOLDING OVER\nSection 8.1 If Tenant remains in possession after the end of the Term, Tenant shall pay holdover rent equal to one and one-half (1.5) times the monthly Base Rent in effect at the end of the Term.\n\nARTICLE 9 - MISCELLANEOUS\nSection 9.1 This Lease is governed by the laws of the state in which the Premises are located and binds the successors and permitted assigns of the parties.\n\nSigned for Harborview Office Owner LLC and for Orbis Analytics Inc. by their authorized signatories.\n"
+   },
+   {
+    "id": "LSE-0012-A1",
+    "kind": "amendment",
+    "effective_date": "2026-05-13",
+    "text": "FIRST AMENDMENT TO LEASE\n\nThis First Amendment to Lease (this \"Amendment\") is made as of May 13, 2026 between Harborview Office Owner LLC (\"Landlord\") and Orbis Analytics Inc. (\"Tenant\").\nRecitals. Landlord and Tenant are parties to an Office Lease dated April 5, 2022 (as amended, the \"Lease\") for Suite 1550 of One Granite Plaza.\n1. Extension of Term. The Term of the Lease is extended so that it expires on June 30, 2028 (the \"Extended Expiration Date\").\n2. Base Rent. Monthly Base Rent for the Premises is payable as follows:\n| June 1, 2027 to May 31, 2028 | $29,339.29 per month |\n| June 1, 2028 to June 30, 2028 | $30,219.47 per month |\n3. Ratification. Except as amended by this Amendment, the Lease remains unmodified and in full force and effect, including Tenant's extension option.\n"
+   }
+  ]
+ },
+ "portfolio_rules": {
+  "notice_lead_days_min": 90,
+  "rent_escalation_types_allowed": [
+   "fixed_pct",
+   "fixed_amount"
+  ],
+  "cam_cap_required": true,
+  "critical_date_horizon_days": 365,
+  "currency": "USD"
+ },
+ "existing_abstract": {
+  "commencement_date": "2022-06-01",
+  "expiration_date": "2027-05-31",
+  "current_monthly_rent": "27942.18"
+ }
+}

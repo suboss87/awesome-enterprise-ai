@@ -1,0 +1,1978 @@
+{
+ "as_of": "2026-10-15",
+ "invoice": {
+  "id": "doc-047",
+  "channel": "email",
+  "text": "Acme Fasteners Ltd\nUSt-IdNr.: GB123456789\n\nRECHNUNG / INVOICE\nRechnungsnummer / Invoice No.: INV-2265\nDatum / Date: 06.10.2026\nBestellung / PO: PO-50047\n\nPos  Artikel                                        Menge   Einzelpreis   Betrag\n1    Degreaser concentrate, 20 L                    50      72,15         3.607,50\n2    Forklift service visit                         12      410,00        4.920,00\n\nNettobetrag / Net: 8.527,50\nMwSt. 20% / VAT: 1.705,50\nGesamtbetrag / Total: 10.233,00 USD\n\nNote: balance of the order ships next week."
+ },
+ "erp": {
+  "vendors": [
+   {
+    "vendor_id": "V-1001",
+    "name": "Acme Fasteners Ltd",
+    "tax_id": "GB123456789",
+    "bank_iban": "GB29NWBK60161331926819",
+    "payment_terms_days": 30
+   },
+   {
+    "vendor_id": "V-1002",
+    "name": "Nordwind Logistik GmbH",
+    "tax_id": "DE811234567",
+    "bank_iban": "DE89370400440532013000",
+    "payment_terms_days": 30
+   },
+   {
+    "vendor_id": "V-1003",
+    "name": "Blue Harbor Packaging Inc",
+    "tax_id": "US-47-2210987",
+    "bank_iban": "US12BOFA0000011122233344",
+    "payment_terms_days": 30
+   },
+   {
+    "vendor_id": "V-1004",
+    "name": "Sierra Office Supply Co",
+    "tax_id": "US-83-5512231",
+    "bank_iban": "US44CHAS0000099887766554",
+    "payment_terms_days": 30
+   },
+   {
+    "vendor_id": "V-1005",
+    "name": "Kestrel Industrial Services LLC",
+    "tax_id": "US-61-9900123",
+    "bank_iban": "US77WFBI0000031415926535",
+    "payment_terms_days": 30
+   },
+   {
+    "vendor_id": "V-1006",
+    "name": "Meridian Chemicals plc",
+    "tax_id": "GB987654321",
+    "bank_iban": "GB12BARC20201530093459",
+    "payment_terms_days": 30
+   }
+  ],
+  "purchase_orders": [
+   {
+    "po_number": "PO-50001",
+    "vendor_id": "V-1004",
+    "currency": "USD",
+    "ordered_on": "2026-08-20",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "SRV-910",
+      "description": "Compressor inspection, per unit",
+      "qty_ordered": 20,
+      "unit_price": 185.0
+     },
+     {
+      "line": 2,
+      "sku": "CHEM-30",
+      "description": "Degreaser concentrate, 20 L",
+      "qty_ordered": 12,
+      "unit_price": 72.15
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50002",
+    "vendor_id": "V-1001",
+    "currency": "USD",
+    "ordered_on": "2026-08-19",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "FAST-220",
+      "description": "M10 flange nut, box of 50",
+      "qty_ordered": 50,
+      "unit_price": 18.75
+     },
+     {
+      "line": 2,
+      "sku": "SRV-910",
+      "description": "Compressor inspection, per unit",
+      "qty_ordered": 100,
+      "unit_price": 185.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50003",
+    "vendor_id": "V-1002",
+    "currency": "USD",
+    "ordered_on": "2026-09-21",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "SRV-900",
+      "description": "Forklift service visit",
+      "qty_ordered": 40,
+      "unit_price": 410.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50004",
+    "vendor_id": "V-1006",
+    "currency": "USD",
+    "ordered_on": "2026-08-19",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "CHEM-30",
+      "description": "Degreaser concentrate, 20 L",
+      "qty_ordered": 40,
+      "unit_price": 72.15
+     },
+     {
+      "line": 2,
+      "sku": "OFF-310",
+      "description": "Copier paper A4 80gsm, box",
+      "qty_ordered": 10,
+      "unit_price": 31.2
+     },
+     {
+      "line": 3,
+      "sku": "PACK-07",
+      "description": "Stretch film roll 500mm",
+      "qty_ordered": 24,
+      "unit_price": 9.9
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50005",
+    "vendor_id": "V-1005",
+    "currency": "USD",
+    "ordered_on": "2026-09-16",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "OFF-310",
+      "description": "Copier paper A4 80gsm, box",
+      "qty_ordered": 40,
+      "unit_price": 31.2
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50006",
+    "vendor_id": "V-1006",
+    "currency": "USD",
+    "ordered_on": "2026-09-25",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "SRV-910",
+      "description": "Compressor inspection, per unit",
+      "qty_ordered": 12,
+      "unit_price": 185.0
+     },
+     {
+      "line": 2,
+      "sku": "LOG-05",
+      "description": "Express surcharge, per shipment",
+      "qty_ordered": 40,
+      "unit_price": 55.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50007",
+    "vendor_id": "V-1004",
+    "currency": "USD",
+    "ordered_on": "2026-09-05",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "LOG-05",
+      "description": "Express surcharge, per shipment",
+      "qty_ordered": 10,
+      "unit_price": 55.0
+     },
+     {
+      "line": 2,
+      "sku": "SRV-900",
+      "description": "Forklift service visit",
+      "qty_ordered": 40,
+      "unit_price": 410.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50008",
+    "vendor_id": "V-1006",
+    "currency": "USD",
+    "ordered_on": "2026-09-07",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "LOG-01",
+      "description": "Pallet transport, per pallet",
+      "qty_ordered": 20,
+      "unit_price": 38.0
+     },
+     {
+      "line": 2,
+      "sku": "FAST-220",
+      "description": "M10 flange nut, box of 50",
+      "qty_ordered": 10,
+      "unit_price": 18.75
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50009",
+    "vendor_id": "V-1003",
+    "currency": "USD",
+    "ordered_on": "2026-09-07",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "OFF-310",
+      "description": "Copier paper A4 80gsm, box",
+      "qty_ordered": 20,
+      "unit_price": 31.2
+     },
+     {
+      "line": 2,
+      "sku": "OFF-455",
+      "description": "Toner cartridge black 3k pages",
+      "qty_ordered": 100,
+      "unit_price": 64.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50010",
+    "vendor_id": "V-1003",
+    "currency": "USD",
+    "ordered_on": "2026-09-07",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "PACK-07",
+      "description": "Stretch film roll 500mm",
+      "qty_ordered": 5,
+      "unit_price": 9.9
+     },
+     {
+      "line": 2,
+      "sku": "OFF-455",
+      "description": "Toner cartridge black 3k pages",
+      "qty_ordered": 40,
+      "unit_price": 64.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50011",
+    "vendor_id": "V-1004",
+    "currency": "USD",
+    "ordered_on": "2026-08-31",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "OFF-310",
+      "description": "Copier paper A4 80gsm, box",
+      "qty_ordered": 10,
+      "unit_price": 31.2
+     },
+     {
+      "line": 2,
+      "sku": "PACK-01",
+      "description": "Corrugated carton 400x300x300",
+      "qty_ordered": 5,
+      "unit_price": 1.42
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50012",
+    "vendor_id": "V-1001",
+    "currency": "USD",
+    "ordered_on": "2026-09-19",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "PACK-07",
+      "description": "Stretch film roll 500mm",
+      "qty_ordered": 20,
+      "unit_price": 9.9
+     },
+     {
+      "line": 2,
+      "sku": "FAST-220",
+      "description": "M10 flange nut, box of 50",
+      "qty_ordered": 12,
+      "unit_price": 18.75
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50013",
+    "vendor_id": "V-1001",
+    "currency": "USD",
+    "ordered_on": "2026-08-27",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "SRV-910",
+      "description": "Compressor inspection, per unit",
+      "qty_ordered": 20,
+      "unit_price": 185.0
+     },
+     {
+      "line": 2,
+      "sku": "CHEM-12",
+      "description": "Isopropyl alcohol 99%, 25 L drum",
+      "qty_ordered": 50,
+      "unit_price": 96.4
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50014",
+    "vendor_id": "V-1003",
+    "currency": "USD",
+    "ordered_on": "2026-09-24",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "LOG-05",
+      "description": "Express surcharge, per shipment",
+      "qty_ordered": 24,
+      "unit_price": 55.0
+     },
+     {
+      "line": 2,
+      "sku": "CHEM-12",
+      "description": "Isopropyl alcohol 99%, 25 L drum",
+      "qty_ordered": 5,
+      "unit_price": 96.4
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50015",
+    "vendor_id": "V-1001",
+    "currency": "USD",
+    "ordered_on": "2026-09-07",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "PACK-01",
+      "description": "Corrugated carton 400x300x300",
+      "qty_ordered": 10,
+      "unit_price": 1.42
+     },
+     {
+      "line": 2,
+      "sku": "FAST-220",
+      "description": "M10 flange nut, box of 50",
+      "qty_ordered": 24,
+      "unit_price": 18.75
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50016",
+    "vendor_id": "V-1002",
+    "currency": "USD",
+    "ordered_on": "2026-08-27",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "SRV-910",
+      "description": "Compressor inspection, per unit",
+      "qty_ordered": 100,
+      "unit_price": 185.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50017",
+    "vendor_id": "V-1003",
+    "currency": "USD",
+    "ordered_on": "2026-08-30",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "PACK-01",
+      "description": "Corrugated carton 400x300x300",
+      "qty_ordered": 40,
+      "unit_price": 1.42
+     },
+     {
+      "line": 2,
+      "sku": "SRV-900",
+      "description": "Forklift service visit",
+      "qty_ordered": 12,
+      "unit_price": 410.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50018",
+    "vendor_id": "V-1006",
+    "currency": "USD",
+    "ordered_on": "2026-09-25",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "FAST-220",
+      "description": "M10 flange nut, box of 50",
+      "qty_ordered": 12,
+      "unit_price": 18.75
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50019",
+    "vendor_id": "V-1001",
+    "currency": "USD",
+    "ordered_on": "2026-09-20",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "FAST-100",
+      "description": "M8 hex bolt, zinc plated, box of 100",
+      "qty_ordered": 24,
+      "unit_price": 24.5
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50020",
+    "vendor_id": "V-1006",
+    "currency": "USD",
+    "ordered_on": "2026-09-03",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "LOG-05",
+      "description": "Express surcharge, per shipment",
+      "qty_ordered": 12,
+      "unit_price": 55.0
+     },
+     {
+      "line": 2,
+      "sku": "FAST-100",
+      "description": "M8 hex bolt, zinc plated, box of 100",
+      "qty_ordered": 24,
+      "unit_price": 24.5
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50021",
+    "vendor_id": "V-1005",
+    "currency": "USD",
+    "ordered_on": "2026-09-07",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "SRV-900",
+      "description": "Forklift service visit",
+      "qty_ordered": 24,
+      "unit_price": 410.0
+     },
+     {
+      "line": 2,
+      "sku": "SRV-910",
+      "description": "Compressor inspection, per unit",
+      "qty_ordered": 10,
+      "unit_price": 185.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50022",
+    "vendor_id": "V-1002",
+    "currency": "USD",
+    "ordered_on": "2026-09-14",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "PACK-07",
+      "description": "Stretch film roll 500mm",
+      "qty_ordered": 5,
+      "unit_price": 9.9
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50023",
+    "vendor_id": "V-1001",
+    "currency": "USD",
+    "ordered_on": "2026-08-21",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "SRV-910",
+      "description": "Compressor inspection, per unit",
+      "qty_ordered": 12,
+      "unit_price": 185.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50024",
+    "vendor_id": "V-1006",
+    "currency": "USD",
+    "ordered_on": "2026-09-10",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "FAST-220",
+      "description": "M10 flange nut, box of 50",
+      "qty_ordered": 50,
+      "unit_price": 18.75
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50025",
+    "vendor_id": "V-1001",
+    "currency": "USD",
+    "ordered_on": "2026-09-19",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "FAST-100",
+      "description": "M8 hex bolt, zinc plated, box of 100",
+      "qty_ordered": 50,
+      "unit_price": 24.5
+     },
+     {
+      "line": 2,
+      "sku": "LOG-05",
+      "description": "Express surcharge, per shipment",
+      "qty_ordered": 10,
+      "unit_price": 55.0
+     },
+     {
+      "line": 3,
+      "sku": "LOG-01",
+      "description": "Pallet transport, per pallet",
+      "qty_ordered": 100,
+      "unit_price": 38.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50026",
+    "vendor_id": "V-1006",
+    "currency": "USD",
+    "ordered_on": "2026-09-13",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "PACK-07",
+      "description": "Stretch film roll 500mm",
+      "qty_ordered": 20,
+      "unit_price": 9.9
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50027",
+    "vendor_id": "V-1003",
+    "currency": "USD",
+    "ordered_on": "2026-09-22",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "LOG-01",
+      "description": "Pallet transport, per pallet",
+      "qty_ordered": 100,
+      "unit_price": 38.0
+     },
+     {
+      "line": 2,
+      "sku": "PACK-07",
+      "description": "Stretch film roll 500mm",
+      "qty_ordered": 100,
+      "unit_price": 9.9
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50028",
+    "vendor_id": "V-1004",
+    "currency": "USD",
+    "ordered_on": "2026-09-20",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "PACK-07",
+      "description": "Stretch film roll 500mm",
+      "qty_ordered": 12,
+      "unit_price": 9.9
+     },
+     {
+      "line": 2,
+      "sku": "LOG-05",
+      "description": "Express surcharge, per shipment",
+      "qty_ordered": 50,
+      "unit_price": 55.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50029",
+    "vendor_id": "V-1003",
+    "currency": "USD",
+    "ordered_on": "2026-08-27",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "SRV-910",
+      "description": "Compressor inspection, per unit",
+      "qty_ordered": 20,
+      "unit_price": 185.0
+     },
+     {
+      "line": 2,
+      "sku": "LOG-01",
+      "description": "Pallet transport, per pallet",
+      "qty_ordered": 24,
+      "unit_price": 38.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50030",
+    "vendor_id": "V-1004",
+    "currency": "USD",
+    "ordered_on": "2026-09-21",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "SRV-910",
+      "description": "Compressor inspection, per unit",
+      "qty_ordered": 12,
+      "unit_price": 185.0
+     },
+     {
+      "line": 2,
+      "sku": "PACK-01",
+      "description": "Corrugated carton 400x300x300",
+      "qty_ordered": 20,
+      "unit_price": 1.42
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50031",
+    "vendor_id": "V-1003",
+    "currency": "USD",
+    "ordered_on": "2026-08-23",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "OFF-455",
+      "description": "Toner cartridge black 3k pages",
+      "qty_ordered": 5,
+      "unit_price": 64.0
+     },
+     {
+      "line": 2,
+      "sku": "FAST-100",
+      "description": "M8 hex bolt, zinc plated, box of 100",
+      "qty_ordered": 40,
+      "unit_price": 24.5
+     },
+     {
+      "line": 3,
+      "sku": "SRV-910",
+      "description": "Compressor inspection, per unit",
+      "qty_ordered": 20,
+      "unit_price": 185.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50032",
+    "vendor_id": "V-1001",
+    "currency": "USD",
+    "ordered_on": "2026-08-31",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "OFF-455",
+      "description": "Toner cartridge black 3k pages",
+      "qty_ordered": 12,
+      "unit_price": 64.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50033",
+    "vendor_id": "V-1005",
+    "currency": "USD",
+    "ordered_on": "2026-09-21",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "LOG-05",
+      "description": "Express surcharge, per shipment",
+      "qty_ordered": 100,
+      "unit_price": 55.0
+     },
+     {
+      "line": 2,
+      "sku": "FAST-100",
+      "description": "M8 hex bolt, zinc plated, box of 100",
+      "qty_ordered": 5,
+      "unit_price": 24.5
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50034",
+    "vendor_id": "V-1001",
+    "currency": "USD",
+    "ordered_on": "2026-08-16",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "CHEM-12",
+      "description": "Isopropyl alcohol 99%, 25 L drum",
+      "qty_ordered": 12,
+      "unit_price": 96.4
+     },
+     {
+      "line": 2,
+      "sku": "FAST-220",
+      "description": "M10 flange nut, box of 50",
+      "qty_ordered": 100,
+      "unit_price": 18.75
+     },
+     {
+      "line": 3,
+      "sku": "OFF-310",
+      "description": "Copier paper A4 80gsm, box",
+      "qty_ordered": 12,
+      "unit_price": 31.2
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50035",
+    "vendor_id": "V-1005",
+    "currency": "USD",
+    "ordered_on": "2026-09-13",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "LOG-05",
+      "description": "Express surcharge, per shipment",
+      "qty_ordered": 10,
+      "unit_price": 55.0
+     },
+     {
+      "line": 2,
+      "sku": "PACK-07",
+      "description": "Stretch film roll 500mm",
+      "qty_ordered": 40,
+      "unit_price": 9.9
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50036",
+    "vendor_id": "V-1001",
+    "currency": "USD",
+    "ordered_on": "2026-09-17",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "PACK-07",
+      "description": "Stretch film roll 500mm",
+      "qty_ordered": 5,
+      "unit_price": 9.9
+     },
+     {
+      "line": 2,
+      "sku": "SRV-900",
+      "description": "Forklift service visit",
+      "qty_ordered": 100,
+      "unit_price": 410.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50037",
+    "vendor_id": "V-1004",
+    "currency": "USD",
+    "ordered_on": "2026-09-25",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "FAST-220",
+      "description": "M10 flange nut, box of 50",
+      "qty_ordered": 24,
+      "unit_price": 18.75
+     },
+     {
+      "line": 2,
+      "sku": "SRV-900",
+      "description": "Forklift service visit",
+      "qty_ordered": 100,
+      "unit_price": 410.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50038",
+    "vendor_id": "V-1003",
+    "currency": "USD",
+    "ordered_on": "2026-09-07",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "LOG-01",
+      "description": "Pallet transport, per pallet",
+      "qty_ordered": 20,
+      "unit_price": 38.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50039",
+    "vendor_id": "V-1004",
+    "currency": "USD",
+    "ordered_on": "2026-09-14",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "LOG-01",
+      "description": "Pallet transport, per pallet",
+      "qty_ordered": 12,
+      "unit_price": 38.0
+     },
+     {
+      "line": 2,
+      "sku": "FAST-100",
+      "description": "M8 hex bolt, zinc plated, box of 100",
+      "qty_ordered": 10,
+      "unit_price": 24.5
+     },
+     {
+      "line": 3,
+      "sku": "FAST-220",
+      "description": "M10 flange nut, box of 50",
+      "qty_ordered": 5,
+      "unit_price": 18.75
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50040",
+    "vendor_id": "V-1005",
+    "currency": "USD",
+    "ordered_on": "2026-09-20",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "PACK-01",
+      "description": "Corrugated carton 400x300x300",
+      "qty_ordered": 100,
+      "unit_price": 1.42
+     },
+     {
+      "line": 2,
+      "sku": "LOG-05",
+      "description": "Express surcharge, per shipment",
+      "qty_ordered": 5,
+      "unit_price": 55.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50041",
+    "vendor_id": "V-1006",
+    "currency": "USD",
+    "ordered_on": "2026-09-02",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "PACK-01",
+      "description": "Corrugated carton 400x300x300",
+      "qty_ordered": 40,
+      "unit_price": 1.42
+     },
+     {
+      "line": 2,
+      "sku": "OFF-310",
+      "description": "Copier paper A4 80gsm, box",
+      "qty_ordered": 12,
+      "unit_price": 31.2
+     },
+     {
+      "line": 3,
+      "sku": "SRV-910",
+      "description": "Compressor inspection, per unit",
+      "qty_ordered": 12,
+      "unit_price": 185.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50042",
+    "vendor_id": "V-1003",
+    "currency": "USD",
+    "ordered_on": "2026-08-30",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "FAST-100",
+      "description": "M8 hex bolt, zinc plated, box of 100",
+      "qty_ordered": 24,
+      "unit_price": 24.5
+     },
+     {
+      "line": 2,
+      "sku": "PACK-01",
+      "description": "Corrugated carton 400x300x300",
+      "qty_ordered": 24,
+      "unit_price": 1.42
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50043",
+    "vendor_id": "V-1001",
+    "currency": "USD",
+    "ordered_on": "2026-08-22",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "CHEM-30",
+      "description": "Degreaser concentrate, 20 L",
+      "qty_ordered": 24,
+      "unit_price": 72.15
+     },
+     {
+      "line": 2,
+      "sku": "OFF-455",
+      "description": "Toner cartridge black 3k pages",
+      "qty_ordered": 5,
+      "unit_price": 64.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50044",
+    "vendor_id": "V-1004",
+    "currency": "USD",
+    "ordered_on": "2026-09-24",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "CHEM-12",
+      "description": "Isopropyl alcohol 99%, 25 L drum",
+      "qty_ordered": 5,
+      "unit_price": 96.4
+     },
+     {
+      "line": 2,
+      "sku": "OFF-455",
+      "description": "Toner cartridge black 3k pages",
+      "qty_ordered": 12,
+      "unit_price": 64.0
+     },
+     {
+      "line": 3,
+      "sku": "LOG-01",
+      "description": "Pallet transport, per pallet",
+      "qty_ordered": 24,
+      "unit_price": 38.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50045",
+    "vendor_id": "V-1003",
+    "currency": "USD",
+    "ordered_on": "2026-09-02",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "SRV-910",
+      "description": "Compressor inspection, per unit",
+      "qty_ordered": 20,
+      "unit_price": 185.0
+     },
+     {
+      "line": 2,
+      "sku": "LOG-01",
+      "description": "Pallet transport, per pallet",
+      "qty_ordered": 12,
+      "unit_price": 38.0
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50046",
+    "vendor_id": "V-1002",
+    "currency": "USD",
+    "ordered_on": "2026-09-03",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "FAST-220",
+      "description": "M10 flange nut, box of 50",
+      "qty_ordered": 5,
+      "unit_price": 18.75
+     },
+     {
+      "line": 2,
+      "sku": "OFF-310",
+      "description": "Copier paper A4 80gsm, box",
+      "qty_ordered": 24,
+      "unit_price": 31.2
+     }
+    ]
+   },
+   {
+    "po_number": "PO-50047",
+    "vendor_id": "V-1001",
+    "currency": "USD",
+    "ordered_on": "2026-09-16",
+    "lines": [
+     {
+      "line": 1,
+      "sku": "CHEM-30",
+      "description": "Degreaser concentrate, 20 L",
+      "qty_ordered": 50,
+      "unit_price": 72.15
+     },
+     {
+      "line": 2,
+      "sku": "SRV-900",
+      "description": "Forklift service visit",
+      "qty_ordered": 12,
+      "unit_price": 410.0
+     }
+    ]
+   }
+  ],
+  "goods_receipts": [
+   {
+    "grn": "GRN-7001",
+    "po_number": "PO-50001",
+    "received_on": "2026-10-01",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 20,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7002",
+    "po_number": "PO-50002",
+    "received_on": "2026-10-12",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 50,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 100,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7003",
+    "po_number": "PO-50003",
+    "received_on": "2026-10-01",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 40,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7004",
+    "po_number": "PO-50004",
+    "received_on": "2026-10-08",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 40,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 10,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 3,
+      "qty_accepted": 24,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7005",
+    "po_number": "PO-50005",
+    "received_on": "2026-10-02",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 40,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7006",
+    "po_number": "PO-50006",
+    "received_on": "2026-10-12",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 40,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7007",
+    "po_number": "PO-50007",
+    "received_on": "2026-10-10",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 10,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 40,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7008",
+    "po_number": "PO-50008",
+    "received_on": "2026-10-01",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 20,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 10,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7009",
+    "po_number": "PO-50009",
+    "received_on": "2026-10-02",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 20,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 100,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7010",
+    "po_number": "PO-50010",
+    "received_on": "2026-10-10",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 5,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 40,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7011",
+    "po_number": "PO-50011",
+    "received_on": "2026-10-12",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 10,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 5,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7012",
+    "po_number": "PO-50012",
+    "received_on": "2026-10-11",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 20,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7013",
+    "po_number": "PO-50013",
+    "received_on": "2026-10-01",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 20,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 50,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7014",
+    "po_number": "PO-50014",
+    "received_on": "2026-10-02",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 24,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 5,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7015",
+    "po_number": "PO-50015",
+    "received_on": "2026-10-04",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 10,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 24,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7016",
+    "po_number": "PO-50016",
+    "received_on": "2026-10-04",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 100,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7017",
+    "po_number": "PO-50017",
+    "received_on": "2026-10-01",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 40,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7018",
+    "po_number": "PO-50018",
+    "received_on": "2026-10-09",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7019",
+    "po_number": "PO-50019",
+    "received_on": "2026-10-04",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 24,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7020",
+    "po_number": "PO-50020",
+    "received_on": "2026-10-03",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 24,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7021",
+    "po_number": "PO-50021",
+    "received_on": "2026-10-03",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 24,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 10,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7022",
+    "po_number": "PO-50022",
+    "received_on": "2026-10-08",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 5,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7023",
+    "po_number": "PO-50023",
+    "received_on": "2026-10-05",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7024",
+    "po_number": "PO-50024",
+    "received_on": "2026-10-10",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 50,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7025",
+    "po_number": "PO-50025",
+    "received_on": "2026-09-30",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 50,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 10,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 3,
+      "qty_accepted": 100,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7026",
+    "po_number": "PO-50026",
+    "received_on": "2026-10-04",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 20,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7027",
+    "po_number": "PO-50027",
+    "received_on": "2026-10-07",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 100,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 100,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7028",
+    "po_number": "PO-50028",
+    "received_on": "2026-10-10",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 50,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7029",
+    "po_number": "PO-50029",
+    "received_on": "2026-10-12",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 20,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 24,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7030",
+    "po_number": "PO-50030",
+    "received_on": "2026-10-11",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 20,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7031",
+    "po_number": "PO-50031",
+    "received_on": "2026-10-10",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 5,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 40,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 3,
+      "qty_accepted": 20,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7032",
+    "po_number": "PO-50032",
+    "received_on": "2026-10-01",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7033",
+    "po_number": "PO-50033",
+    "received_on": "2026-10-04",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 100,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 5,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7034",
+    "po_number": "PO-50034",
+    "received_on": "2026-10-07",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 100,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 3,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7035",
+    "po_number": "PO-50035",
+    "received_on": "2026-10-07",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 10,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 40,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7036",
+    "po_number": "PO-50036",
+    "received_on": "2026-10-07",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 5,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 100,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7037",
+    "po_number": "PO-50037",
+    "received_on": "2026-10-05",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 24,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 100,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7038",
+    "po_number": "PO-50038",
+    "received_on": "2026-10-09",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 20,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7039",
+    "po_number": "PO-50039",
+    "received_on": "2026-10-05",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 10,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 3,
+      "qty_accepted": 5,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7040",
+    "po_number": "PO-50040",
+    "received_on": "2026-10-01",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 100,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 5,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7041",
+    "po_number": "PO-50041",
+    "received_on": "2026-09-30",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 40,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 3,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7042",
+    "po_number": "PO-50042",
+    "received_on": "2026-10-11",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 24,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 24,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7043",
+    "po_number": "PO-50043",
+    "received_on": "2026-10-06",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 24,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 5,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7044",
+    "po_number": "PO-50044",
+    "received_on": "2026-10-02",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 5,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 3,
+      "qty_accepted": 24,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7045",
+    "po_number": "PO-50045",
+    "received_on": "2026-09-30",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 20,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 12,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7046",
+    "po_number": "PO-50046",
+    "received_on": "2026-10-01",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 5,
+      "qty_rejected": 0
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 24,
+      "qty_rejected": 0
+     }
+    ]
+   },
+   {
+    "grn": "GRN-7047",
+    "po_number": "PO-50047",
+    "received_on": "2026-10-10",
+    "lines": [
+     {
+      "po_line": 1,
+      "qty_accepted": 25,
+      "qty_rejected": 25
+     },
+     {
+      "po_line": 2,
+      "qty_accepted": 6,
+      "qty_rejected": 6
+     }
+    ]
+   }
+  ],
+  "ap_ledger": [
+   {
+    "invoice_number": "INV-2201",
+    "vendor_id": "V-1001",
+    "gross_total": 5044.3,
+    "invoice_date": "2026-04-15",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "INV-2202",
+    "vendor_id": "V-1001",
+    "gross_total": 3203.72,
+    "invoice_date": "2026-05-23",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "INV-2203",
+    "vendor_id": "V-1001",
+    "gross_total": 625.21,
+    "invoice_date": "2026-04-26",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "RE-2204",
+    "vendor_id": "V-1002",
+    "gross_total": 5442.99,
+    "invoice_date": "2026-06-30",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "RE-2205",
+    "vendor_id": "V-1002",
+    "gross_total": 5820.94,
+    "invoice_date": "2026-08-05",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "RE-2206",
+    "vendor_id": "V-1002",
+    "gross_total": 3251.88,
+    "invoice_date": "2026-05-23",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "BH-2207",
+    "vendor_id": "V-1003",
+    "gross_total": 1533.96,
+    "invoice_date": "2026-07-30",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "BH-2208",
+    "vendor_id": "V-1003",
+    "gross_total": 1695.45,
+    "invoice_date": "2026-08-30",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "BH-2209",
+    "vendor_id": "V-1003",
+    "gross_total": 2772.43,
+    "invoice_date": "2026-06-08",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "SO-2210",
+    "vendor_id": "V-1004",
+    "gross_total": 8313.58,
+    "invoice_date": "2026-05-16",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "SO-2211",
+    "vendor_id": "V-1004",
+    "gross_total": 4995.2,
+    "invoice_date": "2026-06-15",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "SO-2212",
+    "vendor_id": "V-1004",
+    "gross_total": 1094.49,
+    "invoice_date": "2026-08-22",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "KIS-2213",
+    "vendor_id": "V-1005",
+    "gross_total": 4512.3,
+    "invoice_date": "2026-05-28",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "KIS-2214",
+    "vendor_id": "V-1005",
+    "gross_total": 7950.85,
+    "invoice_date": "2026-05-02",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "KIS-2215",
+    "vendor_id": "V-1005",
+    "gross_total": 1903.71,
+    "invoice_date": "2026-04-01",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "MC-2216",
+    "vendor_id": "V-1006",
+    "gross_total": 2393.4,
+    "invoice_date": "2026-06-01",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "MC-2217",
+    "vendor_id": "V-1006",
+    "gross_total": 5131.94,
+    "invoice_date": "2026-07-28",
+    "status": "paid"
+   },
+   {
+    "invoice_number": "MC-2218",
+    "vendor_id": "V-1006",
+    "gross_total": 5820.96,
+    "invoice_date": "2026-09-04",
+    "status": "paid"
+   }
+  ]
+ },
+ "policy": {
+  "currency": "USD",
+  "unit_price_tolerance_pct": 2.0,
+  "total_tolerance_pct": 1.0,
+  "auto_approve_limit": 25000.0,
+  "tax_rate_pct": 20.0
+ }
+}
