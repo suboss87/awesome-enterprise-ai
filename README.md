@@ -49,11 +49,21 @@ lists what each must contain and the [rubric](docs/RUBRIC.md) says what earns a 
 [Integration](docs/INTEGRATION.md) documents the shipped AP inbox adapter (`.eml` or IMAP plus four ERP CSV exports) and
 the adapter pattern for the other agents. Adapters only build inputs; approved proposals leave through a queue.
 
-## What is next
+## Agents 6 to 10: built, live runs pending
 
-Five more agents are in the build queue, chosen by the [rubric](docs/RUBRIC.md) from a
-[public candidate sheet](docs/CANDIDATES.md) with sources: contract playbook review, commercial credit memo,
-lease abstraction, sales order entry from emailed purchase orders, and approve-only prior authorization.
+Five more agents are built to the same standard and wait for their live evaluation run. Their READMEs carry the
+baseline numbers today; the Agent column fills in from the live report. Chosen by the [rubric](docs/RUBRIC.md) from a
+[public candidate sheet](docs/CANDIDATES.md) with sources.
+
+| Agent | Owner role | Code decides | Cases | Baseline route correct | Baseline unsafe outcomes |
+|---|---|---|---:|---:|---:|
+| [Contract Review](projects/contract-review-agent/) | Legal ops, counsel | Playbook thresholds, risk tier, redlines only from fallback text | 128 | 71.1% | 37 unsafe approvals |
+| [Credit Memo](projects/credit-memo-agent/) | Credit analyst, credit officer | Every ratio, add-back policy, exceptions; no approve or decline from the model | 128 | 61.7% | 5 marked ready |
+| [Lease Abstraction](projects/lease-abstraction-agent/) | Lease administrator | Document precedence, date arithmetic, critical-date register | 119 | 79.0% | 6 marked ready |
+| [Order Entry](projects/order-entry-agent/) | Order desk | Part resolution, price tolerance, UOM, MOQ, duplicates, credit | 122 | 74.6% | 3 unsafe auto-creates |
+| [Prior Authorization](projects/prior-auth-agent/) | UM nurse, medical director | Criteria evaluation, SLA clock; approve-only, no deny action exists | 122 | 83.6% | 7 unsafe approvals |
+
+Contract Review has a partial live run: 122 of 128 cases completed before the API spend limit, all 122 routed correctly, 0 unsafe approvals.
 
 ## Run one in two minutes
 
