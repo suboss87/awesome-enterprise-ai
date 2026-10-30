@@ -34,7 +34,7 @@ Every folder under `projects/` has the same parts. Reviewers check each one.
 
 ```sh
 python3 -m unittest discover -s tests -p 'test_*.py'
-for p in projects/*/; do python3 -m unittest discover -s "$p/tests" -t . -p 'test_*.py'; done
+for p in projects/*/; do python3 -m unittest "$p"tests/test_*.py; done
 python3 -m enterprise_ai run <slug>            # example replay
 python3 -m enterprise_ai eval <slug> --baseline-only
 ```

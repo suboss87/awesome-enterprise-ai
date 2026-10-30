@@ -29,7 +29,7 @@ jobs:
           set -e
           for p in projects/*/; do
             echo "== $p"
-            python3 -m unittest discover -s "$p/tests" -t . -p 'test_*.py' -v
+            python3 -m unittest "$p"tests/test_*.py -v
           done
       - name: Example replays
         run: |
