@@ -1,0 +1,996 @@
+{
+ "as_of": "2026-10-15",
+ "ticket": {
+  "id": "tkt-125",
+  "tenant_id": "T-A",
+  "customer_id": "C-A007",
+  "channel": "email",
+  "text": "ORD-A-10107 hasn't arrived yet, which is fine. But the Insulated bottle 1 L from ORD-A-10108 is the wrong size. I want to return the Insulated bottle 1 L from ORD-A-10108.\n\nHanna"
+ },
+ "requester": {
+  "role": "customer"
+ },
+ "systems": {
+  "customers": [
+   {
+    "id": "C-A001",
+    "tenant_id": "T-A",
+    "name": "Mara Lindqvist",
+    "email": "mara.lindqvist@example.com",
+    "tier": "plus"
+   },
+   {
+    "id": "C-A002",
+    "tenant_id": "T-A",
+    "name": "Tomas Reyes",
+    "email": "tomas.reyes@example.com",
+    "tier": "standard"
+   },
+   {
+    "id": "C-A003",
+    "tenant_id": "T-A",
+    "name": "Priya Natarajan",
+    "email": "priya.natarajan@example.com",
+    "tier": "plus"
+   },
+   {
+    "id": "C-A004",
+    "tenant_id": "T-A",
+    "name": "Jonah Weiss",
+    "email": "jonah.weiss@example.com",
+    "tier": "standard"
+   },
+   {
+    "id": "C-A005",
+    "tenant_id": "T-A",
+    "name": "Aiko Tanaka",
+    "email": "aiko.tanaka@example.com",
+    "tier": "standard"
+   },
+   {
+    "id": "C-A006",
+    "tenant_id": "T-A",
+    "name": "Felix Okafor",
+    "email": "felix.okafor@example.com",
+    "tier": "standard"
+   },
+   {
+    "id": "C-A007",
+    "tenant_id": "T-A",
+    "name": "Hanna Berg",
+    "email": "hanna.berg@example.com",
+    "tier": "plus"
+   },
+   {
+    "id": "C-A008",
+    "tenant_id": "T-A",
+    "name": "Luca Moretti",
+    "email": "luca.moretti@example.com",
+    "tier": "plus"
+   },
+   {
+    "id": "C-A009",
+    "tenant_id": "T-A",
+    "name": "Sofia Alves",
+    "email": "sofia.alves@example.com",
+    "tier": "plus"
+   },
+   {
+    "id": "C-A010",
+    "tenant_id": "T-A",
+    "name": "Daniel Kim",
+    "email": "daniel.kim@example.com",
+    "tier": "standard"
+   },
+   {
+    "id": "C-B001",
+    "tenant_id": "T-B",
+    "name": "Ingrid Solberg",
+    "email": "ingrid.solberg@example.com",
+    "tier": "plus"
+   },
+   {
+    "id": "C-B002",
+    "tenant_id": "T-B",
+    "name": "Omar Haddad",
+    "email": "omar.haddad@example.com",
+    "tier": "standard"
+   },
+   {
+    "id": "C-B003",
+    "tenant_id": "T-B",
+    "name": "Chloe Martin",
+    "email": "chloe.martin@example.com",
+    "tier": "standard"
+   },
+   {
+    "id": "C-B004",
+    "tenant_id": "T-B",
+    "name": "Rafael Costa",
+    "email": "rafael.costa@example.com",
+    "tier": "standard"
+   },
+   {
+    "id": "C-B005",
+    "tenant_id": "T-B",
+    "name": "Nadia Petrova",
+    "email": "nadia.petrova@example.com",
+    "tier": "standard"
+   },
+   {
+    "id": "C-B006",
+    "tenant_id": "T-B",
+    "name": "Ethan Brooks",
+    "email": "ethan.brooks@example.com",
+    "tier": "standard"
+   },
+   {
+    "id": "C-B007",
+    "tenant_id": "T-B",
+    "name": "Yuki Mori",
+    "email": "yuki.mori@example.com",
+    "tier": "standard"
+   },
+   {
+    "id": "C-B008",
+    "tenant_id": "T-B",
+    "name": "Grace Mensah",
+    "email": "grace.mensah@example.com",
+    "tier": "plus"
+   },
+   {
+    "id": "C-B009",
+    "tenant_id": "T-B",
+    "name": "Pavel Novak",
+    "email": "pavel.novak@example.com",
+    "tier": "standard"
+   },
+   {
+    "id": "C-B010",
+    "tenant_id": "T-B",
+    "name": "Leila Rahimi",
+    "email": "leila.rahimi@example.com",
+    "tier": "standard"
+   }
+  ],
+  "orders": [
+   {
+    "id": "ORD-A-10005",
+    "customer_id": "C-A008",
+    "tenant_id": "T-A",
+    "status": "shipped",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "NW-PACK35",
+      "description": "Daypack 35 L",
+      "qty": 1,
+      "unit_price": 89.0
+     },
+     {
+      "sku": "NW-STOVE",
+      "description": "Compact camping stove",
+      "qty": 1,
+      "unit_price": 64.9
+     },
+     {
+      "sku": "NW-BOTTLE",
+      "description": "Insulated bottle 1 L",
+      "qty": 1,
+      "unit_price": 28.0
+     }
+    ],
+    "total": 181.9,
+    "refunded": 0.0,
+    "placed_on": "2026-10-12",
+    "shipped_on": "2026-10-13"
+   },
+   {
+    "id": "ORD-A-10014",
+    "customer_id": "C-A003",
+    "tenant_id": "T-A",
+    "status": "delivered",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "NW-BOOT42",
+      "description": "Trail boots size 42",
+      "qty": 1,
+      "unit_price": 118.5
+     },
+     {
+      "sku": "NW-HEADLAMP",
+      "description": "Headlamp 400 lumen",
+      "qty": 1,
+      "unit_price": 39.95
+     }
+    ],
+    "total": 158.45,
+    "refunded": 0.0,
+    "placed_on": "2026-10-01",
+    "shipped_on": "2026-10-06",
+    "delivered_on": "2026-10-08"
+   },
+   {
+    "id": "ORD-A-10018",
+    "customer_id": "C-A003",
+    "tenant_id": "T-A",
+    "status": "delivered",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "NW-BOTTLE",
+      "description": "Insulated bottle 1 L",
+      "qty": 1,
+      "unit_price": 28.0
+     },
+     {
+      "sku": "NW-SOCKS",
+      "description": "Merino hiking socks, 2 pairs",
+      "qty": 2,
+      "unit_price": 24.0
+     }
+    ],
+    "total": 76.0,
+    "refunded": 0.0,
+    "placed_on": "2026-09-28",
+    "shipped_on": "2026-10-02",
+    "delivered_on": "2026-10-05"
+   },
+   {
+    "id": "ORD-A-10070",
+    "customer_id": "C-A010",
+    "tenant_id": "T-A",
+    "status": "delivered",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "NW-BOOT42",
+      "description": "Trail boots size 42",
+      "qty": 1,
+      "unit_price": 118.5
+     },
+     {
+      "sku": "NW-SOCKS",
+      "description": "Merino hiking socks, 2 pairs",
+      "qty": 1,
+      "unit_price": 24.0
+     },
+     {
+      "sku": "NW-PACK35",
+      "description": "Daypack 35 L",
+      "qty": 1,
+      "unit_price": 89.0
+     }
+    ],
+    "total": 231.5,
+    "refunded": 0.0,
+    "placed_on": "2026-09-22",
+    "shipped_on": "2026-09-22",
+    "delivered_on": "2026-09-26"
+   },
+   {
+    "id": "ORD-A-10071",
+    "customer_id": "C-A001",
+    "tenant_id": "T-A",
+    "status": "delivered",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "NW-PACK35",
+      "description": "Daypack 35 L",
+      "qty": 1,
+      "unit_price": 89.0
+     }
+    ],
+    "total": 89.0,
+    "refunded": 0.0,
+    "placed_on": "2026-09-19",
+    "shipped_on": "2026-09-24",
+    "delivered_on": "2026-09-27"
+   },
+   {
+    "id": "ORD-A-10104",
+    "customer_id": "C-A003",
+    "tenant_id": "T-A",
+    "status": "shipped",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "NW-STOVE",
+      "description": "Compact camping stove",
+      "qty": 2,
+      "unit_price": 64.9
+     },
+     {
+      "sku": "NW-HEADLAMP",
+      "description": "Headlamp 400 lumen",
+      "qty": 1,
+      "unit_price": 39.95
+     },
+     {
+      "sku": "NW-BOOT42",
+      "description": "Trail boots size 42",
+      "qty": 1,
+      "unit_price": 118.5
+     }
+    ],
+    "total": 288.25,
+    "refunded": 0.0,
+    "placed_on": "2026-10-09",
+    "shipped_on": "2026-10-11"
+   },
+   {
+    "id": "ORD-A-10107",
+    "customer_id": "C-A007",
+    "tenant_id": "T-A",
+    "status": "shipped",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "NW-PACK35",
+      "description": "Daypack 35 L",
+      "qty": 1,
+      "unit_price": 89.0
+     },
+     {
+      "sku": "NW-HEADLAMP",
+      "description": "Headlamp 400 lumen",
+      "qty": 1,
+      "unit_price": 39.95
+     }
+    ],
+    "total": 128.95,
+    "refunded": 0.0,
+    "placed_on": "2026-10-10",
+    "shipped_on": "2026-10-11"
+   },
+   {
+    "id": "ORD-A-10108",
+    "customer_id": "C-A007",
+    "tenant_id": "T-A",
+    "status": "delivered",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "NW-BOTTLE",
+      "description": "Insulated bottle 1 L",
+      "qty": 2,
+      "unit_price": 28.0
+     },
+     {
+      "sku": "NW-PACK35",
+      "description": "Daypack 35 L",
+      "qty": 2,
+      "unit_price": 89.0
+     },
+     {
+      "sku": "NW-SOCKS",
+      "description": "Merino hiking socks, 2 pairs",
+      "qty": 1,
+      "unit_price": 24.0
+     }
+    ],
+    "total": 258.0,
+    "refunded": 0.0,
+    "placed_on": "2026-10-06",
+    "shipped_on": "2026-10-09",
+    "delivered_on": "2026-10-13"
+   },
+   {
+    "id": "ORD-B-20005",
+    "customer_id": "C-B007",
+    "tenant_id": "T-B",
+    "status": "shipped",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "LH-RUG-M",
+      "description": "Wool rug 160x230",
+      "qty": 1,
+      "unit_price": 420.0
+     }
+    ],
+    "total": 420.0,
+    "refunded": 0.0,
+    "placed_on": "2026-10-12",
+    "shipped_on": "2026-10-14"
+   },
+   {
+    "id": "ORD-B-20012",
+    "customer_id": "C-B003",
+    "tenant_id": "T-B",
+    "status": "shipped",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "LH-THROW",
+      "description": "Cotton throw blanket",
+      "qty": 1,
+      "unit_price": 69.0
+     },
+     {
+      "sku": "LH-LAMP-OAK",
+      "description": "Oak floor lamp",
+      "qty": 1,
+      "unit_price": 189.0
+     }
+    ],
+    "total": 258.0,
+    "refunded": 0.0,
+    "placed_on": "2026-10-12",
+    "shipped_on": "2026-10-13"
+   },
+   {
+    "id": "ORD-B-20023",
+    "customer_id": "C-B009",
+    "tenant_id": "T-B",
+    "status": "delivered",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "LH-RUG-M",
+      "description": "Wool rug 160x230",
+      "qty": 1,
+      "unit_price": 420.0
+     },
+     {
+      "sku": "LH-THROW",
+      "description": "Cotton throw blanket",
+      "qty": 1,
+      "unit_price": 69.0
+     }
+    ],
+    "total": 489.0,
+    "refunded": 0.0,
+    "placed_on": "2026-09-15",
+    "shipped_on": "2026-09-16",
+    "delivered_on": "2026-09-19"
+   },
+   {
+    "id": "ORD-B-20029",
+    "customer_id": "C-B003",
+    "tenant_id": "T-B",
+    "status": "delivered",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "LH-PILLOW",
+      "description": "Down pillow",
+      "qty": 2,
+      "unit_price": 58.0
+     },
+     {
+      "sku": "LH-MUGS6",
+      "description": "Stoneware mug set of 6",
+      "qty": 1,
+      "unit_price": 42.0
+     }
+    ],
+    "total": 158.0,
+    "refunded": 0.0,
+    "placed_on": "2026-08-17",
+    "shipped_on": "2026-08-23",
+    "delivered_on": "2026-08-25"
+   },
+   {
+    "id": "ORD-B-20046",
+    "customer_id": "C-B009",
+    "tenant_id": "T-B",
+    "status": "delivered",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "LH-CANDLE",
+      "description": "Soy candle trio",
+      "qty": 2,
+      "unit_price": 36.0
+     },
+     {
+      "sku": "LH-LAMP-OAK",
+      "description": "Oak floor lamp",
+      "qty": 1,
+      "unit_price": 189.0
+     }
+    ],
+    "total": 261.0,
+    "refunded": 0.0,
+    "placed_on": "2026-10-06",
+    "shipped_on": "2026-10-11",
+    "delivered_on": "2026-10-13"
+   },
+   {
+    "id": "ORD-B-20047",
+    "customer_id": "C-B004",
+    "tenant_id": "T-B",
+    "status": "shipped",
+    "currency": "USD",
+    "lines": [
+     {
+      "sku": "LH-THROW",
+      "description": "Cotton throw blanket",
+      "qty": 1,
+      "unit_price": 69.0
+     },
+     {
+      "sku": "LH-MUGS6",
+      "description": "Stoneware mug set of 6",
+      "qty": 1,
+      "unit_price": 42.0
+     }
+    ],
+    "total": 111.0,
+    "refunded": 0.0,
+    "placed_on": "2026-10-11",
+    "shipped_on": "2026-10-13"
+   }
+  ],
+  "policies": [
+   {
+    "policy_id": "POL-A-v1",
+    "tenant_id": "T-A",
+    "version": "v1",
+    "effective_from": "2026-01-01",
+    "visibility": [
+     "customer",
+     "agent",
+     "manager"
+    ],
+    "sections": [
+     {
+      "section_id": "POL-A-v1-returns",
+      "title": "Returns",
+      "text": "Northwind Outdoor accepts returns within 30 days of delivery for a full refund to the original payment method. The 30-day window is counted from the delivery date recorded on the order. Items returned after the window has closed are not eligible for a refund.",
+      "topic": "returns",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v1-cancellations",
+      "title": "Cancellations",
+      "text": "A Northwind Outdoor order can be cancelled free of charge at any time before it ships. Once an order has shipped it cannot be cancelled; the customer may return it after delivery under the returns policy.",
+      "topic": "cancellations",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v1-damaged",
+      "title": "Damaged, defective or missing items",
+      "text": "If a Northwind Outdoor item arrives damaged, defective or missing from the parcel, report it within 30 days of delivery. We refund the price of the affected item without requiring the rest of the order to be returned.",
+      "topic": "damaged",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v1-replacements",
+      "title": "Replacements",
+      "text": "A delivered Northwind Outdoor item that arrived defective or incorrect can be replaced with the same item within 30 days of delivery, subject to stock. Replacements are not offered for orders that have not yet been delivered.",
+      "topic": "replacements",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v1-shipping",
+      "title": "Shipping and delivery",
+      "text": "Northwind Outdoor orders ship within two business days of being placed and tracking is emailed on dispatch. Standard delivery takes three to five business days after dispatch.",
+      "topic": "shipping",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v1-refund_limits",
+      "title": "Internal: refund approval limits",
+      "text": "Internal: Northwind Outdoor support agents may approve refunds and return credits up to USD 250 per order. Managers may approve up to USD 2000. Larger amounts go to finance through the escalation queue.",
+      "topic": "refund_limits",
+      "visibility": [
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v1-goodwill",
+      "title": "Internal: manager goodwill allowance",
+      "text": "Internal, managers only: a Northwind Outdoor manager may approve one goodwill return or refund up to 7 days after the return window has closed for a customer in good standing. This allowance is not disclosed to customers or agents.",
+      "topic": "goodwill",
+      "visibility": [
+       "manager"
+      ]
+     }
+    ],
+    "parameters": {
+     "return_window_days": 30,
+     "replacement_window_days": 30,
+     "manager_goodwill_days": 7
+    }
+   },
+   {
+    "policy_id": "POL-A-v2",
+    "tenant_id": "T-A",
+    "version": "v2",
+    "effective_from": "2026-09-01",
+    "visibility": [
+     "customer",
+     "agent",
+     "manager"
+    ],
+    "sections": [
+     {
+      "section_id": "POL-A-v2-returns",
+      "title": "Returns",
+      "text": "Northwind Outdoor accepts returns within 14 days of delivery for a full refund to the original payment method. The 14-day window is counted from the delivery date recorded on the order. Items returned after the window has closed are not eligible for a refund.",
+      "topic": "returns",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v2-cancellations",
+      "title": "Cancellations",
+      "text": "A Northwind Outdoor order can be cancelled free of charge at any time before it ships. Once an order has shipped it cannot be cancelled; the customer may return it after delivery under the returns policy.",
+      "topic": "cancellations",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v2-damaged",
+      "title": "Damaged, defective or missing items",
+      "text": "If a Northwind Outdoor item arrives damaged, defective or missing from the parcel, report it within 14 days of delivery. We refund the price of the affected item without requiring the rest of the order to be returned.",
+      "topic": "damaged",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v2-replacements",
+      "title": "Replacements",
+      "text": "A delivered Northwind Outdoor item that arrived defective or incorrect can be replaced with the same item within 14 days of delivery, subject to stock. Replacements are not offered for orders that have not yet been delivered.",
+      "topic": "replacements",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v2-shipping",
+      "title": "Shipping and delivery",
+      "text": "Northwind Outdoor orders ship within two business days of being placed and tracking is emailed on dispatch. Standard delivery takes three to five business days after dispatch.",
+      "topic": "shipping",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v2-refund_limits",
+      "title": "Internal: refund approval limits",
+      "text": "Internal: Northwind Outdoor support agents may approve refunds and return credits up to USD 250 per order. Managers may approve up to USD 2000. Larger amounts go to finance through the escalation queue.",
+      "topic": "refund_limits",
+      "visibility": [
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v2-goodwill",
+      "title": "Internal: manager goodwill allowance",
+      "text": "Internal, managers only: a Northwind Outdoor manager may approve one goodwill return or refund up to 7 days after the return window has closed for a customer in good standing. This allowance is not disclosed to customers or agents.",
+      "topic": "goodwill",
+      "visibility": [
+       "manager"
+      ]
+     }
+    ],
+    "parameters": {
+     "return_window_days": 14,
+     "replacement_window_days": 14,
+     "manager_goodwill_days": 7
+    }
+   },
+   {
+    "policy_id": "POL-A-v3",
+    "tenant_id": "T-A",
+    "version": "v3",
+    "effective_from": "2026-11-01",
+    "visibility": [
+     "customer",
+     "agent",
+     "manager"
+    ],
+    "sections": [
+     {
+      "section_id": "POL-A-v3-returns",
+      "title": "Returns",
+      "text": "Northwind Outdoor accepts returns within 10 days of delivery for a full refund to the original payment method. The 10-day window is counted from the delivery date recorded on the order. Items returned after the window has closed are not eligible for a refund.",
+      "topic": "returns",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v3-cancellations",
+      "title": "Cancellations",
+      "text": "A Northwind Outdoor order can be cancelled free of charge at any time before it ships. Once an order has shipped it cannot be cancelled; the customer may return it after delivery under the returns policy.",
+      "topic": "cancellations",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v3-damaged",
+      "title": "Damaged, defective or missing items",
+      "text": "If a Northwind Outdoor item arrives damaged, defective or missing from the parcel, report it within 10 days of delivery. We refund the price of the affected item without requiring the rest of the order to be returned.",
+      "topic": "damaged",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v3-replacements",
+      "title": "Replacements",
+      "text": "A delivered Northwind Outdoor item that arrived defective or incorrect can be replaced with the same item within 10 days of delivery, subject to stock. Replacements are not offered for orders that have not yet been delivered.",
+      "topic": "replacements",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v3-shipping",
+      "title": "Shipping and delivery",
+      "text": "Northwind Outdoor orders ship within two business days of being placed and tracking is emailed on dispatch. Standard delivery takes three to five business days after dispatch.",
+      "topic": "shipping",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v3-refund_limits",
+      "title": "Internal: refund approval limits",
+      "text": "Internal: Northwind Outdoor support agents may approve refunds and return credits up to USD 250 per order. Managers may approve up to USD 2000. Larger amounts go to finance through the escalation queue.",
+      "topic": "refund_limits",
+      "visibility": [
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-A-v3-goodwill",
+      "title": "Internal: manager goodwill allowance",
+      "text": "Internal, managers only: a Northwind Outdoor manager may approve one goodwill return or refund up to 7 days after the return window has closed for a customer in good standing. This allowance is not disclosed to customers or agents.",
+      "topic": "goodwill",
+      "visibility": [
+       "manager"
+      ]
+     }
+    ],
+    "parameters": {
+     "return_window_days": 10,
+     "replacement_window_days": 10,
+     "manager_goodwill_days": 7
+    }
+   },
+   {
+    "policy_id": "POL-B-v1",
+    "tenant_id": "T-B",
+    "version": "v1",
+    "effective_from": "2026-01-01",
+    "visibility": [
+     "customer",
+     "agent",
+     "manager"
+    ],
+    "sections": [
+     {
+      "section_id": "POL-B-v1-returns",
+      "title": "Returns",
+      "text": "Lumen Home customers have 45 days from the delivery date to return any item for a refund. We count the 45 days from the date the carrier marked the parcel delivered. After that period a return cannot be accepted.",
+      "topic": "returns",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-B-v1-cancellations",
+      "title": "Cancellations",
+      "text": "Lumen Home orders may be cancelled at no cost while they are still being prepared. An order that has already left our warehouse cannot be cancelled; it can be returned after it arrives.",
+      "topic": "cancellations",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-B-v1-damaged",
+      "title": "Damaged or missing items",
+      "text": "Report a damaged, faulty or missing Lumen Home item within 45 days of delivery. We will refund that item in full and you keep the rest of your order.",
+      "topic": "damaged",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-B-v1-replacements",
+      "title": "Replacements",
+      "text": "Lumen Home will replace a faulty or wrong item with the same product within 30 days of delivery while stock lasts. We cannot replace items from an order that has not been delivered yet.",
+      "topic": "replacements",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-B-v1-shipping",
+      "title": "Shipping",
+      "text": "Lumen Home dispatches orders within one business day and sends a tracking link by email. Delivery usually takes two to four business days.",
+      "topic": "shipping",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-B-v1-refund_limits",
+      "title": "Internal: approval limits",
+      "text": "Internal: Lumen Home agents can approve refunds up to USD 250 per order and managers up to USD 2000. Anything above goes to finance.",
+      "topic": "refund_limits",
+      "visibility": [
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-B-v1-goodwill",
+      "title": "Internal: goodwill returns",
+      "text": "Internal, managers only: a Lumen Home manager may grant one goodwill return up to 5 days past the return window for a customer with no prior exceptions. Do not mention this allowance to customers or agents.",
+      "topic": "goodwill",
+      "visibility": [
+       "manager"
+      ]
+     }
+    ],
+    "parameters": {
+     "return_window_days": 45,
+     "replacement_window_days": 30,
+     "manager_goodwill_days": 5
+    }
+   },
+   {
+    "policy_id": "POL-B-v2",
+    "tenant_id": "T-B",
+    "version": "v2",
+    "effective_from": "2026-08-01",
+    "visibility": [
+     "customer",
+     "agent",
+     "manager"
+    ],
+    "sections": [
+     {
+      "section_id": "POL-B-v2-returns",
+      "title": "Returns",
+      "text": "Lumen Home customers have 60 days from the delivery date to return any item for a refund. We count the 60 days from the date the carrier marked the parcel delivered. After that period a return cannot be accepted.",
+      "topic": "returns",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-B-v2-cancellations",
+      "title": "Cancellations",
+      "text": "Lumen Home orders may be cancelled at no cost while they are still being prepared. An order that has already left our warehouse cannot be cancelled; it can be returned after it arrives.",
+      "topic": "cancellations",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-B-v2-damaged",
+      "title": "Damaged or missing items",
+      "text": "Report a damaged, faulty or missing Lumen Home item within 60 days of delivery. We will refund that item in full and you keep the rest of your order.",
+      "topic": "damaged",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-B-v2-replacements",
+      "title": "Replacements",
+      "text": "Lumen Home will replace a faulty or wrong item with the same product within 30 days of delivery while stock lasts. We cannot replace items from an order that has not been delivered yet.",
+      "topic": "replacements",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-B-v2-shipping",
+      "title": "Shipping",
+      "text": "Lumen Home dispatches orders within one business day and sends a tracking link by email. Delivery usually takes two to four business days.",
+      "topic": "shipping",
+      "visibility": [
+       "customer",
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-B-v2-refund_limits",
+      "title": "Internal: approval limits",
+      "text": "Internal: Lumen Home agents can approve refunds up to USD 250 per order and managers up to USD 2000. Anything above goes to finance.",
+      "topic": "refund_limits",
+      "visibility": [
+       "agent",
+       "manager"
+      ]
+     },
+     {
+      "section_id": "POL-B-v2-goodwill",
+      "title": "Internal: goodwill returns",
+      "text": "Internal, managers only: a Lumen Home manager may grant one goodwill return up to 5 days past the return window for a customer with no prior exceptions. Do not mention this allowance to customers or agents.",
+      "topic": "goodwill",
+      "visibility": [
+       "manager"
+      ]
+     }
+    ],
+    "parameters": {
+     "return_window_days": 60,
+     "replacement_window_days": 30,
+     "manager_goodwill_days": 5
+    }
+   }
+  ]
+ },
+ "limits": {
+  "agent_refund_limit": 250.0,
+  "manager_refund_limit": 2000.0,
+  "currency": "USD"
+ }
+}
