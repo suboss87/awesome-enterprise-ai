@@ -5,3 +5,14 @@ __pycache__/
 # Local working notes
 tasks/
 memory/
+
+# private evaluation runs and traces
+projects/*/evals/runs/
+*.trace.jsonl
+
+# macOS Finder duplicates
+* 2
+* 2.*
+
+# agent worktrees and local tool state
+.claude/

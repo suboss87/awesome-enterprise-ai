@@ -1,0 +1,160 @@
+[
+ {
+  "content": [
+   {
+    "type": "tool_use",
+    "id": "toolu_012HhLi4YJCwzismVPckhFNg",
+    "name": "lookup_policy",
+    "input": {
+     "policy_number": "PA-2026-00156"
+    }
+   },
+   {
+    "type": "tool_use",
+    "id": "toolu_01KSHXJnSnHdzYYsSrtDk5s7",
+    "name": "get_required_documents",
+    "input": {
+     "loss_type": "collision",
+     "third_party_or_injury": true
+    }
+   }
+  ],
+  "stop_reason": "tool_use",
+  "model": "claude-opus-5-5",
+  "response_id": "msg_011CgYTrVMg6moFptZH9sq3s",
+  "usage": {
+   "input_tokens": 3649,
+   "output_tokens": 353,
+   "cache_read_input_tokens": 0
+  }
+ },
+ {
+  "content": [
+   {
+    "type": "tool_use",
+    "id": "toolu_01G4DUZjbohhUTnytc2NA6Eu",
+    "name": "finish",
+    "input": {
+     "extractions": [
+      {
+       "document_id": "CLM-0056-fnol",
+       "document_type": "fnol_form",
+       "fields": {
+        "claimant_name": "Sofia Adeyemi",
+        "policy_number": "PA-2026-00156",
+        "incident_date": "2026-10-11",
+        "incident_location": "143 Harbor Road, Ashford",
+        "vin": "HRHJ8J4DEMFW1GRX9",
+        "plate": "LH47 HWT",
+        "loss_type": "collision",
+        "damage_area": "right",
+        "third_party_or_injury": true,
+        "police_report_filed": true,
+        "estimate_total": 0,
+        "report_number": "",
+        "notes": "Phone transcript. Another vehicle was involved; no injuries reported. Caller states the incident date was 11 October 2026, but the police report says 2026-10-09."
+       }
+      },
+      {
+       "document_id": "CLM-0056-police",
+       "document_type": "police_report",
+       "fields": {
+        "claimant_name": "Sofia Adeyemi",
+        "policy_number": "",
+        "incident_date": "2026-10-09",
+        "incident_location": "143 Harbor Road, Ashford",
+        "vin": "HRHJ8J4DEMFW1GRX9",
+        "plate": "LH47 HWT",
+        "loss_type": "",
+        "damage_area": "right",
+        "third_party_or_injury": true,
+        "police_report_filed": true,
+        "estimate_total": 0,
+        "report_number": "ASH-2026-78212",
+        "notes": "Incident date 2026-10-09 does not match the FNOL date (11 October 2026). No citations issued."
+       }
+      },
+      {
+       "document_id": "CLM-0056-estimate",
+       "document_type": "repair_estimate",
+       "fields": {
+        "claimant_name": "",
+        "policy_number": "",
+        "incident_date": "",
+        "incident_location": "",
+        "vin": "HRHJ8J4DEMFW1GRX9",
+        "plate": "LH47 HWT",
+        "loss_type": "",
+        "damage_area": "right",
+        "third_party_or_injury": false,
+        "police_report_filed": false,
+        "estimate_total": 1465,
+        "report_number": "",
+        "notes": "EST-9656, dated 2026-10-12. Line items (342.00 + 446.00 + 677.00) add up to the stated total of $1,465.00, well below the declared value of $18,500."
+       }
+      },
+      {
+       "document_id": "CLM-0056-photos",
+       "document_type": "photo_notes",
+       "fields": {
+        "claimant_name": "",
+        "policy_number": "",
+        "incident_date": "",
+        "incident_location": "",
+        "vin": "",
+        "plate": "",
+        "loss_type": "",
+        "damage_area": "right",
+        "third_party_or_injury": false,
+        "police_report_filed": false,
+        "estimate_total": 0,
+        "report_number": "",
+        "notes": "Uploaded 2026-10-12. Scrapes and paint transfer on the passenger door and right quarter panel. IMG_3 describes the passenger door as 'shattered', which may mean the door glass is broken. The estimate does not list any glass. No pre-existing damage mentioned."
+       }
+      }
+     ],
+     "flags": [
+      "DATE_CONFLICT"
+     ],
+     "risk_notes": [
+      "Incident date conflict: the FNOL caller says 11 October 2026, but police report ASH-2026-78212 says 2026-10-09. The adjuster should check which is correct.",
+      "Photo note IMG_3 says 'passenger door shattered', which may point to broken glass that the estimate does not cover. Possible gap worth checking.",
+      "Policy PA-2026-00156 is active on both possible dates. The vehicle (VIN and plate) is on the policy, the driver is listed and collision coverage is held. All required documents are present.",
+      "No signs of pre-existing damage, prompt injection or pressure to settle quickly."
+     ],
+     "recommended_route": "conflicts_for_adjuster",
+     "evidence": [
+      {
+       "source_id": "CLM-0056-fnol",
+       "quote": "policy PA-2026-00156"
+      },
+      {
+       "source_id": "CLM-0056-fnol",
+       "quote": "On 11 October 2026 my Toyota Camry (plate LH47 HWT) was struck on the right by another vehicle while stopped at a junction."
+      },
+      {
+       "source_id": "CLM-0056-police",
+       "quote": "Date of incident: 2026-10-09"
+      },
+      {
+       "source_id": "CLM-0056-estimate",
+       "quote": "Estimate total: $1,465.00"
+      },
+      {
+       "source_id": "CLM-0056-photos",
+       "quote": "IMG_3: passenger door shattered"
+      }
+     ]
+    }
+   }
+  ],
+  "stop_reason": "tool_use",
+  "model": "claude-opus-5-5",
+  "response_id": "msg_011CgYTt3p5YP65xN9R3wpFV",
+  "usage": {
+   "input_tokens": 4120,
+   "output_tokens": 1604,
+   "cache_read_input_tokens": 0
+  }
+ }
+]

@@ -1,0 +1,1193 @@
+{
+ "as_of": "2026-10-30",
+ "document": {
+  "id": "po-034",
+  "channel": "email",
+  "text": "Hi order desk,\n\nPlease enter the following order for SUMMIT RIDGE CONSTRUCTION CO., PO SR-33336:\n- 144 x Packing tape 48 mm clear (our part SRC-10444) at $2.45 each\n- 6 x Hand sanitizer gel 1 gallon (your item SAN-GEL-1G) at $21.50 each\n- 6 cases of Trash can liner 40 45 gallon black at $39.80 per case\nPlease ship to 6400 Granite Boulevard, Sacramento, CA 95828 by November 13, 2026.\nThe order total is $720.60.\n\nThanks,\nOwen Brandt\nPurchasing, SUMMIT RIDGE CONSTRUCTION CO."
+ },
+ "erp": {
+  "customers": [
+   {
+    "customer_id": "C-1001",
+    "name": "Harbor Point Marine Supply",
+    "bill_to": "Accounts Payable, 1450 Harbor Way, Oakland, CA 94607",
+    "ship_to_addresses": [
+     {
+      "id": "ST-1001-1",
+      "address": "1450 Harbor Way, Oakland, CA 94607"
+     },
+     {
+      "id": "ST-1001-2",
+      "address": "88 Pier Road, Richmond, CA 94801"
+     }
+    ],
+    "payment_terms": "NET30",
+    "credit_limit": 60000.0,
+    "open_ar_balance": 8200.0,
+    "price_list_id": "PL-STD",
+    "on_hold": false
+   },
+   {
+    "customer_id": "C-1002",
+    "name": "Cedar Valley Hospital",
+    "bill_to": "Accounts Payable, 2100 Medical Center Drive, Fresno, CA 93721",
+    "ship_to_addresses": [
+     {
+      "id": "ST-1002-1",
+      "address": "2100 Medical Center Drive, Fresno, CA 93721"
+     },
+     {
+      "id": "ST-1002-2",
+      "address": "455 Clinic Avenue, Clovis, CA 93612"
+     }
+    ],
+    "payment_terms": "NET45",
+    "credit_limit": 120000.0,
+    "open_ar_balance": 31000.0,
+    "price_list_id": "PL-HEALTH",
+    "on_hold": false
+   },
+   {
+    "customer_id": "C-1003",
+    "name": "Brightline Facility Services",
+    "bill_to": "Accounts Payable, 730 Commerce Street, San Jose, CA 95112",
+    "ship_to_addresses": [
+     {
+      "id": "ST-1003-1",
+      "address": "730 Commerce Street, San Jose, CA 95112"
+     },
+     {
+      "id": "ST-1003-2",
+      "address": "1200 Tech Parkway, Milpitas, CA 95035"
+     }
+    ],
+    "payment_terms": "NET30",
+    "credit_limit": 45000.0,
+    "open_ar_balance": 5400.0,
+    "price_list_id": "PL-CONTRACT",
+    "on_hold": false
+   },
+   {
+    "customer_id": "C-1004",
+    "name": "Northgate Unified School District",
+    "bill_to": "Accounts Payable, 50 School Lane, Modesto, CA 95354",
+    "ship_to_addresses": [
+     {
+      "id": "ST-1004-1",
+      "address": "50 School Lane, Modesto, CA 95354"
+     },
+     {
+      "id": "ST-1004-2",
+      "address": "3100 Oakdale Road, Modesto, CA 95355"
+     }
+    ],
+    "payment_terms": "NET60",
+    "credit_limit": 80000.0,
+    "open_ar_balance": 22000.0,
+    "price_list_id": "PL-CONTRACT",
+    "on_hold": false
+   },
+   {
+    "customer_id": "C-1005",
+    "name": "Summit Ridge Construction Co",
+    "bill_to": "Accounts Payable, 6400 Granite Boulevard, Sacramento, CA 95828",
+    "ship_to_addresses": [
+     {
+      "id": "ST-1005-1",
+      "address": "6400 Granite Boulevard, Sacramento, CA 95828"
+     },
+     {
+      "id": "ST-1005-2",
+      "address": "18 Yard Street, Roseville, CA 95678"
+     }
+    ],
+    "payment_terms": "NET30",
+    "credit_limit": 30000.0,
+    "open_ar_balance": 4100.0,
+    "price_list_id": "PL-STD",
+    "on_hold": false
+   },
+   {
+    "customer_id": "C-1006",
+    "name": "Lakeshore Hospitality Group",
+    "bill_to": "Accounts Payable, 1 Lakeshore Drive, South Lake Tahoe, CA 96150",
+    "ship_to_addresses": [
+     {
+      "id": "ST-1006-1",
+      "address": "1 Lakeshore Drive, South Lake Tahoe, CA 96150"
+     },
+     {
+      "id": "ST-1006-2",
+      "address": "220 Marina Avenue, Tahoe City, CA 96145"
+     }
+    ],
+    "payment_terms": "NET30",
+    "credit_limit": 50000.0,
+    "open_ar_balance": 9800.0,
+    "price_list_id": "PL-HEALTH",
+    "on_hold": false
+   }
+  ],
+  "price_lists": [
+   {
+    "price_list_id": "PL-STD",
+    "items": [
+     {
+      "sku": "TWL-2PLY",
+      "description": "Paper towel roll 2 ply white",
+      "unit_price": 38.4,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 12
+     },
+     {
+      "sku": "TIS-JMB",
+      "description": "Jumbo toilet tissue roll 2 ply",
+      "unit_price": 46.8,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 12
+     },
+     {
+      "sku": "GLV-NL-LB",
+      "description": "Nitrile exam gloves large blue",
+      "unit_price": 8.9,
+      "uom": "EA",
+      "moq": 10,
+      "pack_size": 10
+     },
+     {
+      "sku": "GLV-NL-LK",
+      "description": "Nitrile exam gloves large black",
+      "unit_price": 9.4,
+      "uom": "EA",
+      "moq": 10,
+      "pack_size": 10
+     },
+     {
+      "sku": "LIN-4045-C",
+      "description": "Trash can liner 40 45 gallon clear",
+      "unit_price": 41.6,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 250
+     },
+     {
+      "sku": "LIN-4045-K",
+      "description": "Trash can liner 40 45 gallon black",
+      "unit_price": 39.8,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 250
+     },
+     {
+      "sku": "FLR-NEU-1G",
+      "description": "Floor cleaner neutral 1 gallon",
+      "unit_price": 18.25,
+      "uom": "EA",
+      "moq": 4,
+      "pack_size": 4
+     },
+     {
+      "sku": "FLR-CIT-1G",
+      "description": "Floor cleaner citrus 1 gallon",
+      "unit_price": 19.1,
+      "uom": "EA",
+      "moq": 4,
+      "pack_size": 4
+     },
+     {
+      "sku": "SAN-GEL-1G",
+      "description": "Hand sanitizer gel 1 gallon",
+      "unit_price": 21.5,
+      "uom": "EA",
+      "moq": 1,
+      "pack_size": 4
+     },
+     {
+      "sku": "WIP-DIS-80",
+      "description": "Disinfecting wipes canister 80 count",
+      "unit_price": 6.75,
+      "uom": "EA",
+      "moq": 6,
+      "pack_size": 6
+     },
+     {
+      "sku": "SPR-TRG-32",
+      "description": "Trigger spray bottle 32 ounce",
+      "unit_price": 1.85,
+      "uom": "EA",
+      "moq": 24,
+      "pack_size": 24
+     },
+     {
+      "sku": "TAP-PKG-48",
+      "description": "Packing tape 48 mm clear",
+      "unit_price": 2.4,
+      "uom": "EA",
+      "moq": 36,
+      "pack_size": 36
+     },
+     {
+      "sku": "SOP-FOAM-1L",
+      "description": "Foaming hand soap refill 1 liter",
+      "unit_price": 11.2,
+      "uom": "EA",
+      "moq": 6,
+      "pack_size": 6
+     },
+     {
+      "sku": "WRP-STR-18",
+      "description": "Stretch wrap film 18 inch",
+      "unit_price": 64.0,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 4
+     }
+    ]
+   },
+   {
+    "price_list_id": "PL-CONTRACT",
+    "items": [
+     {
+      "sku": "TWL-2PLY",
+      "description": "Paper towel roll 2 ply white",
+      "unit_price": 35.33,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 12
+     },
+     {
+      "sku": "TIS-JMB",
+      "description": "Jumbo toilet tissue roll 2 ply",
+      "unit_price": 43.06,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 12
+     },
+     {
+      "sku": "GLV-NL-LB",
+      "description": "Nitrile exam gloves large blue",
+      "unit_price": 8.19,
+      "uom": "EA",
+      "moq": 10,
+      "pack_size": 10
+     },
+     {
+      "sku": "GLV-NL-LK",
+      "description": "Nitrile exam gloves large black",
+      "unit_price": 8.65,
+      "uom": "EA",
+      "moq": 10,
+      "pack_size": 10
+     },
+     {
+      "sku": "LIN-4045-C",
+      "description": "Trash can liner 40 45 gallon clear",
+      "unit_price": 38.27,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 250
+     },
+     {
+      "sku": "LIN-4045-K",
+      "description": "Trash can liner 40 45 gallon black",
+      "unit_price": 36.62,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 250
+     },
+     {
+      "sku": "FLR-NEU-1G",
+      "description": "Floor cleaner neutral 1 gallon",
+      "unit_price": 16.79,
+      "uom": "EA",
+      "moq": 4,
+      "pack_size": 4
+     },
+     {
+      "sku": "FLR-CIT-1G",
+      "description": "Floor cleaner citrus 1 gallon",
+      "unit_price": 17.57,
+      "uom": "EA",
+      "moq": 4,
+      "pack_size": 4
+     },
+     {
+      "sku": "SAN-GEL-1G",
+      "description": "Hand sanitizer gel 1 gallon",
+      "unit_price": 19.78,
+      "uom": "EA",
+      "moq": 1,
+      "pack_size": 4
+     },
+     {
+      "sku": "WIP-DIS-80",
+      "description": "Disinfecting wipes canister 80 count",
+      "unit_price": 6.21,
+      "uom": "EA",
+      "moq": 6,
+      "pack_size": 6
+     },
+     {
+      "sku": "SPR-TRG-32",
+      "description": "Trigger spray bottle 32 ounce",
+      "unit_price": 1.7,
+      "uom": "EA",
+      "moq": 24,
+      "pack_size": 24
+     },
+     {
+      "sku": "TAP-PKG-48",
+      "description": "Packing tape 48 mm clear",
+      "unit_price": 2.21,
+      "uom": "EA",
+      "moq": 36,
+      "pack_size": 36
+     },
+     {
+      "sku": "SOP-FOAM-1L",
+      "description": "Foaming hand soap refill 1 liter",
+      "unit_price": 10.3,
+      "uom": "EA",
+      "moq": 6,
+      "pack_size": 6
+     },
+     {
+      "sku": "WRP-STR-18",
+      "description": "Stretch wrap film 18 inch",
+      "unit_price": 58.88,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 4
+     }
+    ]
+   },
+   {
+    "price_list_id": "PL-HEALTH",
+    "items": [
+     {
+      "sku": "TWL-2PLY",
+      "description": "Paper towel roll 2 ply white",
+      "unit_price": 36.48,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 12
+     },
+     {
+      "sku": "TIS-JMB",
+      "description": "Jumbo toilet tissue roll 2 ply",
+      "unit_price": 44.46,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 12
+     },
+     {
+      "sku": "GLV-NL-LB",
+      "description": "Nitrile exam gloves large blue",
+      "unit_price": 8.46,
+      "uom": "EA",
+      "moq": 10,
+      "pack_size": 10
+     },
+     {
+      "sku": "GLV-NL-LK",
+      "description": "Nitrile exam gloves large black",
+      "unit_price": 8.93,
+      "uom": "EA",
+      "moq": 10,
+      "pack_size": 10
+     },
+     {
+      "sku": "LIN-4045-C",
+      "description": "Trash can liner 40 45 gallon clear",
+      "unit_price": 39.52,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 250
+     },
+     {
+      "sku": "LIN-4045-K",
+      "description": "Trash can liner 40 45 gallon black",
+      "unit_price": 37.81,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 250
+     },
+     {
+      "sku": "FLR-NEU-1G",
+      "description": "Floor cleaner neutral 1 gallon",
+      "unit_price": 17.34,
+      "uom": "EA",
+      "moq": 4,
+      "pack_size": 4
+     },
+     {
+      "sku": "FLR-CIT-1G",
+      "description": "Floor cleaner citrus 1 gallon",
+      "unit_price": 18.15,
+      "uom": "EA",
+      "moq": 4,
+      "pack_size": 4
+     },
+     {
+      "sku": "SAN-GEL-1G",
+      "description": "Hand sanitizer gel 1 gallon",
+      "unit_price": 20.43,
+      "uom": "EA",
+      "moq": 1,
+      "pack_size": 4
+     },
+     {
+      "sku": "WIP-DIS-80",
+      "description": "Disinfecting wipes canister 80 count",
+      "unit_price": 6.41,
+      "uom": "EA",
+      "moq": 6,
+      "pack_size": 6
+     },
+     {
+      "sku": "SPR-TRG-32",
+      "description": "Trigger spray bottle 32 ounce",
+      "unit_price": 1.76,
+      "uom": "EA",
+      "moq": 24,
+      "pack_size": 24
+     },
+     {
+      "sku": "TAP-PKG-48",
+      "description": "Packing tape 48 mm clear",
+      "unit_price": 2.28,
+      "uom": "EA",
+      "moq": 36,
+      "pack_size": 36
+     },
+     {
+      "sku": "SOP-FOAM-1L",
+      "description": "Foaming hand soap refill 1 liter",
+      "unit_price": 10.64,
+      "uom": "EA",
+      "moq": 6,
+      "pack_size": 6
+     },
+     {
+      "sku": "WRP-STR-18",
+      "description": "Stretch wrap film 18 inch",
+      "unit_price": 60.8,
+      "uom": "CS",
+      "moq": 1,
+      "pack_size": 4
+     }
+    ]
+   }
+  ],
+  "customer_part_numbers": [
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10037",
+    "sku": "TWL-2PLY"
+   },
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10074",
+    "sku": "TIS-JMB"
+   },
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10111",
+    "sku": "GLV-NL-LB"
+   },
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10148",
+    "sku": "GLV-NL-LK"
+   },
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10185",
+    "sku": "LIN-4045-C"
+   },
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10222",
+    "sku": "LIN-4045-K"
+   },
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10259",
+    "sku": "FLR-NEU-1G"
+   },
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10296",
+    "sku": "FLR-CIT-1G"
+   },
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10333",
+    "sku": "SAN-GEL-1G"
+   },
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10370",
+    "sku": "WIP-DIS-80"
+   },
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10407",
+    "sku": "SPR-TRG-32"
+   },
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10444",
+    "sku": "TAP-PKG-48"
+   },
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10481",
+    "sku": "SOP-FOAM-1L"
+   },
+   {
+    "customer_id": "C-1001",
+    "customer_part": "HPM-10518",
+    "sku": "WRP-STR-18"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10037",
+    "sku": "TWL-2PLY"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10074",
+    "sku": "TIS-JMB"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10111",
+    "sku": "GLV-NL-LB"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10148",
+    "sku": "GLV-NL-LK"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10185",
+    "sku": "LIN-4045-C"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10222",
+    "sku": "LIN-4045-K"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10259",
+    "sku": "FLR-NEU-1G"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10296",
+    "sku": "FLR-CIT-1G"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10333",
+    "sku": "SAN-GEL-1G"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10370",
+    "sku": "WIP-DIS-80"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10407",
+    "sku": "SPR-TRG-32"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10444",
+    "sku": "TAP-PKG-48"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10481",
+    "sku": "SOP-FOAM-1L"
+   },
+   {
+    "customer_id": "C-1002",
+    "customer_part": "CVH-10518",
+    "sku": "WRP-STR-18"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10037",
+    "sku": "TWL-2PLY"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10074",
+    "sku": "TIS-JMB"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10111",
+    "sku": "GLV-NL-LB"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10148",
+    "sku": "GLV-NL-LK"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10185",
+    "sku": "LIN-4045-C"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10222",
+    "sku": "LIN-4045-K"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10259",
+    "sku": "FLR-NEU-1G"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10296",
+    "sku": "FLR-CIT-1G"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10333",
+    "sku": "SAN-GEL-1G"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10370",
+    "sku": "WIP-DIS-80"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10407",
+    "sku": "SPR-TRG-32"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10444",
+    "sku": "TAP-PKG-48"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10481",
+    "sku": "SOP-FOAM-1L"
+   },
+   {
+    "customer_id": "C-1003",
+    "customer_part": "BFS-10518",
+    "sku": "WRP-STR-18"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10037",
+    "sku": "TWL-2PLY"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10074",
+    "sku": "TIS-JMB"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10111",
+    "sku": "GLV-NL-LB"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10148",
+    "sku": "GLV-NL-LK"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10185",
+    "sku": "LIN-4045-C"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10222",
+    "sku": "LIN-4045-K"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10259",
+    "sku": "FLR-NEU-1G"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10296",
+    "sku": "FLR-CIT-1G"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10333",
+    "sku": "SAN-GEL-1G"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10370",
+    "sku": "WIP-DIS-80"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10407",
+    "sku": "SPR-TRG-32"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10444",
+    "sku": "TAP-PKG-48"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10481",
+    "sku": "SOP-FOAM-1L"
+   },
+   {
+    "customer_id": "C-1004",
+    "customer_part": "NUSD-10518",
+    "sku": "WRP-STR-18"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10037",
+    "sku": "TWL-2PLY"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10074",
+    "sku": "TIS-JMB"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10111",
+    "sku": "GLV-NL-LB"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10148",
+    "sku": "GLV-NL-LK"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10185",
+    "sku": "LIN-4045-C"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10222",
+    "sku": "LIN-4045-K"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10259",
+    "sku": "FLR-NEU-1G"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10296",
+    "sku": "FLR-CIT-1G"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10333",
+    "sku": "SAN-GEL-1G"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10370",
+    "sku": "WIP-DIS-80"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10407",
+    "sku": "SPR-TRG-32"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10444",
+    "sku": "TAP-PKG-48"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10481",
+    "sku": "SOP-FOAM-1L"
+   },
+   {
+    "customer_id": "C-1005",
+    "customer_part": "SRC-10518",
+    "sku": "WRP-STR-18"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10037",
+    "sku": "TWL-2PLY"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10074",
+    "sku": "TIS-JMB"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10111",
+    "sku": "GLV-NL-LB"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10148",
+    "sku": "GLV-NL-LK"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10185",
+    "sku": "LIN-4045-C"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10222",
+    "sku": "LIN-4045-K"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10259",
+    "sku": "FLR-NEU-1G"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10296",
+    "sku": "FLR-CIT-1G"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10333",
+    "sku": "SAN-GEL-1G"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10370",
+    "sku": "WIP-DIS-80"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10407",
+    "sku": "SPR-TRG-32"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10444",
+    "sku": "TAP-PKG-48"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10481",
+    "sku": "SOP-FOAM-1L"
+   },
+   {
+    "customer_id": "C-1006",
+    "customer_part": "LHG-10518",
+    "sku": "WRP-STR-18"
+   }
+  ],
+  "inventory": [
+   {
+    "sku": "TWL-2PLY",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-06"
+   },
+   {
+    "sku": "TIS-JMB",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-07"
+   },
+   {
+    "sku": "GLV-NL-LB",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-08"
+   },
+   {
+    "sku": "GLV-NL-LK",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-09"
+   },
+   {
+    "sku": "LIN-4045-C",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-10"
+   },
+   {
+    "sku": "LIN-4045-K",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-11"
+   },
+   {
+    "sku": "FLR-NEU-1G",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-12"
+   },
+   {
+    "sku": "FLR-CIT-1G",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-13"
+   },
+   {
+    "sku": "SAN-GEL-1G",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-14"
+   },
+   {
+    "sku": "WIP-DIS-80",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-15"
+   },
+   {
+    "sku": "SPR-TRG-32",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-06"
+   },
+   {
+    "sku": "TAP-PKG-48",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-07"
+   },
+   {
+    "sku": "SOP-FOAM-1L",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-08"
+   },
+   {
+    "sku": "WRP-STR-18",
+    "available_qty": 5000,
+    "next_receipt_date": "2026-11-09"
+   }
+  ],
+  "open_orders": [
+   {
+    "order_id": "SO-70000",
+    "customer_id": "C-1001",
+    "customer_po_number": "HP-18397",
+    "total": 426.8,
+    "created_on": "2026-10-03",
+    "lines": [
+     {
+      "sku": "LIN-4045-C",
+      "qty": 8
+     },
+     {
+      "sku": "GLV-NL-LK",
+      "qty": 10
+     }
+    ]
+   },
+   {
+    "order_id": "SO-70001",
+    "customer_id": "C-1001",
+    "customer_po_number": "HP-12597",
+    "total": 632.0,
+    "created_on": "2026-09-29",
+    "lines": [
+     {
+      "sku": "GLV-NL-LK",
+      "qty": 40
+     },
+     {
+      "sku": "WRP-STR-18",
+      "qty": 4
+     }
+    ]
+   },
+   {
+    "order_id": "SO-70002",
+    "customer_id": "C-1002",
+    "customer_po_number": "4500013744",
+    "total": 179.22,
+    "created_on": "2026-09-30",
+    "lines": [
+     {
+      "sku": "SOP-FOAM-1L",
+      "qty": 6
+     },
+     {
+      "sku": "WIP-DIS-80",
+      "qty": 18
+     }
+    ]
+   },
+   {
+    "order_id": "SO-70003",
+    "customer_id": "C-1002",
+    "customer_po_number": "4500016193",
+    "total": 434.12,
+    "created_on": "2026-08-11",
+    "lines": [
+     {
+      "sku": "GLV-NL-LK",
+      "qty": 40
+     },
+     {
+      "sku": "WIP-DIS-80",
+      "qty": 12
+     }
+    ]
+   },
+   {
+    "order_id": "SO-70004",
+    "customer_id": "C-1003",
+    "customer_po_number": "BFS-PO-10687",
+    "total": 154.84,
+    "created_on": "2026-09-08",
+    "lines": [
+     {
+      "sku": "SPR-TRG-32",
+      "qty": 48
+     },
+     {
+      "sku": "LIN-4045-K",
+      "qty": 2
+     }
+    ]
+   },
+   {
+    "order_id": "SO-70005",
+    "customer_id": "C-1003",
+    "customer_po_number": "BFS-PO-18796",
+    "total": 490.8,
+    "created_on": "2026-09-14",
+    "lines": [
+     {
+      "sku": "GLV-NL-LB",
+      "qty": 40
+     },
+     {
+      "sku": "SPR-TRG-32",
+      "qty": 96
+     }
+    ]
+   },
+   {
+    "order_id": "SO-70006",
+    "customer_id": "C-1004",
+    "customer_po_number": "NG16466",
+    "total": 500.84,
+    "created_on": "2026-09-12",
+    "lines": [
+     {
+      "sku": "FLR-CIT-1G",
+      "qty": 16
+     },
+     {
+      "sku": "LIN-4045-K",
+      "qty": 6
+     }
+    ]
+   },
+   {
+    "order_id": "SO-70007",
+    "customer_id": "C-1004",
+    "customer_po_number": "NG10714",
+    "total": 294.42,
+    "created_on": "2026-09-08",
+    "lines": [
+     {
+      "sku": "TIS-JMB",
+      "qty": 5
+     },
+     {
+      "sku": "SAN-GEL-1G",
+      "qty": 4
+     }
+    ]
+   },
+   {
+    "order_id": "SO-70008",
+    "customer_id": "C-1005",
+    "customer_po_number": "SR-13912",
+    "total": 457.6,
+    "created_on": "2026-08-24",
+    "lines": [
+     {
+      "sku": "TIS-JMB",
+      "qty": 8
+     },
+     {
+      "sku": "LIN-4045-C",
+      "qty": 2
+     }
+    ]
+   },
+   {
+    "order_id": "SO-70009",
+    "customer_id": "C-1005",
+    "customer_po_number": "SR-13282",
+    "total": 228.4,
+    "created_on": "2026-09-30",
+    "lines": [
+     {
+      "sku": "SOP-FOAM-1L",
+      "qty": 12
+     },
+     {
+      "sku": "GLV-NL-LK",
+      "qty": 10
+     }
+    ]
+   },
+   {
+    "order_id": "SO-70010",
+    "customer_id": "C-1006",
+    "customer_po_number": "LHG-10305",
+    "total": 210.06,
+    "created_on": "2026-09-20",
+    "lines": [
+     {
+      "sku": "GLV-NL-LB",
+      "qty": 20
+     },
+     {
+      "sku": "SAN-GEL-1G",
+      "qty": 2
+     }
+    ]
+   },
+   {
+    "order_id": "SO-70011",
+    "customer_id": "C-1006",
+    "customer_po_number": "LHG-18661",
+    "total": 533.76,
+    "created_on": "2026-08-31",
+    "lines": [
+     {
+      "sku": "WRP-STR-18",
+      "qty": 6
+     },
+     {
+      "sku": "SPR-TRG-32",
+      "qty": 96
+     }
+    ]
+   }
+  ]
+ },
+ "policy": {
+  "price_tolerance_pct": 5.0,
+  "partial_ship_allowed": true,
+  "backorder_allowed": true,
+  "credit_check_required_above": 2500.0,
+  "max_order_total_without_approval": 25000.0,
+  "duplicate_window_days": 14
+ }
+}

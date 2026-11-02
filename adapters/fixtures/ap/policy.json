@@ -1,0 +1,7 @@
+{
+  "currency": "USD",
+  "unit_price_tolerance_pct": 2.0,
+  "total_tolerance_pct": 1.0,
+  "auto_approve_limit": 25000.0,
+  "tax_rate_pct": 20.0
+}

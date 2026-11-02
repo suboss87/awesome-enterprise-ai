@@ -1,0 +1,601 @@
+{
+ "as_of": "2026-10-14T22:10:00Z",
+ "incident": {
+  "id": "INC-2615",
+  "title": "search-api: errors and resource exhaustion",
+  "opened_at": "2026-10-14T21:34:00Z",
+  "window": {
+   "from": "2026-10-14T17:30:00Z",
+   "to": "2026-10-14T22:10:00Z"
+  },
+  "services_impacted": [
+   "search-api"
+  ]
+ },
+ "telemetry": {
+  "alerts": [
+   {
+    "id": "alt-005",
+    "ts": "2026-10-14T19:59:23Z",
+    "service": "fraud-scoring",
+    "severity": "warning",
+    "name": "CPUHigh",
+    "text": "CPU above 70% for 10m on fraud-scoring (threshold 70%)"
+   },
+   {
+    "id": "alt-001",
+    "ts": "2026-10-14T21:30:00Z",
+    "service": "search-api",
+    "severity": "critical",
+    "name": "HighErrorRate",
+    "text": "5xx error rate 43.3% over 5m on search-api (threshold 2%)"
+   },
+   {
+    "id": "alt-004",
+    "ts": "2026-10-14T21:33:59Z",
+    "service": "web-frontend",
+    "severity": "warning",
+    "name": "UpstreamErrors",
+    "text": "web-frontend sees 666 failed calls/min to search-api"
+   },
+   {
+    "id": "alt-002",
+    "ts": "2026-10-14T21:34:16Z",
+    "service": "search-api",
+    "severity": "critical",
+    "name": "LatencyP99High",
+    "text": "p99 latency 5641ms over 5m on search-api (threshold 1200ms)"
+   },
+   {
+    "id": "alt-003",
+    "ts": "2026-10-14T21:37:21Z",
+    "service": "search-api",
+    "severity": "critical",
+    "name": "LatencyP99High",
+    "text": "p99 latency 8034ms over 5m on search-api (threshold 1200ms)"
+   }
+  ],
+  "logs": [
+   {
+    "id": "log-024",
+    "ts": "2026-10-14T17:37:58Z",
+    "service": "search-index",
+    "level": "INFO",
+    "text": "cache refresh completed keys=1757"
+   },
+   {
+    "id": "log-025",
+    "ts": "2026-10-14T17:49:59Z",
+    "service": "search-index",
+    "level": "INFO",
+    "text": "request completed path=/api/v1/cart status=200 latency_ms=266"
+   },
+   {
+    "id": "log-014",
+    "ts": "2026-10-14T18:06:47Z",
+    "service": "search-api",
+    "level": "INFO",
+    "text": "scheduled job nightly-rollup finished in 5.1s"
+   },
+   {
+    "id": "log-036",
+    "ts": "2026-10-14T18:29:02Z",
+    "service": "catalog-db",
+    "level": "INFO",
+    "text": "cache refresh completed keys=1443"
+   },
+   {
+    "id": "log-031",
+    "ts": "2026-10-14T18:54:24Z",
+    "service": "catalog-service",
+    "level": "INFO",
+    "text": "scheduled job index-compact finished in 8.0s"
+   },
+   {
+    "id": "log-018",
+    "ts": "2026-10-14T19:01:45Z",
+    "service": "search-api",
+    "level": "INFO",
+    "text": "connection pool stats: active=5 idle=32 waiting=0"
+   },
+   {
+    "id": "log-033",
+    "ts": "2026-10-14T19:11:53Z",
+    "service": "catalog-service",
+    "level": "INFO",
+    "text": "config reloaded from consul (no changes)"
+   },
+   {
+    "id": "log-023",
+    "ts": "2026-10-14T19:24:36Z",
+    "service": "search-index",
+    "level": "INFO",
+    "text": "connection pool stats: active=29 idle=46 waiting=0"
+   },
+   {
+    "id": "log-043",
+    "ts": "2026-10-14T19:26:24Z",
+    "service": "inventory-service",
+    "level": "INFO",
+    "text": "config reloaded from consul (no changes)"
+   },
+   {
+    "id": "log-052",
+    "ts": "2026-10-14T19:27:41Z",
+    "service": "catalog-db",
+    "level": "WARN",
+    "text": "rate limit at 82% of threshold for tenant tenant-0931"
+   },
+   {
+    "id": "log-039",
+    "ts": "2026-10-14T19:36:01Z",
+    "service": "catalog-db",
+    "level": "INFO",
+    "text": "connection pool stats: active=14 idle=60 waiting=0"
+   },
+   {
+    "id": "log-040",
+    "ts": "2026-10-14T19:39:29Z",
+    "service": "inventory-service",
+    "level": "INFO",
+    "text": "scheduled job nightly-rollup finished in 4.7s"
+   },
+   {
+    "id": "log-029",
+    "ts": "2026-10-14T19:44:56Z",
+    "service": "catalog-service",
+    "level": "INFO",
+    "text": "cache refresh completed keys=3352"
+   },
+   {
+    "id": "log-044",
+    "ts": "2026-10-14T19:48:48Z",
+    "service": "inventory-service",
+    "level": "INFO",
+    "text": "GET /health 200 in 2ms"
+   },
+   {
+    "id": "log-017",
+    "ts": "2026-10-14T19:52:00Z",
+    "service": "search-api",
+    "level": "INFO",
+    "text": "cache refresh completed keys=3205"
+   },
+   {
+    "id": "log-041",
+    "ts": "2026-10-14T19:52:39Z",
+    "service": "inventory-service",
+    "level": "INFO",
+    "text": "GET /health 200 in 2ms"
+   },
+   {
+    "id": "log-032",
+    "ts": "2026-10-14T19:55:50Z",
+    "service": "catalog-service",
+    "level": "INFO",
+    "text": "request completed path=/api/v1/profile status=200 latency_ms=71"
+   },
+   {
+    "id": "log-022",
+    "ts": "2026-10-14T19:56:51Z",
+    "service": "search-index",
+    "level": "INFO",
+    "text": "cache refresh completed keys=3413"
+   },
+   {
+    "id": "log-021",
+    "ts": "2026-10-14T20:04:55Z",
+    "service": "search-index",
+    "level": "INFO",
+    "text": "request completed path=/api/v1/orders status=200 latency_ms=215"
+   },
+   {
+    "id": "log-001",
+    "ts": "2026-10-14T20:22:00Z",
+    "service": "search-api",
+    "level": "WARN",
+    "text": "heap used 69% after GC; ProfileCache entries=1242000"
+   },
+   {
+    "id": "log-030",
+    "ts": "2026-10-14T20:26:07Z",
+    "service": "catalog-service",
+    "level": "INFO",
+    "text": "request completed path=/api/v1/cart status=200 latency_ms=297"
+   },
+   {
+    "id": "log-002",
+    "ts": "2026-10-14T20:31:00Z",
+    "service": "search-api",
+    "level": "WARN",
+    "text": "heap used 76% after GC; ProfileCache entries=1368000"
+   },
+   {
+    "id": "log-037",
+    "ts": "2026-10-14T20:31:08Z",
+    "service": "catalog-db",
+    "level": "INFO",
+    "text": "cache refresh completed keys=2872"
+   },
+   {
+    "id": "log-034",
+    "ts": "2026-10-14T20:32:16Z",
+    "service": "catalog-db",
+    "level": "INFO",
+    "text": "config reloaded from consul (no changes)"
+   },
+   {
+    "id": "log-028",
+    "ts": "2026-10-14T20:36:51Z",
+    "service": "catalog-service",
+    "level": "INFO",
+    "text": "scheduled job nightly-rollup finished in 7.5s"
+   },
+   {
+    "id": "log-016",
+    "ts": "2026-10-14T20:37:01Z",
+    "service": "search-api",
+    "level": "INFO",
+    "text": "config reloaded from consul (no changes)"
+   },
+   {
+    "id": "log-046",
+    "ts": "2026-10-14T20:39:42Z",
+    "service": "auth-service",
+    "level": "INFO",
+    "text": "cache refresh completed keys=2810"
+   },
+   {
+    "id": "log-035",
+    "ts": "2026-10-14T20:44:12Z",
+    "service": "catalog-db",
+    "level": "INFO",
+    "text": "cache refresh completed keys=1412"
+   },
+   {
+    "id": "log-003",
+    "ts": "2026-10-14T20:46:00Z",
+    "service": "search-api",
+    "level": "WARN",
+    "text": "heap used 81% after GC; ProfileCache entries=1458000"
+   },
+   {
+    "id": "log-047",
+    "ts": "2026-10-14T20:46:15Z",
+    "service": "auth-service",
+    "level": "INFO",
+    "text": "config reloaded from consul (no changes)"
+   },
+   {
+    "id": "log-004",
+    "ts": "2026-10-14T20:58:00Z",
+    "service": "search-api",
+    "level": "WARN",
+    "text": "heap used 89% after GC; ProfileCache entries=1602000"
+   },
+   {
+    "id": "log-051",
+    "ts": "2026-10-14T21:00:02Z",
+    "service": "search-api",
+    "level": "WARN",
+    "text": "slow query 860ms: SELECT * FROM sessions WHERE updated_at > ?"
+   },
+   {
+    "id": "log-015",
+    "ts": "2026-10-14T21:00:46Z",
+    "service": "search-api",
+    "level": "INFO",
+    "text": "config reloaded from consul (no changes)"
+   },
+   {
+    "id": "log-050",
+    "ts": "2026-10-14T21:05:41Z",
+    "service": "search-api",
+    "level": "WARN",
+    "text": "retry 1/3 for upstream call to catalog-service"
+   },
+   {
+    "id": "log-020",
+    "ts": "2026-10-14T21:06:00Z",
+    "service": "search-api",
+    "level": "INFO",
+    "text": "request completed path=/api/v1/orders status=200 latency_ms=102"
+   },
+   {
+    "id": "log-049",
+    "ts": "2026-10-14T21:06:11Z",
+    "service": "auth-service",
+    "level": "INFO",
+    "text": "connection pool stats: active=26 idle=38 waiting=0"
+   },
+   {
+    "id": "log-005",
+    "ts": "2026-10-14T21:10:00Z",
+    "service": "search-api",
+    "level": "WARN",
+    "text": "heap used 97% after GC; ProfileCache entries=1746000"
+   },
+   {
+    "id": "log-019",
+    "ts": "2026-10-14T21:12:31Z",
+    "service": "search-api",
+    "level": "INFO",
+    "text": "connection pool stats: active=20 idle=36 waiting=0"
+   },
+   {
+    "id": "log-038",
+    "ts": "2026-10-14T21:17:04Z",
+    "service": "catalog-db",
+    "level": "INFO",
+    "text": "config reloaded from consul (no changes)"
+   },
+   {
+    "id": "log-026",
+    "ts": "2026-10-14T21:19:05Z",
+    "service": "search-index",
+    "level": "INFO",
+    "text": "request completed path=/api/v1/orders status=200 latency_ms=119"
+   },
+   {
+    "id": "log-042",
+    "ts": "2026-10-14T21:24:14Z",
+    "service": "inventory-service",
+    "level": "INFO",
+    "text": "cache refresh completed keys=1669"
+   },
+   {
+    "id": "log-006",
+    "ts": "2026-10-14T21:25:00Z",
+    "service": "search-api",
+    "level": "WARN",
+    "text": "heap used 97% after GC; ProfileCache entries=1746000"
+   },
+   {
+    "id": "log-045",
+    "ts": "2026-10-14T21:28:50Z",
+    "service": "auth-service",
+    "level": "INFO",
+    "text": "cache refresh completed keys=293"
+   },
+   {
+    "id": "log-007",
+    "ts": "2026-10-14T21:28:55Z",
+    "service": "search-api",
+    "level": "ERROR",
+    "text": "OutOfMemoryError: Java heap space in ProfileCache.put; container restarting"
+   },
+   {
+    "id": "log-008",
+    "ts": "2026-10-14T21:30:05Z",
+    "service": "search-api",
+    "level": "ERROR",
+    "text": "OutOfMemoryError: Java heap space in ProfileCache.put; container restarting"
+   },
+   {
+    "id": "log-009",
+    "ts": "2026-10-14T21:30:28Z",
+    "service": "search-api",
+    "level": "ERROR",
+    "text": "OutOfMemoryError: Java heap space in ProfileCache.put; container restarting"
+   },
+   {
+    "id": "log-010",
+    "ts": "2026-10-14T21:31:24Z",
+    "service": "search-api",
+    "level": "ERROR",
+    "text": "OutOfMemoryError: Java heap space in ProfileCache.put; container restarting"
+   },
+   {
+    "id": "log-011",
+    "ts": "2026-10-14T21:32:28Z",
+    "service": "search-api",
+    "level": "ERROR",
+    "text": "OutOfMemoryError: Java heap space in ProfileCache.put; container restarting"
+   },
+   {
+    "id": "log-012",
+    "ts": "2026-10-14T21:33:13Z",
+    "service": "search-api",
+    "level": "ERROR",
+    "text": "OutOfMemoryError: Java heap space in ProfileCache.put; container restarting"
+   },
+   {
+    "id": "log-013",
+    "ts": "2026-10-14T21:33:57Z",
+    "service": "search-api",
+    "level": "ERROR",
+    "text": "OutOfMemoryError: Java heap space in ProfileCache.put; container restarting"
+   },
+   {
+    "id": "log-027",
+    "ts": "2026-10-14T21:44:02Z",
+    "service": "catalog-service",
+    "level": "INFO",
+    "text": "connection pool stats: active=4 idle=55 waiting=0"
+   },
+   {
+    "id": "log-048",
+    "ts": "2026-10-14T22:06:13Z",
+    "service": "auth-service",
+    "level": "INFO",
+    "text": "request completed path=/api/v1/search status=200 latency_ms=58"
+   }
+  ],
+  "deploys": [
+   {
+    "id": "dep-005",
+    "ts": "2026-10-12T21:30:00Z",
+    "service": "checkout-api",
+    "sha": "5b31d88",
+    "author": "d.fischer",
+    "summary": "Fix typo in README",
+    "changed_files": [
+     "README.md"
+    ]
+   },
+   {
+    "id": "dep-004",
+    "ts": "2026-10-14T18:23:24Z",
+    "service": "reporting-service",
+    "sha": "f414efb",
+    "author": "c.moreau",
+    "summary": "Migrate HTTP client to shared connection pool",
+    "changed_files": [
+     "src/clients/http_pool.py",
+     "src/clients/__init__.py"
+    ]
+   },
+   {
+    "id": "dep-003",
+    "ts": "2026-10-14T18:48:56Z",
+    "service": "reporting-service",
+    "sha": "3ed7b1c",
+    "author": "j.nguyen",
+    "summary": "Switch order serializer to v2 schema",
+    "changed_files": [
+     "src/orders/serializer.py",
+     "src/orders/schema_v2.py"
+    ]
+   },
+   {
+    "id": "dep-001",
+    "ts": "2026-10-14T20:03:00Z",
+    "service": "search-api",
+    "sha": "33e07ac",
+    "author": "d.fischer",
+    "summary": "Cache customer profiles in-process",
+    "changed_files": [
+     "src/cache/profile_cache.py"
+    ]
+   },
+   {
+    "id": "dep-002",
+    "ts": "2026-10-14T21:16:00Z",
+    "service": "search-api",
+    "sha": "36cb56c",
+    "author": "c.moreau",
+    "summary": "Fix typo in README",
+    "changed_files": [
+     "README.md"
+    ]
+   }
+  ],
+  "config_changes": [],
+  "runbooks": [
+   {
+    "id": "rb-001",
+    "service_or_symptom": "disk-full",
+    "title": "Disk full on a stateful service",
+    "text": "Purge rotated logs and temp files, extend the volume, then investigate the growth. Alert on 85%."
+   },
+   {
+    "id": "rb-002",
+    "service_or_symptom": "certificate",
+    "title": "TLS certificate expired or invalid",
+    "text": "Rotate the certificate with the cert-renewal job, restart the listener, verify with openssl s_client. Check why automatic renewal failed."
+   },
+   {
+    "id": "rb-003",
+    "service_or_symptom": "message-bus",
+    "title": "Message bus backlog",
+    "text": "Check consumer lag per topic; scale consumers; verify broker disk."
+   },
+   {
+    "id": "rb-004",
+    "service_or_symptom": "LatencyP99High",
+    "title": "p99 latency above threshold",
+    "text": "Look for connection pool exhaustion, slow queries and upstream timeouts. Scale horizontally only after ruling out a leak."
+   }
+  ],
+  "dependencies": [
+   {
+    "service": "web-frontend",
+    "depends_on": "checkout-api"
+   },
+   {
+    "service": "web-frontend",
+    "depends_on": "search-api"
+   },
+   {
+    "service": "web-frontend",
+    "depends_on": "auth-service"
+   },
+   {
+    "service": "checkout-api",
+    "depends_on": "payments-gateway"
+   },
+   {
+    "service": "checkout-api",
+    "depends_on": "inventory-service"
+   },
+   {
+    "service": "checkout-api",
+    "depends_on": "auth-service"
+   },
+   {
+    "service": "checkout-api",
+    "depends_on": "orders-db"
+   },
+   {
+    "service": "payments-gateway",
+    "depends_on": "payments-db"
+   },
+   {
+    "service": "payments-gateway",
+    "depends_on": "fraud-scoring"
+   },
+   {
+    "service": "search-api",
+    "depends_on": "search-index"
+   },
+   {
+    "service": "search-api",
+    "depends_on": "catalog-service"
+   },
+   {
+    "service": "inventory-service",
+    "depends_on": "inventory-db"
+   },
+   {
+    "service": "inventory-service",
+    "depends_on": "message-bus"
+   },
+   {
+    "service": "auth-service",
+    "depends_on": "auth-db"
+   },
+   {
+    "service": "auth-service",
+    "depends_on": "token-cache"
+   },
+   {
+    "service": "catalog-service",
+    "depends_on": "catalog-db"
+   },
+   {
+    "service": "notification-service",
+    "depends_on": "message-bus"
+   },
+   {
+    "service": "notification-service",
+    "depends_on": "email-provider"
+   },
+   {
+    "service": "fraud-scoring",
+    "depends_on": "feature-store"
+   },
+   {
+    "service": "batch-worker",
+    "depends_on": "orders-db"
+   },
+   {
+    "service": "batch-worker",
+    "depends_on": "message-bus"
+   },
+   {
+    "service": "reporting-service",
+    "depends_on": "orders-db"
+   }
+  ]
+ }
+}

@@ -1,0 +1,214 @@
+{
+ "as_of": "2026-10-20",
+ "claim": {
+  "id": "CLM-0056",
+  "received_via": "portal",
+  "documents": [
+   {
+    "id": "CLM-0056-fnol",
+    "filename": "call-transcript.txt",
+    "text": "Call transcript, claims line. Caller identified as Sofia Adeyemi, policy PA-2026-00156.\n\nCaller: On 11 October 2026 my Toyota Camry (plate LH47 HWT) was struck on the right by another vehicle while stopped at a junction. It happened at 143 Harbor Road, Ashford. Another vehicle was involved. Nobody was hurt. The police came and I have a report.\nAgent: Thank you. I am recording this as a collision loss with damage to the right. The VIN on file ends in W1GRX9.\nCaller: That is right, the full VIN is HRHJ8J4DEMFW1GRX9."
+   },
+   {
+    "id": "CLM-0056-police",
+    "filename": "police-report.txt",
+    "text": "ASHFORD POLICE DEPARTMENT\nINCIDENT REPORT\nReport No: ASH-2026-78212\nDate of incident: 2026-10-09\nLocation: 143 Harbor Road, Ashford\nVehicle 1: 2021 Toyota Camry, plate LH47 HWT, VIN HRHJ8J4DEMFW1GRX9\nDriver 1: Sofia Adeyemi\nNarrative: Driver 1 reported that the vehicle was struck on the right by another vehicle while stopped at a junction.\nCitations: none issued"
+   },
+   {
+    "id": "CLM-0056-estimate",
+    "filename": "estimate.txt",
+    "text": "Riverton Motors Bodyshop\nREPAIR ESTIMATE EST-9656\nEstimate date: 2026-10-12\nVehicle: 2021 Toyota Camry\nVIN: HRHJ8J4DEMFW1GRX9\nPlate: LH47 HWT\n\nOperation                              Labor hrs   Parts        Line\nReplace passenger door                 1.5         240.00       342.00\nReplace right quarter panel            2.0         310.00       446.00\nPaint and materials                                             677.00\n\nEstimate total: $1,465.00"
+   },
+   {
+    "id": "CLM-0056-photos",
+    "filename": "photo-notes.txt",
+    "text": "Photo set uploaded 2026-10-12, 4 images, reviewed by intake.\nIMG_1: passenger door scraped with paint transfer\nIMG_2: right quarter panel scraped with paint transfer\nIMG_3: passenger door shattered\nIMG_4: wide shot of the right of the vehicle"
+   }
+  ]
+ },
+ "policies": [
+  {
+   "policy_number": "PA-2026-00151",
+   "status": "active",
+   "effective_from": "2025-12-30",
+   "effective_to": "2026-12-30",
+   "named_insured": "Tom Okafor",
+   "listed_drivers": [
+    "Tom Okafor"
+   ],
+   "vehicles": [
+    {
+     "vin": "JZ4Z3DMAWGT9B38YS",
+     "plate": "XP81 DLS",
+     "make": "Ford",
+     "model": "Focus",
+     "year": 2025,
+     "declared_value": 11800
+    }
+   ],
+   "coverages": {
+    "collision": {
+     "deductible": 500
+    },
+    "comprehensive": {
+     "deductible": 250
+    },
+    "glass": {},
+    "liability": {}
+   }
+  },
+  {
+   "policy_number": "PA-2026-00152",
+   "status": "active",
+   "effective_from": "2026-03-16",
+   "effective_to": "2027-03-16",
+   "named_insured": "James Haddad",
+   "listed_drivers": [
+    "James Haddad"
+   ],
+   "vehicles": [
+    {
+     "vin": "11HJ2DCLZELRY6M44",
+     "plate": "XM94 PBL",
+     "make": "Hyundai",
+     "model": "Tucson",
+     "year": 2017,
+     "declared_value": 21300
+    }
+   ],
+   "coverages": {
+    "collision": {
+     "deductible": 1000
+    },
+    "comprehensive": {
+     "deductible": 250
+    },
+    "glass": {},
+    "liability": {}
+   }
+  },
+  {
+   "policy_number": "PA-2026-00153",
+   "status": "active",
+   "effective_from": "2026-04-03",
+   "effective_to": "2027-04-03",
+   "named_insured": "Elena Patel",
+   "listed_drivers": [
+    "Elena Patel",
+    "Tom Haddad"
+   ],
+   "vehicles": [
+    {
+     "vin": "PNR41LLRWSPNXXVVJ",
+     "plate": "VN79 PDL",
+     "make": "Skoda",
+     "model": "Octavia",
+     "year": 2017,
+     "declared_value": 17400
+    }
+   ],
+   "coverages": {
+    "collision": {
+     "deductible": 250
+    },
+    "comprehensive": {
+     "deductible": 250
+    },
+    "glass": {},
+    "liability": {}
+   }
+  },
+  {
+   "policy_number": "PA-2026-00154",
+   "status": "active",
+   "effective_from": "2026-01-28",
+   "effective_to": "2027-01-28",
+   "named_insured": "Tom Walsh",
+   "listed_drivers": [
+    "Tom Walsh",
+    "Priya Walsh"
+   ],
+   "vehicles": [
+    {
+     "vin": "VMKXSWJPVF2HYWJ2M",
+     "plate": "XR65 LEF",
+     "make": "Kia",
+     "model": "Sportage",
+     "year": 2025,
+     "declared_value": 20100
+    }
+   ],
+   "coverages": {
+    "collision": {
+     "deductible": 250
+    },
+    "comprehensive": {
+     "deductible": 500
+    },
+    "glass": {},
+    "liability": {}
+   }
+  },
+  {
+   "policy_number": "PA-2026-00155",
+   "status": "active",
+   "effective_from": "2025-12-19",
+   "effective_to": "2026-12-19",
+   "named_insured": "James Costa",
+   "listed_drivers": [
+    "James Costa",
+    "Omar Okafor"
+   ],
+   "vehicles": [
+    {
+     "vin": "NETDY9RABL2U88S8W",
+     "plate": "DS15 MXB",
+     "make": "Volkswagen",
+     "model": "Golf",
+     "year": 2025,
+     "declared_value": 14900
+    }
+   ],
+   "coverages": {
+    "collision": {
+     "deductible": 250
+    },
+    "comprehensive": {
+     "deductible": 500
+    },
+    "glass": {},
+    "liability": {}
+   }
+  },
+  {
+   "policy_number": "PA-2026-00156",
+   "status": "active",
+   "effective_from": "2026-02-05",
+   "effective_to": "2027-02-05",
+   "named_insured": "Sofia Adeyemi",
+   "listed_drivers": [
+    "Sofia Adeyemi"
+   ],
+   "vehicles": [
+    {
+     "vin": "HRHJ8J4DEMFW1GRX9",
+     "plate": "LH47 HWT",
+     "make": "Toyota",
+     "model": "Camry",
+     "year": 2021,
+     "declared_value": 18500
+    }
+   ],
+   "coverages": {
+    "collision": {
+     "deductible": 500
+    },
+    "comprehensive": {
+     "deductible": 250
+    },
+    "glass": {},
+    "liability": {}
+   }
+  }
+ ]
+}

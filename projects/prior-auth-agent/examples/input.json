@@ -1,0 +1,139 @@
+{
+ "as_of": "2026-10-30T14:00:00Z",
+ "request": {
+  "id": "PA-2026-40012",
+  "received_at": "2026-10-29T07:59:00Z",
+  "expedited": true,
+  "member": {
+   "member_id": "M39460446",
+   "dob": "1998-01-04",
+   "plan_id": "HP-COMM-PPO-2026"
+  },
+  "requesting_provider": {
+   "npi": "1545504249",
+   "specialty": "Endocrinology"
+  },
+  "service": {
+   "cpt_codes": [
+    "E2103",
+    "A4239"
+   ],
+   "icd10_codes": [
+    "E11.9"
+   ],
+   "units": 1,
+   "site_of_service": "home",
+   "requested_start": "2026-11-06"
+  }
+ },
+ "documents": [
+  {
+   "id": "lab-1",
+   "kind": "lab_report",
+   "date": "2026-09-18",
+   "text": "NORTHSTAR CLINICAL LABORATORIES\nCollected: 2026-09-18 08:14    Reported: 2026-09-19\nPatient: Haddad, Marcus    DOB: 1998-01-04    Ordering: S. Brennan, MD\n\nTest                          Result   Units    Reference\nHemoglobin A1c                9.0      %        4.0-5.6\nGlucose, fasting              159      mg/dL    70-99"
+  },
+  {
+   "id": "cn-1",
+   "kind": "clinical_note",
+   "date": "2026-10-12",
+   "text": "CEDAR VALLEY ENDOCRINOLOGY\nEndocrinology Follow-up    Date of service: 2026-10-12\nPatient: Haddad, Marcus    DOB: 1998-01-04    MRN: 842229\nProvider: S. Brennan, MD, Endocrinology\n\nHistory: Diabetes for 8 years with frequent glucose excursions and two recent nocturnal lows.\nMedications: Insulin glargine 23 units at bedtime and insulin lispro 8 to 12 units with meals.\nVisit: Seen in person today to evaluate glycemic control; meter downloads reviewed with the patient.\nAssessment: Diabetes mellitus (E11.9).\nPlan: Continuous glucose monitor (E2103, A4239); continue current insulin regimen."
+  }
+ ],
+ "coverage_policy": {
+  "policy_id": "UM-DME-007",
+  "service": "Continuous glucose monitor",
+  "criteria": [
+   {
+    "id": "CG-1",
+    "kind": "threshold",
+    "text": "HbA1c of 7.0% or higher within the past 180 days.",
+    "params": {
+     "lookback_days": 180,
+     "evidence_kinds": [
+      "lab_report"
+     ],
+     "value_name": "hba1c",
+     "op": ">=",
+     "threshold": 7.0
+    }
+   },
+   {
+    "id": "CG-2",
+    "kind": "presence",
+    "text": "Insulin therapy (multiple daily injections or an insulin pump) documented within the past 180 days.",
+    "params": {
+     "lookback_days": 180,
+     "evidence_kinds": [
+      "clinical_note"
+     ]
+    }
+   },
+   {
+    "id": "CG-3",
+    "kind": "presence",
+    "text": "In-person visit with the prescribing practitioner to evaluate diabetes control within the past 180 days.",
+    "params": {
+     "lookback_days": 180,
+     "evidence_kinds": [
+      "clinical_note"
+     ]
+    }
+   },
+   {
+    "id": "CG-4",
+    "kind": "code_pairing",
+    "text": "Each procedure code is billed with a covered diagnosis.",
+    "params": {}
+   }
+  ],
+  "valid_code_pairs": [
+   [
+    "E2103",
+    "E11.65"
+   ],
+   [
+    "E2103",
+    "E11.9"
+   ],
+   [
+    "E2103",
+    "E10.65"
+   ],
+   [
+    "E2103",
+    "E10.9"
+   ],
+   [
+    "A4239",
+    "E11.65"
+   ],
+   [
+    "A4239",
+    "E11.9"
+   ],
+   [
+    "A4239",
+    "E10.65"
+   ],
+   [
+    "A4239",
+    "E10.9"
+   ]
+  ],
+  "site_of_service_rules": {
+   "allowed": [
+    "home"
+   ]
+  },
+  "requires_peer_review_if": []
+ },
+ "plan": {
+  "benefit_active": true,
+  "eligibility_dates": {
+   "start": "2026-01-01",
+   "end": "2026-12-31"
+  },
+  "exclusions": []
+ }
+}

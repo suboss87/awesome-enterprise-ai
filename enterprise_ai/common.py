@@ -109,9 +109,16 @@ def string_schema(enum=None):
 def validate_schema(value, schema, path='result'):
     kind=schema['type']
     if kind=='object':
-        obj(value,schema['required'])
+        required=schema.get('required',list(schema['properties']))
+        if not isinstance(value,dict):
+            raise InputError('Expected object at '+path)
+        missing=[k for k in required if k not in value]
+        extra=[k for k in value if k not in schema['properties']]
+        if missing or extra:
+            raise InputError(f'{path}: missing {missing}, unexpected {extra}')
         for key,spec in schema['properties'].items():
-            validate_schema(value[key],spec,path+'.'+key)
+            if key in value:
+                validate_schema(value[key],spec,path+'.'+key)
     elif kind=='array':
         rows(value,path,maximum=1000)
         for item in value:

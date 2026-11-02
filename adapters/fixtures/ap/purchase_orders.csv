@@ -1,0 +1,91 @@
+po_number,vendor_id,currency,ordered_on,line,sku,description,qty_ordered,unit_price
+PO-50001,V-1004,USD,2026-08-20,1,SRV-910,"Compressor inspection, per unit",20,185.0
+PO-50001,V-1004,USD,2026-08-20,2,CHEM-30,"Degreaser concentrate, 20 L",12,72.15
+PO-50002,V-1001,USD,2026-08-19,1,FAST-220,"M10 flange nut, box of 50",50,18.75
+PO-50002,V-1001,USD,2026-08-19,2,SRV-910,"Compressor inspection, per unit",100,185.0
+PO-50003,V-1002,USD,2026-09-21,1,SRV-900,Forklift service visit,40,410.0
+PO-50004,V-1006,USD,2026-08-19,1,CHEM-30,"Degreaser concentrate, 20 L",40,72.15
+PO-50004,V-1006,USD,2026-08-19,2,OFF-310,"Copier paper A4 80gsm, box",10,31.2
+PO-50004,V-1006,USD,2026-08-19,3,PACK-07,Stretch film roll 500mm,24,9.9
+PO-50005,V-1005,USD,2026-09-16,1,OFF-310,"Copier paper A4 80gsm, box",40,31.2
+PO-50006,V-1006,USD,2026-09-25,1,SRV-910,"Compressor inspection, per unit",12,185.0
+PO-50006,V-1006,USD,2026-09-25,2,LOG-05,"Express surcharge, per shipment",40,55.0
+PO-50007,V-1004,USD,2026-09-05,1,LOG-05,"Express surcharge, per shipment",10,55.0
+PO-50007,V-1004,USD,2026-09-05,2,SRV-900,Forklift service visit,40,410.0
+PO-50008,V-1006,USD,2026-09-07,1,LOG-01,"Pallet transport, per pallet",20,38.0
+PO-50008,V-1006,USD,2026-09-07,2,FAST-220,"M10 flange nut, box of 50",10,18.75
+PO-50009,V-1003,USD,2026-09-07,1,OFF-310,"Copier paper A4 80gsm, box",20,31.2
+PO-50009,V-1003,USD,2026-09-07,2,OFF-455,Toner cartridge black 3k pages,100,64.0
+PO-50010,V-1003,USD,2026-09-07,1,PACK-07,Stretch film roll 500mm,5,9.9
+PO-50010,V-1003,USD,2026-09-07,2,OFF-455,Toner cartridge black 3k pages,40,64.0
+PO-50011,V-1004,USD,2026-08-31,1,OFF-310,"Copier paper A4 80gsm, box",10,31.2
+PO-50011,V-1004,USD,2026-08-31,2,PACK-01,Corrugated carton 400x300x300,5,1.42
+PO-50012,V-1001,USD,2026-09-19,1,PACK-07,Stretch film roll 500mm,20,9.9
+PO-50012,V-1001,USD,2026-09-19,2,FAST-220,"M10 flange nut, box of 50",12,18.75
+PO-50013,V-1001,USD,2026-08-27,1,SRV-910,"Compressor inspection, per unit",20,185.0
+PO-50013,V-1001,USD,2026-08-27,2,CHEM-12,"Isopropyl alcohol 99%, 25 L drum",50,96.4
+PO-50014,V-1003,USD,2026-09-24,1,LOG-05,"Express surcharge, per shipment",24,55.0
+PO-50014,V-1003,USD,2026-09-24,2,CHEM-12,"Isopropyl alcohol 99%, 25 L drum",5,96.4
+PO-50015,V-1001,USD,2026-09-07,1,PACK-01,Corrugated carton 400x300x300,10,1.42
+PO-50015,V-1001,USD,2026-09-07,2,FAST-220,"M10 flange nut, box of 50",24,18.75
+PO-50016,V-1002,USD,2026-08-27,1,SRV-910,"Compressor inspection, per unit",100,185.0
+PO-50017,V-1003,USD,2026-08-30,1,PACK-01,Corrugated carton 400x300x300,40,1.42
+PO-50017,V-1003,USD,2026-08-30,2,SRV-900,Forklift service visit,12,410.0
+PO-50018,V-1006,USD,2026-09-25,1,FAST-220,"M10 flange nut, box of 50",12,18.75
+PO-50019,V-1001,USD,2026-09-20,1,FAST-100,"M8 hex bolt, zinc plated, box of 100",24,24.5
+PO-50020,V-1006,USD,2026-09-03,1,LOG-05,"Express surcharge, per shipment",12,55.0
+PO-50020,V-1006,USD,2026-09-03,2,FAST-100,"M8 hex bolt, zinc plated, box of 100",24,24.5
+PO-50021,V-1005,USD,2026-09-07,1,SRV-900,Forklift service visit,24,410.0
+PO-50021,V-1005,USD,2026-09-07,2,SRV-910,"Compressor inspection, per unit",10,185.0
+PO-50022,V-1002,USD,2026-09-14,1,PACK-07,Stretch film roll 500mm,5,9.9
+PO-50023,V-1001,USD,2026-08-21,1,SRV-910,"Compressor inspection, per unit",12,185.0
+PO-50024,V-1006,USD,2026-09-10,1,FAST-220,"M10 flange nut, box of 50",50,18.75
+PO-50025,V-1001,USD,2026-09-19,1,FAST-100,"M8 hex bolt, zinc plated, box of 100",50,24.5
+PO-50025,V-1001,USD,2026-09-19,2,LOG-05,"Express surcharge, per shipment",10,55.0
+PO-50025,V-1001,USD,2026-09-19,3,LOG-01,"Pallet transport, per pallet",100,38.0
+PO-50026,V-1006,USD,2026-09-13,1,PACK-07,Stretch film roll 500mm,20,9.9
+PO-50027,V-1003,USD,2026-09-22,1,LOG-01,"Pallet transport, per pallet",100,38.0
+PO-50027,V-1003,USD,2026-09-22,2,PACK-07,Stretch film roll 500mm,100,9.9
+PO-50028,V-1004,USD,2026-09-20,1,PACK-07,Stretch film roll 500mm,12,9.9
+PO-50028,V-1004,USD,2026-09-20,2,LOG-05,"Express surcharge, per shipment",50,55.0
+PO-50029,V-1003,USD,2026-08-27,1,SRV-910,"Compressor inspection, per unit",20,185.0
+PO-50029,V-1003,USD,2026-08-27,2,LOG-01,"Pallet transport, per pallet",24,38.0
+PO-50030,V-1004,USD,2026-09-21,1,SRV-910,"Compressor inspection, per unit",12,185.0
+PO-50030,V-1004,USD,2026-09-21,2,PACK-01,Corrugated carton 400x300x300,20,1.42
+PO-50031,V-1003,USD,2026-08-23,1,OFF-455,Toner cartridge black 3k pages,5,64.0
+PO-50031,V-1003,USD,2026-08-23,2,FAST-100,"M8 hex bolt, zinc plated, box of 100",40,24.5
+PO-50031,V-1003,USD,2026-08-23,3,SRV-910,"Compressor inspection, per unit",20,185.0
+PO-50032,V-1001,USD,2026-08-31,1,OFF-455,Toner cartridge black 3k pages,12,64.0
+PO-50033,V-1005,USD,2026-09-21,1,LOG-05,"Express surcharge, per shipment",100,55.0
+PO-50033,V-1005,USD,2026-09-21,2,FAST-100,"M8 hex bolt, zinc plated, box of 100",5,24.5
+PO-50034,V-1001,USD,2026-08-16,1,CHEM-12,"Isopropyl alcohol 99%, 25 L drum",12,96.4
+PO-50034,V-1001,USD,2026-08-16,2,FAST-220,"M10 flange nut, box of 50",100,18.75
+PO-50034,V-1001,USD,2026-08-16,3,OFF-310,"Copier paper A4 80gsm, box",12,31.2
+PO-50035,V-1005,USD,2026-09-13,1,LOG-05,"Express surcharge, per shipment",10,55.0
+PO-50035,V-1005,USD,2026-09-13,2,PACK-07,Stretch film roll 500mm,40,9.9
+PO-50036,V-1001,USD,2026-09-17,1,PACK-07,Stretch film roll 500mm,5,9.9
+PO-50036,V-1001,USD,2026-09-17,2,SRV-900,Forklift service visit,100,410.0
+PO-50037,V-1004,USD,2026-09-25,1,FAST-220,"M10 flange nut, box of 50",24,18.75
+PO-50037,V-1004,USD,2026-09-25,2,SRV-900,Forklift service visit,100,410.0
+PO-50038,V-1003,USD,2026-09-07,1,LOG-01,"Pallet transport, per pallet",20,38.0
+PO-50039,V-1004,USD,2026-09-14,1,LOG-01,"Pallet transport, per pallet",12,38.0
+PO-50039,V-1004,USD,2026-09-14,2,FAST-100,"M8 hex bolt, zinc plated, box of 100",10,24.5
+PO-50039,V-1004,USD,2026-09-14,3,FAST-220,"M10 flange nut, box of 50",5,18.75
+PO-50040,V-1005,USD,2026-09-20,1,PACK-01,Corrugated carton 400x300x300,100,1.42
+PO-50040,V-1005,USD,2026-09-20,2,LOG-05,"Express surcharge, per shipment",5,55.0
+PO-50041,V-1006,USD,2026-09-02,1,PACK-01,Corrugated carton 400x300x300,40,1.42
+PO-50041,V-1006,USD,2026-09-02,2,OFF-310,"Copier paper A4 80gsm, box",12,31.2
+PO-50041,V-1006,USD,2026-09-02,3,SRV-910,"Compressor inspection, per unit",12,185.0
+PO-50042,V-1003,USD,2026-08-30,1,FAST-100,"M8 hex bolt, zinc plated, box of 100",24,24.5
+PO-50042,V-1003,USD,2026-08-30,2,PACK-01,Corrugated carton 400x300x300,24,1.42
+PO-50043,V-1001,USD,2026-08-22,1,CHEM-30,"Degreaser concentrate, 20 L",24,72.15
+PO-50043,V-1001,USD,2026-08-22,2,OFF-455,Toner cartridge black 3k pages,5,64.0
+PO-50044,V-1004,USD,2026-09-24,1,CHEM-12,"Isopropyl alcohol 99%, 25 L drum",5,96.4
+PO-50044,V-1004,USD,2026-09-24,2,OFF-455,Toner cartridge black 3k pages,12,64.0
+PO-50044,V-1004,USD,2026-09-24,3,LOG-01,"Pallet transport, per pallet",24,38.0
+PO-50045,V-1003,USD,2026-09-02,1,SRV-910,"Compressor inspection, per unit",20,185.0
+PO-50045,V-1003,USD,2026-09-02,2,LOG-01,"Pallet transport, per pallet",12,38.0
+PO-50046,V-1002,USD,2026-09-03,1,FAST-220,"M10 flange nut, box of 50",5,18.75
+PO-50046,V-1002,USD,2026-09-03,2,OFF-310,"Copier paper A4 80gsm, box",24,31.2
+PO-50047,V-1001,USD,2026-09-16,1,CHEM-30,"Degreaser concentrate, 20 L",50,72.15
+PO-50047,V-1001,USD,2026-09-16,2,SRV-900,Forklift service visit,12,410.0
