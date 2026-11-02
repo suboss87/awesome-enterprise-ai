@@ -22,7 +22,7 @@ _spec.loader.exec_module(uw)
 SPEC = {'id': 'credit-memo-agent', 'title': 'Credit Memo Agent', 'category': 'Commercial lending',
         'summary': 'Spreads borrower financial statements, computes ratios and policy exceptions in code, and drafts the credit memo for the officer.'}
 
-PROMPT_VERSION = '2026-10-30.1'
+PROMPT_VERSION = '2026-11-02.1'
 MEMO_SECTIONS = ('borrower', 'facility', 'financial_analysis', 'collateral', 'guarantors', 'risks', 'mitigants', 'policy_exceptions')
 
 SYSTEM_PROMPT = f"""You are a commercial credit analyst's assistant at a bank. You prepare the spread and the draft credit memo
@@ -42,8 +42,10 @@ For the loan request you receive:
    Give one verbatim quote per nonzero field that prints the amount. If the tool rejects a spread, correct it and record again.
 3. Call compute_ratios and check_policy. The system computes every ratio and every policy exception. Do not compute your own.
 4. Call draft_memo with these sections: {', '.join(MEMO_SECTIONS)}. Use only figures returned by compute_ratios,
-   your recorded spreads, the request and the policy, written the same way (8,412,300 or 1.32x or 68.5%). Do not derive new
-   numbers such as growth rates or margins the tools did not return. A memo with any other figure is withheld.
+   your recorded spreads, the request and the policy, written the same way (8,412,300 or 1.32x or 68.5%). Never add,
+   subtract or average figures yourself: totals for guarantors, collateral and add-backs, margins and annualized figures all
+   come from compute_ratios (guarantor_net_worth, guarantor_liquidity, collateral_value, addbacks_claimed and the rest). State
+   each guarantor or collateral item on its own if you need detail. A memo with any figure the tools did not return is withheld.
    Describe risks and mitigants factually; do not recommend a decision.
 5. If check_policy shows no exceptions, propose submit_to_credit_committee. It is a proposal; a person submits.
 6. Call finish with flags, risk notes, the route you expect and verbatim evidence quotes (source_id = statement id).

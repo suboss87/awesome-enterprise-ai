@@ -219,6 +219,12 @@ def compute(data, spreads):
     r['ltv_limit'] = q(lendable / collateral) if collateral else None
     guarantor_cf = sum((dec(g['personal_cash_flow']) for g in request['guarantors']), Decimal(0))
     r['guarantor_cash_flow'] = guarantor_cf
+    # Totals a memo naturally states. Exposing them here keeps the model from adding figures itself.
+    r['guarantor_net_worth'] = sum((dec(g['net_worth']) for g in request['guarantors']), Decimal(0))
+    r['guarantor_liquidity'] = sum((dec(g['liquidity']) for g in request['guarantors']), Decimal(0))
+    r['guarantor_count'] = len(request['guarantors'])
+    r['collateral_count'] = len(request['collateral'])
+    r['addbacks_claimed'] = sum((dec(a['amount']) for sp in spreads.values() for a in sp['addbacks']), Decimal(0))
     keys = ('revenue', 'gross_profit', 'operating_income', 'ebitda', 'adjusted_ebitda', 'addbacks_accepted', 'distributions',
             'interest_expense', 'existing_debt_service', 'debt_service', 'dscr', 'global_dscr', 'interim_revenue_annualized',
             'interim_adjusted_ebitda_annualized', 'interim_debt_service', 'interim_dscr', 'interim_global_dscr', 'total_debt',
@@ -424,7 +430,8 @@ def build_output(data, verdict, spreads, memo, evidence, memo_source):
     if memo_status == 'withheld':
         actions.append({'action': 'analyst_drafts_memo', 'owner': 'Credit analyst', 'status': 'queued'})
     summary = {'ready_for_officer': 'Spread complete, ratios within policy, no exceptions. Ready for the credit officer.',
-               'exceptions_for_officer': f"Policy exceptions for the credit officer: {', '.join(codes)}.",
+               'exceptions_for_officer': f"Policy exceptions for the credit officer: {', '.join(codes)}."
+                                         + (f" Memo withheld; figures not computed: {', '.join(verdict['memo_unsupported'][:4])}." if verdict['memo_unsupported'] else ''),
                'insufficient_financials': f"Financials insufficient: {', '.join(c for c in codes if c in INCOMPLETE)}."}[route]
     pick = ('dscr', 'global_dscr', 'interim_dscr', 'leverage', 'ltv', 'ltv_limit', 'current_ratio', 'revenue', 'ebitda',
             'adjusted_ebitda', 'total_debt', 'debt_service')

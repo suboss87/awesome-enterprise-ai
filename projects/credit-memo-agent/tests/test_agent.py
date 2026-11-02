@@ -196,6 +196,14 @@ class BoundaryTests(unittest.TestCase):
         self.assertEqual(out['metrics']['route'], 'exceptions_for_officer')
         self.assertFalse(load_scorer(SLUG).score(c, out)['figure_not_in_spread'])
 
+    def test_memo_may_state_the_system_computed_guarantor_total(self):
+        c = case('guarantor_global_cash_flow')
+        total = sum(g['net_worth'] for g in c['input']['request']['guarantors'])
+        out = run(c, memo=memo_for(c, extra=f'Combined guarantor net worth is {total:,.0f} per the request.'))
+        self.assertNotIn('FIGURE_NOT_IN_SPREAD', out['exceptions'])
+        self.assertNotEqual(out['memo_status'], 'withheld')
+        self.assertEqual(out['ratios']['guarantor_net_worth'], float(total))
+
     def test_memo_using_only_computed_figures_is_released(self):
         c = case('clean_narrative')
         out = run(c)
