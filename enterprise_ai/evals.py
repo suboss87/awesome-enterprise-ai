@@ -26,7 +26,7 @@ class EvalAborted(InputError):
 def _is_account_failure(exc):
     text = str(exc)
     markers = ('HTTP 401', 'HTTP 402', 'HTTP 403', 'no credits', 'insufficient_quota', 'billing',
-               'usage limits', 'regain access', 'Set ANTHROPIC_API_KEY', 'Set OPENAI_API_KEY')
+               'usage limits', 'regain access', 'credit balance', 'Plans & Billing', 'Set ANTHROPIC_API_KEY', 'Set OPENAI_API_KEY')
     return any(marker in text for marker in markers)
 
 

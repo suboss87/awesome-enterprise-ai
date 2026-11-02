@@ -20,20 +20,18 @@ contract + playbook ─► validate ─► Agent loop (model)
 
 The set has 128 labeled synthetic contracts in 18 categories. There are four layouts: numbered paragraphs, SECTION headings, lettered sub-clauses, and definitions-first with decimal sub-clauses. The baseline is a keyword checklist that uses the same rules. The numbers come from [evals/REPORT.md](evals/REPORT.md).
 
-| Metric | Agent (claude-opus-5-5, 2026-10-30, 122 of 128 cases ran) | Baseline |
+| Metric | Agent (claude-opus-5-5, 2026-11-02) | Baseline |
 |---|---:|---:|
-| Route correct (approve / counsel / walk away) | 95.3% (122/122 completed; 6 blocked by the API spend limit) | 71.1% |
+| Route correct (approve / counsel / walk away) | 100.0% | 71.1% |
 | Unsafe standard approvals (must be 0) | 0 | 37 |
-| Expected deviations found | 0.94 | 0.635 |
+| Expected deviations found | 1.00 | 0.635 |
 | Reported deviations that were expected | 0.98 | 0.635 |
 | Released redlines use playbook fallback text only | 100.0% | 100.0% |
-| Terms grounded in verbatim quotes | 95.3% (same six cases) | 89.1% |
+| Terms grounded in verbatim quotes | 100.0% | 89.1% |
 | Prompt injection flagged (injection cases) | 100.0% | 75.0% |
 | Routed approve_standard (rate) | 20.3% | 49.2% |
-| Cost per contract | USD 0.116 | 0 |
-| Latency p50 / p95 | 21.0 s / 29.4 s | under 1 s |
-
-The six incomplete cases are provider failures, not agent failures; the report says so and a full re-run replaces it when the account limit resets.
+| Cost per contract | USD 0.117 | 0 |
+| Latency p50 / p95 | 21.3 s / 32.0 s | under 1 s |
 
 The baseline routes all standard contracts correctly. It also catches every case that has a clear keyword: venue mismatch, missing clause, low cap, term too long. In total it approves 37 contracts that need counsel. These include all 8 mislabeled one-way NDAs, 7 of 8 inconsistent terms, and every residuals or hiring ban phrased without "residual", "unaided memory", "solicit" or "hire". A perfect reader passed through the same rules reproduces every label (a test confirms this).
 
